@@ -11,29 +11,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WatchController {
     @Autowired
     IWatchService iWatchService;
+
     @GetMapping("detail")
-    public String detail(){
+    public String detail() {
         return "detail";
     }
+
     @GetMapping("login")
-    public String login(){
+    public String login() {
         return "login";
     }
+
     @GetMapping("watches")
-    public String watches(){
+    public String watches() {
         return "watches";
     }
+
     @GetMapping("register")
-    public String register(){
+    public String register() {
         return "register";
     }
+
     @GetMapping("contact")
-    public String contact(){
+    public String contact() {
         return "contact";
     }
+
     @GetMapping("index")
-    public String index(Model model){
-        model.addAttribute("list",iWatchService.findAll());
+    public String index(Model model) {
+        model.addAttribute("list", iWatchService.findAll());
         return "index";
     }
+
+//    @GetMapping("cart")
+//    public String cart() {
+//        return "cart";
+//    }
 }
