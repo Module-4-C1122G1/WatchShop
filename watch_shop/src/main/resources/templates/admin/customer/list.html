@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/user/css/themify-icons.css">
     <link rel="stylesheet" href="/user/css/nice-select.css">
     <link rel="stylesheet" href="/user/css/nouislider.min.css">
-    <link rel="stylesheet" href="/user/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
     <link rel="stylesheet" href="/user/css/main.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css"
@@ -394,6 +394,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 </head>
 <body>
+
 <div class="px-0 bg-light container-fluid">
     <div class="d-flex">
         <div class="d-flex align-items-center " id="navbar">
@@ -421,13 +422,26 @@
         </ul>
         <div id="topnavbar">
             <div class="topnav mb-3">
-                <div class="d-flex px-1"><a href="/adminBook" class="active">Sản phẩm</a> <a href="/customers">Hoá đơn</a> <a
+                <div class="d-flex px-1"><a href="/adminBook" class="active">Sản phẩm</a> <a href="/customers">Hoá
+                    đơn</a> <a
                         href="/type">Chi nhánh</a><a href="/customers">Khách
                     hàng</a><a href="/customers">Nhân viên</a>
                 </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        Loại Khách Hàng
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li th:each="type : ${customerTypeList}">
+                            <a class="dropdown-item" th:href="@{/customer/type/{id}(id=${type.getId()})}"
+                               th:text="${type.name}">Action</a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="d-flex align-items-center mb-3 px-md-3 px-2">
                     <span class="text-uppercase fs13 fw-bolder pe-3">Tìm<span class="ps-1">Kiếm</span></span>
-                    <form class="example d-flex align-items-center">
+                    <form action="/customer/search/" class="example d-flex align-items-center">
                         <input type="text" placeholder="Tìm kiếm theo tên" name="name" value=""
                                style="width: 40%;">
                         <button type="submit"><i class="fa fa-search"></i></button>
@@ -440,19 +454,103 @@
                 <div class="table-responsive px-2">
                     <table id="tableBook" class="table table-responsive">
                         <tr class="text-center">
-                            <th style="width: 10%;text-align: center">Mã sách</th>
-                            <th style="width: 260px;text-align: center">Tên sách</th>
-                            <th style="width: 15%;text-align: center">Gía sách (VND)</th>
-                            <th style="text-align: center">Tác giả</th>
-                            <th style="text-align: center">Loại sách</th>
-                            <th style="width: 116px;text-align: center">Tác vụ</th>
+                            <th style="text-align: center">STT</th>
+                            <th style="text-align: center">Mã khách hàng</th>
+                            <th style="text-align: center">Tên khách hàng</th>
+                            <th style="text-align: center">Ngày sinh</th>
+                            <th style="width:200px; text-align: center">Địa chỉ</th>
+                            <th style="width: 5%; text-align: center">Email</th>
+                            <th style="text-align: center">Số điện thoại</th>
+                            <th style="text-align: center">Loại khách hàng</th>
+                            <th style="text-align: center">Detail</th>
+                            <th style="text-align: center">Update</th>
+                            <th style="text-align: center">Delete</th>
                         </tr>
+                        <tbody>
+                        <tr th:each="customer, temp: ${customerList}">
+                            <td th:text="${temp.count}"></td>
+                            <td th:text="${customer.idCustomer}"></td>
+                            <td th:text="${customer.name}"></td>
+                            <td th:text="${customer.dayOfBirth}"></td>
+                            <td th:text="${customer.address}"></td>
+                            <td th:text="${customer.email}"></td>
+                            <td th:text="${customer.phone}"></td>
+                            <td th:text="${customer.customerType.name}"></td>
+                            <td>
+                                <button type="button" class="btn btn-danger"><a
+                                        th:href="@{/customer/detail/{idCustomer}(idCustomer = ${customer.idCustomer})}">Detail</a>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger"><a
+                                        th:href="@{/customer/update/{idCustomer}(idCustomer = ${customer.idCustomer})}">Update</a>
+                                </button>
+                            <td>
+                                <button type="button"
+                                        th:attr="onclick=|information('${customer.getIdCustomer()}', '${customer.getName()}')|"
+                                        class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Delete
+                                </button>
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Xóa khách hàng</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/customer/delete" method="post">
+                                                    <input hidden=type="text" id="idDelete" name="delete">
+                                                    <span>Bạn có muốn xóa khách hàng </span> <span
+                                                        id="nameDelete"></span> <span> không ?</span>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="pagination text-center">
+<span class="page-item">
+    <a class="page-link" th:if="${customerList.hasPrevious()}" th:href="@{/customer(page=${customerList.number - 1})}">Previous</a>
+</span>
+    <!--<span th:text="${CustomerList.number +'/' + (CustomerList.getTotalPages()-1)}"></span>-->
+    <span class="page-item" th:each="pageNo: ${#numbers.sequence(0, customerList.getTotalPages() -1)}">
+<a class="page-link" th:href="@{/customer(page=${pageNo})}" th:text="${pageNo}"></a>
+</span>
+    <span class="page-item">
+    <a class="page-link" th:if="${customerList.hasNext()}" th:href="@{/customer(page=${customerList.number + 1})}">Next</a>
+</span>
+    <form action="/customer" id="pageNumber">
+        <input style="width: 50px" class="form-control" type="number" name="page"
+               onchange="document.getElementById('pageNumber').submit();">
+    </form>
+</div>
+
+
+<script>
+    function information(id, name) {
+        document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").innerText = name;
+    }
+</script>
 <footer class="footer_section">
     <div class="container">
         <div class="row">
@@ -559,19 +657,22 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-<script src="js/jquery-3.4.1.min.js"></script>
+<script src="/static/js/jquery-3.4.1.min.js"></script>
 <!-- popper js -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>
 <!-- bootstrap js -->
-<script src="js/bootstrap.js"></script>
+<script src="/static/js/bootstrap.js"></script>
 <!-- owl slider -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
 </script>
 <!-- custom js -->
-<script src="js/custom.js"></script>
+<script src="/static/js/custom.js"></script>
 <!-- Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
 </html>
