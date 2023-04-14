@@ -1,36 +1,38 @@
-package com.example.watch_shop.model;
+package com.example.watch_shop.dto;
+
+import com.example.watch_shop.model.Account;
+import com.example.watch_shop.model.CustomerType;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "customer")
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_customer")
+public class CustomerDTO {
+
     private Integer idCustomer;
-    @Column(name = "name_customer")
+    @NotBlank(message = "Tên không được để trống")
     private String name;
-    @Column(name = "date_of_birth")
-    private String dayOfBirth;
-    @Column(name = "address")
-    private String address;
-    @Column(name = "email_customer")
-    private String email;
-    @Column(name = "phone_number")
-    private String phone;
-    @ManyToOne
-    @JoinColumn(name = "id_type_cus")
-    private CustomerType customerType;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "name_account")
+    @NotBlank(message = "Ngày sinh không được để trống")
+    private String dayOfBirth;
+    @NotBlank(message = " Đia chỉ không được để trống")
+    private String address;
+    @NotBlank(message = "Email không được để trống")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Không đúng định dạng example@gmail")
+    private String email;
+    @NotBlank(message = "Số điện thoai không được để trống")
+    @Pattern(regexp = "\\d{9,10}", message = "Số điện thoại phải từ 9 đến 10 số")
+    private String phone;
+    private CustomerType customerType;
+//    @NotBlank(message = "Account không được để trống")
+//    @Size(min = 6, message = "Account phải trên 6 ký tự")
     private Account account;
 
-    public Customer() {
+    public CustomerDTO() {
     }
 
-    public Customer(String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, Account account) {
+    public CustomerDTO(String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, Account account) {
         this.name = name;
         this.dayOfBirth = dayOfBirth;
         this.address = address;
@@ -40,7 +42,7 @@ public class Customer {
         this.account = account;
     }
 
-    public Customer(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, Account account) {
+    public CustomerDTO(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, Account account) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.dayOfBirth = dayOfBirth;
