@@ -15,6 +15,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
     <link href="css/responsive.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <section class="h-100" style="background-color: #eee;">
@@ -44,16 +45,16 @@
                                 </p>
                             </div>
                             <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                <button class="btn btn-link px-2" th:attr="onclick=|download('${listCart.watch.idWatch}','${listCart.price}')|">
+                                <button class="btn btn-link px-2"
+                                        th:attr="onclick=|download('${listCart.watch.idWatch}','${listCart.price}')|">
                                     <i class="fa fa-minus"></i>
                                 </button>
 
-                                <input th:id="${listCart.watch.idWatch}+'b'" min="0" name="quantity" value="2"
+                                <input th:id="${listCart.watch.idWatch}+'b'" min="0" name="quantity" th:value="${listCart.quantity}" disabled max="10"
                                        type="number"
                                        class="form-control form-control-sm"/>
 
                                 <button class="btn btn-link px-2"
-                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
                                         th:attr="onclick=|upload('${listCart.watch.idWatch}','${listCart.price}')|">
                                     <i class="fa fa-plus"></i>
                                 </button>
@@ -67,6 +68,7 @@
                         </div>
                     </div>
                 </div>
+                <p>Total Price <span th:text="${total}"></span></p>
 
                 <div class="card">
                     <div class="card-body">
@@ -167,12 +169,34 @@
         let qtt = +document.getElementById(idWatch + 'b').value + 1;
         document.getElementById(idWatch + 'a').innerText = qtt * price
         document.getElementById(idWatch + 'b').value = qtt
+            $.ajax({
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                type: 'POST',
+                url:'http://localhost:8080/api/cart?qtt='+qtt,
+                success:(e) => {
+                    console.log(e)
+                }
+            })
     }
 
     function download(idWatch, price) {
         let qtt = +document.getElementById(idWatch + 'b').value - 1;
         document.getElementById(idWatch + 'a').innerText = qtt * price
         document.getElementById(idWatch + 'b').value = qtt
+        $.ajax({
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            type: 'POST',
+            url:'http://localhost:8080/api/cart?qtt='+qtt,
+            success:(e) => {
+                console.log(e)
+            }
+        })
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
