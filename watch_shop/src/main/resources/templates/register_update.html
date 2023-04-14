@@ -173,10 +173,14 @@
                 <div class="form_container">
                     <div class="heading_container">
                         <h2 style="margin: 0 auto">
-                            Đăng ký
+                            Cập nhật thông tin khách hàng
                         </h2>
                     </div>
-                    <form action="/customer/register" method="post" th:object="${customerDto}">
+                    <form action="/customer/update" method="post" th:object="${customerDto}">
+                        <div>
+                            <input th:field="*{idCustomer}" type="text" placeholder="Id"/>
+                            <p style="color: red" th:if="${#fields.hasErrors('idCustomer')}" th:errors="*{idCustomer}"></p>
+                        </div>
                         <div>
                             <input th:field="*{name}" type="text" placeholder="Full Name"/>
                             <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
@@ -198,17 +202,17 @@
                             <p style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                         </div>
                         <div>
-                            <select hidden="hidden" th:field="*{customerType}">
+                            <select th:field="*{customerType}">
                                 <option th:each="type: ${customerType}" th:text="${type.name}"
                                         th:value="${type.id}"></option>
                             </select>
                         </div>
-                        <div>
+                        <div hidden="hidden">
                             <input th:field="*{account.name}" type="text" placeholder="Account"/>
                             <p style="color: red" th:if="${#fields.hasErrors('account.name')}" th:errors="*{account.name}"></p>
                         </div>
-                        <div>
-                            <input th:field="*{account.pass}" type="password" placeholder="Password"/>
+                        <div hidden="hidden">
+                            <input th:field="*{account.pass}" type="text" placeholder="Password"/>
                             <p style="color: red" th:if="${#fields.hasErrors('account.pass')}" th:errors="*{account.pass}"></p>
 
                         </div>
@@ -217,7 +221,7 @@
                         <!--            </div>-->
                         <div class="d-flex ">
                             <button style="margin: 0 auto">
-                                Đăng ký
+                                Cập nhật
                             </button>
                         </div>
                     </form>
