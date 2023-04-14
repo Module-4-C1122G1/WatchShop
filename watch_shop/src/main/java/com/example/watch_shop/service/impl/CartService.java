@@ -28,17 +28,21 @@ public class CartService implements ICartService {
     public void update(CartID cartID, Integer qtt) {
         Cart cart = findById(cartID);
         Watch watch = iWatchRepository.findById(cartID.getIdWatch()).get();
+        Double price= (double) (watch.getPrice() * qtt);
         if (qtt <= watch.getQtt()) {
             cart.setQuantity(qtt);
+            cart.setPrice(price);
             iCartRepository.save(cart);
         }
 
     }
-    public Double totalPrice(){
-        List<Cart> list=findAll();
-        Double total=0.0;
-        for (Cart cart:list){
-            total+=cart.getPrice();
+
+    @Override
+    public Double totalPrice() {
+        List<Cart> list = findAll();
+        Double total = 0.0;
+        for (Cart cart : list) {
+            total += cart.getPrice();
         }
         return total;
     }
