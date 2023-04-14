@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("cart")
+@RequestMapping("carts")
 public class CartController {
     @Autowired
     ICartService iCartService;
@@ -16,6 +16,7 @@ public class CartController {
     public String list(Model model){
         model.addAttribute("list",iCartService.findAll());
         model.addAttribute("total",iCartService.totalPrice());
+        System.out.println(iCartService.totalPrice());
         return "cart";
     }
 }
