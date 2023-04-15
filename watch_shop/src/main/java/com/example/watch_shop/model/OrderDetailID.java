@@ -12,6 +12,7 @@ public class OrderDetailID implements Serializable {
     @Column(name = "id_watch")
     private Integer idWatch;
 
+
     public OrderDetailID(Integer idOrder, Integer idWatch) {
         this.idOrder = idOrder;
         this.idWatch = idWatch;

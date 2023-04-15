@@ -13,11 +13,11 @@ public class OrderDetail {
     private Integer price;
     @Column(name = "image")
     private String img;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idOrder")
     @JoinColumn(name = "id_order")
     OrderWatch orderWatch;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idWatch")
     @JoinColumn(name = "id_watch")
     Watch watch;

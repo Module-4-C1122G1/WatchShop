@@ -65,7 +65,7 @@
                                     th:text="${listCart.price}*${listCart.quantity}"></h5>
                             </div>
                             <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                <a href="#!" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
+                                <a th:href="@{/carts/delete/(idWatch=${listCart.cartID.getIdWatch()},idCus=${listCart.cartID.getIdCustomer()})}" class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
                             </div>
                         </div>
                     </div>

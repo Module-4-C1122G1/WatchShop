@@ -25,7 +25,7 @@ public class Watch {
     @Column(name = "detail")
     private String detail;
     @Column(name = "quantity")
-    private Integer qtt;
+    private Integer quantity;
     @ManyToOne
     @JoinColumn(name = "id_type_watch")
     private TypeWatch typeWatch;
@@ -46,7 +46,7 @@ public class Watch {
         this.color = color;
         this.origin = origin;
         this.detail = detail;
-        this.qtt = qtt;
+        this.quantity = qtt;
         this.typeWatch = typeWatch;
         this.manufacturer = manufacturer;
     }
@@ -123,12 +123,12 @@ public class Watch {
         this.detail = detail;
     }
 
-    public Integer getQtt() {
-        return qtt;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setQtt(Integer qtt) {
-        this.qtt = qtt;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public TypeWatch getTypeWatch() {
