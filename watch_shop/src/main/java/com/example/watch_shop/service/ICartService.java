@@ -11,5 +11,6 @@ public interface ICartService {
     void update(CartID cartID,Integer qtt);
     Cart findById(CartID cartID);
     List<Cart> findByCusId(Integer id);
-    public Double totalPrice();
+    Integer totalPrice(Integer idCus);
+    void deleteById(CartID id);
 }
