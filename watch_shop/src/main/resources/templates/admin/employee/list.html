@@ -421,10 +421,10 @@
         </ul>
         <div id="topnavbar">
             <div class="topnav mb-3">
-                <div class="d-flex px-1"><a href="/adminBook" class="active">Sản phẩm</a> <a href="/customers">Hoá
+                <div class="d-flex px-1"><a href="/adminBook" >Sản phẩm</a> <a href="/customers">Hoá
                     đơn</a> <a
                         href="/type">Chi nhánh</a><a href="/customers">Khách
-                    hàng</a><a href="/employee/">Nhân viên</a>
+                    hàng</a><a href="/employee/" class="active">Nhân viên</a>
                 </div>
                 <div class="d-flex align-items-center mb-3 px-md-3 px-2">
                     <span class="text-uppercase fs13 fw-bolder pe-3">Tìm<span class="ps-1">Kiếm</span></span>
@@ -433,11 +433,8 @@
                                style="width: 40%;">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
-                    <form class="example d-flex align-items-center" action="/adminBook">
-                        <input type="hidden" name="action" value="create">
-                        <button type="submit" style="width: 100px">Thêm nhân viên</button>
-                        <a th:href="@{/employee/create}">Thêm nhân viên</a>
-                    </form>
+
+                        <a th:href="@{/employee/create}" class="btn btn-primary" style="background-color: #1c1b1b;color: white" >Thêm nhân viên</a>
                 </div>
                 <div class="table-responsive px-2">
                     <table id="tableBook" class="table table-responsive">
@@ -488,7 +485,7 @@
                             </td>
                         </tr>
                     </table>
-                    <-- modal xoa
+                    <!--                  modal xoa-->
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">

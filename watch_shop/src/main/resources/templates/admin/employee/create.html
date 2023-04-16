@@ -376,24 +376,12 @@
         </ul>
         <div id="topnavbar">
             <div class="topnav mb-3" style="height: 500px">
-                <div class="d-flex px-1"><a href="/adminBook" class="active">Sách</a> <a href="/customers">Khách Hàng</a> <a
+                <div class="d-flex px-1"><a href="/adminBook" class="active">Nhân viên</a> <a href="/customers">Khách Hàng</a> <a
                         href="/type">Loại sách</a>
                 </div>
                 <div style="margin-left: 10px">
                     <form action="" method="post">
                         <table>
-                            <tr>
-                                <th style="padding-bottom: 30px">Mã nhân viên:</th>
-                                <td style="padding-bottom: 30px;padding-right: 60px;">
-                                    <input type="hidden" name="idBook" id="id" placeholder="Nhập vào mã sách" size="45" style="margin-left: 20px" required minlength="1" />
-                                </td>
-                                <th style="padding-bottom: 30px">Bằng cấp:</th>
-                                <td  class="dropup" id="categoryID" style="padding-bottom: 30px">
-                                    <select th:field="*{position}" style="text-align: center">
-                                            <option th:each="position1:${position}" class="dropup-content" th:text="${position1.name}" th:value="${position1.id}"></option>
-                                    </select>
-                                </td>
-                            </tr>
                             <tr>
                                 <th style="padding-bottom: 30px">Tên nhân viên:</th>
                                 <td style="padding-bottom: 30px;padding-right: 60px;">
@@ -432,6 +420,21 @@
                                 <th style="padding-bottom: 30px">Ảnh:</th>
                                 <td style="padding-bottom: 30px">
                                     <input type="text" name="describes" id="describes" placeholder="Nhập vào mô tả" size="45" style="margin-left: 20px"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="padding-bottom: 30px">Bằng cấp:</th>
+                                <td  class="dropup" id="categoryID" style="padding-bottom: 30px">
+                                    <select th:field="*{position}" style="text-align: center">
+                                        <option th:each="position1:${position}" class="dropup-content" th:text="${position1.name}" th:value="${position1.id}"></option>
+                                    </select>
+                                </td>
+                                <th style="padding-bottom: 30px">Chức vụ:</th>
+
+                                <td  class="dropup" style="padding-bottom: 30px">
+                                    <select th:field="*{diploma}" style="text-align: center">
+                                        <option th:each="diploma:${diploma}" class="dropup-content" th:text="${diploma.name}" th:value="${diploma.id}"></option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
