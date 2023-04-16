@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface ICartRepository extends PagingAndSortingRepository<Cart, CartID> {
     List<Cart> findCartByCartID_IdCustomer(Integer id);
-    @Query(value = "select sum(price) from cart where id_customer : idCus and check_order=0",nativeQuery = true)
+    @Query(value = "select sum(price) from cart where id_customer =:idCus and check_order=0",nativeQuery = true)
     Integer totalPriceOrder(@Param("idCus")Integer idCus);
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -31,7 +30,7 @@ public class CartController {
     IOrderDetailService iOrderDetailService;
 
     @GetMapping("")
-    public String list(Model model,@RequestParam("idCus") Integer id) {
+    public String list(Model model, @RequestParam("idCus") Integer id) {
         model.addAttribute("list", iCartService.findByCusId(id));
         model.addAttribute("total", iCartService.totalPrice(id));
         return "cart";
@@ -45,15 +44,17 @@ public class CartController {
     }
 
     @GetMapping("buy")
-    public String buy(Integer idCus) {
-        Customer customer=iCustomerService.findByIdCustomer(idCus);
-        List<Cart> list=iCartService.findByCusId(idCus);
-        Integer price=iCartService.totalPrice(idCus);
-        iOrderService.save(new OrderWatch(LocalDate.now(),price,customer));
-
-        for (Cart cart:list){
-//            iOrderDetailService.save(new OrderDetail(new OrderDetailID(idCus,cart.getCartID().getIdWatch()),cart.getQuantity(),cart.getPrice(),cart.getWatch().getImage(),));
+    public String buy() {
+        Integer idCus = 1;
+        Customer customer = iCustomerService.findByIdCustomer(idCus);
+        List<Cart> list = iCartService.findByCusId(idCus);
+        Integer price = iCartService.totalPrice(idCus);
+        OrderWatch orderWatch = new OrderWatch(LocalDate.now(), price, customer);
+        iOrderService.save(orderWatch);
+        for (Cart cart : list) {
+            iOrderDetailService.save(new OrderDetail(new OrderDetailID(idCus, cart.getCartID().getIdWatch())
+                    , cart.getQuantity(), cart.getPrice(), cart.getWatch().getImage(), orderWatch, cart.getWatch()));
         }
-        return "index";
+        return "redirect:/carts";
     }
 }

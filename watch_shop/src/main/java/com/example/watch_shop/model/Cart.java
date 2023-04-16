@@ -8,7 +8,7 @@ public class Cart {
     @EmbeddedId
     CartID cartID;
     @Column(name = "price")
-    private Double price;
+    private Integer price;
     @Column(name = "quantity")
     private Integer quantity;
     @Column(name = "check_order")
@@ -25,7 +25,7 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(CartID cartID, Double price, Integer quantity, Integer check, Customer customer, Watch watch) {
+    public Cart(CartID cartID, Integer price, Integer quantity, Integer check, Customer customer, Watch watch) {
         this.cartID = cartID;
         this.price = price;
         this.quantity = quantity;
@@ -42,11 +42,11 @@ public class Cart {
         this.cartID = cartID;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
