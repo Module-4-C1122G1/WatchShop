@@ -1,12 +1,11 @@
 package com.example.watch_shop.dto;
 
-import com.example.watch_shop.model.Account;
+import com.example.watch_shop.model.AppUser;
 import com.example.watch_shop.model.CustomerType;
 
-import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 public class CustomerDTO {
 
@@ -24,25 +23,29 @@ public class CustomerDTO {
     @NotBlank(message = "Số điện thoai không được để trống")
     @Pattern(regexp = "\\d{9,10}", message = "Số điện thoại phải từ 9 đến 10 số")
     private String phone;
+
+
     private CustomerType customerType;
 //    @NotBlank(message = "Account không được để trống")
 //    @Size(min = 6, message = "Account phải trên 6 ký tự")
-    private Account account;
+@Valid
+    private AppUser appUser;
 
     public CustomerDTO() {
     }
 
-    public CustomerDTO(String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, Account account) {
+
+    public CustomerDTO(String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, AppUser appUser) {
         this.name = name;
         this.dayOfBirth = dayOfBirth;
         this.address = address;
         this.email = email;
         this.phone = phone;
         this.customerType = customerType;
-        this.account = account;
+        this.appUser = appUser;
     }
 
-    public CustomerDTO(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, Account account) {
+    public CustomerDTO(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, AppUser appUser) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.dayOfBirth = dayOfBirth;
@@ -50,7 +53,7 @@ public class CustomerDTO {
         this.email = email;
         this.phone = phone;
         this.customerType = customerType;
-        this.account = account;
+        this.appUser = appUser;
     }
 
     public Integer getIdCustomer() {
@@ -109,11 +112,11 @@ public class CustomerDTO {
         this.customerType = customerType;
     }
 
-    public Account getAccount() {
-        return account;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }

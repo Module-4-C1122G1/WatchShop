@@ -24,23 +24,23 @@ public class Customer {
     private CustomerType customerType;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "name_account")
-    private Account account;
+    @JoinColumn(name = "user_id")
+    private AppUser appUser;
 
     public Customer() {
     }
 
-    public Customer(String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, Account account) {
+    public Customer(String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, AppUser appUser) {
         this.name = name;
         this.dayOfBirth = dayOfBirth;
         this.address = address;
         this.email = email;
         this.phone = phone;
         this.customerType = customerType;
-        this.account = account;
+        this.appUser = appUser;
     }
 
-    public Customer(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, Account account) {
+    public Customer(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, AppUser appUser) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.dayOfBirth = dayOfBirth;
@@ -48,7 +48,7 @@ public class Customer {
         this.email = email;
         this.phone = phone;
         this.customerType = customerType;
-        this.account = account;
+        this.appUser = appUser;
     }
 
     public Integer getIdCustomer() {
@@ -107,11 +107,11 @@ public class Customer {
         this.customerType = customerType;
     }
 
-    public Account getAccount() {
-        return account;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }

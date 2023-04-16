@@ -21,10 +21,10 @@ public class WatchController {
         return "detail";
     }
 
-    @GetMapping("login")
-    public String login() {
-        return "login";
-    }
+//    @GetMapping("login")
+//    public String login() {
+//        return "login";
+//    }
 
     @GetMapping("watches")
     public String watches(Model model) {
