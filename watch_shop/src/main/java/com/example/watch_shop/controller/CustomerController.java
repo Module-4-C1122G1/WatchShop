@@ -52,6 +52,8 @@ public class CustomerController {
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("customerDto", new CustomerDTO());
+        model.addAttribute("enabled", 1);
+
         model.addAttribute("customerType", customerTypeService.findAllCustomerType());
         return "register";
     }

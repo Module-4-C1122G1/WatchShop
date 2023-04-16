@@ -194,7 +194,7 @@
                             <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                         </div>
                         <div>
-                            <input th:field="*{phone}" type="text" placeholder="Phone number"/>
+                            <input th:field="*{phone}" type="number" placeholder="Phone number"/>
                             <p style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                         </div>
                         <div>
@@ -204,14 +204,17 @@
                             </select>
                         </div>
                         <div>
-                            <input th:field="*{account.name}" type="text" placeholder="Account"/>
-                            <p style="color: red" th:if="${#fields.hasErrors('account.name')}" th:errors="*{account.name}"></p>
+                            <input th:field="*{appUser.userName}" type="text" placeholder="User Name"/>
+                            <p style="color: red" th:if="${#fields.hasErrors('appUser.userName')}" th:errors="*{appUser.userName}"></p>
                         </div>
                         <div>
-                            <input th:field="*{account.pass}" type="password" placeholder="Password"/>
-                            <p style="color: red" th:if="${#fields.hasErrors('account.pass')}" th:errors="*{account.pass}"></p>
+                            <input th:field="*{appUser.encrytedPassword}" type="password" placeholder="Password"/>
+                            <p style="color: red" th:if="${#fields.hasErrors('appUser.encrytedPassword')}" th:errors="*{appUser.encrytedPassword}"></p>
 
                         </div>
+<!--                        <div>-->
+<!--                            <input th:field="*{appUser.enabled}" th:text="${enabled}" type="number" hidden="hidden">-->
+<!--                        </div>-->
                         <!--            <div>-->
                         <!--              <input th:field="*{account.pass}" type="password" placeholder="Confirm password " />-->
                         <!--            </div>-->

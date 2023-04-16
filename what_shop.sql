@@ -61,8 +61,8 @@ address varchar(255) not null,
 email_customer varchar(255) not null unique,
 phone_number varchar(45) not null unique,
 id_type_cus int,
-name_account varchar(45) not null unique,
-foreign key(name_account) references account_user(name_account),
+user_id int not null ,
+foreign key(user_id) references app_user(user_id),
 foreign key(id_type_cus) references type_customer(id_type_cus)
 );
 
@@ -123,61 +123,83 @@ foreign key(id_watch) references watch(id_watch),
 primary key(id_branch,id_watch)
 );
 
-create table account_user
+create table app_user
 (
-    name_account VARCHAR(45) primary key,
-    pass_word VARCHAR(45) NOT NULL
+    user_id int auto_increment primary key,
+    user_name VARCHAR(45),
+    encryted_password VARCHAR(45) NOT NULL,
+    enabled boolean
 );
 
 
 
-create table role_user
+create table app_role
 (
-    id_role INT AUTO_INCREMENT PRIMARY KEY,
-    name_role VARCHAR(10) NOT NULL UNIQUE
+    role_id int AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(10) NOT NULL UNIQUE
 );
 
 
-create table account_role
+create table user_role
 (
-    name_account VARCHAR(45)  ,
-    id_role INT ,
-    FOREIGN KEY (name_account) REFERENCES account_user(name_account),
-    FOREIGN KEY (id_role) REFERENCES role_user(id_role),
-    primary key(name_account,id_role)
+    id int auto_increment primary key ,
+    user_id int,
+    role_id int,
+    foreign key (user_id) references app_user(user_id),
+    foreign key (role_id) references app_role(role_id)
 );
+insert into user_role(user_id, role_id)
+value(1,1),
+(2,2),
+(3,2),
+(4,2),
+(5,2),
+(6,2),
+(7,2),
+(8,2),
+(9,2),
+(10,2),
+(11,2);
+
 
 
 insert into type_customer(name_type_cus)
-value('Diamond'),
-('Paltinium'),
-('Gold'),
+value('Member'),
 ('Silver'),
-('Member');
-insert into account_user(name_account, pass_word)
-value('admin123456','admin123'),
-('tin.tran123','abcd34782'),
-('vanvu5678','abcd34782'),
-('nhannguyen267','abcd3478232'),
-('dat.hoang273','abcd3478242'),
-('AnhPhuc628','abcd34782342'),
-('thao.hoang233','abc243d34782'),
-('dang.hai145','abcd2434782'),
-('ngovu123','abc24d34782'),
-('huudat728','ab25cd34782'),
-('thanh.tran457','abgcd34782');
-insert into customer(name_customer, date_of_birth, address, email_customer, phone_number, id_type_cus, name_account)
-value('Đoàn Thành Tiến','1993-12-03','123 Phan Châu Trinh, Đà Nẳng','tienDoan123@gmail.com','0911899574',1,'admin123456'),
-('Trần Thị Tín','2000-12-25','45 Đống Đa, Quảng Nam','tinTran345@gmail.com','0918869572',2,'tin.tran123'),
-('Ngô Văn Vũ','1991-04-24','60 Nguyễn Huệ, Quảng Nam','VuNgo1994@gmail.com','0816829570',1, 'vanvu5678'),
-('Nguyễn Phước Thành Nhân','1992-04-11','45 Trần Bá Song, Huế','NhanNguyen1994@gmail.com','0918897575',3,'nhannguyen267'),
-('Hoàng Tất Đạt','2005-06-15','78 Phan Tứ, Đà Nẳng','NguyenDat123@gmail.com','0911819572',4,'dat.hoang273'),
-('Nguyễn Thị Ánh Phúc','2001-04-30','89 Chu Văn An, Huế','PhucPham456@gmail.com','0816599576', 5,'AnhPhuc628'),
-('Hồ Thị Thu Thảo','1980-12-11','60 Nguyễn Huệ, Hà Nội','Thao241@gmail.com','0918869570',5,'thao.hoang233'),
-('Phan Ngọc Hải Đăng','1992-08-11','50 Châu Thị Vĩnh Tế, Đà Nẳng','DangGa34@gmail.com','0954839572',3,'dang.hai145'),
-('Ngô Định Vũ','2005-01-11','10 Trần Hưng Đạo, Huế','dinhvu24@gmail.com','0973859571',2,'ngovu123'),
-('Hoàng Hữu Đạt','2005-01-11','50 Nguyễn Chí Thanh, Huế, Quảng Nam','datNguyen4@gmail.com','0990829578',5,'huudat728'),
-('Trần Văn Thanh','2000-09-15','234 Ngô Quyền, Hồ Chí Minh','thanh2000@gmail.com','0987894572',3,'thanh.tran457');
+('Gold'),
+('Paltinium'),
+('Diamond');
+insert into app_role
+value(1, 'ROLE_ADMIN'),
+(2, 'ROLE_USER');
+
+
+
+
+insert into app_user(user_name, encryted_password, enabled)
+value('admin123456','admin123456', 1),
+('tin.tran123','abcd34782', 1),
+('vanvu5678','abcd34782', 1),
+('nhannguyen267','abcd3478232', 1),
+('dat.hoang273','abcd3478242', 1),
+('AnhPhuc628','abcd34782342', 0),
+('thao.hoang233','abc243d34782', 1),
+('dang.hai145','abcd2434782', 1),
+('ngovu123','abc24d34782', 1),
+('huudat728','ab25cd34782', 1),
+('thanh.tran457','abgcd34782', 1);
+insert into customer(name_customer, date_of_birth, address, email_customer, phone_number, id_type_cus, user_id)
+value('Đoàn Thành Tiến','1993-12-03','123 Phan Châu Trinh, Đà Nẳng','tienDoan123@gmail.com','0911899574',1,1),
+('Trần Thị Tín','2000-12-25','45 Đống Đa, Quảng Nam','tinTran345@gmail.com','0918869572',2,2),
+('Ngô Văn Vũ','1991-04-24','60 Nguyễn Huệ, Quảng Nam','VuNgo1994@gmail.com','0816829570',1,3),
+('Nguyễn Phước Thành Nhân','1992-04-11','45 Trần Bá Song, Huế','NhanNguyen1994@gmail.com','0918897575',3,4),
+('Hoàng Tất Đạt','2005-06-15','78 Phan Tứ, Đà Nẳng','NguyenDat123@gmail.com','0911819572',4,5),
+('Nguyễn Thị Ánh Phúc','2001-04-30','89 Chu Văn An, Huế','PhucPham456@gmail.com','0816599576', 5,6),
+('Hồ Thị Thu Thảo','1980-12-11','60 Nguyễn Huệ, Hà Nội','Thao241@gmail.com','0918869570',5,7),
+('Phan Ngọc Hải Đăng','1992-08-11','50 Châu Thị Vĩnh Tế, Đà Nẳng','DangGa34@gmail.com','0954839572',3,8),
+('Ngô Định Vũ','2005-01-11','10 Trần Hưng Đạo, Huế','dinhvu24@gmail.com','0973859571',2,9),
+('Hoàng Hữu Đạt','2005-01-11','50 Nguyễn Chí Thanh, Huế, Quảng Nam','datNguyen4@gmail.com','0990829578',5,10),
+('Trần Văn Thanh','2000-09-15','234 Ngô Quyền, Hồ Chí Minh','thanh2000@gmail.com','0987894572',3,11);
 
 insert into branch (name_branch , address_branch , area_branch) values ('Chi nhánh Hà Nội' , '310 Xã Đàn, Phường Phương Liên, Quận Đống Đa, Hà Nội' , 50.0) ,
 ('Chi nhánh Đà Nẵng' , '71 Nguyễn Lương Bằng, Hòa Khánh, Liên Chiểu, Đà Nẵng' , 50.0) ,
