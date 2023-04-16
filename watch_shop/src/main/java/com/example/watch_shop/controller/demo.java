@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class demo {
     @GetMapping("")
     public String showList(){
-        return "admin/cart/list";
+        return "admins/pages/product/list";
     }
 }

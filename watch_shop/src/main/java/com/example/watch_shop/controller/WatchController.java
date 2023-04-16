@@ -1,5 +1,6 @@
 package com.example.watch_shop.controller;
 
+import com.example.watch_shop.service.IManufactureService;
 import com.example.watch_shop.service.IWatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,12 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("watch")
 public class WatchController {
     @Autowired
     IWatchService iWatchService;
+    @Autowired
+    IManufactureService iManufactureService;
 
     @GetMapping("detail")
-    public String detail() {
+    public String detail(Model model) {
         return "detail";
     }
 
@@ -23,7 +27,9 @@ public class WatchController {
 //    }
 
     @GetMapping("watches")
-    public String watches() {
+    public String watches(Model model) {
+        model.addAttribute("list",iWatchService.findAll());
+        model.addAttribute("listManu",iManufactureService.finAll());
         return "watches";
     }
 
