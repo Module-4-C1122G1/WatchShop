@@ -20,7 +20,7 @@ public class WatchService implements IWatchService {
     }
     public void updateQuantity(Integer qtt,Integer id){
         Watch watch=findById(id);
-        watch.setQtt(qtt);
+        watch.setQuantity(qtt);
         iWatchRepository.save(watch);
     }
 }

@@ -1,15 +1,18 @@
 package com.example.watch_shop.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "order_watch")
-public class OrderWatch {
+public class OrderWatch{
     @Id
     @Column(name = "id_order")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idOrder;
     @Column(name = "date_order")
-    private String date;
+    private LocalDate date;
     @Column(name = "total_price")
     private Integer price;
     @ManyToOne
@@ -19,7 +22,7 @@ public class OrderWatch {
     public OrderWatch() {
     }
 
-    public OrderWatch(Integer idOrder, String date, Integer price, Customer customer) {
+    public OrderWatch(LocalDate date, Integer price, Customer customer) {
         this.idOrder = idOrder;
         this.date = date;
         this.price = price;
@@ -34,11 +37,11 @@ public class OrderWatch {
         this.idOrder = idOrder;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

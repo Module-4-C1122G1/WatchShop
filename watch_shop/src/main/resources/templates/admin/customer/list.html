@@ -420,6 +420,7 @@
                         href="/type">Chi nhánh</a><a href="/customers">Khách
                     hàng</a><a href="/customers">Nhân viên</a>
                 </div>
+            <div><span th:utext="${#request.userPrincipal.name}"></span></div>
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown"
@@ -457,6 +458,7 @@
                             <th style="text-align: center">Số điện thoại</th>
                             <th style="text-align: center">Loại khách hàng</th>
                             <th style="text-align: center">Tài khoản</th>
+                            <th style="text-align: center">Trạng thái</th>
                             <th style="text-align: center">Detail</th>
                             <th style="text-align: center">Update</th>
                             <th style="text-align: center">Delete</th>
@@ -471,11 +473,48 @@
                             <td th:text="${customer.email}"></td>
                             <td th:text="${customer.phone}"></td>
                             <td th:text="${customer.customerType.name}"></td>
-                            <td th:text="${customer.account.name}"></td>
+                            <td th:text="${customer.appUser.userName}"></td>
+                            <td th:text="${customer.appUser.enabled}"></td>
                             <td>
-                                <button type="button" class="btn btn-danger"><a
-                                        th:href="@{/customer/detail/{idCustomer}(idCustomer = ${customer.idCustomer})}">Detail</a>
+                                <!--                                <button type="button" class="btn btn-danger"><a-->
+                                <!--                                        th:href="@{/customer/detail/{idCustomer}(idCustomer = ${customer.idCustomer})}">Detail</a>-->
+                                <!--                                </button>-->
+
+                                <button type="button"
+                                        th:attr="onclick=|information2('${customer.getName()}','${customer.getDayOfBirth()}')|"
+                                        class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                    Thông tin chi tiết
                                 </button>
+                                <div class="modal fade" id="exampleModal1" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel1">Thông tin chi tiết</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+
+
+                                                <span class="text-dark fs-4">Tên khách hàng: </span>
+                                                <span id="name" class="text-success fs-4">.text-success</span></br>
+                                                <span>Ngày sinh: </span> <span id="dateOfBirth"></span>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close2525
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger"><a
@@ -546,6 +585,14 @@
     function information(id, name) {
         document.getElementById("idDelete").value = id;
         document.getElementById("nameDelete").innerText = name;
+    }
+</script>
+
+<script>
+    function information2(nameDetail, dateOfBirthDetail) {
+        // document.getElementById("idDelete1").value = nameDetail;
+        document.getElementById("name").innerText = nameDetail;
+        document.getElementById("dateOfBirth").innerText = dateOfBirthDetail;
     }
 </script>
 <footer class="footer_section">
