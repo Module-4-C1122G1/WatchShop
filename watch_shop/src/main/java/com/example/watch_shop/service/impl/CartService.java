@@ -28,7 +28,7 @@ public class CartService implements ICartService {
     public void update(CartID cartID, Integer qtt) {
         Cart cart = findById(cartID);
         Watch watch = iWatchRepository.findById(cartID.getIdWatch()).get();
-        Double price = (double) (watch.getPrice() * qtt);
+        Integer price = watch.getPrice() * qtt;
         if (qtt <= watch.getQuantity()) {
             cart.setQuantity(qtt);
             cart.setPrice(price);
@@ -50,8 +50,7 @@ public class CartService implements ICartService {
 
     @Override
     public Integer totalPrice(Integer idCus) {
-        Integer total = iCartRepository.totalPriceOrder(idCus);
-        return total;
+        return iCartRepository.totalPriceOrder(idCus);
     }
 
     @Override
