@@ -25,6 +25,7 @@ public class CustomerService implements ICustomerService {
         customerRepository.save(customer);
     }
 
+
     @Override
     public void deleteCustomer(Integer idCustomer) {
         customerRepository.deleteById(idCustomer);
@@ -43,5 +44,20 @@ public class CustomerService implements ICustomerService {
     @Override
     public Page<Customer> findByCustomerType(Integer idCustomerType, PageRequest pageRequest) {
         return customerRepository.findByCustomerType(idCustomerType, pageRequest);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return customerRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByPhone(String phone) {
+        return customerRepository.existsByPhone(phone);
+    }
+
+    @Override
+    public boolean existsByAppUser_UserName(String userName) {
+        return customerRepository.existsByAppUser_UserName(userName);
     }
 }

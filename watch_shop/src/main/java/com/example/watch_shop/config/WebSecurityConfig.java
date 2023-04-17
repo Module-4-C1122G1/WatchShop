@@ -18,17 +18,12 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     private UserDetailServiceImpl userDetailService;
 
-
-    //Sử dụng thuật toán Bcrypt để mã hóa password.
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        //Khi tạo mới tài khoản thì cần mã hóa mật khẩu trước khi lưu vào DB
-//        String password = bCryptPasswordEncoder.encode("123123");
         return bCryptPasswordEncoder;
     }
 
@@ -37,35 +32,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        // Các trang không yêu cầu login
-        http.authorizeRequests().antMatchers("/", "/login", "/logout","/index","/contact","/about").permitAll();
+        http.authorizeRequests().antMatchers("/", "/login", "/register", "/logout", "/index", "/contact", "/about","/watch").permitAll();
 
         http.authorizeRequests()
-                .antMatchers("/userInfo","/customer")
+                .antMatchers("/userInfo")
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
         http.authorizeRequests()
-                .antMatchers("/admin", "/customer/register")
+                .antMatchers("/admin", "/customer")
                 .access("hasRole('ROLE_ADMIN')");
 
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
-        // Cấu hình cho Login Form.
-        http.authorizeRequests().and().formLogin()//
-                // Submit URL của trang login
-                .loginProcessingUrl("/j_spring_security") // Submit URL
-                .loginPage("/login")//
-                .defaultSuccessUrl("/userInfo")//
-                .failureUrl("/login?error=true")//
-                .usernameParameter("username")//
+        http.authorizeRequests().and().formLogin()
+                .loginProcessingUrl("/j_spring_security")
+                .loginPage("/login")
+                .defaultSuccessUrl("/userInfo")
+                .failureUrl("/login?error=true")
+                .usernameParameter("username")
                 .passwordParameter("password")
-                // Cấu hình cho Logout Page.
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login");
 
-        // Cấu hình Remember Me.
         http.authorizeRequests().and() //
-                .rememberMe().tokenRepository(this.persistentTokenRepository()) //
-                .tokenValiditySeconds(100 * 24 * 60 * 60); // 24h
+                .rememberMe().tokenRepository(this.persistentTokenRepository())
+                .tokenValiditySeconds(100 * 24 * 60 * 60);
 
     }
 

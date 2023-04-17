@@ -175,18 +175,19 @@
                         <h2 style="margin: 0 auto">
                             Đăng ký
                         </h2>
+                        <p style="color: red; margin: auto; padding: 10px" th:text="${message}"></p>
                     </div>
-                    <form action="/customer/register" method="post" th:object="${customerDto}">
+                    <form action="/register" method="post" th:object="${customerDto}">
                         <div>
-                            <input th:field="*{name}" type="text" placeholder="Full Name"/>
+                            <input th:field="*{name}" type="text" placeholder="Họ và tên"/>
                             <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                         </div>
                         <div>
-                            <input th:field="*{dayOfBirth}" type="date" placeholder="Data Birthday"/>
+                            <input th:field="*{dayOfBirth}" type="date" placeholder="Ngày sinh"/>
                             <p style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>
                         </div>
                         <div>
-                            <input th:field="*{address}" type="text" placeholder="Address"/>
+                            <input th:field="*{address}" type="text" placeholder="Địa chỉ"/>
                             <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
                         </div>
                         <div>
@@ -194,7 +195,7 @@
                             <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                         </div>
                         <div>
-                            <input th:field="*{phone}" type="number" placeholder="Phone number"/>
+                            <input th:field="*{phone}" type="number" placeholder="Số điện thoại"/>
                             <p style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                         </div>
                         <div>
@@ -204,11 +205,11 @@
                             </select>
                         </div>
                         <div>
-                            <input th:field="*{appUser.userName}" type="text" placeholder="User Name"/>
+                            <input th:field="*{appUser.userName}" type="text" placeholder="Tài khoản"/>
                             <p style="color: red" th:if="${#fields.hasErrors('appUser.userName')}" th:errors="*{appUser.userName}"></p>
                         </div>
                         <div>
-                            <input th:field="*{appUser.encrytedPassword}" type="password" placeholder="Password"/>
+                            <input th:field="*{appUser.encrytedPassword}" type="password" placeholder="Mật khẩu"/>
                             <p style="color: red" th:if="${#fields.hasErrors('appUser.encrytedPassword')}" th:errors="*{appUser.encrytedPassword}"></p>
 
                         </div>
