@@ -69,25 +69,6 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/update/{idCustomer}")
-    public String showUpdateRegisterForm(@PathVariable Integer idCustomer, Model model) {
-        model.addAttribute("customerDto", customerService.findByIdCustomer(idCustomer));
-        model.addAttribute("customerType", customerTypeService.findAllCustomerType());
-        return "register_update";
-    }
-
-    @PostMapping("/update")
-    public String updateRegister(@Valid @ModelAttribute("customerDto") CustomerDTO customerUpdateDTO, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
-            return "register_update";
-        } else {
-            Customer customer = new Customer();
-            BeanUtils.copyProperties(customerUpdateDTO, customer);
-            customerService.saveCustomer(customer);
-            return "redirect:/customer";
-        }
-    }
 
     @GetMapping(value = {"/", "/welcome"})
     public String welcomePage() {
@@ -119,6 +100,7 @@ public class LoginController {
 
         String userInfo = WebUtils.toString(loginUser);
         model.addAttribute("userInfo", userInfo);
+
         return "userInfoPage";
     }
 
