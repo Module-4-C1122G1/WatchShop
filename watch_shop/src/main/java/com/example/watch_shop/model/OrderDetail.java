@@ -11,11 +11,13 @@ public class OrderDetail {
     private Integer quantity;
     @Column(name = "price")
     private Integer price;
-    @ManyToOne
+    @Column(name = "image")
+    private String img;
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idOrder")
     @JoinColumn(name = "id_order")
     OrderWatch orderWatch;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idWatch")
     @JoinColumn(name = "id_watch")
     Watch watch;
@@ -24,10 +26,11 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
-    public OrderDetail(OrderDetailID orderDetailID, Integer quantity, Integer price, OrderWatch orderWatch, Watch watch) {
+    public OrderDetail(OrderDetailID orderDetailID, Integer quantity, Integer price, String img, OrderWatch orderWatch, Watch watch) {
         this.orderDetailID = orderDetailID;
         this.quantity = quantity;
         this.price = price;
+        this.img = img;
         this.orderWatch = orderWatch;
         this.watch = watch;
     }
@@ -54,6 +57,14 @@ public class OrderDetail {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public OrderWatch getOrderWatch() {

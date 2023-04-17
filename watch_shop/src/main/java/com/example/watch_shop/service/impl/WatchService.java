@@ -15,4 +15,12 @@ public class WatchService implements IWatchService {
     public List<Watch> findAll() {
         return (List<Watch>) iWatchRepository.findAll();
     }
+    public Watch findById(Integer id){
+        return iWatchRepository.findById(id).get();
+    }
+    public void updateQuantity(Integer qtt,Integer id){
+        Watch watch=findById(id);
+        watch.setQuantity(qtt);
+        iWatchRepository.save(watch);
+    }
 }

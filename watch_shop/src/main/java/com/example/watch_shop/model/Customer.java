@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "customer")
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_customer")
     private Integer idCustomer;
     @Column(name = "name_customer")
@@ -22,10 +23,24 @@ public class Customer {
     @JoinColumn(name = "id_type_cus")
     private CustomerType customerType;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private AppUser appUser;
+
     public Customer() {
     }
 
-    public Customer(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType) {
+    public Customer(String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, AppUser appUser) {
+        this.name = name;
+        this.dayOfBirth = dayOfBirth;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.customerType = customerType;
+        this.appUser = appUser;
+    }
+
+    public Customer(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, AppUser appUser) {
         this.idCustomer = idCustomer;
         this.name = name;
         this.dayOfBirth = dayOfBirth;
@@ -33,6 +48,7 @@ public class Customer {
         this.email = email;
         this.phone = phone;
         this.customerType = customerType;
+        this.appUser = appUser;
     }
 
     public Integer getIdCustomer() {
@@ -89,5 +105,13 @@ public class Customer {
 
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }
