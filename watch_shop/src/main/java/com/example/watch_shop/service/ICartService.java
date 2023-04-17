@@ -13,4 +13,6 @@ public interface ICartService {
     List<Cart> findByCusId(Integer id);
     Integer totalPrice(Integer idCus);
     void deleteById(CartID id);
+    void addOrder(Integer idCus);
+    void updateCheck(Integer idCus);
 }
