@@ -23,6 +23,10 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
     <style>
+        img {
+            width: 69px;
+            height: 69px;
+        }
         @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 
         * {
@@ -434,32 +438,35 @@
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                     <form class="example d-flex align-items-center" action="/adminBook">
-                        <a class="btn btn-add btn-sm" href="/branch/create">
-                            Thêm mới chi nhánh</a>
+                        <input type="hidden" name="action" value="create">
+                        <button type="submit" style="width: 100px">Thêm sách</button>
                     </form>
                 </div>
                 <div class="table-responsive px-2">
                     <table id="tableBook" class="table table-responsive">
                         <tr class="text-center">
-                            <th style="width: 10%;text-align: center">Mã chi nhánh</th>
-                            <th style="width: 260px;text-align: center">Tên chi nhánh</th>
-                            <th style="width: 15%;text-align: center">Địa chỉ chi nhánh</th>
-                            <th style="text-align: center">Nhân viên phụ trách</th>
-                            <th style="text-align: center">Các loại sản phẩm</th>
+                            <th style="width: 10%;text-align: center">Mã nhân viên</th>
+                            <th style="width: 260px;text-align: center">Tên sản phẩm </th>
+<!--                            <th style="width: 15%;text-align: center">Giá sản phẩm</th>-->
+<!--                            <th style="width: 15%;text-align: center">Hình ảnh</th>-->
+<!--                            <th style="text-align: center">Chất liệu dây đeo</th>-->
+<!--                            <th style="text-align: center">Đường kính</th>-->
+<!--                            <th style="text-align: center">Màu sắc</th>-->
+<!--                            <th style="text-align: center">Nguồn gốc</th>-->
+<!--                            <th style="text-align: center">Thông tin chi tiết</th>-->
                         </tr>
-                        <tr th:each="branch :${branchPage}">
-                            <td th:text="${branch.idBranch}"></td>
-                            <td th:text="${branch.name}"></td>
-                            <td th:text="${branch.address}"></td>
-                            <td><a class="btn btn-primary btn-sm" th:href="@{/branch/employee/__${branch.idBranch}__}">Nhân viên</a><td>
-                            <td><a class="btn btn-primary btn-sm" th:href="@{/branch/watch/__${branch.idBranch}__}">Sản phẩm</a><td>
-                            <td><a th:href="@{/branch/update?id=__*{branch.idBranch}__}" class="btn btn-primary btn-sm">Sửa</a></td>
-                            <td>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modelId"
-                                        th:attr="onclick=|infoDelete('${branch.idBranch}', '${branch.name}')|">
-                                    Xoá
-                                </button>
-                            </td>
+                        <tr th:each="watch :${watchList}">
+                            <td th:text="${watch.idWatch}"></td>
+                            <td th:text="${watch.name}"></td>
+<!--                            <td th:text="${watch.price}"></td>-->
+<!--                            <td>-->
+<!--                                <img th:src="${watch.image}">-->
+<!--                            </td>-->
+<!--                            <td th:text="${watch.strapMaterial}"></td>-->
+<!--                            <td th:text="${watch.diameter}"></td>-->
+<!--                            <td th:text="${watch.color}"></td>-->
+<!--                            <td th:text="${watch.origin}"></td>-->
+<!--                            <td th:text="${watch.detail}"></td>-->
                         </tr>
                     </table>
                 </div>
@@ -467,52 +474,8 @@
         </div>
     </div>
 </div>
-<div class="text-center">
-    <a class="page-item btn btn-dark active1" th:if="${branchPage.hasPrevious()}"
-       th:href="@{/branch(page = ${branchPage.number - 1}, name = ${name})}">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </a>
 
-    <a class="page-item number btn btn-dark active1"
-       th:classappend="${pageNumber == branchPage.number + 1} ? 'active' : ''"
-       th:each="pageNumber : ${pageNumberList}"
-       th:href="@{/branch(page = ${pageNumber - 1},name = ${name})}"
-       th:text="${pageNumber}">
-    </a>
 
-    <a class="page-item btn btn-dark active1" th:if="${branchPage.hasNext()}"
-       th:href="@{/branch(page = ${branchPage.number + 1}, name =${name})}">
-        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-    </a>
-</div>
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"> Xóa chi nhánh </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="/branch/delete">
-                <div class="modal-body">
-                    <input type="hidden" name="deleteId" id="deleteId">
-                    <span>Bạn có chắc muốn xóa </span> <span id="deleteName"></span>?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
-                    <button type="submit" class="btn btn-danger">Xoá</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<script>
-    function infoDelete (id, name) {
-        document.getElementById("deleteId").value = id;
-        document.getElementById("deleteName").innerText = name;
-    }
-</script>
 <!--FOOTER-->
 <footer class="footer_section">
     <div class="container">

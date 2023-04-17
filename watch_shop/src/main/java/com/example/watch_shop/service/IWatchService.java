@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IWatchService {
     List<Watch> findAll();
+    Watch findById(int id);
 }

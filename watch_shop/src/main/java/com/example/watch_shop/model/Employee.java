@@ -30,7 +30,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "id_position")
     private Position position;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_branch")
     private Branch branch;
 
