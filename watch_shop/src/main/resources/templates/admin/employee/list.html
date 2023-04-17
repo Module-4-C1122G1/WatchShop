@@ -1,665 +1,641 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>List Books</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="/user/css/linearicons.css">
-    <link rel="stylesheet" href="/user/css/owl.carousel.css">
-    <link rel="stylesheet" href="/user/css/themify-icons.css">
-    <link rel="stylesheet" href="/user/css/nice-select.css">
-    <link rel="stylesheet" href="/user/css/nouislider.min.css">
-    <link rel="stylesheet" href="/user/css/bootstrap.css">
-    <link rel="stylesheet" href="/user/css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
-    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
-    <link th:href="@{/css/style.css}" rel="stylesheet"/>
-    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            list-style: none;
-            font-family: 'Montserrat', sans-serif
-        }
-
-        body {
-            padding: 10px
-        }
-
-        .topnav {
-            background-color: #ffff;
-            overflow: hidden
-        }
-
-        .far.fa-user-circle {
-            font-size: 29px;
-            color: #726f6f;
-            padding-top: 10px
-        }
-
-        .input-10 {
-            width: 40px;
-            color: #4c4c96;
-            font-weight: 600
-        }
-
-        .fas.fa-search {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: lightsalmon;
-            height: 100%
-        }
-
-        .topnav a {
-            float: left;
-            display: block;
-            color: #8d8b8b;
-            font-weight: 800;
-            font-size: 14px;
-            text-transform: uppercase;
-            padding: 14px 16px;
-            text-decoration: none;
-            border-bottom: 3px solid transparent
-        }
-
-        .topnav a:hover {
-            color: #f7910c;
-            border-bottom: 3px solid red
-        }
-
-        .topnav .active {
-            color: black;
-            border-bottom: 3px solid red
-        }
-
-        form.example input[type=text] {
-            padding: 10px;
-            font-size: 17px;
-            border: 1px solid grey;
-            float: left;
-            width: 90%;
-            height: 36px;
-            background: #fff
-        }
-
-        form.example input[type=text]:focus {
-            outline: none
-        }
-
-        form.example button {
-            float: left;
-            width: 10%;
-            height: 36px;
-            padding: 5px;
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-            background: black;
-            color: white;
-            font-size: 14px;
-            border: 1px solid grey;
-            border-left: none;
-            cursor: pointer
-        }
-
-        .navbar-toggler:focus {
-            box-shadow: none;
-            outline: none;
-            border: none
-        }
-
-        ::placeholder {
-            font-size: 10px
-        }
-
-        form.example button:hover {
-            background: #0b7dda
-        }
-
-        form.example::after {
-            content: "";
-            clear: both;
-            display: table
-        }
-
-        .container .table-responsive {
-            margin: 20px auto;
-            overflow-x: auto
-        }
-
-        .container .table-responsive::-webkit-scrollbar {
-            height: 5px
-        }
-
-        .container .table-responsive::-webkit-scrollbar-thumb {
-            border-radius: 5px;
-            background-image: linear-gradient(to right, #5D7ECD, #0C91E6)
-        }
-
-        .table thead tr th {
-            font-size: 11px;
-            color: white;
-            padding: 10px 10px
-        }
-
-        .table tbody tr td {
-            font-size: 13.5px;
-            padding: 10px 10px
-        }
-
-        #navbar {
-            width: 20%;
-            background-color: black !important;
-            height: 50px;
-            border: none
-        }
-
-        .bg-blight {
-            color: #7f7fee;
-            font-weight: 600
-        }
-
-        .bg-bdark {
-            color: #4c4c96;
-            font-weight: 600
-        }
-
-        #navbar a {
-            color: white
-        }
-
-        .fas.fa-bars {
-            color: white
-        }
-
-        #navbar2 {
-            width: 80%
-        }
-
-        #navbar-items {
-            width: 20%;
-            height: 500px;
-            background-color: white;
-        }
-
-        ul#navbar-items li {
-            color: black;
-            padding: 15px 25px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 10px;
-            display: flex;
-            align-items: center
-        }
-
-        ul li .fas {
-            font-size: 16px
-        }
-
-        ul#navbar-items li:hover {
-            background-color: #fd7e14;
-            color: white
-        }
-
-        ul li:hover .fas {
-            color: #f7910c
-        }
-
-        #topnavbar {
-            width: 80%
-        }
-
-        .fs13 {
-            font-size: 13px
-        }
-
-        .fs14 {
-            font-size: 18px;
-            color: white
-        }
-
-        .fas.fa-times {
-            color: red
-        }
-
-        .fas.fa-check {
-            color: greenyellow
-        }
-
-        .example {
-            width: 50%
-        }
-
-        @media (max-width: 780px) {
-            #navbar {
-                width: 20%
-            }
-
-            #topnavbar {
-                width: 80%
-            }
-
-            .text-decoration-none.fs14 {
-                font-size: 10px
-            }
-
-            .text-decoration-none .fs13 {
-                font-size: 9px
-            }
-        }
-
-        @media (max-width: 430px) {
-            #navbar-items, #topnavbar {
-                width: 100%;
-                height: 100%
-            }
-
-            #navbar-items {
-                padding: 20px;
-                margin-bottom: 30px
-            }
-
-            .topnav a {
-                font-size: 12px;
-                padding: 12px
-            }
-
-            #navbar {
-                width: 100%;
-                background-color: blue
-            }
-
-            .example {
-                width: 100%
-            }
-
-            .text-decoration-none.fs14 {
-                font-size: 14px
-            }
-
-            .text-decoration-none .fs13 {
-                font-size: 13px
-            }
-        }
-
-        @media (max-width: 376px) {
-            #navbar-items {
-                padding: 20px;
-                margin-bottom: 30px
-            }
-
-            .topnav a {
-                font-size: 12px;
-                padding: 7px
-            }
-        }
-
-        @media (max-width: 320px) {
-            .topnav a {
-                font-size: 10px;
-                padding: 4px
-            }
-        }
-
-        footer {
-            background: #101010;
-            padding: 86px 0;
-        }
-
-        .single-content {
-            text-align: center;
-            padding: 115px 0;
-        }
-
-        .single-box p {
-            color: #fff;
-            line-height: 1.9;
-        }
-
-        .single-box h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .single-box .card-area i {
-            color: #ffffff;
-            font-size: 20px;
-            margin-right: 10px;
-        }
-
-        .single-box ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .single-box ul li a {
-            text-decoration: none;
-            color: #fff;
-            line-height: 2.5;
-            font-weight: 100;
-        }
-
-        .single-box h2 {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        #basic-addon2 {
-            background: #fe1e4f;
-            color: #fff;
-        }
-
-        .socials i {
-            font-size: 18px;
-            margin-right: 15px;
-        }
-
-        @media (max-width: 767px) {
-            .single-box {
-                margin-bottom: 50px;
-            }
-        }
-
-        @media (min-width: 768px) and (max-width: 991px) {
-            .single-box {
-                margin-bottom: 50px;
-            }
-        }
-
-        .img-book {
-            width: 16em;
-            height: auto;
-        }
-
-        .detail-book {
-            display: grid;
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+    <title>
+        Trang admin
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+    <link th:href="@{/admin/assets/css/nucleo-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/admin/assets/css/nucleo-svg.css}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link th:href="@{/admin/assets/css/nucleo-svg.css}" rel="stylesheet"/>
+    <link id="pagestyle" th:href="@{/admin/assets/css/soft-ui-dashboard.css}" rel="stylesheet"/>
 </head>
-<body>
-<div class="px-0 bg-light container-fluid">
-    <div class="d-flex">
-        <div class="d-flex align-items-center " id="navbar">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-items"
-                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation"><span
-                    class="fas fa-bars"></span></button>
-            <a class="text-decoration-none fs14 ps-2" href="#">Quản lý WatchStores<span class="fs13 pe-2"></span></a>
-        </div>
-        <div id="navbar2" class="d-flex justify-content-end pe-4"><span> <li class="nav-item submenu dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                 aria-haspopup="true"
-                 aria-expanded="false"></a>
-              <ul class="dropdown-menu">
-                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-              </ul>
-            </li></span></div>
+<body class="g-sidenav-show  bg-gray-100">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+       id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+           aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
+           target="_blank">
+            <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
+        </a>
     </div>
-    <div class="d-md-flex">
-        <ul id="navbar-items" class="p-0">
-            <li><span class="fas fa-th-list"></span> <span class="ps-3 name">Quản lý sản phẫm</span></li>
-            <li><span class="fas fa-chart-line"></span> <span class="ps-3 name">Quản lý hoá đơn</span></li>
-            <li><span class="fas fa-clipboard-check"></span> <span class="ps-3 name">Quản lý chi nhánh</span></li>
-            <li><span class="fas fa-clipboard-check"></span> <span class="ps-3 name">Quản lý chi khách hàng</span></li>
-            <li><span class="fas fa-clipboard-check"></span> <span class="ps-3 name">Quản lý chi nhân viên</span></li>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link  nav-link-sidebar" href="../dashboard.html">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>shop </title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(0.000000, 148.000000)">
+                                            <path class="color-background opacity-6"
+                                                  d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"></path>
+                                            <path class="color-background"
+                                                  d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Thống kê</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-sidebar" href="../pages/tables.html">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>office</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g id="office" transform="translate(153.000000, 2.000000)">
+                                            <path class="color-background opacity-6"
+                                                  d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"></path>
+                                            <path class="color-background"
+                                                  d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Sản phẩm</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  nav-link-sidebar" href="../pages/billing.html">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(453.000000, 454.000000)">
+                                            <path class="color-background opacity-6"
+                                                  d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
+                                            <path class="color-background"
+                                                  d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Khách hàng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  nav-link-sidebar" href="../pages/virtual-reality.html">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>box-3d-50</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2319.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(603.000000, 0.000000)">
+                                            <path class="color-background"
+                                                  d="M22.7597136,19.3090182 L38.8987031,11.2395234 C39.3926816,10.9925342 39.592906,10.3918611 39.3459167,9.89788265 C39.249157,9.70436312 39.0922432,9.5474453 38.8987261,9.45068056 L20.2741875,0.1378125 L20.2741875,0.1378125 C19.905375,-0.04725 19.469625,-0.04725 19.0995,0.1378125 L3.1011696,8.13815822 C2.60720568,8.38517662 2.40701679,8.98586148 2.6540352,9.4798254 C2.75080129,9.67332903 2.90771305,9.83023153 3.10122239,9.9269862 L21.8652864,19.3090182 C22.1468139,19.4497819 22.4781861,19.4497819 22.7597136,19.3090182 Z"></path>
+                                            <path class="color-background opacity-6"
+                                                  d="M23.625,22.429159 L23.625,39.8805372 C23.625,40.4328219 24.0727153,40.8805372 24.625,40.8805372 C24.7802551,40.8805372 24.9333778,40.8443874 25.0722402,40.7749511 L41.2741875,32.673375 L41.2741875,32.673375 C41.719125,32.4515625 42,31.9974375 42,31.5 L42,14.241659 C42,13.6893742 41.5522847,13.241659 41,13.241659 C40.8447549,13.241659 40.6916418,13.2778041 40.5527864,13.3472318 L24.1777864,21.5347318 C23.8390024,21.7041238 23.625,22.0503869 23.625,22.429159 Z"></path>
+                                            <path class="color-background opacity-6"
+                                                  d="M20.4472136,21.5347318 L1.4472136,12.0347318 C0.953235098,11.7877425 0.352562058,11.9879669 0.105572809,12.4819454 C0.0361450918,12.6208008 6.47121774e-16,12.7739139 0,12.929159 L0,30.1875 L0,30.1875 C0,30.6849375 0.280875,31.1390625 0.7258125,31.3621875 L19.5528096,40.7750766 C20.0467945,41.0220531 20.6474623,40.8218132 20.8944388,40.3278283 C20.963859,40.1889789 21,40.0358742 21,39.8806379 L21,22.429159 C21,22.0503869 20.7859976,21.7041238 20.4472136,21.5347318 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Chi nhánh</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-sidebar " href="../pages/billing.html">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(453.000000, 454.000000)">
+                                            <path class="color-background opacity-6"
+                                                  d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
+                                            <path class="color-background"
+                                                  d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Khách hàng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:class="${employee != null} ? 'nav-link active' : 'nav-link'" th:href="@{/employee}">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(453.000000, 454.000000)">
+                                            <path class="color-background opacity-6"
+                                                  d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
+                                            <path class="color-background"
+                                                  d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Nhân viên</span>
+                </a>
+            </li>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý tài khoản</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  " href="../pages/profile.html">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>customer-support</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(1.000000, 0.000000)">
+                                            <path class="color-background opacity-6"
+                                                  d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
+                                            <path class="color-background"
+                                                  d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                                            <path class="color-background"
+                                                  d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Thông tin tài khoản</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  " href="../pages/sign-in.html">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>document</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(154.000000, 300.000000)">
+                                            <path class="color-background opacity-6"
+                                                  d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z"></path>
+                                            <path class="color-background"
+                                                  d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Đăng xuất</span>
+                </a>
+            </li>
+
         </ul>
-        <div id="topnavbar">
-            <div class="topnav mb-3">
-                <div class="d-flex px-1"><a href="/adminBook" >Sản phẩm</a> <a href="/customers">Hoá
-                    đơn</a> <a
-                        href="/type">Chi nhánh</a><a href="/customers">Khách
-                    hàng</a><a href="/employee/" class="active">Nhân viên</a>
-                </div>
-                <div class="d-flex align-items-center mb-3 px-md-3 px-2">
-                    <span class="text-uppercase fs13 fw-bolder pe-3">Tìm<span class="ps-1">Kiếm</span></span>
-                    <form class="example d-flex align-items-center">
-                        <input type="text" placeholder="Tìm kiếm theo tên" name="name" value=""
-                               style="width: 40%;">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
+    </div>
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+         navbar-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Nhân viên</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Nhân viên</h6>
+            </nav>
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 
-                        <a th:href="@{/employee/create}" class="btn btn-primary" style="background-color: #1c1b1b;color: white" >Thêm nhân viên</a>
-                </div>
-                <div class="table-responsive px-2">
-                    <table id="tableBook" class="table table-responsive">
-                        <tr class="text-center">
-                            <th style="text-align: center">Mã nhân viên</th>
-                            <th style="text-align: center">Tên nhân viên</th>
-                            <th style="text-align: center">Ngày sinh</th>
-                            <th style="text-align: center">Giới tính</th>
-                            <th style="text-align: center">Lương</th>
-                            <th style="text-align: center">Địa chỉ</th>
-                            <th style="text-align: center">số điện thoại</th>
-                            <th style="text-align: center">email</th>
-                            <th style="text-align: center">Ảnh</th>
-                            <th style="text-align: center">Bằng cấp</th>
-                            <th style="text-align: center">Chức vụ</th>
-                            <th style="text-align: center">Chi nhánh</th>
-                        </tr>
-                        <tr th:each="employee :${employee}">
-                            <td th:text="${employee.id}"></td>
-                            <td th:text="${employee.name}"></td>
-                            <td th:text="${employee.dateOfBirth}"></td>
-                            <td th:text="${employee.gender}"></td>
-                            <td th:text="${employee.salary}"></td>
-                            <td th:text="${employee.address}"></td>
-                            <td th:text="${employee.phone}"></td>
-                            <td th:text="${employee.email}"></td>
-                            <td><img th:src="${employee.img}" style="width: 100px"></td>
-                            <td th:text="${employee.diploma.name}"></td>
-                            <td th:text="${employee.position.name}"></td>
-                            <td th:text="${employee.branch.address}"></td>
-                            <td>
-                                <!--button xem thêm-->
+                <ul class="navbar-nav  justify-content-end">
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-user"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end" style="height: 500px; width: 24%">
+                            <a href="#" style="font-size: 20px">Reports</a>
+                            <a href="#">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#">Logout</a>
+                        </div>
+                    </li>
+                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                            <div class="sidenav-toggler-inner">
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item px-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0">
+                            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-bell cursor-pointer"></i>
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                            aria-labelledby="dropdownMenuButton">
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="my-auto">
+                                            <img th:src="@{/assets/img/team-2.jpg}" class="avatar avatar-sm  me-3 ">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                <span class="font-weight-bold">New message</span> from Laur
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0 ">
+                                                <i class="fa fa-clock me-1"></i>
+                                                13 minutes ago
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="my-auto">
+                                            <img th:src="@{/assets/img/small-logos/logo-spotify.svg}"
+                                                 class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                <span class="font-weight-bold">New album</span> by Travis Scott
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0 ">
+                                                <i class="fa fa-clock me-1"></i>
+                                                1 day
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item border-radius-md" href="javascript:;">
+                                    <div class="d-flex py-1">
+                                        <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                            <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
+                                                 xmlns="http://www.w3.org/2000/svg"
+                                                 xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <title>credit-card</title>
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF"
+                                                       fill-rule="nonzero">
+                                                        <g transform="translate(1716.000000, 291.000000)">
+                                                            <g transform="translate(453.000000, 454.000000)">
+                                                                <path class="color-background"
+                                                                      d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+                                                                      opacity="0.593633743"></path>
+                                                                <path class="color-background"
+                                                                      d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="text-sm font-weight-normal mb-1">
+                                                Payment successfully completed
+                                            </h6>
+                                            <p class="text-xs text-secondary mb-0 ">
+                                                <i class="fa fa-clock me-1"></i>
+                                                2 days
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6 style="display: inline">Nhân viên</h6>
+                        <!--                        <button type="button" class="btn btn-outline-secondary"-->
+                        <!--                                style="background: #cb0c9f;float: right;color: white">Thêm mới-->
+                        <!--                        </button>-->
+                        <a th:href="@{/employee/create}" class="btn btn-outline-secondary"
+                           style="background-color:blue;color: white">Thêm nhân viên</a>
 
-<!--                                                <button type="button"-->
-<!--                                                        th:attr="onclick=|detail('${employee.manufacturer?.getName()}','${employee.dateOfBirth}','${employee.gender}','${employee.salary}','${employee.address}','${employee.phone}','${employee.image}')|"-->
-<!--                                                        class="btn btn-primary"-->
-<!--                                                        data-bs-toggle="modal" data-bs-target="#extraLargeModal"-->
-<!--                                                        data-bs-whatever="@mdo"-->
-<!--                                                        style="margin-bottom: 5px; background: white;border: 0">-->
-<!--                                                  <i class="fa fa-table" style="color: black"></i>-->
-<!--                                                </button>-->
+                        <form>
+                            <!--                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>-->
+                            <input type="text" placeholder="Tìm kiếm theo tên Nhân viên"
+                                   name="name">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
 
-                                <!--button update-->
-                                <a th:href="@{/employee/update/{id}(id=${employee.id})}" class="btn btn-primary"><i
-                                        class="fas fa-edit"></i></a>
-                                <!-- button delete-->
-                                <button type="button" th:attr="onclick=|deleteId('${employee.id}','${employee.name}')|"
-                                        class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                    <!--                  modal xoa-->
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Xóa nhân viên </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                    <div class="card-body px-0 pt-0 pb-2" style="background: beige">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã
+                                        nhân viên
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tên
+                                        nhân viên
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Chức vụ
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Chi nhánh
+                                    </th>
+                                    <th class="text-secondary opacity-7"> Giới tính</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="employee :${employee}">
+                                    <th class="text-xs font-weight-bold mb-0" th:text="${employee.id}"></th>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <img th:src="${employee.img}" class="avatar avatar-sm me-3"
+                                                     alt="user1">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm" th:text="${employee.name}"></h6>
+                                                <p class="text-xs text-secondary mb-0" th:text="${employee.email}"></p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0" th:text="${employee.diploma.name}"></p>
+                                        <p class="text-xs text-secondary mb-0" th:text="${employee.position.name}"></p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-success"
+                                              th:text="${employee.branch.address}"></span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold"
+                                              th:text="${employee.gender}"></span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <!--                                         <button type="button" th:href="@{/employee/update/{id}(id=${employee.id})}" onclick="" class="btn btn-danger btn-rounded btn-icon"-->
+                                        <!--                                         style="margin-bottom: 0px">-->
+                                        <!--                                         <i class="fa fa-edit"></i>-->
+                                        <!--                                         </button>-->
+
+                                        <div><a th:href="@{/employee/update/{id}(id=${employee.id})}"
+                                                class="btn btn-danger btn-rounded btn-icon"><i
+                                                class="fas fa-edit"></i></a>
+                                        </div>
+                                        <div>
+                                            <button type="button" class="btn btn-info btn-rounded btn-icon"
+                                                    th:attr="onclick=|deleteId('${employee.id}','${employee.name}')|"
+                                                    style="margin-bottom: 0px" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <!--                  modal xoa-->
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Xóa nhân viên </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <form action="/employee/delete">
+                                            <div class="modal-body">
+                                                <label for="deleteId"></label>
+                                                <input type="hidden" id="deleteId" name="deleteId">
+                                                Bạn có muốn xóa <span id="deleteName"
+                                                                      style="color: brown; font-weight: bold">${employee.name}</span>
+                                                ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Hủy bỏ
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Đồng ý</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
                                 </div>
-                                <form action="/employee/delete">
-                                    <div class="modal-body">
-                                        <label for="deleteId"></label>
-                                        <input type="hidden" id="deleteId" name="deleteId">
-                                        Bạn có muốn xóa <span id="deleteName"
-                                                              style="color: brown; font-weight: bold">${employee.name}</span>
-                                        ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ
-                                        </button>
-                                        <button type="submit" class="btn btn-primary">Đồng ý</button>
-                                    </div>
+                            </div>
+                            <div>
+                                <script>
+                                    function deleteId(id, name) {
+                                        document.getElementById("deleteId").value = id;
+                                        document.getElementById("deleteName").innerText = name;
+                                    }
+                                </script>
+                                <!--                            page-->
 
-                                </form>
+                                <div class="text-center container">
+                                    <a class="page-item btn btn-dark page-item" th:if="${employee.hasPrevious()}"
+                                       th:href="@{/employee(page = ${employee.number - 1})}">
+                                        <i class="ti-angle-left">Previous</i>
+                                    </a>
+
+                                    <!--                                <a class="page-item number btn btn-dark page-item"-->
+                                    <!--                                   th:classappend="${pageNumber == employee.number + 1} ? 'active' : ''"-->
+                                    <!--                                   th:each="pageNumber : ${pageNumberList}"-->
+                                    <!--                                   th:href="@{/admin/employee(page = ${pageNumber - 1})}"-->
+                                    <!--                                   th:text="${pageNumber}">-->
+                                    <!--                                </a>-->
+
+                                    <a class="page-item btn btn-dark page-item" th:if="${employee.hasNext()}"
+                                       th:href="@{/employee(page = ${employee.number + 1})}">
+                                        <i class="ti-angle-right">Next</i>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <script>
-                            function deleteId(id, name) {
-                                document.getElementById("deleteId").value = id;
-                                document.getElementById("deleteName").innerText = name;
-                            }
-                        </script>
-
-                        <div>
-                            <a th:href="@{'/employee'(page=${employee.number - 1})}" th:if="${employee.hasPrevious()}">Previous</a>
-                            <span th:text="${employee.number + 1}"></span>/<span
-                                th:text="${employee.totalPages}"></span>
-                            <a th:href="@{'/employee'(page=${employee.number + 1})}"
-                               th:if="${employee.hasNext()}">Next</a>
+                </div>
+            </div>
+            <footer class="footer pt-3  ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                ,
+                                WatchShop <i class="fa fa-heart"></i> bởi
+                                <a href="https://www.creative-tim.com" class="font-weight-bold"
+                                   target="_blank">Team3</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </footer>
+        </div>
+    </div>
+</main>
+<div class="fixed-plugin">
+    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+        <i class="fa fa-cog py-2"> </i>
+    </a>
+    <div class="card shadow-lg ">
+        <div class="card-header pb-0 pt-3 ">
+            <div class="float-start">
+                <h5 class="mt-3 mb-0">Soft UI Configurator</h5>
+                <p>See our dashboard options.</p>
+            </div>
+            <div class="float-end mt-4">
+                <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+            <!-- End Toggle Button -->
+        </div>
+        <hr class="horizontal dark my-1">
+        <div class="card-body pt-sm-3 pt-0">
+            <!-- Sidebar Backgrounds -->
+            <div>
+                <h6 class="mb-0">Sidebar Colors</h6>
+            </div>
+            <a href="javascript:void(0)" class="switch-trigger background-color">
+                <div class="badge-colors my-2 text-start">
+                    <span class="badge filter bg-gradient-primary active" data-color="primary"
+                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-success" data-color="success"
+                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-warning" data-color="warning"
+                          onclick="sidebarColor(this)"></span>
+                    <span class="badge filter bg-gradient-danger" data-color="danger"
+                          onclick="sidebarColor(this)"></span>
+                </div>
+            </a>
+            <!-- Sidenav Type -->
+            <div class="mt-3">
+                <h6 class="mb-0">Sidenav Type</h6>
+                <p class="text-sm">Choose between 2 different sidenav types.</p>
+            </div>
+            <div class="d-flex">
+                <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-transparent"
+                        onclick="sidebarType(this)">Transparent
+                </button>
+                <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white"
+                        onclick="sidebarType(this)">White
+                </button>
+            </div>
+            <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+            <!-- Navbar Fixed -->
+            <div class="mt-3">
+                <h6 class="mb-0">Navbar Fixed</h6>
+            </div>
+            <div class="form-check form-switch ps-0">
+                <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed"
+                       onclick="navbarFixed(this)">
+            </div>
+            <hr class="horizontal dark my-sm-4">
+            <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard">Free
+                Download</a>
+            <a class="btn btn-outline-dark w-100"
+               href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard">View
+                documentation</a>
+            <div class="w-100 text-center">
+                <a class="github-button" href="https://github.com/creativetimofficial/soft-ui-dashboard"
+                   data-icon="octicon-star" data-size="large" data-show-count="true"
+                   aria-label="Star creativetimofficial/soft-ui-dashboard on GitHub">Star</a>
+                <h6 class="mt-3">Thank you for sharing!</h6>
+                <a href="https://twitter.com/intent/tweet?text=Check%20Soft%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
+                   class="btn btn-dark mb-0 me-2" target="_blank">
+                    <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/soft-ui-dashboard"
+                   class="btn btn-dark mb-0 me-2" target="_blank">
+                    <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
+                </a>
             </div>
         </div>
     </div>
 </div>
-<footer class="footer_section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-lg-3 footer-col">
-                <div class="footer_detail">
-                    <h4>
-                        About
-                    </h4>
-                    <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of
-                        over
-                        200 Latin words, combined with
-                    </p>
-                    <div class="footer_social">
-                        <a href="">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-linkedin" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 footer-col">
-                <div class="footer_contact">
-                    <h4>
-                        Reach at..
-                    </h4>
-                    <div class="contact_link_box">
-                        <a href="">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <span>
-                  Location
-                </span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            <span>
-                  Call +01 1234567890
-                </span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <span>
-                  demo@gmail.com
-                </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 footer-col">
-                <div class="footer_contact">
-                    <h4>
-                        Subscribe
-                    </h4>
-                    <form action="#">
-                        <input type="text" placeholder="Enter email"/>
-                        <button type="submit">
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 footer-col">
-                <div class="map_container">
-                    <div class="map">
-                        <div id="googleMap"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-info">
-            <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
-            </p>
-        </div>
-    </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-<script src="/user/js/vendor/jquery-2.2.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-        crossorigin="anonymous"></script>
-<script src="/user/js/vendor/bootstrap.min.js"></script>
-<script src="/user/js/jquery.ajaxchimp.min.js"></script>
-<script src="/user/js/jquery.nice-select.min.js"></script>
-<script src="/user/js/jquery.sticky.js"></script>
-<script src="/user/js/nouislider.min.js"></script>
-<script src="/user/js/jquery.magnific-popup.min.js"></script>
-<script src="/user/js/owl.carousel.min.js"></script>
-<!--gmaps Js-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-<script src="/user/js/gmaps.min.js"></script>
-<script src="/user/js/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-<script src="js/jquery-3.4.1.min.js"></script>
-<!-- popper js -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+<!--   Core JS Files   -->
+<script th:src="@{/admin/assets/js/core/popper.min.js}"></script>
+<script th:src="@{/admin/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/admin/assets/js/plugins/perfect-scrollbar.min.js}"></script>
+<script th:src="@{/admin/assets/js/plugins/smooth-scrollbar.min.js}"></script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
 </script>
-<!-- bootstrap js -->
-<script src="js/bootstrap.js"></script>
-<!-- owl slider -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-</script>
-<!-- custom js -->
-<script src="js/custom.js"></script>
-<!-- Google Map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+<script th:src="@{/admin/assets/js/soft-ui-dashboard.min.js}"></script>
 </body>
-</html>
+<script>
+    let navLinkElm = document.getElementsByClassName("nav-link-sidebar");
+    for (let i = 0; i < navLinkElm.length; i++) {
+        navLinkElm[i].addEventListener('click', () => {
+            this.classList.add('active');
+            debugger;
+        })
+    }
+</script>
+</html>>

@@ -35,7 +35,7 @@ public class EmployeeController {
                        @RequestParam(required = false, defaultValue = "") String name) {
         Sort sort = Sort.by("name").descending();
         model.addAttribute("employee", employeeService.findByAll(name, PageRequest.of(page, 3, sort)));
-        return "admin/employee/list2";
+        return "admin/employee/list";
     }
 
     @GetMapping("/create")
@@ -64,7 +64,7 @@ public class EmployeeController {
     }
     @GetMapping("create1")
     public String pr(){
-        return "admin/employee/list2";
+        return "admin/employee/update2";
     }
 
     @GetMapping("/update/{id}")
