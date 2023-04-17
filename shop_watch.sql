@@ -1,39 +1,32 @@
 drop database if exists shop_watch;
 create database shop_watch;
 use shop_watch;
-
 create table type_customer(
 id_type_cus int primary key auto_increment,
 name_type_cus varchar(45) not null
 );
-
 create table positions(
 id_position int primary key auto_increment,
 name_position varchar(45) not null
 );
-
 create table diploma(
 id_diploma int primary key auto_increment,
 name_diploma varchar(255) not null
 );
-
 create table type_watch(
 id_type_watch int primary key auto_increment,
 name_type_watch varchar(255) not null
 );
-
 create table manufacturer(
 id_manufacturer int primary key auto_increment,
 name_manufacturer varchar(45) not null
 );
-
 create table branch(
 id_branch int primary key auto_increment,
 name_branch varchar(45) not null,
 address_branch varchar(255) not null,
 area_branch double not null
 );
-
 create table employee(
 id_employee int primary key auto_increment,
 name_employee varchar(255) not null,
@@ -51,24 +44,9 @@ foreign key(id_position) references positions(id_position),
 foreign key(id_diploma) references diploma(id_diploma),
 foreign key(id_branch) references branch(id_branch)
 );
-
-
-create table customer(
-id_customer int primary key auto_increment,
-name_customer varchar(45) not null,
-date_of_birth date not null,
-address varchar(255) not null,
-email_customer varchar(255) not null unique,
-phone_number varchar(45) not null unique,
-id_type_cus int,
-user_id int not null ,
-foreign key(user_id) references app_user(user_id),
-foreign key(id_type_cus) references type_customer(id_type_cus)
-);
-
 create table watch(
 id_watch int primary key auto_increment,
-name_watch varchar(100) not null,
+name_watch varchar(45) not null,
 price int not null,
 id_type_watch int,
 id_manufacturer int,
@@ -83,17 +61,57 @@ foreign key(id_type_watch) references type_watch(id_type_watch),
 foreign key(id_manufacturer) references manufacturer(id_manufacturer)
 );
 
+create table manage_product_branch(
+id_branch int,
+id_watch int,
+foreign key(id_branch) references branch(id_branch),
+foreign key(id_watch) references watch(id_watch),
+primary key(id_branch,id_watch)
+);
+create table app_user
+(
+    user_id int auto_increment primary key,
+    user_name VARCHAR(45),
+    encryted_password VARCHAR(255) NOT NULL,
+    enabled bit default 1
+);
+create table app_role
+(
+    role_id int AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(10) NOT NULL UNIQUE
+);
+create table user_role
+(
+    id int auto_increment primary key ,
+    user_id int,
+    role_id int,
+    foreign key (user_id) references app_user(user_id),
+    foreign key (role_id) references app_role(role_id)
+);
+create table customer(
+id_customer int primary key auto_increment,
+name_customer varchar(45) not null,
+date_of_birth date not null,
+address varchar(255) not null,
+email_customer varchar(255) not null unique,
+phone_number varchar(45) not null unique,
+id_type_cus int,
+user_id int not null ,
+foreign key(user_id) references app_user(user_id),
+foreign key(id_type_cus) references type_customer(id_type_cus)
+);
+
 create table cart(
 id_customer int,
 id_watch int,
 price double,
 quantity int,
 check_order bit,
+image text,
 foreign key(id_customer) references customer(id_customer),
 foreign key(id_watch) references watch(id_watch),
 primary key(id_customer,id_watch)
 );
-
 create table order_watch(
 id_order int primary key auto_increment,
 id_customer int,
@@ -101,7 +119,6 @@ date_order date,
 total_price int,
 foreign key(id_customer) references customer(id_customer)
 );
-
 create table order_detail(
 id_order int,
 id_watch int,
@@ -111,41 +128,6 @@ image text,
 foreign key(id_order) references order_watch(id_order),
 foreign key(id_watch) references watch(id_watch),
 primary key(id_order,id_watch)
-);
-
-
-create table manage_product_branch(
-id_branch int,
-id_watch int,
-foreign key(id_branch) references branch(id_branch),
-foreign key(id_watch) references watch(id_watch),
-primary key(id_branch,id_watch)
-);
-
-create table app_user
-(
-    user_id int auto_increment primary key,
-    user_name VARCHAR(45),
-    encryted_password VARCHAR(45) NOT NULL,
-    enabled boolean
-);
-
-
-
-create table app_role
-(
-    role_id int AUTO_INCREMENT PRIMARY KEY,
-    role_name VARCHAR(10) NOT NULL UNIQUE
-);
-
-
-create table user_role
-(
-    id int auto_increment primary key ,
-    user_id int,
-    role_id int,
-    foreign key (user_id) references app_user(user_id),
-    foreign key (role_id) references app_role(role_id)
 );
 insert into user_role(user_id, role_id)
 value(1,1),
@@ -159,9 +141,6 @@ value(1,1),
 (9,2),
 (10,2),
 (11,2);
-
-
-
 insert into type_customer(name_type_cus)
 value('Member'),
 ('Silver'),
@@ -171,10 +150,6 @@ value('Member'),
 insert into app_role
 value(1, 'ROLE_ADMIN'),
 (2, 'ROLE_USER');
-
-
-
-
 insert into app_user(user_name, encryted_password, enabled)
 value('admin123456','admin123456', 1),
 ('tin.tran123','abcd34782', 1),
@@ -199,12 +174,10 @@ value('Đoàn Thành Tiến','1993-12-03','123 Phan Châu Trinh, Đà Nẳng','t
 ('Ngô Định Vũ','2005-01-11','10 Trần Hưng Đạo, Huế','dinhvu24@gmail.com','0973859571',2,9),
 ('Hoàng Hữu Đạt','2005-01-11','50 Nguyễn Chí Thanh, Huế, Quảng Nam','datNguyen4@gmail.com','0990829578',5,10),
 ('Trần Văn Thanh','2000-09-15','234 Ngô Quyền, Hồ Chí Minh','thanh2000@gmail.com','0987894572',3,11);
-
 insert into branch (name_branch , address_branch , area_branch) values ('Chi nhánh Hà Nội' , '310 Xã Đàn, Phường Phương Liên, Quận Đống Đa, Hà Nội' , 50.0) ,
 ('Chi nhánh Đà Nẵng' , '71 Nguyễn Lương Bằng, Hòa Khánh, Liên Chiểu, Đà Nẵng' , 50.0) ,
 ('Chi nhánh Hồ Chí minh' , '64 Võ Thị Sáu, phường Tân Định, quận 1, TP. HCM' , 50.0) ,
 ('Chi nhánh Hải Phòng' , '342 P.Tô Hiệu , Hà Nam , Hải Phòng' , 50.0);
-
 insert into type_watch(name_type_watch) values
 ('Đồng hồ cơ – Automatic'),
 ('Đồng hồ Quartz '),
@@ -243,7 +216,6 @@ insert into watch(name_watch,price,id_type_watch,id_manufacturer,image,strap_mat
 ('ĐỒNG HỒ NAM CERTINA DS-8 MOON PHASE',14710000,6,15,'https://donghoduyanh.com/images/products/2021/01/04/large/dong-ho-certina-c0334573605100_1609729818.jpg.webp','Dây da','41mm','Đen','Thụy Sỹ','Tính năng khác:Lịch ngày. Moonphase. Caliber F05.441. Super-LumiNova. Sapphire chống lóa.<br>Độ chịu nước:100m<br>Bảo hành chính hãng:2 năm quốc tế',30),
 ('Apple Watch SE 2022 40mm',7490000,7,11,'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/1/_/1_258.jpg','Cao Su','40mm','Retina LTPO OLED (1.000 nits)',null,'Tính năng: Có định vị GPS, cài ứng dụng, phát nhạc trên đồng hồ, chế độ luyện tập, hiển thị thông báo điện thoại, tùy chỉnh mặt đồng hồ, nghe gọi trên đồng hồ, nhận cuộc gọi , điều khiển chơi nhạc, kết nối tai nghe',10),
 ('Đồng hồ thông minh Xiaomi Watch S1 Active',4490000,7,13,'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/b/l/blue2.jpg','Silicone','1.43 inch','Amoled','Trung Quốc','17 chế độ thể thao, 19 chế độ chuyên nghiệp.<br>Thực hiện cuộc gọi qua bluetooth<br>Trợ lý ảo Alexa',30);
-
 insert into diploma(name_diploma)
 values
 ('Giám đốc'),
@@ -285,6 +257,7 @@ values
 ('Nguyễn Thị Bích Ngọc','1996-10-11','Nữ','2000','121 Tố Hữu, Đà Nẵng','0903111563','bichngoc@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1),
 ('Tạ Đình Vũ Đàm','1997-07-11','Nam','1000','111 Phan Tứ, Đà Nẵng','0905323563','damvuta@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1),
 ('Nguyễn Thị Hương Trà','1999-02-11','Nữ','500','453 Bạch Đằng, Đà Nẵng','0909124863','huongtra@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1);
+
 
 insert into watch(name_watch,price,id_type_watch,id_manufacturer,image,strap_material,diameter,face_color,origin,detail,quantity) values
 ('ĐỒNG HỒ NAM LONGINES MASTER COLLECTION',103500000,1,1,'https://donghoduyanh.com/images/products/2021/07/01/large/l27935577_1625107594.jpg.webp','Thép không gỉ 316L/ Vàng 18K','40mm','Đen','Thụy Sỹ','Tính năng khác:Lịch ngày. Caliber L888, 25.200vph, trữ cót 64h. Mặt số đính 13 viên kim cương tổng 0.059 carat.<br>Độ chịu nước:30m<br>Bảo hành chính hãng:5 năm quốc tế',20),
