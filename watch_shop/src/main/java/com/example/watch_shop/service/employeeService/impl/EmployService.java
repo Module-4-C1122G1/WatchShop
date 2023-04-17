@@ -1,8 +1,10 @@
 package com.example.watch_shop.service.employeeService.impl;
 
+import com.example.watch_shop.dto.EmployeeDTO;
 import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.repository.employeeRepository.IEmployeeRepository;
 import com.example.watch_shop.service.employeeService.IEmployeeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +23,9 @@ public class EmployService implements IEmployeeService {
     }
 
     @Override
-    public void save(Employee employee) {
+    public void save(EmployeeDTO employeeDTO) {
+        Employee employee =new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
         iEmployeeRepository.save(employee);
     }
 

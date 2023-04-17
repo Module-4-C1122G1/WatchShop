@@ -465,15 +465,18 @@
                             <td th:text="${employee.diploma.name}"></td>
                             <td th:text="${employee.position.name}"></td>
                             <td th:text="${employee.branch.address}"></td>
-                            <td><!--button xem thêm-->
-                                <!--                <button type="button"-->
-                                <!--                        th:attr="onclick=|detail('${employee.manufacturer?.getName()}','${adminWatch.strapMaterial}','${adminWatch.diameter}','${adminWatch.color}','${adminWatch.origin}','${adminWatch.detail}','${adminWatch.image}')|"-->
-                                <!--                        class="btn btn-primary"-->
-                                <!--                        data-bs-toggle="modal" data-bs-target="#extraLargeModal"-->
-                                <!--                        data-bs-whatever="@mdo"-->
-                                <!--                        style="margin-bottom: 5px; background: white;border: 0">-->
-                                <!--                  <i class="fa fa-table" style="color: black"></i>-->
-                                <!--                </button>-->
+                            <td>
+                                <!--button xem thêm-->
+
+<!--                                                <button type="button"-->
+<!--                                                        th:attr="onclick=|detail('${employee.manufacturer?.getName()}','${employee.dateOfBirth}','${employee.gender}','${employee.salary}','${employee.address}','${employee.phone}','${employee.image}')|"-->
+<!--                                                        class="btn btn-primary"-->
+<!--                                                        data-bs-toggle="modal" data-bs-target="#extraLargeModal"-->
+<!--                                                        data-bs-whatever="@mdo"-->
+<!--                                                        style="margin-bottom: 5px; background: white;border: 0">-->
+<!--                                                  <i class="fa fa-table" style="color: black"></i>-->
+<!--                                                </button>-->
+
                                 <!--button update-->
                                 <a th:href="@{/employee/update/{id}(id=${employee.id})}" class="btn btn-primary"><i
                                         class="fas fa-edit"></i></a>

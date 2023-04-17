@@ -1,5 +1,6 @@
 package com.example.watch_shop.controller;
 
+import com.example.watch_shop.dto.EmployeeDTO;
 import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.service.employeeService.IBranchService;
 import com.example.watch_shop.service.employeeService.IDiplomaService;
@@ -14,9 +15,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/employee")
-public class EmployController {
+public class EmployeeController {
 
     @Autowired
     private IEmployeeService employeeService;
@@ -38,7 +41,7 @@ public class EmployController {
 
     @GetMapping("/create")
     public String add(Model model) {
-        model.addAttribute("employee", new Employee());
+        model.addAttribute("employeeDTO", new EmployeeDTO());
         model.addAttribute("position", iPositionService.list());
         model.addAttribute("diploma", iDiplomaService.list());
         model.addAttribute("branch", iBranchService.list());
@@ -46,16 +49,25 @@ public class EmployController {
     }
 
     @PostMapping("/create")
-    public String add(@RequestParam Employee employee, BindingResult bindingResult,
+    public String add(@Valid @ModelAttribute EmployeeDTO employeeDTO, BindingResult bindingResult,
                       RedirectAttributes redirectAttributes){
-        employeeService.save(employee);
-        return "redirect:employee";
+        if (bindingResult.hasErrors()){
+            return "admin/employee/create";
+        }else {
+            redirectAttributes.addFlashAttribute("msg","thêm mới thành công");
+            employeeService.save(employeeDTO);
+            return "redirect:/employee";
+        }
+
     }
 
     @GetMapping("/update/{id}")
     public String update(@PathVariable Integer id,Model model){
-        employeeService.findById(id);
-        return "employee/update";
+        model.addAttribute("employeeDTO",employeeService.findById(id));
+        model.addAttribute("position", iPositionService.list());
+        model.addAttribute("diploma", iDiplomaService.list());
+        model.addAttribute("branch", iBranchService.list());
+        return "admin/employee/update";
     }
 
 

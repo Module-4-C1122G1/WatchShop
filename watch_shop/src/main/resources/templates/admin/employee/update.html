@@ -376,62 +376,79 @@
     </ul>
     <div id="topnavbar">
       <div class="topnav mb-3" style="height: 500px">
-        <div class="d-flex px-1"><a href="/adminBook" class="active">Sách</a> <a href="/customers">Khách Hàng</a> <a
+        <div class="d-flex px-1"><a href="/adminBook" class="active">Nhân viên</a> <a href="/customers">Khách Hàng</a> <a
                 href="/type">Loại sách</a>
         </div>
         <div style="margin-left: 10px">
-          <form action="" method="post">
+          <form action="/employee/create" th:object="${employeeDTO}" novalidate="novalidate" method="post">
             <table>
               <tr>
-                <th style="padding-bottom: 30px">Mã nhân viên:</th>
+                <div class="mb-3">
+                  <label>id </label>
+                  <input type="hidden" class="form-control" th:field="*{id}"/>
+                </div>
+              </tr>
+              <tr>
+                <th style="padding-bottom: 30px">Tên nhân viên:</th>
                 <td style="padding-bottom: 30px;padding-right: 60px;">
-                  <input type="hidden" name="idBook" id="id" placeholder="Nhập vào mã sách" size="45" style="margin-left: 20px" required minlength="1" />
+                  <input type="text" th:field="*{name}" id="nameBook"   size="45" style="margin-left: 20px" required />
                 </td>
+                <th style="padding-bottom: 30px">Ngày sinh:</th>
+                <td style="padding-bottom: 30px">
+                  <input type="text"  th:field="*{dateOfBirth}"  size="45" style="margin-left: 20px"/>
+                </td>
+              </tr>
+              <tr>
+                <th style="padding-bottom: 30px">Giới tính:</th>
+                <td style="padding-bottom: 30px;padding-right: 60px;">
+                  <input type="text" th:field="*{gender}" size="45" style="margin-left: 20px; width: 95%" required/>
+                </td>
+                <th style="padding-bottom: 30px">Lương:</th>
+                <td style="padding-bottom: 30px">
+                  <input type="text"  th:field="*{salary}"  size="45" style="margin-left: 20px"/>
+                </td>
+              </tr>
+              <tr>
+                <th style="padding-bottom: 30px">Địa chỉ:</th>
+                <td style="padding-bottom: 30px;padding-right: 60px;">
+                  <input type="text" th:field="*{address}"  size="45" style="margin-left: 20px"/>
+                </td>
+                <th style="padding-bottom: 30px">Số điện thoại:</th>
+                <td style="padding-bottom: 30px">
+                  <input type="number"  th:field="*{phone}"  size="45" style="margin-left: 20px"/>
+                </td>
+              </tr>
+              <tr>
+                <th style="padding-bottom: 30px">Email:</th>
+                <td style="padding-bottom: 30px;padding-right: 60px;">
+                  <input type="text" th:field="*{email}"  size="45" style="margin-left: 20px"/>
+                </td>
+                <th style="padding-bottom: 30px">Ảnh:</th>
+                <td style="padding-bottom: 30px">
+                  <input type="text" th:field="*{img}"  size="45" style="margin-left: 20px"/>
+                </td>
+              </tr>
+              <tr>
                 <th style="padding-bottom: 30px">Bằng cấp:</th>
                 <td  class="dropup" id="categoryID" style="padding-bottom: 30px">
                   <select th:field="*{position}" style="text-align: center">
                     <option th:each="position1:${position}" class="dropup-content" th:text="${position1.name}" th:value="${position1.id}"></option>
                   </select>
                 </td>
-              </tr>
-              <tr>
-                <th style="padding-bottom: 30px">Tên nhân viên:</th>
-                <td style="padding-bottom: 30px;padding-right: 60px;">
-                  <input type="text" name="nameBook" id="nameBook"  placeholder="Nhập vào tên sách" size="45" style="margin-left: 20px" required />
-                </td>
-                <th style="padding-bottom: 30px">Ngày sinh:</th>
-                <td style="padding-bottom: 30px">
-                  <input type="text" name="image" id="image" placeholder="Nhập vào ảnh" size="45" style="margin-left: 20px"/>
+                <th style="padding-bottom: 30px">Chức vụ:</th>
+
+                <td  class="dropup" style="padding-bottom: 30px">
+                  <select th:field="*{diploma}" style="text-align: center">
+                    <option th:each="diploma:${diploma}" class="dropup-content" th:text="${diploma.name}" th:value="${diploma.id}"></option>
+                  </select>
                 </td>
               </tr>
               <tr>
-                <th style="padding-bottom: 30px">Giới tính:</th>
-                <td style="padding-bottom: 30px;padding-right: 60px;">
-                  <input type="number" name="price" id="price" placeholder="Nhập vào giá sách" size="45" style="margin-left: 20px; width: 95%" required/>
-                </td>
-                <th style="padding-bottom: 30px">Lương:</th>
-                <td style="padding-bottom: 30px">
-                  <input type="text" name="publisher" id="publisher" placeholder="Nhập vào nhà xuất bản" size="45" style="margin-left: 20px"/>
-                </td>
-              </tr>
-              <tr>
-                <th style="padding-bottom: 30px">Địa chỉ:</th>
-                <td style="padding-bottom: 30px;padding-right: 60px;">
-                  <input type="text" name="author" id="author" placeholder="Nhập vào tên tác giả" size="45" style="margin-left: 20px"/>
-                </td>
-                <th style="padding-bottom: 30px">Số điện thoại:</th>
-                <td style="padding-bottom: 30px">
-                  <input type="text" name="translator" id="translator" placeholder="Nhập vào người phiên dịch" size="45" style="margin-left: 20px"/>
-                </td>
-              </tr>
-              <tr>
-                <th style="padding-bottom: 30px">Email:</th>
-                <td style="padding-bottom: 30px;padding-right: 60px;">
-                  <input type="text" name="publishingCompany" id="publishingCompany" placeholder="Nhập vào nhà phát hành" size="45" style="margin-left: 20px"/>
-                </td>
-                <th style="padding-bottom: 30px">Ảnh:</th>
-                <td style="padding-bottom: 30px">
-                  <input type="text" name="describes" id="describes" placeholder="Nhập vào mô tả" size="45" style="margin-left: 20px"/>
+                <th style="padding-bottom: 30px">Chi nhánh:</th>
+                <td  class="dropup" style="padding-bottom: 30px">
+                  <select th:field="*{branch}" style="text-align: center">
+                    <option th:each="branch:${branch}" class="dropup-content" th:text="${branch.address}" th:value="${branch.idBranch}"></option>
+                  </select>
                 </td>
               </tr>
               <tr>

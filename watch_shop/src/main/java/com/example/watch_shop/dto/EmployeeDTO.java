@@ -1,44 +1,51 @@
-package com.example.watch_shop.model;
+package com.example.watch_shop.dto;
 
-import javax.persistence.*;
+import com.example.watch_shop.model.Branch;
+import com.example.watch_shop.model.Diploma;
+import com.example.watch_shop.model.Position;
 
-@Entity
-@Table(name = "employee")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_employee")
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+public class EmployeeDTO {
     private Integer id;
-    @Column(name = "name_employee")
+    @NotBlank(message = "tên không được để trống")
+
     private String name;
-    @Column(name = "date_of_birth")
+    @NotBlank(message = "ngày sinh không được để trống")
+
     private String dateOfBirth;
-    @Column(name = "gender")
+    @NotBlank(message = "giới tính không được để trống")
+
     private String gender;
-    @Column(name = "salary")
+    @NotNull(message = "lương không được để trống")
+
     private Double salary;
-    @Column(name = "address")
+    @NotBlank(message = "Địa chỉ không được để trống")
+
     private String address;
-    @Column(name = "phone_number")
+    @NotBlank(message = "Số điện thoại không được để trống")
+    @Pattern(regexp = "\\d{9,10}", message = "Số điện thoại phải từ 9 đến 10 số")
     private String phone;
-    @Column(name = "email_employee")
+    @NotBlank(message = "Email không được để trống")
+    @Email(message = "Nhập đúng định dạng example@gmail")
     private String email;
-    @Column(name = "img")
     private String img;
-    @ManyToOne
-    @JoinColumn(name = "id_diploma")
     private Diploma diploma;
-    @ManyToOne
-    @JoinColumn(name = "id_position")
+
     private Position position;
-    @ManyToOne
-    @JoinColumn(name = "id_branch")
+
     private Branch branch;
 
-    public Employee() {
+    public EmployeeDTO() {
     }
 
-    public Employee(Integer id, String name, String dateOfBirth, String gender, Double salary, String address, String phone, String email, String img, Diploma diploma, Position position, Branch branch) {
+    public EmployeeDTO(Integer id, String name, String dateOfBirth, String gender, Double salary, String address, String phone, String email, String img) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -48,8 +55,29 @@ public class Employee {
         this.phone = phone;
         this.email = email;
         this.img = img;
+    }
+
+    public Diploma getDiploma() {
+        return diploma;
+    }
+
+    public void setDiploma(Diploma diploma) {
         this.diploma = diploma;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
         this.branch = branch;
     }
 
@@ -123,29 +151,5 @@ public class Employee {
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-    public Diploma getDiploma() {
-        return diploma;
-    }
-
-    public void setDiploma(Diploma diploma) {
-        this.diploma = diploma;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public Branch getBranch() {
-        return branch;
-    }
-
-    public void setBranch(Branch branch) {
-        this.branch = branch;
     }
 }
