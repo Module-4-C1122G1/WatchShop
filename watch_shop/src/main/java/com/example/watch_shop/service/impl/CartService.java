@@ -1,14 +1,16 @@
 package com.example.watch_shop.service.impl;
 
-import com.example.watch_shop.model.Cart;
-import com.example.watch_shop.model.CartID;
-import com.example.watch_shop.model.Watch;
+import com.example.watch_shop.model.*;
 import com.example.watch_shop.repository.ICartRepository;
 import com.example.watch_shop.repository.IWatchRepository;
 import com.example.watch_shop.service.ICartService;
+import com.example.watch_shop.service.ICustomerService;
+import com.example.watch_shop.service.IOrderDetailService;
+import com.example.watch_shop.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -17,6 +19,12 @@ public class CartService implements ICartService {
     ICartRepository iCartRepository;
     @Autowired
     IWatchRepository iWatchRepository;
+    @Autowired
+    ICustomerService iCustomerService;
+    @Autowired
+    IOrderService iOrderService;
+    @Autowired
+    IOrderDetailService iOrderDetailService;
 
     @Override
     public List<Cart> findAll() {
@@ -37,7 +45,7 @@ public class CartService implements ICartService {
 
     }
 
-    public void updateCheckAnd(Integer idCus) {
+    public void updateCheck(Integer idCus) {
         List<Cart> list = findByCusId(idCus);
         for (Cart cart : list) {
             cart.setCheck(1);
@@ -45,7 +53,15 @@ public class CartService implements ICartService {
     }
 
     public void addOrder(Integer idCus) {
-
+        Customer customer = iCustomerService.findByIdCustomer(idCus);
+        List<Cart> list = findByCusId(idCus);
+        Integer price = totalPrice(idCus);
+        OrderWatch orderWatch = new OrderWatch(LocalDate.now(), price, customer);
+        iOrderService.save(orderWatch);
+        for (Cart cart : list) {
+            iOrderDetailService.save(new OrderDetail(new OrderDetailID(idCus, cart.getCartID().getIdWatch())
+                    , cart.getQuantity(), cart.getPrice(), cart.getWatch().getImage(), orderWatch, cart.getWatch()));
+        }
     }
 
     @Override

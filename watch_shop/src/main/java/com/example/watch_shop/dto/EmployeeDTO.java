@@ -13,25 +13,28 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class EmployeeDTO {
+
     private Integer id;
     @NotBlank(message = "tên không được để trống")
-
+    @Pattern(regexp = "^[^@;,.=+\\\\-]+$",message = "Tên Không chứa kí tự đặc biệt")
     private String name;
+
     @NotBlank(message = "ngày sinh không được để trống")
-
     private String dateOfBirth;
+
     @NotBlank(message = "giới tính không được để trống")
-
     private String gender;
+
     @NotNull(message = "lương không được để trống")
-
     private Double salary;
-    @NotBlank(message = "Địa chỉ không được để trống")
 
+    @NotBlank(message = "Địa chỉ không được để trống")
     private String address;
+
     @NotBlank(message = "Số điện thoại không được để trống")
     @Pattern(regexp = "\\d{9,10}", message = "Số điện thoại phải từ 9 đến 10 số")
     private String phone;
+
     @NotBlank(message = "Email không được để trống")
     @Email(message = "Nhập đúng định dạng example@gmail")
     private String email;

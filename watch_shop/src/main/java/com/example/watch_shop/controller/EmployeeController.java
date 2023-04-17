@@ -1,7 +1,6 @@
 package com.example.watch_shop.controller;
 
 import com.example.watch_shop.dto.EmployeeDTO;
-import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.service.employeeService.IBranchService;
 import com.example.watch_shop.service.employeeService.IDiplomaService;
 import com.example.watch_shop.service.employeeService.IEmployeeService;
@@ -36,7 +35,7 @@ public class EmployeeController {
                        @RequestParam(required = false, defaultValue = "") String name) {
         Sort sort = Sort.by("name").descending();
         model.addAttribute("employee", employeeService.findByAll(name, PageRequest.of(page, 3, sort)));
-        return "admin/employee/list";
+        return "admin/employee/list2";
     }
 
     @GetMapping("/create")
@@ -50,8 +49,11 @@ public class EmployeeController {
 
     @PostMapping("/create")
     public String add(@Valid @ModelAttribute EmployeeDTO employeeDTO, BindingResult bindingResult,
-                      RedirectAttributes redirectAttributes){
+                      RedirectAttributes redirectAttributes,Model model){
         if (bindingResult.hasErrors()){
+            model.addAttribute("position", iPositionService.list());
+            model.addAttribute("diploma", iDiplomaService.list());
+            model.addAttribute("branch", iBranchService.list());
             return "admin/employee/create";
         }else {
             redirectAttributes.addFlashAttribute("msg","thêm mới thành công");
@@ -59,6 +61,10 @@ public class EmployeeController {
             return "redirect:/employee";
         }
 
+    }
+    @GetMapping("create1")
+    public String pr(){
+        return "admin/employee/list2";
     }
 
     @GetMapping("/update/{id}")

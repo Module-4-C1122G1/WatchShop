@@ -10,12 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 @RequestMapping("carts")
@@ -44,17 +41,9 @@ public class CartController {
     }
 
     @GetMapping("buy")
-    public String buy() {
-        Integer idCus = 1;
-        Customer customer = iCustomerService.findByIdCustomer(idCus);
-        List<Cart> list = iCartService.findByCusId(idCus);
-        Integer price = iCartService.totalPrice(idCus);
-        OrderWatch orderWatch = new OrderWatch(LocalDate.now(), price, customer);
-        iOrderService.save(orderWatch);
-        for (Cart cart : list) {
-            iOrderDetailService.save(new OrderDetail(new OrderDetailID(idCus, cart.getCartID().getIdWatch())
-                    , cart.getQuantity(), cart.getPrice(), cart.getWatch().getImage(), orderWatch, cart.getWatch()));
-        }
+    public String buy(@RequestParam("id") Integer idCus) {
+        iCartService.addOrder(idCus);
+        iCartService.updateCheck(idCus);
         return "redirect:/carts";
     }
 }
