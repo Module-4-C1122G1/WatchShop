@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
     <title>
-        Trang admin: Thêm mới chi nhánh
+        Trang admin: Nhân viên
     </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <link th:href="@{/admin/assets/css/nucleo-icons.css}" rel="stylesheet"/>
@@ -235,9 +235,9 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Chi nhánh</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Nhân viên của chi nhánh</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Chi nhánh</h6>
+                <h6 class="font-weight-bolder mb-0">Nhân viên</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -363,22 +363,59 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-        <h1 class="text-center">Thêm mới chi nhánh</h1>
-        <form action="/branch/create" method="post" th:object="${branchDTO}">
-            <label for="name">Điền tên chi nhánh</label>
-            <input type="text" class="form-control" th:field="*{name}" id="name">
-            <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-            <label for="address">Điền địa chỉ chi nhánh</label>
-            <input type="text" class="form-control" th:field="*{address}" id="address">
-            <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
-            <label for="area">Điền diện tích chi nhánh</label>
-            <input type="text" class="form-control" th:field="*{area}" id="area">
-            <p style="color: red" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></p>
-            <div class="mt-3">
-                <input type="submit" class="btn btn-primary" value="Tạo mới">
-                <button type="button" class="btn btn-secondary" onclick="window.location.href='/branch'">Cancel</button>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2" style="background: beige">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0" style="width: fit-content">
+                                <thead>
+                                <tr>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tên nhân viên
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Ngày sinh
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Giới tính
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Địa chỉ
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Số điện thoại
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Email
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Hình ảnh
+                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr style="text-align: center" th:each="employee :${employeePage}">
+                                    <td th:text="${employee.name}"></td>
+                                    <td th:text="${employee.dateOfBirth}"></td>
+                                    <td th:text="${employee.gender}"></td>
+                                    <td th:text="${employee.address}"></td>
+                                    <td th:text="${employee.phone}"></td>
+                                    <td th:text="${employee.email}"></td>
+                                    <td>
+                                        <img style="height: 69px ; width: 69px" th:src="${employee.img}">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
         <footer class="footer pt-3  ">
             <div class="container-fluid">
                 <div class="row align-items-center justify-content-lg-between">

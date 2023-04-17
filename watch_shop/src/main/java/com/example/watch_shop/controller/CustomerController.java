@@ -4,7 +4,6 @@ import com.example.watch_shop.dto.CustomerDTO;
 import com.example.watch_shop.model.AppUser;
 import com.example.watch_shop.model.Customer;
 import com.example.watch_shop.model.UserRole;
-import com.example.watch_shop.repository.ICustomerTypeRepository;
 import com.example.watch_shop.service.ICustomerService;
 import com.example.watch_shop.service.ICustomerTypeService;
 import com.example.watch_shop.service.IUserRoleService;
@@ -30,9 +29,29 @@ public class CustomerController {
 
     @GetMapping("")
     public String showListCustomer(Model model, @RequestParam(defaultValue = "0") int page) {
-        model.addAttribute("customerList", customerService.findAllCustomer(PageRequest.of(page, 2)));
+        model.addAttribute("customerList", customerService.findAllCustomer(PageRequest.of(page, 4)));
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
-        return "admin/customer/list2";
+        return "/admin/customer/list";
+    }
+
+    @GetMapping("/update/{idCustomer}")
+    public String showUpdateRegisterForm(@PathVariable Integer idCustomer, Model model) {
+        model.addAttribute("customerDto", customerService.findByIdCustomer(idCustomer));
+        model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+        return "register_update";
+    }
+
+    @PostMapping("/update")
+    public String updateRegister(@Valid @ModelAttribute("customerDto") CustomerDTO customerUpdateDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            return "register_update";
+        } else {
+            Customer customer = new Customer();
+            BeanUtils.copyProperties(customerUpdateDTO, customer);
+            customerService.saveCustomer(customer);
+            return "redirect:/customer";
+        }
     }
 
     @PostMapping("/delete")
@@ -47,15 +66,15 @@ public class CustomerController {
 
     @GetMapping("/type/{id}")
     public String searchByCustomerType(@PathVariable Integer id, Model model, @RequestParam(defaultValue = "0") int page) {
-        model.addAttribute("customerList", customerService.findByCustomerType(id, PageRequest.of(page, 2)));
+        model.addAttribute("customerList", customerService.findByCustomerType(id, PageRequest.of(page, 4)));
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
-        return "admin/customer/list";
+        return "/admin/customer/list";
     }
 
     @GetMapping("/search")
     public String searchByCustomerName(@RequestParam String name, Model model, @RequestParam(defaultValue = "0") int page) {
-        model.addAttribute("customerList", customerService.findByNameCustomer(name, PageRequest.of(page, 2)));
-        return "admin/customer/list2";
+        model.addAttribute("customerList", customerService.findByNameCustomer(name, PageRequest.of(page, 4)));
+        return "/admin/customer/list";
     }
 
 }
