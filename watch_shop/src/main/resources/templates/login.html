@@ -1,33 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon">
-
-    <title>Timups</title>
-
-
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
-    <!--owl slider stylesheet -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-    <!-- font awesome style -->
-    <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
-
-    <!-- Custom styles for this template -->
-    <link href="/static/css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
-    <link href="/static/css/responsive.css" rel="stylesheet" />
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
     <style>
         .placeicon {
             font-family: fontawesome;
@@ -57,7 +48,9 @@
             </span>
                 </a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class=""> </span>
                 </button>
 
@@ -73,7 +66,8 @@
                             <a class="nav-link" href="about.html"> About </a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="contact.html">Contact Us <span class="sr-only">(current)</span> </a>
+                            <a class="nav-link" href="contact.html">Contact Us <span class="sr-only">(current)</span>
+                            </a>
                         </li>
                     </ul>
                     <div class="user_option-box">
@@ -103,7 +97,8 @@
                                         Đồng hồ
                                     </h1>
                                     <p>
-                                        Chúng tôi cam kết mang lại những giá trị cao nhất, chế độ hậu mãi tốt nhất khi quý khách hàng tin dùng & mua sắm đồng hồ nam nữ chính hãng của thương hiệu
+                                        Chúng tôi cam kết mang lại những giá trị cao nhất, chế độ hậu mãi tốt nhất khi
+                                        quý khách hàng tin dùng & mua sắm đồng hồ nam nữ chính hãng của thương hiệu
                                     </p>
                                     <div class="btn-box">
                                         <a href="" class="btn1">
@@ -114,7 +109,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="img-box">
-                                    <img src="/static/images/slider-img.png" alt="">
+                                    <img th:src="@{/images/slider-img.png}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -129,7 +124,8 @@
                                         Đồng hồ
                                     </h1>
                                     <p>
-                                        Chúng tôi cam kết mang lại những giá trị cao nhất, chế độ hậu mãi tốt nhất khi quý khách hàng tin dùng & mua sắm đồng hồ nam nữ chính hãng của thương hiệu                    </p>
+                                        Chúng tôi cam kết mang lại những giá trị cao nhất, chế độ hậu mãi tốt nhất khi
+                                        quý khách hàng tin dùng & mua sắm đồng hồ nam nữ chính hãng của thương hiệu </p>
                                     <div class="btn-box">
                                         <a href="" class="btn1">
                                             Contact Us
@@ -139,7 +135,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="img-box">
-                                    <img src="/static/images/slider-img.png" alt="">
+                                    <img th:src="@{/images/slider-img.png}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -154,7 +150,8 @@
                                         Đồng hồ
                                     </h1>
                                     <p>
-                                        Chúng tôi cam kết mang lại những giá trị cao nhất, chế độ hậu mãi tốt nhất khi quý khách hàng tin dùng & mua sắm đồng hồ nam nữ chính hãng của thương hiệu                    </p>
+                                        Chúng tôi cam kết mang lại những giá trị cao nhất, chế độ hậu mãi tốt nhất khi
+                                        quý khách hàng tin dùng & mua sắm đồng hồ nam nữ chính hãng của thương hiệu </p>
                                     <div class="btn-box">
                                         <a href="" class="btn1">
                                             Contact Us
@@ -164,7 +161,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="img-box">
-                                    <img src="/static/images/slider-img.png" alt="">
+                                    <img th:src="@{/images/slider-img.png}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -189,19 +186,30 @@
             <div class="col-md-6">
                 <div class="form_container">
                     <div class="heading_container">
-                        <h2 style="margin: 0 auto">
+                        <h2 style="margin: 0 auto; bottom: 30px">
                             Đăng nhập
                         </h2>
+
+                        <div th:if="${#request.getParameter('error') == 'true'}"
+                             style="color:red; margin:auto;">
+                            <p class="text-center">Đăng nhập thất bại !!!!</p>
+                            <p class="text-center">Tài khoản hoặc mật khẩu không đúng </p>
+                        </div>
+
                     </div>
-                    <form action="">
+                    <form name='f' th:action="@{/j_spring_security}" method='POST'>
                         <div>
-                            <input type="text" placeholder="Full Name" />
+                            <input type="text" name="username" placeholder="Tài khoản"/>
                         </div>
                         <div>
-                            <input type="password" placeholder="Password" />
+                            <input type="password" name="password" placeholder="Mật khẩu"/>
+                        </div>
+                        <div>
+                            <label><input style="height: auto; width: auto; margin-right: 20px" type="checkbox"
+                                          name="remember-me"/>Remember Me?</label>
                         </div>
                         <div class="d-flex ">
-                            <button style="margin: 0 auto">
+                            <button type="submit" style="margin: 0 auto">
                                 Đăng nhập
                             </button>
                         </div>
@@ -214,19 +222,22 @@
                                 <div class="row justify-content-center">
                                     <!-- Twitter Connect -->
                                     <div class="col-7 col-sm-4 px-1 pb-1">
-                                        <a href="#" class="btn btn-block btn-social btn-twitter bg-primary" style="color: white">
-                                            <span class="fa fa-twitter"  style="color: white"></span> Twitter
+                                        <a href="#" class="btn btn-block btn-social btn-twitter bg-primary"
+                                           style="color: white">
+                                            <span class="fa fa-twitter" style="color: white"></span> Twitter
                                         </a>
                                     </div>
                                     <!-- Facebook Connect -->
                                     <div class="col-7 col-sm-4 px-1 pb-1">
-                                        <a href="#" class="btn btn-block btn-social btn-facebook" style="background: #0056b3; color: white">
+                                        <a href="#" class="btn btn-block btn-social btn-facebook"
+                                           style="background: #0056b3; color: white">
                                             <span class="fa fa-facebook" style="color: white"></span> Facebook
                                         </a>
                                     </div>
                                     <!-- Google Connect -->
                                     <div class="col-7 col-sm-4 px-1 pb-1">
-                                        <a href="#" class="btn btn-block btn-social btn-google" style="background: red;color: white">
+                                        <a href="#" class="btn btn-block btn-social btn-google"
+                                           style="background: red;color: white">
                                             <span class="fa fa-google-plus" style="color: white"></span> Google+
                                         </a>
                                     </div>
@@ -243,11 +254,13 @@
                     <!-- Register Now -->
                     <div class="pt-2">
                         <div class="row justify-content-center">
-                            <h5>Bạn chưa có tài khoản?<span><a href="#" class="text-danger" onclick="location.href = '/user'"> Đăng ký ngay!</a></span></h5>
+                            <h5>Bạn chưa có tài khoản?<span><a class="text-danger"
+                                                               th:href="@{/register} "> Đăng ký ngay!</a></span>
+                            </h5>
                         </div>
                         <div class="row justify-content-center align-items-center pt-4 pb-5">
                             <div class="col-4">
-                                <a href="#" class="btn btn-block btn-info" onclick="location.href = '/user'">
+                                <a class="btn btn-block btn-info" onclick="location.href = '/register'">
                                     Đăng ký
                                 </a>
                             </div>
@@ -257,16 +270,13 @@
             </div>
             <div class="col-md-6">
                 <div class="img-box">
-                    <img src="/static/images/contact-img.jpg" alt="">
+                    <img th:src="@{/images/contact-img.jpg}" alt="">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- end contact section -->
-
-<!-- footer section -->
 <footer class="footer_section">
     <div class="container">
         <div class="row">
@@ -276,7 +286,8 @@
                         About
                     </h4>
                     <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over
+                        200 Latin words, combined with
                     </p>
                     <div class="footer_social">
                         <a href="">
@@ -309,13 +320,13 @@
                         <a href="">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                  Call +01 1234567890
+                  Call +084 911899572
                 </span>
                         </a>
                         <a href="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                  demo@gmail.com
+                  Nhom2CodeGym@gmail.com
                 </span>
                         </a>
                     </div>
@@ -327,7 +338,7 @@
                         Subscribe
                     </h4>
                     <form action="#">
-                        <input type="text" placeholder="Enter email" />
+                        <input type="text" placeholder="Enter email"/>
                         <button type="submit">
                             Subscribe
                         </button>
@@ -352,18 +363,14 @@
 </footer>
 <!-- footer section -->
 
-<!-- jQery -->
-<script src="/static/js/jquery-3.4.1.min.js"></script>
-<!-- popper js -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>
-<!-- bootstrap js -->
-<script src="/static/js/bootstrap.js"></script>
-<!-- owl slider -->
+<script th:src="@{/js/bootstrap.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
 </script>
-<!-- custom js -->
-<script src="/static/js/custom.js"></script>
+<script th:src="@{/js/custom.js}"></script>
 <!-- Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
 <!-- End Google Map -->
