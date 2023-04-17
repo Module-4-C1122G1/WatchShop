@@ -40,6 +40,16 @@ public class Customer {
         this.appUser = appUser;
     }
 
+    public Customer(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType) {
+        this.idCustomer = idCustomer;
+        this.name = name;
+        this.dayOfBirth = dayOfBirth;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.customerType = customerType;
+    }
+
     public Customer(Integer idCustomer, String name, String dayOfBirth, String address, String email, String phone, CustomerType customerType, AppUser appUser) {
         this.idCustomer = idCustomer;
         this.name = name;
