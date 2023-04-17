@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Watch {
     @Id
     @Column(name = "id_watch")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idWatch;
     @Column(name = "name_watch")
     private String name;
@@ -25,7 +26,7 @@ public class Watch {
     @Column(name = "detail")
     private String detail;
     @Column(name = "quantity")
-    private Integer qtt;
+    private Integer quantity ;
     @ManyToOne
     @JoinColumn(name = "id_type_watch")
     private TypeWatch typeWatch;
@@ -36,7 +37,7 @@ public class Watch {
     public Watch() {
     }
 
-    public Watch(Integer idWatch, String name, Integer price, String image, String strapMaterial, String diameter, String color, String origin, String detail, Integer qtt, TypeWatch typeWatch, Manufacturer manufacturer) {
+    public Watch(Integer idWatch, String name, Integer price, String image, String strapMaterial, String diameter, String color, String origin, String detail, Integer quantity, TypeWatch typeWatch, Manufacturer manufacturer) {
         this.idWatch = idWatch;
         this.name = name;
         this.price = price;
@@ -46,7 +47,7 @@ public class Watch {
         this.color = color;
         this.origin = origin;
         this.detail = detail;
-        this.qtt = qtt;
+        this.quantity = quantity;
         this.typeWatch = typeWatch;
         this.manufacturer = manufacturer;
     }
@@ -123,12 +124,12 @@ public class Watch {
         this.detail = detail;
     }
 
-    public Integer getQtt() {
-        return qtt;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setQtt(Integer qtt) {
-        this.qtt = qtt;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public TypeWatch getTypeWatch() {
