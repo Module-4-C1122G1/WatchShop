@@ -1,10 +1,9 @@
-package com.example.watch_shop.controller.branch;
+package com.example.watch_shop.controller;
 
 import com.example.watch_shop.dto.BranchDTO;
 import com.example.watch_shop.model.Branch;
 import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.model.Watch;
-import com.example.watch_shop.service.IWatchService;
 import com.example.watch_shop.service.manager_watch_branch.IBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,8 +13,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +25,6 @@ import java.util.List;
 public class ManagerWatchBranchController {
     @Autowired
     private IBranchService branchService;
-    @Autowired
-    private IWatchService watchService;
-
     @GetMapping("")
     public String showStore(@PageableDefault(size = 3) Pageable pageable, @RequestParam(defaultValue = "") String name, Model model) {
         Sort sort = Sort.by("name").ascending();
@@ -64,25 +62,31 @@ public class ManagerWatchBranchController {
 
     @GetMapping("/create")
     public String showCreateBranch(Model model) {
-        model.addAttribute("branch", new BranchDTO());
+        model.addAttribute("branchDTO", new BranchDTO());
         return "/admin/branch/create";
     }
 
     @PostMapping("/create")
-    public String createBranch(@ModelAttribute BranchDTO branch) {
-        branchService.create(branch);
+    public String createBranch(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "/admin/branch/create";
+        }
+        branchService.create(branchDTO);
         return "redirect:/branch";
     }
 
     @GetMapping("/update")
     public String showUpdateSoccerPlayer(@RequestParam int id, Model model) {
-        model.addAttribute("branch", branchService.findById(id));
+        model.addAttribute("branchDTO", branchService.findById(id));
         return "/admin/branch/update";
     }
 
     @PostMapping("/update")
-    public String updateSoccerPlayer(@ModelAttribute BranchDTO branch) {
-        branchService.update(branch, branch.getIdBranch());
+    public String updateSoccerPlayer(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "/admin/branch/update";
+        }
+        branchService.update(branchDTO, branchDTO.getIdBranch());
         return "redirect:/branch";
     }
 }

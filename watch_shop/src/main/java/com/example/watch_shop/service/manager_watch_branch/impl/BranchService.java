@@ -6,7 +6,6 @@ import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.model.Watch;
 import com.example.watch_shop.repository.IBranchRepository;
 import com.example.watch_shop.repository.IEmployeeRepository;
-import com.example.watch_shop.repository.IManagerWatchBranch;
 import com.example.watch_shop.repository.IWatchRepository;
 import com.example.watch_shop.service.manager_watch_branch.IBranchService;
 import org.springframework.beans.BeanUtils;
@@ -37,7 +36,7 @@ public class BranchService implements IBranchService {
 
     @Override
     public List<Watch> findAllWatch(int idBranch) {
-        return watchRepository.findByBranchIdBranch(idBranch);
+        return watchRepository.findWatchByBranchIdBranch(idBranch);
     }
 
     @Override

@@ -15,6 +15,12 @@ public class WatchService implements IWatchService {
     public List<Watch> findAll() {
         return (List<Watch>) iWatchRepository.findAll();
     }
+
+    @Override
+    public Watch findById(int id) {
+        return null;
+    }
+
     public Watch findById(Integer id){
         return iWatchRepository.findById(id).get();
     }
