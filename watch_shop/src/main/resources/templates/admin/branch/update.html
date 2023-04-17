@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
     <title>
-        Trang admin: Thêm mới chi nhánh
+        Trang admin: Chỉnh sửa chi nhánh
     </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <link th:href="@{/admin/assets/css/nucleo-icons.css}" rel="stylesheet"/>
@@ -363,19 +363,20 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-        <h1 class="text-center">Thêm mới chi nhánh</h1>
-        <form action="/branch/create" method="post" th:object="${branchDTO}">
-            <label for="name">Điền tên chi nhánh</label>
-            <input type="text" class="form-control" th:field="*{name}" id="name">
+        <h1 class="text-center">Chỉnh sửa chi nhánh</h1>
+        <form action="/branch/update" method="post" th:object="${branchDTO}">
+            <input type="hidden" th:field="${branchDTO.idBranch}">
+            <label for="code">Điền tên chi nhánh</label>
+            <input type="text" class="form-control" th:field="*{name}" id="code">
             <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-            <label for="address">Điền địa chỉ chi nhánh</label>
-            <input type="text" class="form-control" th:field="*{address}" id="address">
+            <label for="name">Điền địa chỉ chi nhánh</label>
+            <input type="text" class="form-control" th:field="*{address}" id="name">
             <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
-            <label for="area">Điền diện tích chi nhánh</label>
-            <input type="text" class="form-control" th:field="*{area}" id="area">
+            <label for="exp">Điền diện tích</label>
+            <input type="text" class="form-control" th:field="*{area}" id="exp">
             <p style="color: red" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></p>
             <div class="mt-3">
-                <input type="submit" class="btn btn-primary" value="Tạo mới">
+                <input type="submit" class="btn btn-primary" value="Cập nhật">
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='/branch'">Cancel</button>
             </div>
         </form>
@@ -500,3 +501,6 @@
 <script th:src="@{/admin/assets/js/soft-ui-dashboard.min.js}"></script>
 </body>
 </html>
+
+
+

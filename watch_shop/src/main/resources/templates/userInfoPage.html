@@ -16,6 +16,8 @@
 <br/><br/>
 
 <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+
+<div th:if="${roleName != null}" th:utext="${roleName}"></div>
 <a th:href="@{/logout}">logout</a>
 </body>
 
