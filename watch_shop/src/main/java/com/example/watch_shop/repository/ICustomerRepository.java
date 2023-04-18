@@ -19,4 +19,5 @@ public interface ICustomerRepository extends PagingAndSortingRepository<Customer
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
     boolean existsByAppUser_UserName(String userName);
+    Customer findCustomerByAppUser_UserName(String account);
 }

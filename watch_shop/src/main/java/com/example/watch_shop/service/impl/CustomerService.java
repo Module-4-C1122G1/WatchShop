@@ -60,4 +60,9 @@ public class CustomerService implements ICustomerService {
     public boolean existsByAppUser_UserName(String userName) {
         return customerRepository.existsByAppUser_UserName(userName);
     }
+
+    @Override
+    public Customer findByNameAccount(String nameAccount) {
+        return customerRepository.findCustomerByAppUser_UserName(nameAccount);
+    }
 }
