@@ -60,6 +60,7 @@ public class AdminWatch {
         for (int i = 1; i <watchPage.getTotalPages() ; i++) {
             integerList.add(i);
         }
+        model.addAttribute("name",name);
         model.addAttribute("integerList",integerList);
         return "/admin/product/list";
     }
