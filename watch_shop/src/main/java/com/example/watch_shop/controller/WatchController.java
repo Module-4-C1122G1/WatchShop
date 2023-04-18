@@ -6,10 +6,10 @@ import com.example.watch_shop.service.IWatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,9 +50,12 @@ public class WatchController {
         return "register";
     }
 
-    @GetMapping("contact")
-    public String contact() {
-        return "contact";
+    @PostMapping("search")
+    public String searchByName(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page, @RequestParam(name = "name", required = false) String name) {
+        model.addAttribute("list", iWatchService.findByName(name, PageRequest.of(page, 10)));
+        model.addAttribute("listManu", iManufactureService.finAll());
+        model.addAttribute("check", 2);
+        return "watches";
     }
 
     @GetMapping("index")
