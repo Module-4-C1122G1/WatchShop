@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/customer")
+    @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
     private ICustomerService customerService;
