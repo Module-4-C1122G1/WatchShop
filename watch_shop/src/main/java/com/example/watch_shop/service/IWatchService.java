@@ -8,6 +8,12 @@ import java.util.List;
 
 public interface IWatchService {
     Page<Watch> findAll(PageRequest pageRequest);
+
     Page<Watch> findByType(Integer id, PageRequest pageRequest);
+
     Watch findById(Integer id);
+
+    Page<Watch> findByName(String name, PageRequest pageRequest);
+
+    void updateQuantity(Integer qtt, Integer id);
 }

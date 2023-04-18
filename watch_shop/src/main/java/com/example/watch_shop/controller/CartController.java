@@ -1,10 +1,7 @@
 package com.example.watch_shop.controller;
 
 import com.example.watch_shop.model.*;
-import com.example.watch_shop.service.ICartService;
-import com.example.watch_shop.service.ICustomerService;
-import com.example.watch_shop.service.IOrderDetailService;
-import com.example.watch_shop.service.IOrderService;
+import com.example.watch_shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/carts")
 public class CartController {
     @Autowired
-    ICartService iCartService;
+    private ICartService iCartService;
     @Autowired
-    IOrderService iOrderService;
+    private IOrderService iOrderService;
     @Autowired
-    ICustomerService iCustomerService;
+    private ICustomerService iCustomerService;
     @Autowired
-    IOrderDetailService iOrderDetailService;
+    private IOrderDetailService iOrderDetailService;
+    @Autowired
+    private IWatchService iWatchService;
 
     @GetMapping("")
     public String list(Model model, @RequestParam(value = "name", required = false) String nameAcc) {

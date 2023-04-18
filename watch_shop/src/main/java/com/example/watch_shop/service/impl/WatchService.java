@@ -27,6 +27,12 @@ public class WatchService implements IWatchService {
     public Watch findById(Integer id){
         return iWatchRepository.findById(id).get();
     }
+
+    @Override
+    public Page<Watch> findByName(String name, PageRequest pageRequest) {
+        return iWatchRepository.findWatchByNameContaining(name,pageRequest);
+    }
+
     public void updateQuantity(Integer qtt,Integer id){
         Watch watch=findById(id);
         watch.setQuantity(qtt);

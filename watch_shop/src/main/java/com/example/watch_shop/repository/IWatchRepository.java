@@ -12,6 +12,8 @@ import java.util.List;
 
 public interface IWatchRepository extends PagingAndSortingRepository<Watch,Integer> {
     Page<Watch> findWatchByTypeWatchId(Integer id,PageRequest pageRequest);
+
+    Page<Watch> findWatchByNameContaining(String name,PageRequest pageRequest);
     @Transactional
     @Query(value = "select * from watch join manage_product_branch on manage_product_branch.id_watch = watch.id_watch where manage_product_branch.id_branch = ?" , nativeQuery = true)
     List<Watch> findWatchByBranchIdBranch(@Param("idBranch") int idBranch);
