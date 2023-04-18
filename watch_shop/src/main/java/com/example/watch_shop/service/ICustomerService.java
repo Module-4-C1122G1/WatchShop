@@ -16,4 +16,5 @@ public interface ICustomerService {
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
     boolean existsByAppUser_UserName(String userName);
+    Customer findByNameAccount(String nameAccount);
 }

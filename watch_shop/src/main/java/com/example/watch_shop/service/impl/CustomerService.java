@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class CustomerService implements ICustomerService {
     @Autowired
-    ICustomerRepository customerRepository;
+    private ICustomerRepository customerRepository;
 
     @Override
     public Page<Customer> findAllCustomer(PageRequest pageRequest) {
@@ -59,5 +59,10 @@ public class CustomerService implements ICustomerService {
     @Override
     public boolean existsByAppUser_UserName(String userName) {
         return customerRepository.existsByAppUser_UserName(userName);
+    }
+
+    @Override
+    public Customer findByNameAccount(String nameAccount) {
+        return customerRepository.findCustomerByAppUser_UserName(nameAccount);
     }
 }

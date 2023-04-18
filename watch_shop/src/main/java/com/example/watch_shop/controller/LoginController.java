@@ -9,6 +9,7 @@ import com.example.watch_shop.service.ICustomerService;
 import com.example.watch_shop.service.ICustomerTypeService;
 import com.example.watch_shop.service.IUserRoleService;
 import com.example.watch_shop.utils.WebUtils;
+import org.attoparser.dom.Document;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,9 +20,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -65,29 +63,11 @@ public class LoginController {
             AppUser appUser = customer.getAppUser();
             AppRole appRole = new AppRole(2, "ROLE_USER");
             userRoleService.saveUserRole(new UserRole(appUser, appRole));
+
             return "redirect:/customer";
         }
     }
 
-    @GetMapping("/update/{idCustomer}")
-    public String showUpdateRegisterForm(@PathVariable Integer idCustomer, Model model) {
-        model.addAttribute("customerDto", customerService.findByIdCustomer(idCustomer));
-        model.addAttribute("customerType", customerTypeService.findAllCustomerType());
-        return "register_update";
-    }
-
-    @PostMapping("/update")
-    public String updateRegister(@Valid @ModelAttribute("customerDto") CustomerDTO customerUpdateDTO, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
-            return "register_update";
-        } else {
-            Customer customer = new Customer();
-            BeanUtils.copyProperties(customerUpdateDTO, customer);
-            customerService.saveCustomer(customer);
-            return "redirect:/customer";
-        }
-    }
 
     @GetMapping(value = {"/", "/welcome"})
     public String welcomePage() {
@@ -100,9 +80,10 @@ public class LoginController {
     }
 
     @GetMapping(value = "/logout")
-    public String logoutSuccessfulPage(Model model) {
-        model.addAttribute("message", "Đăng xuất thành công");
-        return "login";
+    public String logoutSuccessfulPage(Model model, RedirectAttributes redirect) {
+//        model.addAttribute("message", "Đăng xuất thành công");
+        redirect.addFlashAttribute("message", "Đăng xuất thành công");
+        return "redirect:/login";
     }
 
 
@@ -119,6 +100,7 @@ public class LoginController {
 
         String userInfo = WebUtils.toString(loginUser);
         model.addAttribute("userInfo", userInfo);
+
         return "userInfoPage";
     }
 
@@ -148,8 +130,15 @@ public class LoginController {
             model.addAttribute("message", message);
 
         }
-
         return "403Page";
+    }
+    @GetMapping("/about")
+    public String about(){
+        return "about";
+    }
+    @GetMapping("/contact")
+    public String contact(){
+        return "contact";
     }
 
 }

@@ -30,7 +30,7 @@
             <nav class="navbar navbar-expand-lg custom_nav-container ">
                 <a class="navbar-brand" href="index.html">
             <span>
-              Timups
+              Watch shop
             </span>
                 </a>
 
@@ -43,16 +43,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home </a>
+                            <a class="nav-link" th:href="@{/watch/index}">Home </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="watches.html"> Watches </a>
+                            <a class="nav-link" th:href="@{/watch/index}"> Watches </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html"> About </a>
+                            <a class="nav-link" th:href="@{/about}"> About </a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="contact.html">Contact Us <span class="sr-only">(current)</span>
+                            <a class="nav-link" th:href="@{/contact}">Contact Us <span class="sr-only">(current)</span>
                             </a>
                         </li>
                     </ul>
@@ -175,22 +175,25 @@
                         <h2 style="margin: 0 auto">
                             Cập nhật thông tin khách hàng
                         </h2>
+                        <p style="color: red; margin: auto; padding: 10px" th:text="${message}"></p>
                     </div>
                     <form action="/customer/update" method="post" th:object="${customerDto}">
-                        <div>
+                        <div hidden="hidden">
                             <input th:field="*{idCustomer}" type="text" placeholder="Id"/>
-                            <p style="color: red" th:if="${#fields.hasErrors('idCustomer')}" th:errors="*{idCustomer}"></p>
+                            <p style="color: red" th:if="${#fields.hasErrors('idCustomer')}"
+                               th:errors="*{idCustomer}"></p>
                         </div>
                         <div>
-                            <input th:field="*{name}" type="text" placeholder="Full Name"/>
+                            <input th:field="*{name}" type="text" placeholder="Họ và tên"/>
                             <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                         </div>
                         <div>
-                            <input th:field="*{dayOfBirth}" type="date" placeholder="Data Birthday"/>
-                            <p style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>
+                            <input th:field="*{dayOfBirth}" type="date" placeholder="Ngày sinh"/>
+                            <p style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}"
+                               th:errors="*{dayOfBirth}"></p>
                         </div>
                         <div>
-                            <input th:field="*{address}" type="text" placeholder="Address"/>
+                            <input th:field="*{address}" type="text" placeholder="Địa chỉ"/>
                             <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
                         </div>
                         <div>
@@ -198,29 +201,32 @@
                             <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                         </div>
                         <div>
-                            <input th:field="*{phone}" type="text" placeholder="Phone number"/>
+                            <input th:field="*{phone}" type="number" placeholder="Số điện thoại"/>
                             <p style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                         </div>
                         <div>
-                            <select th:field="*{customerType}">
+                            <select th:field="*{customerType}" >
                                 <option th:each="type: ${customerType}" th:text="${type.name}"
                                         th:value="${type.id}"></option>
                             </select>
                         </div>
                         <div hidden="hidden">
-                            <input th:field="*{account.name}" type="text" placeholder="Account"/>
-                            <p style="color: red" th:if="${#fields.hasErrors('account.name')}" th:errors="*{account.name}"></p>
-                        </div>
-                        <div hidden="hidden">
-                            <input th:field="*{account.pass}" type="text" placeholder="Password"/>
-                            <p style="color: red" th:if="${#fields.hasErrors('account.pass')}" th:errors="*{account.pass}"></p>
+                            <input th:field="*{appUser.userId}" type="text" placeholder="id"/>
 
                         </div>
-                        <!--            <div>-->
-                        <!--              <input th:field="*{account.pass}" type="password" placeholder="Confirm password " />-->
-                        <!--            </div>-->
+                        <div>
+                            <input th:field="*{appUser.userName}" type="text" placeholder="Tài khoản"/>
+                            <p style="color: red" th:if="${#fields.hasErrors('appUser.userName')}"
+                               th:errors="*{appUser.userName}"></p>
+                        </div>
+                        <div hidden="hidden">
+                            <input th:field="*{appUser.encrytedPassword}" type="text" placeholder="Mật khẩu"/>
+                            <p style="color: red" th:if="${#fields.hasErrors('appUser.encrytedPassword')}"
+                               th:errors="*{appUser.encrytedPassword}"></p>
+
+                        </div>
                         <div class="d-flex ">
-                            <button style="margin: 0 auto">
+                            <button type="submit" style="margin: 0 auto">
                                 Cập nhật
                             </button>
                         </div>
