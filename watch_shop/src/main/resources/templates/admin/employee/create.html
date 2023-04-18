@@ -402,10 +402,14 @@
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Ảnh:</small>
                 <div class="row rone">
-                    <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <input type="text" class="form-control" th:field="*{img}"
-                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
-                    </div>
+<!--                    thêm ảnh từ máy-->
+                        <div class="form-group">
+                            <label class="form-label required">
+                            </label>
+                            <input type="file" multiple class="form-control required"
+                                   id="uploaded-file" name="uploaded-file" th:field="*{img}"/>
+                        </div>
+
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Bằng cấp:</small>
                 <div class="row rone">

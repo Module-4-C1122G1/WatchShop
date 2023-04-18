@@ -516,6 +516,10 @@
                                                 <th>Địa chỉ:</th>
                                                 <td><p id="address"></p></td>
                                             </tr>
+                                            <tr class="detail-watch">
+                                                <th>Ảnh:</th>
+                                                <td><p id="image" style="width: 40%"></p></td>
+                                            </tr>
                                         </table>
                                     </div>
                                 </div>
@@ -557,7 +561,7 @@
         </div>
         <div>
             <script>
-                function detail(branch, diploma, position, name, phone, dateOfBirth, gender, salary, address) {
+                function detail(branch, diploma, position, name, phone, dateOfBirth, gender, salary, address,image) {
                     document.getElementById("branch").innerText = branch;
                     document.getElementById("diploma").innerText = diploma;
                     document.getElementById("position").innerText = position;

@@ -19,7 +19,7 @@ public class EmployService implements IEmployeeService {
 
     @Override
     public Page<Employee> findByAll(String name,PageRequest pageRequest) {
-        return iEmployeeRepository.findByNameContaining(name,pageRequest);
+        return iEmployeeRepository.findEmployeeByNameContainingAndIsDelete(name,pageRequest , false);
     }
 
     @Override
@@ -36,7 +36,9 @@ public class EmployService implements IEmployeeService {
 
     @Override
     public void delete(Integer id) {
-        iEmployeeRepository.deleteById(id);
+        Employee employee = iEmployeeRepository.findById(id).get();
+        employee.setDelete(true);
+        iEmployeeRepository.save(employee);
     }
 
     @Override
