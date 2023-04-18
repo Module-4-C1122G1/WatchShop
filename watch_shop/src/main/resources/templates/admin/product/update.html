@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
     <title>
-        Trang admin: Chi nhánh
+        Trang admin
     </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <link th:href="@{/admin/assets/css/nucleo-icons.css}" rel="stylesheet"/>
@@ -15,13 +15,9 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link th:href="@{/admin/assets/css/nucleo-svg.css}" rel="stylesheet"/>
     <link id="pagestyle" th:href="@{/admin/assets/css/soft-ui-dashboard.css}" rel="stylesheet"/>
-    <style>
-        .cc{
-            color: pink;
-            background: white;
-        }
-    </style>
+
 </head>
+
 <body class="g-sidenav-show  bg-gray-100">
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
        id="sidenav-main">
@@ -30,7 +26,7 @@
            aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
            target="_blank">
-            <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
         </a>
     </div>
@@ -61,7 +57,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " th:href="@{/adminWatch}">
+                <a class="nav-link  active" href="../pages/tables.html">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -84,7 +80,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " th:href="@{/customer}">
+                <a class="nav-link  " href="../pages/billing.html">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -107,7 +103,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active  " th:href="@{/branch}">
+                <a class="nav-link  " href="../pages/virtual-reality.html">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -129,29 +125,6 @@
                         </svg>
                     </div>
                     <span class="nav-link-text ms-1">Chi nhánh</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link  " th:href="@{/employee}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>credit-card</title>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(453.000000, 454.000000)">
-                                            <path class="color-background opacity-6"
-                                                  d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
-                                            <path class="color-background"
-                                                  d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <span class="nav-link-text ms-1">Nhân viên</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
@@ -183,7 +156,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " th:href="@{/logout}">
+                <a class="nav-link  " href="../pages/sign-in.html">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -218,20 +191,16 @@
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Chi nhánh</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sản phẩm</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Chi nhánh</h6>
+                <h6 class="font-weight-bolder mb-0">Sản phẩm</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <form action="/branch" class="example d-flex align-items-center">
-                        <div class="input-group">
-                            <span class="input-group-text text-body"><i class="fas fa-search"
-                                                                        aria-hidden="true"></i></span>
-                            <input name="name" type="text" class="form-control"
-                                   placeholder="Tìm kiếm theo tên chi nhánh">
-                        </div>
-                    </form>
+                    <div class="input-group">
+                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm">
+                    </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
@@ -269,7 +238,7 @@
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
                                         <div class="my-auto">
-                                            <img th:src="@{/assets/img/team-2.jpg}" class="avatar avatar-sm  me-3 ">
+                                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
@@ -287,7 +256,7 @@
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
                                         <div class="my-auto">
-                                            <img th:src="@{/assets/img/small-logos/logo-spotify.svg}"
+                                            <img src="../assets/img/small-logos/logo-spotify.svg"
                                                  class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
@@ -345,172 +314,107 @@
         </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <form action="/branch/create">
-                            <button type="submit" class="btn btn-outline-secondary"
-                                    style="background: #cb0c9f;float: right;color: white">Thêm mới
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="card-body px-0 pt-0 pb-2" style="background: beige">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0" style="width: fit-content">
-                                <thead>
-                                <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        STT
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tên chi nhánh
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Địa chỉ chi nhánh
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Diện tích chi nhánh
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Danh sách nhân viên
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Danh sách sản phẩm
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Cập nhật
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Xóa
-                                    </th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr style="text-align: center" th:each="branch, temp: ${branchPage}">
-                                    <td th:text="${temp.count}"></td>
-                                    <td th:text="${branch.name}"></td>
-                                    <td th:text="${branch.address}"></td>
-                                    <td th:text="${branch.area}"></td>
-                                    <td><a class="btn btn-primary btn-sm"
-                                           th:href="@{/branch/employee/__${branch.idBranch}__}">Nhân viên</a>
-                                    </td>
-                                    <td><a class="btn btn-primary btn-sm"
-                                           th:href="@{/branch/watch/__${branch.idBranch}__}">Sản phẩm</a>
-                                </td>
-                                    <td>
-                                        <button type="button" class="btn btn-info btn-rounded btn-icon"
-                                                style="margin-bottom: 0px"><a th:href="@{/branch/update?id=__*{branch.idBranch}__}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button type="button"
-                                                th:attr="onclick=|information('${branch.idBranch}', '${branch.name}')|"
-                                                class="btn btn-danger btn-rounded btn-icon" style="margin-bottom: 0px"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                        <div class="modal fade" id="exampleModal" tabindex="-1"
-                                             aria-labelledby="exampleModalLabel"
-                                             aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Xóa khách
-                                                            hàng</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="/branch/delete">
-                                                            <input hidden=type="text" id="deleteId" name="deleteId">
-                                                            <span>Bạn có muốn xóa chi nhánh </span> <span style="color: red"
-                                                                id="name"></span> <span> không ?</span>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close
-                                                                </button>
-                                                                <button type="submit" class="btn btn-primary">Delete
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+    <div class="row my-2 mx-2" style="width: 95%;background: #d4d4e3;height: auto;">
+        <div class="col-md-12">
+            <a href="/adminWatch" style="display: block;margin-left: 1em;margin-top: 1em">
+                <button type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"
+                         viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
+                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
+                    </svg>
+                </button>
+            </a>
+            <h2 class="title pt-3 pb-3" style="text-align: center"> Cập nhật thông tin đồng hồ</h2>
+            <form action="/adminWatch/update" method="post" th:object="${watch}" style="width: 50%;margin: 0 auto">
+                <div class="form-group col-md-12 py-3" style="position: relative;">
+                    <input type="hidden" class="form-control" th:field="*{idWatch}" name="idWatch">
+                </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Tên đồng hồ:</small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" style="position: relative;">
+                        <input type="text" class="form-control" th:field="*{name}" name="name" id="name"
+                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Sai tên</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="text-center container">
-            <a class="page-item btn btn-dark cc page-item" th:if="${branchPage.hasPrevious()}"
-               th:href="@{/branch(page = ${branchPage.number - 1})}">
-                <i class="ti-angle-left">Trước</i>
-            </a>
-
-            <a class="page-item number cc btn btn-dark page-item"
-               th:classappend="${pageNumber == branchPage.number + 1} ? 'active' : ''"
-               th:each="pageNumber : ${integerList}"
-               th:href="@{/branch(page = ${pageNumber - 1})}"
-               th:text="${pageNumber}">
-            </a>
-
-            <a class="page-item btn cc btn-dark page-item" th:if="${branchPage.hasNext()}"
-               th:href="@{/branch(page = ${branchPage.number + 1})}">
-                <i class="ti-angle-right">Sau</i>
-            </a>
-        </div>
-<!--            <form action="/customer" id="pageNumber">-->
-<!--                <input style="width: 50px" class="form-control" type="number" name="page"-->
-<!--                       onchange="document.getElementById('pageNumber').submit();">-->
-<!--            </form>-->
-<!--        </div>-->
-
-
-        <script>
-            function information(id, name) {
-                document.getElementById("deleteId").value = id;
-                document.getElementById("name").innerText = name;
-            }
-        </script>
-
-        <script>
-            function information2(nameDetail, dateOfBirthDetail) {
-                // document.getElementById("idDelete1").value = nameDetail;
-                document.getElementById("name").innerText = nameDetail;
-                document.getElementById("dateOfBirth").innerText = dateOfBirthDetail;
-            }
-        </script>
-
-
-        <footer class="footer pt-3  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            ,
-                            WatchShop <i class="fa fa-heart"></i> bởi
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Team3</a>
-                        </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Giá (VND): </small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" style="position: relative;">
+                        <input type="number" class="form-control" th:field="*{price}" name="price" id="price"
+                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                        <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Sai giá</p>
                     </div>
                 </div>
-            </div>
-        </footer>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Thương hiệu: </small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" id="manufactureid" style="position: relative;">
+                        <select class="form-select" th:field="*{manufacturer}">
+                            <option th:each="manufacturer:${manufactureList}" th:text="${manufacturer.name}"
+                                    th:value="${manufacturer.id}"></option>
+                        </select>
+                    </div>
+                </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Loại đồng hồ:</small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" id="typeWatchID" style="position: relative;">
+                        <select class="form-select" th:field="*{typeWatch}" style="font-size: 13px">
+                            <option th:each="typeWatch:${typeWatchList}" th:text="${typeWatch.name}"
+                                    th:value="${typeWatch.id}"></option>
+                        </select>
+                    </div>
+                </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Ảnh: </small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" style="position: relative;">
+                        <input type="text" class="form-control" th:field="*{image}" name="image" id="image"
+                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                    </div>
+                </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Chất liệu dây: </small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" style="position: relative;">
+                        <input type="text" class="form-control" th:field="*{strapMaterial}" name="strapMaterial" id="strapMaterial"
+                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                    </div>
+                </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Đường kính: </small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" style="position: relative;">
+                        <input type="text" class="form-control" th:field="*{diameter}" name="diameter" id="diameter"
+                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                    </div>
+                </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Màu mặt:</small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" style="position: relative;">
+                        <input type="text" class="form-control" th:field="*{color}" name="color" id="color"
+                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                    </div>
+                </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Thông tin chi tiết: </small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" style="position: relative;">
+                        <textarea class="form-control" name="detail" id="detail" th:text="${watch.detail.replace('<br>','&#10')}"></textarea>
+                    </div>
+                </div>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Số lượng: </small>
+                <div class="row rone">
+                    <div class="form-group col-md-12 py-3" style="position: relative;">
+                        <input type="number" class="form-control" th:field="*{quantity}" name="quantity" id="quantity"
+                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                        <p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Sai số lượng</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3"><button type="submit" class="btn btn-secondary" style="display: block;margin:0 auto;width: 120%;background: #2c2972; border-radius: 10px">Cập nhật</button></div>
+                    <div class="col-3"><button type="reset" class="btn btn-secondary" style="background-color: red;display: block;width: 100%;border-radius: 10px">Hủy bỏ</button></div>
+                    <div class="col-3"></div>
+                </div>
+            </form>
+        </div>
     </div>
 </main>
 <div class="fixed-plugin">
@@ -615,6 +519,3 @@
 <script th:src="@{/admin/assets/js/soft-ui-dashboard.min.js}"></script>
 </body>
 </html>
-
-
-
