@@ -21,11 +21,11 @@ import javax.validation.Valid;
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
-    ICustomerService customerService;
+    private ICustomerService customerService;
     @Autowired
-    ICustomerTypeService customerTypeService;
+    private ICustomerTypeService customerTypeService;
     @Autowired
-    IUserRoleService userRoleService;
+    private IUserRoleService userRoleService;
 
     @GetMapping("")
     public String showListCustomer(Model model, @RequestParam(defaultValue = "0") int page) {
@@ -43,7 +43,22 @@ public class CustomerController {
 
     @PostMapping("/update")
     public String updateRegister(@Valid @ModelAttribute("customerDto") CustomerDTO customerUpdateDTO, BindingResult bindingResult, Model model) {
+
+        Integer id = customerUpdateDTO.getIdCustomer();
+        Customer customerOld = customerService.findByIdCustomer(id);
         if (bindingResult.hasErrors()) {
+            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            return "register_update";
+        } else if (customerService.existsByEmail(customerUpdateDTO.getEmail()) && (!customerOld.getEmail().equals(customerUpdateDTO.getEmail()))) {
+            model.addAttribute("message", "Email đã tồn tại, vui lòng nhập email khác");
+            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            return "register_update";
+        } else if (customerService.existsByPhone(customerUpdateDTO.getPhone()) &&(!customerOld.getPhone().equals(customerUpdateDTO.getPhone()))) {
+            model.addAttribute("message", "Số điện thoại đã tồn tại, vui lòng nhập số điện thoại khác");
+            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            return "register_update";
+        } else if (customerService.existsByAppUser_UserName(customerUpdateDTO.getAppUser().getUserName()) &&(!customerOld.getAppUser().getUserName().equals(customerUpdateDTO.getAppUser().getUserName()))) {
+            model.addAttribute("message", "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác");
             model.addAttribute("customerType", customerTypeService.findAllCustomerType());
             return "register_update";
         } else {
