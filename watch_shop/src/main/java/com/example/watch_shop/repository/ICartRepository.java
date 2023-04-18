@@ -9,9 +9,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ICartRepository extends PagingAndSortingRepository<Cart, CartID> {
-    @Query(value = "select *from cart where check_order=0 and id_customer=:id", nativeQuery = true)
-    List<Cart> findByCustomer(@Param("id")Integer id);
+    @Query(value = "select *from cart where check_order=0 and check_delete=0 and id_customer=:id", nativeQuery = true)
+    List<Cart> findByCustomer(@Param("id") Integer id);
 
-    @Query(value = "select sum(price) from cart where id_customer =:idCus and check_order=0", nativeQuery = true)
+    @Query(value = "select sum(price) from cart where id_customer =:idCus and check_order=0 and check_delete=0", nativeQuery = true)
     Integer totalPriceOrder(@Param("idCus") Integer idCus);
 }

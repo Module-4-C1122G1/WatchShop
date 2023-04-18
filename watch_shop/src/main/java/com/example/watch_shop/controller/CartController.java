@@ -1,5 +1,6 @@
 package com.example.watch_shop.controller;
 
+import com.example.watch_shop.dto.CartDTO;
 import com.example.watch_shop.model.*;
 import com.example.watch_shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,17 @@ public class CartController {
         model.addAttribute("total", iCartService.totalPrice(customer.getIdCustomer()));
         return "cart";
     }
+    @GetMapping("add")
+    private String addCart(@RequestParam("nameAccount")String nameAcc,
+                       @RequestParam("qtt")Integer qtt,
+                       @RequestParam("idWatch") Integer idWatch,
+                       @RequestParam("price") Integer price){
+        iCartService.addCart(nameAcc,idWatch,price,qtt);
+        return "redirect:/watch/index";
+    }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam Integer idWatch, @RequestParam Integer idCus) {
+    public String deleteCart(@RequestParam Integer idWatch, @RequestParam Integer idCus) {
         CartID id = new CartID(idCus, idWatch);
         iCartService.deleteById(id);
         return "redirect:/watch/index";
@@ -46,5 +55,15 @@ public class CartController {
         iCartService.addOrder(customer.getIdCustomer());
         iCartService.updateCheck(customer.getIdCustomer());
         return "redirect:/watch/index";
+    }
+    @GetMapping("order")
+    private String orderOneProduct(@RequestParam("nameAccount")String nameAcc,
+                                   @RequestParam("qtt")Integer qtt,
+                                   @RequestParam("idWatch") Integer idWatch,
+                                   @RequestParam("price") Integer price){
+
+        iCartService.addOneOrder(nameAcc,idWatch,qtt,price);
+        return "redirect:/watch/index";
+
     }
 }

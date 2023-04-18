@@ -1,5 +1,7 @@
 package com.example.watch_shop.controller;
 
+import com.example.watch_shop.dto.CartDTO;
+import com.example.watch_shop.model.Cart;
 import com.example.watch_shop.model.Watch;
 import com.example.watch_shop.service.IManufactureService;
 import com.example.watch_shop.service.ITypeWatchService;
@@ -68,8 +70,4 @@ public class WatchController {
         return "index";
     }
 
-//    @GetMapping("cart")
-//    public String cart() {
-//        return "cart";
-//    }
 }
