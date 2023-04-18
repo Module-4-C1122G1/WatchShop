@@ -1,13 +1,17 @@
 package com.example.watch_shop.controller;
 
 import com.example.watch_shop.dto.EmployeeDTO;
+import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.service.employeeService.IBranchEService;
 import com.example.watch_shop.service.employeeService.IDiplomaService;
 import com.example.watch_shop.service.employeeService.IEmployeeService;
 import com.example.watch_shop.service.employeeService.IPositionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/employee")
@@ -31,10 +37,18 @@ public class EmployeeController {
     private IPositionService iPositionService;
 
     @GetMapping("")
-    public String list(Model model, @RequestParam(defaultValue = "0") Integer page,
-                       @RequestParam(required = false, defaultValue = "") String name) {
+    public String list(Model model, @PageableDefault(size = 5)Pageable pageable,
+                       @RequestParam(defaultValue = "") String name) {
         Sort sort = Sort.by("name").descending();
-        model.addAttribute("employee", employeeService.findByAll(name, PageRequest.of(page, 3, sort)));
+        Pageable sortedPage = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),sort);
+        Page<Employee> employeePage=employeeService.findByAll(name, (PageRequest) sortedPage);
+        model.addAttribute("employee",employeePage);
+        List<Integer> integerList =new ArrayList<>();
+        for (int i = 1; i <employeePage.getTotalPages() ; i++) {
+            integerList.add(i);
+        }
+        model.addAttribute("integerList",integerList);
+//        model.addAttribute("employee", employeeService.findByAll(name, PageRequest.of(page, 3, sort)));
         return "admin/employee/list";
     }
 
