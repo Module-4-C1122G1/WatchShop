@@ -98,9 +98,9 @@
                     </ul>
                     <div class="user_option-box">
                         <div class="input-group">
-                            <form th:action="@{/carts/search}" method="post">
+                            <form action="/watch/search" method="post">
                             <button class="input-group-text text-body" type="submit"><i class="fas fa-search"
-                                                                        aria-hidden="true"></i></button>
+                                                                        ></i></button>
                             <input name="name" type="text" class="form-control" placeholder="Tìm kiếm theo tên">
                             </form>
                         </div>
@@ -184,6 +184,11 @@
 <span th:if="${check==1}">
     <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/type(page=${list.number -1},id=${id})}">Trước</a></span>
     <span><a th:if="${list.hasNext()}" th:href="@{/watch/type(page=${list.number +1},id=${id})}">Sau</a></span>
+</span>
+
+<span th:if="${check==2}">
+    <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/search(page=${list.number -1},name=${id})}">Trước</a></span>
+    <span><a th:if="${list.hasNext()}" th:href="@{/watch/search(page=${list.number +1},name=${id})}">Sau</a></span>
 </span>
 
 <!-- end shop section -->

@@ -15,4 +15,5 @@ public interface ICartService {
     void deleteById(CartID id);
     void addOrder(Integer idCus);
     void updateCheck(Integer idCus);
+    void save(Cart cart);
 }
