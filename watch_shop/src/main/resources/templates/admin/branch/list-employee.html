@@ -374,6 +374,9 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Số thứ tự
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tên nhân viên
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -398,7 +401,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr style="text-align: center" th:each="employee :${employeePage}">
+                                <tr style="text-align: center" th:each="employee , temp :${employeePage}">
+                                    <td th:text="${temp.count}"></td>
                                     <td th:text="${employee.name}"></td>
                                     <td th:text="${employee.dateOfBirth}"></td>
                                     <td th:text="${employee.gender}"></td>

@@ -53,6 +53,14 @@ public class WatchController {
         return "register";
     }
 
+    @PostMapping("search")
+    public String searchByName(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page, @RequestParam(name = "name", required = false) String name) {
+        model.addAttribute("list", iWatchService.findByName(name, PageRequest.of(page, 10)));
+        model.addAttribute("listManu", iManufactureService.finAll());
+        model.addAttribute("check", 2);
+        model.addAttribute("name",name);
+        return "watches";
+    }
 
     @GetMapping("index")
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {

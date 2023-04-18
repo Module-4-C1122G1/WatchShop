@@ -89,13 +89,21 @@
                             <a class="nav-link" th:href="@{/watch/index}">Trang Chủ </a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/watch/watches}"> Sản Phẩm <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" th:href="@{/watch/watches}"> Sản Phẩm <span
+                                    class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/login}"> Đăng nhập </a>
                         </li>
                     </ul>
                     <div class="user_option-box">
+                        <div class="input-group">
+                            <form action="/watch/search" method="post">
+                            <button class="input-group-text text-body" type="submit"><i class="fas fa-search"
+                                                                        ></i></button>
+                            <input name="name" type="text" class="form-control" placeholder="Tìm kiếm theo tên">
+                            </form>
+                        </div>
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="fa fa-user"></i></a>
                         <div class="dropdown-menu dropdown-menu-end" style="height: 500px; width: 24%">
@@ -107,11 +115,8 @@
                         <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
-                        <a sec:isAnonymous="isAuthenticated()" th:href="@{/login}">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-search" aria-hidden="true"></i>
+                        <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -125,7 +130,8 @@
 <div class="box-group-filter" style="margin-top: 40px; margin-left: 20px " th:each="type:${listManu}">
     <div id="filter_by">
       <span class="list-cat-child-category">
- 	            <a th:href="@{/watch/type(id=${type.id})}" th:text="${type.name}" title="Apple Watch" style="float: left"><i></i></a>
+ 	            <a th:href="@{/watch/type(id=${type.id})}" th:text="${type.name}" title="Apple Watch"
+                   style="float: left"><i></i></a>
     </span>
     </div>
 </div>
@@ -178,6 +184,11 @@
 <span th:if="${check==1}">
     <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/type(page=${list.number -1},id=${id})}">Trước</a></span>
     <span><a th:if="${list.hasNext()}" th:href="@{/watch/type(page=${list.number +1},id=${id})}">Sau</a></span>
+</span>
+
+<span th:if="${check==2}">
+    <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/search(page=${list.number -1},name=${id})}">Trước</a></span>
+    <span><a th:if="${list.hasNext()}" th:href="@{/watch/search(page=${list.number +1},name=${id})}">Sau</a></span>
 </span>
 
 <!-- end shop section -->
