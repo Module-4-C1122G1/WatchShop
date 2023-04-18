@@ -414,7 +414,7 @@
                                 </thead>
                                 <tbody>
                                 <tr style="text-align: center" th:each="branch, temp: ${branchPage}">
-                                    <td th:text="${branch.idBranch}"></td>
+                                    <td th:text="${temp.count}"></td>
                                     <td th:text="${branch.name}"></td>
                                     <td th:text="${branch.address}"></td>
                                     <td th:text="${branch.area}"></td>

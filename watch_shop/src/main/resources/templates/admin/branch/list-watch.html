@@ -374,7 +374,7 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Mã sản phẩm
+                                        Số thứ tự
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tên sản phẩm
@@ -385,37 +385,37 @@
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Hình ảnh
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Chất liệu dây đeo
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Đường kính
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Màu sắc
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Nguồn gốc
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Thông tin chi tiết
-                                    </th>
+<!--                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">-->
+<!--                                        Chất liệu dây đeo-->
+<!--                                    </th>-->
+<!--                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">-->
+<!--                                        Đường kính-->
+<!--                                    </th>-->
+<!--                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">-->
+<!--                                        Màu sắc-->
+<!--                                    </th>-->
+<!--                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">-->
+<!--                                        Nguồn gốc-->
+<!--                                    </th>-->
+<!--                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">-->
+<!--                                        Thông tin chi tiết-->
+<!--                                    </th>-->
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr style="text-align: center" th:each="watch :${watchList}">
-                                    <td th:text="${watch.idWatch}"></td>
+                                <tr style="text-align: center" th:each="watch , temp :${watchList}">
+                                    <td th:text="${temp.count}"></td>
                                     <td th:text="${watch.name}"></td>
                                     <td th:text="${watch.price}"></td>
                                     <td>
                                         <img style="width: 69px ; height: 69px" th:src="${watch.image}">
                                     </td>
-                                    <td th:text="${watch.strapMaterial}"></td>
-                                    <td th:text="${watch.diameter}"></td>
-                                    <td th:text="${watch.color}"></td>
-                                    <td th:text="${watch.origin}"></td>
-                                    <td th:text="${watch.detail}"></td>
+<!--                                    <td th:text="${watch.strapMaterial}"></td>-->
+<!--                                    <td th:text="${watch.diameter}"></td>-->
+<!--                                    <td th:text="${watch.color}"></td>-->
+<!--                                    <td th:text="${watch.origin}"></td>-->
+<!--                                    <td th:text="${watch.detail}"></td>-->
                                     <td>
                                         <button type="button"
                                                 th:attr="onclick=|information('${watch.idWatch}', '${idBranch}' , '${watch.name}')|"
