@@ -324,7 +324,7 @@
         </div>
     </nav>
     <div class="container-fluid py-4">
-        <p th:text = "${msg}" id="msg" style="display: none"></p>
+        <p th:text = "${msg}" id="msg" style="display: none;width: 20%"></p>
         <div class="row">
             <div class="col-12" style="background-color: #e9e8fc">
                 <div class="card mb-4" style="background-color: #2c2972">
@@ -577,7 +577,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-<script>
+<script style="width: 50%">
     let msg = document.getElementById("msg").innerText;
     if(msg) {
         Swal.fire({
@@ -585,7 +585,8 @@
             icon: 'success',
             title: msg,
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
+            style: 'w-10,h-10'
         })
     }
 
