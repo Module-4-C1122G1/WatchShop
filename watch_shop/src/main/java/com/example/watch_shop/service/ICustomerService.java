@@ -13,4 +13,8 @@ public interface ICustomerService {
     Customer findByIdCustomer(Integer idCustomer);
     Page<Customer> findByNameCustomer(String nameCustomer, PageRequest pageRequest);
     Page<Customer> findByCustomerType(Integer idCustomerType, PageRequest pageRequest);
+    boolean existsByEmail(String email);
+    boolean existsByPhone(String phone);
+    boolean existsByAppUser_UserName(String userName);
+    Customer findByNameAccount(String nameAccount);
 }

@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "employee")
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_employee")
     private Integer id;
     @Column(name = "name_employee")
@@ -30,7 +31,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "id_position")
     private Position position;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_branch")
     private Branch branch;
 

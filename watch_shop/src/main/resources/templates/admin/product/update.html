@@ -327,11 +327,15 @@
             </a>
             <h2 class="title pt-3 pb-3" style="text-align: center"> Cập nhật thông tin đồng hồ</h2>
             <form action="/adminWatch/update" method="post" th:object="${watch}" style="width: 50%;margin: 0 auto">
+                <div class="form-group col-md-12 py-3" style="position: relative;">
+                    <input type="hidden" class="form-control" th:field="*{idWatch}" name="idWatch">
+                </div>
                 <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Tên đồng hồ:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{name}" name="name" id="name"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                        <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Sai tên</p>
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Giá (VND): </small>
@@ -339,6 +343,7 @@
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="number" class="form-control" th:field="*{price}" name="price" id="price"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                        <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Sai giá</p>
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Thương hiệu: </small>
@@ -391,8 +396,6 @@
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <textarea class="form-control" name="detail" id="detail" th:text="${watch.detail.replace('<br>','&#10')}"></textarea>
-<!--                        <textarea class="form-control"  th:utext="${watch.detail}" name="detail" id="detail"-->
-<!--                      style="font-size: 13px;padding-left: 40px;width: 100%;height: auto"></textarea>-->
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Số lượng: </small>
@@ -400,6 +403,7 @@
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="number" class="form-control" th:field="*{quantity}" name="quantity" id="quantity"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+                        <p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Sai số lượng</p>
                     </div>
                 </div>
 

@@ -11,11 +11,14 @@
 <h2>User Info Page</h2>
 <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
 <h3>Welcome : <span th:utext="${#request.userPrincipal.name}"></span></h3>
+<p th:authentication='principal.authorities'></p>
 <b>This is protected page!</b>
 
 <br/><br/>
 
 <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+
+<div th:if="${roleName != null}" th:utext="${roleName}"></div>
 <a th:href="@{/logout}">logout</a>
 </body>
 

@@ -1,7 +1,6 @@
 package com.example.watch_shop.controller;
 
 import com.example.watch_shop.model.*;
-import com.example.watch_shop.repository.IOrderDetailRepository;
 import com.example.watch_shop.service.ICartService;
 import com.example.watch_shop.service.ICustomerService;
 import com.example.watch_shop.service.IOrderDetailService;
@@ -10,15 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
-import java.util.List;
 
 @Controller
-@RequestMapping("carts")
+@RequestMapping("/carts")
 public class CartController {
     @Autowired
     ICartService iCartService;
@@ -30,31 +26,26 @@ public class CartController {
     IOrderDetailService iOrderDetailService;
 
     @GetMapping("")
-    public String list(Model model, @RequestParam("idCus") Integer id) {
-        model.addAttribute("list", iCartService.findByCusId(id));
-        model.addAttribute("total", iCartService.totalPrice(id));
+    public String list(Model model, @RequestParam(value = "name", required = false) String nameAcc) {
+        Customer customer=iCustomerService.findByNameAccount(nameAcc);
+        model.addAttribute("nameAcc", nameAcc);
+        model.addAttribute("list", iCartService.findByCusId(customer.getIdCustomer()));
+        model.addAttribute("total", iCartService.totalPrice(customer.getIdCustomer()));
         return "cart";
     }
 
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam Integer idWatch, @RequestParam Integer idCus) {
         CartID id = new CartID(idCus, idWatch);
         iCartService.deleteById(id);
         return "redirect:/carts";
     }
 
-    @GetMapping("buy")
-    public String buy() {
-        Integer idCus = 1;
-        Customer customer = iCustomerService.findByIdCustomer(idCus);
-        List<Cart> list = iCartService.findByCusId(idCus);
-        Integer price = iCartService.totalPrice(idCus);
-        OrderWatch orderWatch = new OrderWatch(LocalDate.now(), price, customer);
-        iOrderService.save(orderWatch);
-        for (Cart cart : list) {
-            iOrderDetailService.save(new OrderDetail(new OrderDetailID(idCus, cart.getCartID().getIdWatch())
-                    , cart.getQuantity(), cart.getPrice(), cart.getWatch().getImage(), orderWatch, cart.getWatch()));
-        }
-        return "redirect:/carts";
+    @GetMapping("buys")
+    public String buy(@RequestParam("name") String nameAcc) {
+        Customer customer=iCustomerService.findByNameAccount(nameAcc);
+        iCartService.addOrder(customer.getIdCustomer());
+        iCartService.updateCheck(customer.getIdCustomer());
+        return "redirect:/watch/index";
     }
 }

@@ -326,12 +326,13 @@
         </button>
       </a>
       <h2 class="title pt-3 pb-3" style="text-align: center">Thêm mới đồng hồ</h2>
-      <form action="/adminWatch/create" method="post" th:object="${watch}" style="width: 50%;margin: 0 auto">
+      <form action="/adminWatch/create" method="post" th:object="${watch}" style="width: 50%;margin: 0 auto" novalidate="novalidate">
         <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Tên đồng hồ:</small>
         <div class="row rone">
           <div class="form-group col-md-12 py-3" style="position: relative;">
             <input type="text" class="form-control" th:field="*{name}" name="name" id="name"
                    style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+            <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Sai tên</p>
           </div>
         </div>
         <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Giá (VND): </small>
@@ -339,6 +340,7 @@
           <div class="form-group col-md-12 py-3" style="position: relative;">
             <input type="number" class="form-control" th:field="*{price}" name="price" id="price"
                    style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+            <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Sai giá</p>
           </div>
         </div>
         <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Thương hiệu: </small>
@@ -399,12 +401,13 @@
           <div class="form-group col-md-12 py-3" style="position: relative;">
             <input type="number" class="form-control" th:field="*{quantity}" name="quantity" id="quantity"
                    style="font-size: 13px;font-weight: bold;padding-left: 40px;">
+            <p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Sai số lượng</p>
           </div>
         </div>
 
         <div class="row">
           <div class="col-3"></div>
-          <div class="col-3"><button type="submit" class="btn btn-secondary" style="display: block;margin:0 auto;width: 120%;background: #2c2972; border-radius: 10px">Thêm mới</button></div>
+          <div class="col-3"><button type="submit" class="btn btn-secondary" style="display: block;margin:0 auto;width: 120%;background: #2c2972; border-radius: 10px" onclick="myFunction()">Thêm mới</button></div>
           <div class="col-3"><button type="reset" class="btn btn-secondary" style="background-color: red;display: block;width: 100%;border-radius: 10px">Hủy bỏ</button></div>
           <div class="col-3"></div>
         </div>

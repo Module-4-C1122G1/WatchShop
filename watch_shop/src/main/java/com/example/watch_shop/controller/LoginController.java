@@ -1,23 +1,76 @@
 package com.example.watch_shop.controller;
 
+import com.example.watch_shop.dto.CustomerDTO;
+import com.example.watch_shop.model.AppRole;
 import com.example.watch_shop.model.AppUser;
+import com.example.watch_shop.model.Customer;
+import com.example.watch_shop.model.UserRole;
+import com.example.watch_shop.service.ICustomerService;
+import com.example.watch_shop.service.ICustomerTypeService;
+import com.example.watch_shop.service.IUserRoleService;
 import com.example.watch_shop.utils.WebUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
 public class LoginController {
+    @Autowired
+    private ICustomerService customerService;
+    @Autowired
+    private ICustomerTypeService customerTypeService;
+    @Autowired
+    private IUserRoleService userRoleService;
 
-    @GetMapping(value = { "/", "/welcome" })
+    @GetMapping("/register")
+    public String registerForm(Model model) {
+        model.addAttribute("customerDto", new CustomerDTO());
+        model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(@Valid @ModelAttribute("customerDto") CustomerDTO customerCreateDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            return "register";
+        } else if (customerService.existsByEmail(customerCreateDTO.getEmail())) {
+            model.addAttribute("message", "Email đã tồn tại, vui lòng nhập email khác");
+            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            return "register";
+        } else if (customerService.existsByPhone(customerCreateDTO.getPhone())) {
+            model.addAttribute("message", "Số điện thoại đã tồn tại, vui lòng nhập số điện thoại khác");
+            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            return "register";
+        } else if (customerService.existsByAppUser_UserName(customerCreateDTO.getAppUser().getUserName())) {
+            model.addAttribute("message", "Tài khoản đã tồn tại, vui lòng nhập tài khoản khác");
+            model.addAttribute("customerType", customerTypeService.findAllCustomerType());
+            return "register";
+        } else {
+            Customer customer = new Customer();
+            BeanUtils.copyProperties(customerCreateDTO, customer);
+            customerService.saveCustomer(customer);
+            AppUser appUser = customer.getAppUser();
+            AppRole appRole = new AppRole(2, "ROLE_USER");
+            userRoleService.saveUserRole(new UserRole(appUser, appRole));
+            return "redirect:/customer";
+        }
+    }
+
+
+    @GetMapping(value = {"/", "/welcome"})
     public String welcomePage() {
         return "index";
     }
@@ -47,6 +100,7 @@ public class LoginController {
 
         String userInfo = WebUtils.toString(loginUser);
         model.addAttribute("userInfo", userInfo);
+
         return "userInfoPage";
     }
 
@@ -80,49 +134,4 @@ public class LoginController {
         return "403Page";
     }
 
-//    @Autowired
-//    IAppUserService appUserService;
-//
-//    @ModelAttribute("appUser")
-//    public AppUser setUpAccountForm() {
-//        return new AppUser();
-//    }
-//
-//    @GetMapping("/login")
-//    public String login(@CookieValue(value = "setAppUser", defaultValue = "") String setAppUser, Model model) {
-//        Cookie cookie = new Cookie("setAppUser", setAppUser);
-//        model.addAttribute("cookieValue", cookie);
-//        return "login";
-//    }
-//
-//    @PostMapping("/doLogin")
-//    public String login(@ModelAttribute("appUser") AppUser appUser, Model model,
-//                        @CookieValue(value = "setAppUser", defaultValue = "") String setAppUser,
-//                        HttpServletRequest request, HttpServletResponse response) {
-//        if (appUserService.findAppUserByUserName(appUser.getUserName()) != null) {
-//            Cookie cookie = new Cookie("userName", appUser.getUserName());
-//            cookie.setMaxAge(24 * 60 * 60);
-//            response.addCookie(cookie);
-//
-//            Cookie cookie1 = new Cookie("encrytedPassword", appUser.getEncrytedPassword());
-//            cookie.setMaxAge(24 * 60 * 60);
-//            response.addCookie(cookie1);
-//            Cookie[] cookies = request.getCookies();
-//            for (Cookie ck : cookies) {
-//                if (ck.equals(appUser.getUserName())) {
-//                    model.addAttribute("cookieValueUserName", ck);
-//                }
-//                if (ck.equals(appUser.getEncrytedPassword())) {
-//                    model.addAttribute("cookieValueencrytedPassword", ck);
-//                }
-//            }
-//            model.addAttribute("message", "Login success. Welcome ");
-//
-//        } else {
-//            model.addAttribute("message", "Login failed. Try again.");
-//        }
-//        return "login";
-//    }
-//    @GetMapping("/logoutSuccessful")
-//    public String
 }

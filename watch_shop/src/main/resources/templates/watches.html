@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <!-- Basic -->
     <meta charset="utf-8"/>
@@ -92,10 +92,7 @@
                             <a class="nav-link" th:href="@{/watch/watches}"> Sản Phẩm <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html"> About </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact Us</a>
+                            <a class="nav-link" th:href="@{/login}"> Đăng nhập </a>
                         </li>
                     </ul>
                     <div class="user_option-box">
@@ -107,8 +104,11 @@
                             <div class="dropdown-divider"></div>
                             <a href="#">Logout</a>
                         </div>
-                        <a th:href="@{/carts}">
+                        <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        </a>
+                        <a sec:isAnonymous="isAuthenticated()" th:href="@{/login}">
+                            <i class="fa fa-search" aria-hidden="true"></i>
                         </a>
                         <a href="">
                             <i class="fa fa-search" aria-hidden="true"></i>
@@ -125,7 +125,7 @@
 <div class="box-group-filter" style="margin-top: 40px; margin-left: 20px " th:each="type:${listManu}">
     <div id="filter_by">
       <span class="list-cat-child-category">
- 	            <a th:text="${type.name}" title="Apple Watch" style="float: left"><i></i></a>
+ 	            <a th:href="@{/watch/type(id=${type.id})}" th:text="${type.name}" title="Apple Watch" style="float: left"><i></i></a>
     </span>
     </div>
 </div>
@@ -139,7 +139,7 @@
         <div class="row">
             <div class="col-md-6 " th:each="watch : ${list}">
                 <div class="box">
-                    <a href="">
+                    <a th:href="@{watch/detail}">
                         <div class="img-box">
                             <img th:src="${watch.image}">
                         </div>
@@ -170,6 +170,15 @@
         </div>
     </div>
 </section>
+<span th:if="${check==0}">
+    <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/watches(page=${list.number -1})}">Trước</a></span>
+    <span><a th:if="${list.hasNext()}" th:href="@{/watch/watches(page=${list.number +1})}">Sau</a></span>
+</span>
+
+<span th:if="${check==1}">
+    <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/type(page=${list.number -1},id=${id})}">Trước</a></span>
+    <span><a th:if="${list.hasNext()}" th:href="@{/watch/type(page=${list.number +1},id=${id})}">Sau</a></span>
+</span>
 
 <!-- end shop section -->
 

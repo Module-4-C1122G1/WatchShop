@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  active" href="../pages/tables.html">
+                <a class="nav-link  active" th:href="@{/adminWatch}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/billing.html">
+                <a class="nav-link  " th:href="@{/product}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>
@@ -93,7 +93,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/virtual-reality.html">
+                <a class="nav-link  " th:href="@{/branch}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>box-3d-50</title>
@@ -114,7 +114,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/billing.html">
+                <a class="nav-link  " th:href="@{/employee}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>
@@ -130,29 +130,29 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Khách hàng</span>
+                    <span class="nav-link-text ms-1">Nhân viên</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link  " href="../pages/billing.html">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>credit-card</title>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                    <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(453.000000, 454.000000)">
-                                            <path class="color-background opacity-6" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
-                                            <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <span class="nav-link-text ms-1">Khách hàng</span>
-                </a>
-            </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link  " href="../pages/billing.html">-->
+<!--                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">-->
+<!--                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
+<!--                            <title>credit-card</title>-->
+<!--                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">-->
+<!--                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">-->
+<!--                                    <g transform="translate(1716.000000, 291.000000)">-->
+<!--                                        <g transform="translate(453.000000, 454.000000)">-->
+<!--                                            <path class="color-background opacity-6" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>-->
+<!--                                            <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>-->
+<!--                                        </g>-->
+<!--                                    </g>-->
+<!--                                </g>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                    </div>-->
+<!--                    <span class="nav-link-text ms-1">Khách hàng</span>-->
+<!--                </a>-->
+<!--            </li>-->
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý tài khoản</h6>
             </li>
@@ -214,10 +214,12 @@
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                    <form action="/adminWatch">
                     <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" placeholder="Nhập tên đồng hồ cần tìm..." name="name" th:value="${name}">
                     </div>
+                    </form>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
@@ -322,26 +324,27 @@
         </div>
     </nav>
     <div class="container-fluid py-4">
+        <p th:text = "${msg}" id="msg" style="display: none"></p>
         <div class="row">
             <div class="col-12" style="background-color: #849fb7">
-                <div class="card mb-4">
+                <div class="card mb-4" style="background-color: #2c2972">
                     <div class="card-header pb-0">
-                        <h3 style="display: inline">Danh sách đồng hồ</h3>
+                        <h3 style="display: inline;color: white" >Danh sách đồng hồ</h3>
 
                             <a style="text-decoration: none" href="/adminWatch/create">
-                                <button type="button" class="btn btn-outline-secondary" style="background: #373754;float: right;color: white">Thêm mới</button>
+                                <button type="button" class="btn btn-outline-secondary" style="background: #7a7ac5;float: right;color: white">Thêm mới</button>
                             </a>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2" style="background: #d4d4e3">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                    <div class="card-body px-0 pt-0 pb-2" style="background: #e4e4ea">
+                        <div class="table-responsive p-0" >
+                            <table class="table align-items-center mb-0" style="border-color: #1b1f23;">
                                 <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mã đồng hồ</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên đồng hồ</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gía (VND)</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số lượng</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tác vụ</th>
+                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Mã đồng hồ</th>
+                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Tên đồng hồ</th>
+                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Gía (VND)</th>
+                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Số lượng</th>
+                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Tác vụ</th>
                                 </tr>
                                 </thead>
                                 <tr th:each="adminWatch:${watchList}">
@@ -350,13 +353,13 @@
                                     <td th:text="${adminWatch.price}"></td>
                                     <td th:text="${adminWatch.quantity}"></td>
                                     <td>
-                                        <!--button xem thêm-->
+                                    <!-- button xem thêm-->
                                         <button type="button"
                                                 th:attr="onclick=|detail('${adminWatch.typeWatch?.getName()}','${adminWatch.manufacturer?.getName()}','${adminWatch.strapMaterial}','${adminWatch.diameter}','${adminWatch.color}','${adminWatch.origin}','${adminWatch.detail}','${adminWatch.image}')|"
                                                 class="btn btn-primary"
                                                 data-bs-toggle="modal" data-bs-target="#extraLargeModal"
                                                 data-bs-whatever="@mdo"
-                                                style="margin-bottom: 5px; background: white;border: 0">
+                                                style="background-color: white">
                                             <i class="fa fa-table" style="color: black"></i>
                                         </button>
                                         <!--button update-->
@@ -371,19 +374,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div>
-                            <a class="page-item" th:if="${watchList.hasPrevious()}"
-                               th:href="@{/adminWatch(page=${watchList.number - 1},tittle=${name})}">
-                                Previous
-                            </a>
-                            <a class="page-item" th:each="p : ${countPages}"
-                               th:href="@{/adminWatch(page=${p},tittle=${name})}" th:text="${p + 1}"></a>
-                            <a class="page-item" th:if="${watchList.hasNext()}"
-                               th:href="@{/adminWatch(page=${watchList.number + 1},tittle=${name})}">
-                                Next
-                            </a>
-                        </div>
                         <!--modal xem thêm  -->
                         <div class="modal fade" id="extraLargeModal" tabindex="-1" aria-labelledby="exampleModalLabel1"
                              style="width: 100%;"
@@ -467,30 +457,32 @@
             </div>
         </div>
         <div>
-            <script>
-                function detail(nameType,name,strapMaterial, diameter, color, origin,detail,image) {
-                    document.getElementById("typeWatch").innerText=nameType;
-                    document.getElementById("manufacturer").innerText= name;
-                    document.getElementById("strapMaterial").innerText = strapMaterial;
-                    document.getElementById("diameter").innerText = diameter;
-                    document.getElementById("color").innerText = color;
-                    document.getElementById("origin").innerText = origin;
-                    document.getElementById("detail").innerText = detail;
-                    document.getElementById("image").innerHTML = "<img class='img-watch' src=" + image + ">";
-                }
-            </script>
-            <script>
-                function deleteId(idWatch, name) {
-                    document.getElementById("deleteId").value = idWatch;
-                    document.getElementById("deleteName").innerText = name;
-                }
-            </script>
 
-        </div>
+
+
 
     </div>
     </div>
     </div>
+    </div>
+    <!--Phân trang-->
+    <div class="text-center container">
+        <a class="page-item btn btn-dark page-item" th:if="${watchList.hasPrevious()}"
+           th:href="@{/adminWatch(page = ${watchList.number - 1})}">
+            <i class="ti-angle-left">Trước</i>
+        </a>
+
+        <a class="page-item number btn btn-dark page-item"
+           th:classappend="${pageNumber == watchList.number + 1} ? 'active' : ''"
+           th:each="pageNumber : ${integerList}"
+           th:href="@{/adminWatch(page = ${pageNumber - 1})}"
+           th:text="${pageNumber}">
+        </a>
+
+        <a class="page-item btn btn-dark page-item" th:if="${watchList.hasNext()}"
+           th:href="@{/adminWatch(page = ${watchList.number + 1})}">
+            <i class="ti-angle-right">Sau</i>
+        </a>
     </div>
         <footer class="footer pt-3  ">
             <div class="container-fluid">
@@ -576,11 +568,52 @@
     </div>
 </div>
 
+
 <!--   Core JS Files   -->
 <script th:src="@{/admin/assets/js/core/popper.min.js}"></script>
 <script th:src="@{/admin/assets/js/core/bootstrap.min.js}"></script>
 <script th:src="@{/admin/assets/js/plugins/perfect-scrollbar.min.js}"></script>
 <script th:src="@{/admin/assets/js/plugins/smooth-scrollbar.min.js}"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script>
+    let msg = document.getElementById("msg").innerText;
+    if(msg) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: msg,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+
+</script>
+
+<script>
+
+    // detail('Đồng hồ thông minh','SAMSUNG','Silicone','40 mm','Xám Graphite, Bạc, Hồng vàng','Trung Quốc','Hỗ trợ sức khỏe.','https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/a/sansung_1__2.png')
+    function detail(nameType,name,strapMaterial, diameter, color, origin,detail,image) {
+        debugger
+        document.getElementById("typeWatch").innerText=nameType;
+        document.getElementById("manufacturer").innerText= name;
+        document.getElementById("strapMaterial").innerText = strapMaterial;
+        document.getElementById("diameter").innerText = diameter;
+        document.getElementById("color").innerText = color;
+        document.getElementById("origin").innerText = origin;
+        document.getElementById("detail").innerText = detail;
+        document.getElementById("image").innerHTML = "<img class='img-watch' src=" + image + ">";
+    }
+</script>
+<script>
+    function deleteId(idWatch, name) {
+        document.getElementById("deleteId").value = idWatch;
+        document.getElementById("deleteName").innerText = name;
+    }
+</script>
+
+
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

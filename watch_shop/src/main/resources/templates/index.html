@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <!-- Basic -->
@@ -33,7 +33,6 @@
 </head>
 
 <body>
-
 <div class="hero_area">
     <div class="hero_social">
         <a href="">
@@ -68,16 +67,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/watch/index}">Trang chủ<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" th:href="@{/watch/index}">Trang chủ<span
+                                    class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/watch/watches}">Sản phẩm</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Liên hệ</a>
+                            <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
                         </li>
                     </ul>
                     <div class="user_option-box">
@@ -89,12 +86,16 @@
                             <div class="dropdown-divider"></div>
                             <a href="#">Logout</a>
                         </div>
-                        <a th:href="@{/carts}">
+                        <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
-                        <a href="">
+                        <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        </a>
+                        <a>
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </a>
+
                     </div>
                 </div>
             </nav>
@@ -221,7 +222,10 @@
         </a>
     </div>
 </section>
-
+<!--<span>-->
+<!--    <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/index(page=${list.number -1})}">Trước</a></span>-->
+<!--    <span><a th:if="${list.hasNext()}" th:href="@{/watch/index(page=${list.number +1})}">Sau</a></span>-->
+<!--</span>-->
 <!-- end shop section -->
 
 <!-- about section -->

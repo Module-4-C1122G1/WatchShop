@@ -8,11 +8,11 @@ public class ManageWatchBranch {
 
     @EmbeddedId
     private ManageWatchBranchID manageWatchBranchID;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idBranch")
     @JoinColumn(name = "id_branch")
     private Branch branch;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("idWatch")
     @JoinColumn(name = "id_watch")
     private Watch watch;

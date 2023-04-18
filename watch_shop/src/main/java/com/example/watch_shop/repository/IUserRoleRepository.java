@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface IUserRoleRepository extends JpaRepository<UserRole, Integer> {
     List<UserRole> findByAppUser(AppUser appUser);
+    UserRole findUserRoleByAppUser(AppUser appUser);
+
 }
