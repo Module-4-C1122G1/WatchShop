@@ -3,10 +3,7 @@ package com.example.watch_shop.service.impl;
 import com.example.watch_shop.model.*;
 import com.example.watch_shop.repository.ICartRepository;
 import com.example.watch_shop.repository.IWatchRepository;
-import com.example.watch_shop.service.ICartService;
-import com.example.watch_shop.service.ICustomerService;
-import com.example.watch_shop.service.IOrderDetailService;
-import com.example.watch_shop.service.IOrderService;
+import com.example.watch_shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +13,17 @@ import java.util.List;
 @Service
 public class CartService implements ICartService {
     @Autowired
-    ICartRepository iCartRepository;
+    private ICartRepository iCartRepository;
     @Autowired
-    IWatchRepository iWatchRepository;
+    private IWatchRepository iWatchRepository;
     @Autowired
-    ICustomerService iCustomerService;
+    private ICustomerService iCustomerService;
     @Autowired
-    IOrderService iOrderService;
+    private IOrderService iOrderService;
     @Autowired
-    IOrderDetailService iOrderDetailService;
+    private IOrderDetailService iOrderDetailService;
+    @Autowired
+    private IWatchService iWatchService;
 
     @Override
     public List<Cart> findAll() {
@@ -52,6 +51,21 @@ public class CartService implements ICartService {
         }
     }
 
+    @Override
+    public void save(Cart cart) {
+        boolean flag = true;
+        for (Cart cart1 : findByCusId(cart.getCartID().getIdCustomer())) {
+            if (cart.getCartID().getIdWatch().equals(cart1.getCartID().getIdWatch())) {
+                update(cart1.getCartID(), (cart1.getQuantity() + cart.getQuantity()));
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            iCartRepository.save(cart);
+        }
+    }
+
     public void addOrder(Integer idCus) {
         Customer customer = iCustomerService.findByIdCustomer(idCus);
         List<Cart> list = findByCusId(idCus);
@@ -61,6 +75,8 @@ public class CartService implements ICartService {
         for (Cart cart : list) {
             iOrderDetailService.save(new OrderDetail(new OrderDetailID(idCus, cart.getCartID().getIdWatch())
                     , cart.getQuantity(), cart.getPrice(), cart.getWatch().getImage(), orderWatch, cart.getWatch()));
+            iWatchService.updateQuantity((cart.getWatch().getQuantity()-cart.getQuantity()), cart.getWatch().getIdWatch());
+            System.out.println(cart.getWatch().getQuantity()-cart.getQuantity());
         }
     }
 
@@ -83,6 +99,12 @@ public class CartService implements ICartService {
 
     @Override
     public List<Cart> findByCusId(Integer id) {
-        return iCartRepository.findCartByCartID_IdCustomer(id);
+        List<Cart> list = iCartRepository.findByCustomer(id);
+        for (Cart cart : list) {
+            if (cart.getQuantity() > iWatchService.findById(cart.getWatch().getIdWatch()).getQuantity()) {
+                cart.setQuantity(iWatchService.findById(cart.getWatch().getIdWatch()).getQuantity());
+            }
+        }
+        return list;
     }
 }
