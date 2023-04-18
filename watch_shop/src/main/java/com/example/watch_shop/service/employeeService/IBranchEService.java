@@ -4,6 +4,6 @@ import com.example.watch_shop.model.Branch;
 
 import java.util.List;
 
-public interface IBranchService {
+public interface IBranchEService {
     List<Branch> list();
 }

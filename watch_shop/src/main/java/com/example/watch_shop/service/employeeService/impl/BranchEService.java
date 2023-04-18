@@ -1,18 +1,18 @@
 package com.example.watch_shop.service.employeeService.impl;
 
 import com.example.watch_shop.model.Branch;
-import com.example.watch_shop.repository.employeeRepository.IBranchRepository;
-import com.example.watch_shop.service.employeeService.IBranchService;
+import com.example.watch_shop.repository.employeeRepository.IBranchERepository;
+import com.example.watch_shop.service.employeeService.IBranchEService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 @Controller
-public class BranchService implements IBranchService {
+public class BranchEService implements IBranchEService {
     @Autowired
-    IBranchRepository iBranchRepository;
+    IBranchERepository iBranchERepository;
     @Override
     public List<Branch> list() {
-        return (List<Branch>) iBranchRepository.findAll();
+        return (List<Branch>) iBranchERepository.findAll();
     }
 }
