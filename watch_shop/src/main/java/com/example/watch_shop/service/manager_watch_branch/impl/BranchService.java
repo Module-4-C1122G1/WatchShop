@@ -6,6 +6,7 @@ import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.model.Watch;
 import com.example.watch_shop.repository.IBranchRepository;
 import com.example.watch_shop.repository.IEmployeeRepository;
+import com.example.watch_shop.repository.IManagerWatchBranch;
 import com.example.watch_shop.repository.IWatchRepository;
 import com.example.watch_shop.service.manager_watch_branch.IBranchService;
 import org.springframework.beans.BeanUtils;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BranchService implements IBranchService {
@@ -24,9 +26,12 @@ public class BranchService implements IBranchService {
     private IEmployeeRepository employeeRepository;
     @Autowired
     private IWatchRepository watchRepository;
+    @Autowired
+    private IManagerWatchBranch managerWatchBranch;
+
     @Override
     public Page<Branch> findAll(String name, Pageable pageable) {
-        return watchBranchRepository.findBranchByNameContainingAndIsDelete(name, pageable , false);
+        return watchBranchRepository.findBranchByNameContainingAndIsDelete(name, pageable, false);
     }
 
     @Override
@@ -47,20 +52,26 @@ public class BranchService implements IBranchService {
     @Override
     public void create(BranchDTO branchDTO) {
         Branch branch = new Branch();
-        BeanUtils.copyProperties(branchDTO , branch);
+        BeanUtils.copyProperties(branchDTO, branch);
         watchBranchRepository.save(branch);
     }
 
     @Override
-    public void update(BranchDTO branchDTO , int id) {
+    public void update(BranchDTO branchDTO, int id) {
         Branch branch = watchBranchRepository.findById(id).get();
-        BeanUtils.copyProperties(branchDTO , branch);
+        BeanUtils.copyProperties(branchDTO, branch);
         watchBranchRepository.save(branch);
     }
+
     @Override
     public void delete(int id) {
-        Branch branch = watchBranchRepository.findById(id).get();
-        branch.setDelete(true);
-        watchBranchRepository.save(branch);
+        Optional<Branch> branch = watchBranchRepository.findById(id);
+        if (branch.isPresent()) {
+            branch.get().removeWatch(branch.get().getWatchSet());
+            branch.get().removeEmployee(branch.get().getEmployeeSet());
+//            employeeRepository.deleteEmployeeByBranchIdBranch(branch.get().getIdBranch());
+            branch.get().setDelete(true);
+            watchBranchRepository.save(branch.get());
+        }
     }
 }
