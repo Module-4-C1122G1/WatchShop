@@ -1,6 +1,7 @@
 package com.example.watch_shop.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "watch")
@@ -33,6 +34,10 @@ public class Watch {
     @ManyToOne
     @JoinColumn(name = "id_manufacturer")
     private Manufacturer manufacturer;
+
+    @ManyToMany
+    @JoinTable(name = "manage_product_branch" , joinColumns = @JoinColumn(name = "id_watch") , inverseJoinColumns = @JoinColumn(name = "id_branch"))
+    private Set<Branch> branchSet;
 
     public Watch() {
     }

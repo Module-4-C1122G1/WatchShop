@@ -14,7 +14,12 @@ public interface IWatchService {
     void save(Watch watch);
     void delete(int id);
     Page<Watch> findAll(PageRequest pageRequest);
+
     Page<Watch> findByType(Integer id, PageRequest pageRequest);
+
     Watch findById(Integer id);
 
+    Page<Watch> findByName(String name, PageRequest pageRequest);
+
+    void updateQuantity(Integer qtt, Integer id);
 }
