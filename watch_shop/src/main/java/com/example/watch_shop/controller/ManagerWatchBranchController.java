@@ -26,17 +26,17 @@ public class ManagerWatchBranchController {
     @Autowired
     private IBranchService branchService;
     @GetMapping("")
-    public String showStore(@PageableDefault(size = 3) Pageable pageable, @RequestParam(defaultValue = "") String name, Model model) {
+    public String showStore(@PageableDefault(size = 1) Pageable pageable, @RequestParam(defaultValue = "") String name, Model model) {
         Sort sort = Sort.by("name").ascending();
         model.addAttribute("name", name);
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         Page<Branch> branchPage = branchService.findAll(name, sortedPage);
         model.addAttribute("branchPage", branchPage);
-        List<Integer> pageNumberList = new ArrayList<>();
-        for (int i = 0; i < branchPage.getTotalPages(); i++) {
-            pageNumberList.add(i);
+        List<Integer> integerList =new ArrayList<>();
+        for (int i = 1; i <branchPage.getTotalPages() ; i++) {
+            integerList.add(i);
         }
-        model.addAttribute("pageNumberList", pageNumberList);
+        model.addAttribute("integerList",integerList);
         return "/admin/branch/list";
     }
 
@@ -50,6 +50,7 @@ public class ManagerWatchBranchController {
     @GetMapping("/watch/{idBranch}")
     public String showWatch(@PathVariable("idBranch") int idBranch, Model model) {
         List<Watch> watchList = branchService.findAllWatch(idBranch);
+        model.addAttribute("idBranch" , idBranch);
         model.addAttribute("watchList", watchList);
         return "/admin/branch/list-watch";
     }
@@ -59,7 +60,6 @@ public class ManagerWatchBranchController {
         branchService.delete(deleteId);
         return "redirect:/branch";
     }
-
     @GetMapping("/create")
     public String showCreateBranch(Model model) {
         model.addAttribute("branchDTO", new BranchDTO());
