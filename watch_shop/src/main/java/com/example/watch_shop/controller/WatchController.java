@@ -26,7 +26,7 @@ public class WatchController {
     @GetMapping("/detail/{idWatch}")
     public String detail(@PathVariable int idWatch, Model model) {
         model.addAttribute("typeWatchList", iTypeWatchService.findAll());
-        model.addAttribute("manufactureList",iManufactureService.findAll());
+        model.addAttribute("manufactureList", iManufactureService.findAll());
         model.addAttribute("watch", iWatchService.findByIdWatch(idWatch));
         return "detail";
     }
@@ -57,16 +57,23 @@ public class WatchController {
 
     @PostMapping("search")
     public String searchByName(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page, @RequestParam(name = "name", required = false) String name) {
-        model.addAttribute("list", iWatchService.findByName(name, PageRequest.of(page, 10)));
+        Page<Watch> watchPage = iWatchService.findByName(name, PageRequest.of(page, 10));
+        if (watchPage.isEmpty()) {
+            String msg="Không tìm thấy sản phẩm";
+            model.addAttribute("msg", msg);
+            System.out.println(msg);
+        } else {
+            model.addAttribute("list", watchPage);
+        }
         model.addAttribute("listManu", iManufactureService.findAll());
         model.addAttribute("check", 2);
-        model.addAttribute("name",name);
+        model.addAttribute("name", name);
         return "watches";
     }
 
     @GetMapping("index")
     public String index(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
-        model.addAttribute("list", iWatchService.findAll(PageRequest.of(page, 10)));
+        model.addAttribute("list", iWatchService.findAll(PageRequest.of(page, 12)));
         return "index";
     }
 
