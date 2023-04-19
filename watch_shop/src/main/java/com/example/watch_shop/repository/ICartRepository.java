@@ -14,4 +14,8 @@ public interface ICartRepository extends PagingAndSortingRepository<Cart, CartID
 
     @Query(value = "select sum(price) from cart where id_customer =:idCus and check_order=0 and check_delete=0", nativeQuery = true)
     Integer totalPriceOrder(@Param("idCus") Integer idCus);
+
+    @Query(value = " select id_customer, sum(total_price) from order_watch group by id_customer\n" +
+            "having sum(total_price) >= all (select sum(total_price) from order_watch group by id_customer)", nativeQuery = true)
+    List<Integer> selectIdCustomer();
 }

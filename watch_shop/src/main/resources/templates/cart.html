@@ -65,11 +65,13 @@
                                     th:text="${listCart.price}"></h5>
                             </div>
                             <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-<!--                                <a class="text-danger" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
-<!--                                    <i class="fa fa-trash fa-lg"></i>-->
-<!--                                </a>-->
-                                <a th:href="@{/carts/delete/(name=${nameAcc},idWatch=${listCart.cartID.getIdWatch()},idCus=${listCart.cartID.getIdCustomer()})}"
-                                   class="text-danger"><i class="fa fa-trash fa-lg"></i></a>
+                                <button th:attr="onclick=|deleteCart('${nameAcc}','${listCart.cartID.getIdWatch()}','${listCart.cartID.getIdCustomer()}','${listCart.watch.name}')|"
+                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="fa fa-trash fa-lg"></i>
+                                </button>
+
+<!--                                <a th:href="@{/carts/delete/(name=${nameAcc},idWatch=${listCart.cartID.getIdWatch()},idCus=${listCart.cartID.getIdCustomer()})}"-->
+<!--                                   class="text-danger"><i class="fa fa-trash fa-lg"></i></a>-->
                             </div>
                         </div>
                     </div>
@@ -81,7 +83,6 @@
                            class="btn btn-warning btn-block btn-lg">Proceed to Pay</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -98,15 +99,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Xoá</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <p>Xác nhận xoá <span id="nameWatch"></span></p>
             </div>
             <div class="modal-footer">
+                <form action="carts/delete">
+                    <input type="hidden" name="idCus" id="idCus">
+                    <input type="hidden" name="idWatch" id="idWatch">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Xoá</button>
+                </form>
             </div>
         </div>
     </div>
@@ -198,6 +203,14 @@
     </div>
 </footer>
 <script>
+    function deleteCart(nameAcc,idWatch,idCus,nameWatch){
+        document.getElementById("nameWatch").innerHTML=nameWatch;
+        document.getElementById("idCus").value=idCus;
+        document.getElementById("idWatch").value=idWatch;
+    }
+</script>
+<script>
+
 
     function upload(idWatch, price, idCus) {
         let qtt = +document.getElementById(idWatch + 'b' + idCus).value + 1;
