@@ -1,7 +1,9 @@
 package com.example.watch_shop.controller;
 
 import com.example.watch_shop.dto.WatchDTO;
+import com.example.watch_shop.model.OrderDetail;
 import com.example.watch_shop.model.Watch;
+import com.example.watch_shop.repository.PostCommentSummary;
 import com.example.watch_shop.service.IManufactureService;
 import com.example.watch_shop.service.ITypeWatchService;
 import com.example.watch_shop.service.IWatchService;
@@ -56,10 +58,12 @@ public class AdminWatch {
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),sort);
         Page<Watch> watchPage=iWatchService.findAllWatch(name, (PageRequest) sortedPage);
         model.addAttribute("watchList",watchPage);
+        model.addAttribute("list" , watchPage.getTotalElements());
         List<Integer> integerList =new ArrayList<>();
         for (int i = 1; i <watchPage.getTotalPages() ; i++) {
             integerList.add(i);
         }
+        model.addAttribute("name",name);
         model.addAttribute("integerList",integerList);
         return "/admin/product/list";
     }
@@ -118,5 +122,11 @@ public class AdminWatch {
     public String performDelete(@RequestParam(required = false) Integer deleteId) {
         iWatchService.delete(deleteId);
         return "redirect:/adminWatch";
+    }
+    @GetMapping("/quantity")
+    public String quantitySell(Model model){
+       List<PostCommentSummary> orderDetailList = iWatchService.getQuantitySell();
+       model.addAttribute("orderDetailList" , orderDetailList);
+       return "/admin/product/quantity-sell";
     }
 }

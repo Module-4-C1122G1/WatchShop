@@ -35,6 +35,7 @@ public class OrderWatchController {
         }
         model.addAttribute("customer",list);
         model.addAttribute("price",iCartService.selectTotalPriceMax());
+        model.addAttribute("totalPrice",iOrderService.totalPrice());
         return "admin/cart/list";
     }
 
@@ -43,6 +44,7 @@ public class OrderWatchController {
         iOrderService.delete(id);
         return "redirect:/order";
     }
+
 
 
 }

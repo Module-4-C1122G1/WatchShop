@@ -28,6 +28,10 @@ public class Watch {
     private String detail;
     @Column(name = "quantity")
     private Integer quantity ;
+
+    @Column(name = "is_delete" , nullable = false)
+    private boolean isDelete;
+
     @ManyToOne
     @JoinColumn(name = "id_type_watch")
     private TypeWatch typeWatch;
@@ -151,5 +155,38 @@ public class Watch {
 
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public Watch(Integer idWatch, String name, Integer price, String image, String strapMaterial, String diameter, String color, String origin, String detail, Integer quantity, boolean isDelete, TypeWatch typeWatch, Manufacturer manufacturer, Set<Branch> branchSet) {
+        this.idWatch = idWatch;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.strapMaterial = strapMaterial;
+        this.diameter = diameter;
+        this.color = color;
+        this.origin = origin;
+        this.detail = detail;
+        this.quantity = quantity;
+        this.isDelete = isDelete;
+        this.typeWatch = typeWatch;
+        this.manufacturer = manufacturer;
+        this.branchSet = branchSet;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
+    public Set<Branch> getBranchSet() {
+        return branchSet;
+    }
+
+    public void setBranchSet(Set<Branch> branchSet) {
+        this.branchSet = branchSet;
     }
 }
