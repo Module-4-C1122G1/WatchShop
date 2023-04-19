@@ -38,7 +38,7 @@ public class EmployeeController {
 
     @GetMapping("")
     public String list(Model model, @PageableDefault(size = 5)Pageable pageable,
-                       @RequestParam(defaultValue = "") String name) {
+                       @RequestParam(defaultValue = "",required = false) String name) {
         Sort sort = Sort.by("name").descending();
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),sort);
         Page<Employee> employeePage=employeeService.findByAll(name, (PageRequest) sortedPage);
