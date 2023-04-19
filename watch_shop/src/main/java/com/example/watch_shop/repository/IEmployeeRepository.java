@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface IEmployeeRepository extends JpaRepository<Employee , Integer> {
     List<Employee> findByBranchIdBranch(int idBranch);
-    Page<Employee> findByNameContaining(String name, Pageable pageRequest);
 
+    Page<Employee> findByNameContaining(String name, Pageable pageRequest);
     @Transactional
-//    @Query(value = "delete from employee where branch.id_branch = ?" , nativeQuery = true)
     void deleteEmployeeByBranchIdBranch(int deleteId);
 }
+
