@@ -18,7 +18,7 @@ import java.util.List;
 public interface IWatchRepository extends PagingAndSortingRepository<Watch,Integer> {
 
     List<Watch>findAll();
-    Page<Watch>findByNameContaining(String name, Pageable pageable);
+    Page<Watch>findByNameContainingAndIsDelete(String name, Pageable pageable,boolean isDelete);
     Watch findByIdWatch(int idWatch);
     Page<Watch> findWatchByTypeWatchId(Integer id,PageRequest pageRequest);
 

@@ -39,6 +39,9 @@ public class WatchDTO {
     @Min(value = 0,message = "Số lượng ít nhất là không ")
     private Integer quantity;
 
+    @Column(name = "is_delete" , nullable = false)
+    private boolean isDelete;
+
     @ManyToOne
     @JoinColumn(name = "id_type_watch")
     private TypeWatch typeWatch;
@@ -48,6 +51,22 @@ public class WatchDTO {
     private Manufacturer manufacturer;
 
     public WatchDTO() {
+    }
+
+    public WatchDTO(Integer idWatch, String name, Integer price, String image, String strapMaterial, String diameter, String color, String origin, String detail, Integer quantity, boolean isDelete, TypeWatch typeWatch, Manufacturer manufacturer) {
+        this.idWatch = idWatch;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.strapMaterial = strapMaterial;
+        this.diameter = diameter;
+        this.color = color;
+        this.origin = origin;
+        this.detail = detail;
+        this.quantity = quantity;
+        this.isDelete = isDelete;
+        this.typeWatch = typeWatch;
+        this.manufacturer = manufacturer;
     }
 
     public WatchDTO(Integer idWatch, String name, Integer price, String image, String strapMaterial, String diameter, String color, String origin, String detail, Integer quantity, TypeWatch typeWatch, Manufacturer manufacturer) {
@@ -172,5 +191,13 @@ public class WatchDTO {
     @Override
     public int hashCode() {
         return Objects.hash(idWatch, name, price, image, strapMaterial, diameter, color, origin, detail, quantity, typeWatch, manufacturer);
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

@@ -58,10 +58,12 @@ public class AdminWatch {
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),sort);
         Page<Watch> watchPage=iWatchService.findAllWatch(name, (PageRequest) sortedPage);
         model.addAttribute("watchList",watchPage);
+        model.addAttribute("list" , watchPage.getTotalElements());
         List<Integer> integerList =new ArrayList<>();
         for (int i = 1; i <watchPage.getTotalPages() ; i++) {
             integerList.add(i);
         }
+        model.addAttribute("name",name);
         model.addAttribute("integerList",integerList);
         return "/admin/product/list";
     }
