@@ -16,6 +16,8 @@ public interface ICartService {
     void addOrder(Integer idCus);
     void updateCheck(Integer idCus);
     void save(Cart cart);
+    List<Integer> selectIdCustomer();
+    Long selectTotalPriceMax();
 
     void addOneOrder(String nameAcc, Integer idWatch, Integer qtt, Integer price);
 }
