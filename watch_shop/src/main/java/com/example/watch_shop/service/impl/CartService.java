@@ -44,10 +44,25 @@ public class CartService implements ICartService {
 
     }
 
+    public void addCart(String nameAcc, Integer idWatch, Integer price, Integer qtt) {
+        Customer customer = iCustomerService.findByNameAccount(nameAcc);
+        Watch watch = iWatchService.findByIdWatch(idWatch);
+        int totalPrice;
+        totalPrice = qtt * price;
+        Cart cart;
+        if (watch.getQuantity() < qtt) {
+            cart = new Cart(new CartID(customer.getIdCustomer(), idWatch), totalPrice, watch.getQuantity(), 0,0, customer, watch);
+        } else {
+            cart = new Cart(new CartID(customer.getIdCustomer(), idWatch), totalPrice, qtt, 0,0, customer, watch);
+        }
+        save(cart);
+    }
+
     public void updateCheck(Integer idCus) {
         List<Cart> list = findByCusId(idCus);
         for (Cart cart : list) {
             cart.setCheck(1);
+            iCartRepository.save(cart);
         }
     }
 
@@ -66,6 +81,26 @@ public class CartService implements ICartService {
         }
     }
 
+    @Override
+    public List<Integer> selectIdCustomer() {
+        return iCartRepository.selectIdCustomer();
+    }
+
+    @Override
+    public Long selectTotalPriceMax() {
+        return iCartRepository.selectTotalPriceMax();
+    }
+
+    @Override
+    public void addOneOrder(String nameAcc, Integer idWatch, Integer qtt, Integer price) {
+        Customer customer = iCustomerService.findByNameAccount(nameAcc);
+        Watch watch = iWatchService.findById(idWatch);
+        OrderWatch orderWatch = new OrderWatch(LocalDate.now(), price, customer);
+        iOrderService.save(orderWatch);
+        OrderDetail orderDetail = new OrderDetail(new OrderDetailID(customer.getIdCustomer(), idWatch), qtt, price, watch.getImage(), orderWatch, watch);
+        iOrderDetailService.save(orderDetail);
+    }
+
     public void addOrder(Integer idCus) {
         Customer customer = iCustomerService.findByIdCustomer(idCus);
         List<Cart> list = findByCusId(idCus);
@@ -73,12 +108,14 @@ public class CartService implements ICartService {
         OrderWatch orderWatch = new OrderWatch(LocalDate.now(), price, customer);
         iOrderService.save(orderWatch);
         for (Cart cart : list) {
-            iOrderDetailService.save(new OrderDetail(new OrderDetailID(idCus, cart.getCartID().getIdWatch())
-                    , cart.getQuantity(), cart.getPrice(), cart.getWatch().getImage(), orderWatch, cart.getWatch()));
-            iWatchService.updateQuantity((cart.getWatch().getQuantity()-cart.getQuantity()), cart.getWatch().getIdWatch());
-            System.out.println(cart.getWatch().getQuantity()-cart.getQuantity());
+            OrderDetail orderDetail = new OrderDetail(new OrderDetailID(idCus, cart.getCartID().getIdWatch())
+                    , cart.getQuantity(), cart.getPrice(), cart.getWatch().getImage(), orderWatch, cart.getWatch());
+
+            iOrderDetailService.save(orderDetail);
+            iWatchService.updateQuantity((cart.getWatch().getQuantity() - cart.getQuantity()), cart.getWatch().getIdWatch());
         }
     }
+
 
     @Override
     public Integer totalPrice(Integer idCus) {
@@ -88,7 +125,7 @@ public class CartService implements ICartService {
     @Override
     public void deleteById(CartID id) {
         Cart cart = findById(id);
-        cart.setCheck(1);
+        cart.setCheck_delete(1);
         iCartRepository.save(cart);
     }
 
@@ -102,7 +139,10 @@ public class CartService implements ICartService {
         List<Cart> list = iCartRepository.findByCustomer(id);
         for (Cart cart : list) {
             if (cart.getQuantity() > iWatchService.findById(cart.getWatch().getIdWatch()).getQuantity()) {
-                cart.setQuantity(iWatchService.findById(cart.getWatch().getIdWatch()).getQuantity());
+                Watch watch = iWatchService.findById(cart.getWatch().getIdWatch());
+                cart.setQuantity(watch.getQuantity());
+                cart.setPrice(watch.getPrice() * watch.getQuantity());
+                iCartRepository.save(cart);
             }
         }
         return list;
