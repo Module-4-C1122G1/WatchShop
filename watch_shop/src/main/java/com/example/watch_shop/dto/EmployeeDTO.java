@@ -3,6 +3,7 @@ package com.example.watch_shop.dto;
 import com.example.watch_shop.model.Branch;
 import com.example.watch_shop.model.Diploma;
 import com.example.watch_shop.model.Position;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -16,7 +17,7 @@ public class EmployeeDTO {
 
     private Integer id;
     @NotBlank(message = "tên không được để trống")
-    @Pattern(regexp = "^[^@;,.=+\\\\-]+$",message = "Tên Không chứa kí tự đặc biệt")
+    @Pattern(regexp = "^[^@;,.=+\\\\-]+$", message = "Tên Không chứa kí tự đặc biệt")
     private String name;
 
     @NotBlank(message = "ngày sinh không được để trống")
@@ -38,6 +39,7 @@ public class EmployeeDTO {
     @NotBlank(message = "Email không được để trống")
     @Email(message = "Nhập đúng định dạng example@gmail")
     private String email;
+    
     private String img;
     private Diploma diploma;
 

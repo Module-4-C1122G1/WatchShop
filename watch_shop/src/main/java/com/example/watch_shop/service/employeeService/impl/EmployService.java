@@ -1,8 +1,10 @@
 package com.example.watch_shop.service.employeeService.impl;
 
 import com.example.watch_shop.dto.EmployeeDTO;
+import com.example.watch_shop.model.Customer;
 import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.repository.IEmployeeRepository;
+import com.example.watch_shop.repository.IEmployeeeRepository;
 import com.example.watch_shop.service.employeeService.IEmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,12 @@ import java.util.List;
 public class EmployService implements IEmployeeService {
     @Autowired
     private IEmployeeRepository iEmployeeRepository;
+    @Autowired
+    private IEmployeeeRepository iEmployeeeRepository;
 
     @Override
     public Page<Employee> findByAll(String name,PageRequest pageRequest) {
-        return iEmployeeRepository.findByNameContaining(name,pageRequest);
+        return iEmployeeRepository.findEmployeeByNameContainingAndIsDelete(name,pageRequest , false);
     }
 
     @Override
@@ -36,7 +40,9 @@ public class EmployService implements IEmployeeService {
 
     @Override
     public void delete(Integer id) {
-        iEmployeeRepository.deleteById(id);
+        Employee employee = iEmployeeRepository.findById(id).get();
+        employee.setDelete(true);
+        iEmployeeRepository.save(employee);
     }
 
     @Override
@@ -47,5 +53,10 @@ public class EmployService implements IEmployeeService {
     @Override
     public List<Employee> list() {
         return (List<Employee>) iEmployeeRepository.findAll();
+    }
+
+    @Override
+    public Page<Employee> findByBranch(Integer idBranch, PageRequest pageRequest) {
+        return iEmployeeeRepository.findByBranch(idBranch,pageRequest);
     }
 }
