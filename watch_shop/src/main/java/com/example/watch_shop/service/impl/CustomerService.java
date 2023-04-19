@@ -6,6 +6,7 @@ import com.example.watch_shop.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +16,14 @@ public class CustomerService implements ICustomerService {
     @Autowired
     private ICustomerRepository customerRepository;
 
+//    @Override
+//    public Page<Customer> findAllCustomer(PageRequest pageRequest) {
+//        return customerRepository.findAll(pageRequest);
+//    }
+
     @Override
-    public Page<Customer> findAllCustomer(PageRequest pageRequest) {
-        return customerRepository.findAll(pageRequest);
+    public Page<Customer> findAllCustomer(String name, Pageable pageable) {
+        return customerRepository.findByNameContaining(name,pageable);
     }
 
     @Override
@@ -39,6 +45,7 @@ public class CustomerService implements ICustomerService {
     @Override
     public Page<Customer> findByNameCustomer(String nameCustomer, PageRequest pageRequest) {
         return customerRepository.findByNameCustomer(nameCustomer, pageRequest);
+
     }
 
     @Override
@@ -59,5 +66,10 @@ public class CustomerService implements ICustomerService {
     @Override
     public boolean existsByAppUser_UserName(String userName) {
         return customerRepository.existsByAppUser_UserName(userName);
+    }
+
+    @Override
+    public Customer findByNameAccount(String nameAccount) {
+        return customerRepository.findCustomerByAppUser_UserName(nameAccount);
     }
 }

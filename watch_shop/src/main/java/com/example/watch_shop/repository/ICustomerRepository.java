@@ -4,6 +4,7 @@ import com.example.watch_shop.model.AppUser;
 import com.example.watch_shop.model.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +20,6 @@ public interface ICustomerRepository extends PagingAndSortingRepository<Customer
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
     boolean existsByAppUser_UserName(String userName);
+    Customer findCustomerByAppUser_UserName(String account);
+    Page<Customer>findByNameContaining(String name, Pageable pageable);
 }

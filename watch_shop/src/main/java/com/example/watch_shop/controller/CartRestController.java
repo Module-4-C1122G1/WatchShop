@@ -1,5 +1,6 @@
 package com.example.watch_shop.controller;
 
+import com.example.watch_shop.dto.WatchUpdateDTO;
 import com.example.watch_shop.model.Cart;
 import com.example.watch_shop.model.CartID;
 import com.example.watch_shop.model.Watch;
@@ -22,12 +23,8 @@ public class CartRestController {
     IWatchService iWatchService;
 
     @PostMapping("")
-    public void update(@RequestParam("qtt") Integer qtt) {
-        CartID cartID = new CartID(1, 1);
-        iCartService.update(cartID, qtt);
-    }
-    @GetMapping(value = "list")
-    public ResponseEntity<List<Cart>> showListStudent(){
-        return new ResponseEntity<>(iCartService.findAll(), HttpStatus.OK);
+    public void update(@RequestBody WatchUpdateDTO watch) {
+        CartID cartID = new CartID(watch.getIdCus(), watch.getIdWatch());
+        iCartService.update(cartID, watch.getQtt());
     }
 }
