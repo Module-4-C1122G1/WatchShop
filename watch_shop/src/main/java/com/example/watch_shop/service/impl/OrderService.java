@@ -20,4 +20,7 @@ public class OrderService implements IOrderService {
     public Page<OrderWatch> findAll(PageRequest pageRequest) {
         return iOrderRepository.findAll(pageRequest);
     }
+    public void delete(Integer id){
+        iOrderRepository.deleteById(id);
+    }
 }

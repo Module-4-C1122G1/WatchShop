@@ -82,6 +82,16 @@ public class CartService implements ICartService {
     }
 
     @Override
+    public List<Integer> selectIdCustomer() {
+        return iCartRepository.selectIdCustomer();
+    }
+
+    @Override
+    public Long selectTotalPriceMax() {
+        return iCartRepository.selectTotalPriceMax();
+    }
+
+    @Override
     public void addOneOrder(String nameAcc, Integer idWatch, Integer qtt, Integer price) {
         Customer customer = iCustomerService.findByNameAccount(nameAcc);
         Watch watch = iWatchService.findById(idWatch);
