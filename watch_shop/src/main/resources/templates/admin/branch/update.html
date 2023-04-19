@@ -315,6 +315,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="row my-2 mx-2" style="width: 95%;background: #d4d4e3;height: auto;">
+        <p th:text = "${msg}" id="msg" style="display: none;width: 20%"></p>
         <div class="col-md-12">
             <a href="/branch" style="display: block;margin-left: 1em;margin-top: 1em">
                 <button type="button" class="btn btn-secondary">
@@ -455,6 +456,20 @@
         </div>
     </div>
 </div>
+<script style="width: 50%">
+    let msg = document.getElementById("msg").innerText;
+    if(msg) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: msg,
+            showConfirmButton: false,
+            timer: 1500,
+            style: 'w-10,h-10'
+        })
+    }
+
+</script>
 <!--   Core JS Files   -->
 <script th:src="@{/admin/assets/js/core/popper.min.js}"></script>
 <script th:src="@{/admin/assets/js/core/bootstrap.min.js}"></script>

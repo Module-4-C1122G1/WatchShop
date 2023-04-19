@@ -39,6 +39,7 @@ public class ManagerWatchBranchController {
         for (int i = 1; i <branchPage.getTotalPages() ; i++) {
             integerList.add(i);
         }
+        model.addAttribute("list" , branchPage.getTotalElements());
         model.addAttribute("integerList",integerList);
         return "/admin/branch/list";
     }
@@ -63,8 +64,10 @@ public class ManagerWatchBranchController {
     }
 
     @GetMapping("/delete")
-    public String deleteBranch(@RequestParam int deleteId) {
+    public String deleteBranch(@RequestParam int deleteId , Model model) {
         branchService.delete(deleteId);
+        Branch branch = branchService.findById(deleteId);
+        model.addAttribute("msg" , "Xoá " + branch.getName() + " thành công");
         return "redirect:/branch";
     }
     @GetMapping("/create")
@@ -80,6 +83,7 @@ public class ManagerWatchBranchController {
             model.addAttribute("domains" , domainService.findAll());
             return "/admin/branch/create";
         }
+        model.addAttribute("msg" , "Thêm mới thành công");
         branchService.create(branchDTO);
         return "redirect:/branch";
     }
@@ -97,6 +101,7 @@ public class ManagerWatchBranchController {
             model.addAttribute("domains" , domainService.findAll());
             return "/admin/branch/update";
         }
+        model.addAttribute("msg" , "Chỉnh sửa thành công");
         branchService.update(branchDTO, branchDTO.getIdBranch());
         return "redirect:/branch";
     }

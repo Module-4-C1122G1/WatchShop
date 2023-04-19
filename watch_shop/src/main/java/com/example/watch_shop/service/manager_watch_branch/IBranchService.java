@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public interface IBranchService {
+    List<Branch> findAll();
     Page<Branch> findAll(String name , Pageable pageable);
     List<Employee> findAllEmployee(int id);
     List<Watch> findAllWatch(int idBranch);
