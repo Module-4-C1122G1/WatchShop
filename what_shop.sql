@@ -336,3 +336,10 @@ values
 ('Nguyễn Thị Bích Ngọc','1996-10-11','Nữ','2000','121 Tố Hữu, Đà Nẵng','0903111563','bichngoc@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1),
 ('Tạ Đình Vũ Đàm','1997-07-11','Nam','1000','111 Phan Tứ, Đà Nẵng','0905323563','damvuta@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1),
 ('Nguyễn Thị Hương Trà','1999-02-11','Nữ','500','453 Bạch Đằng, Đà Nẵng','0909124863','huongtra@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1);
+<<<<<<< HEAD:what_shop.sql
+=======
+
+
+
+
+>>>>>>> 13de2adddf19c6c7bd73d1dbf803d64f510c29e3:shop_watch.sql

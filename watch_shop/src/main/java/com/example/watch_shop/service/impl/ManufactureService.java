@@ -14,7 +14,7 @@ public class ManufactureService implements IManufactureService {
     IManufactureRepository iManufactureRepository;
 
     @Override
-    public List<Manufacturer> finAll() {
+    public List<Manufacturer> findAll() {
         return (List<Manufacturer>) iManufactureRepository.findAll();
     }
 }

@@ -15,6 +15,12 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link th:href="@{/admin/assets/css/nucleo-svg.css}" rel="stylesheet"/>
     <link id="pagestyle" th:href="@{/admin/assets/css/soft-ui-dashboard.css}" rel="stylesheet"/>
+    <style>
+        .cc{
+            color: pink;
+            background: white;
+        }
+    </style>
 </head>
 <body class="g-sidenav-show  bg-gray-100">
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
@@ -385,7 +391,7 @@
                                 </thead>
                                 <tbody>
                                 <tr style="text-align: center" th:each="branch, temp: ${branchPage}">
-                                    <td th:text="${branch.idBranch}"></td>
+                                    <td th:text="${temp.count}"></td>
                                     <td th:text="${branch.name}"></td>
                                     <td th:text="${branch.address}"></td>
                                     <td th:text="${branch.area}"></td>
@@ -447,24 +453,29 @@
                 </div>
             </div>
         </div>
+        <div class="text-center container">
+            <a class="page-item btn btn-dark cc page-item" th:if="${branchPage.hasPrevious()}"
+               th:href="@{/branch(page = ${branchPage.number - 1})}">
+                <i class="ti-angle-left">Trước</i>
+            </a>
 
+            <a class="page-item number cc btn btn-dark page-item"
+               th:classappend="${pageNumber == branchPage.number + 1} ? 'active' : ''"
+               th:each="pageNumber : ${integerList}"
+               th:href="@{/branch(page = ${pageNumber - 1})}"
+               th:text="${pageNumber}">
+            </a>
 
-        <div class="pagination text-center">
-<span class="page-item">
-    <a class="page-link" th:if="${branchPage.hasPrevious()}" th:href="@{/branch(page=${branchPage.number - 1})}">Previous</a>
-</span>
-            <span class="page-item" th:each="pageNo: ${#numbers.sequence(0, branchPage.getTotalPages() -1)}">
-<a class="page-link" th:href="@{/branch(page=${pageNo})}" th:text="${pageNo}"></a>
-</span>
-            <span class="page-item">
-    <a class="page-link" th:if="${branchPage.hasNext()}"
-       th:href="@{/branch(page=${branchPage.number + 1})}">Next</a>
-</span>
-            <form action="/customer" id="pageNumber">
-                <input style="width: 50px" class="form-control" type="number" name="page"
-                       onchange="document.getElementById('pageNumber').submit();">
-            </form>
+            <a class="page-item btn cc btn-dark page-item" th:if="${branchPage.hasNext()}"
+               th:href="@{/branch(page = ${branchPage.number + 1})}">
+                <i class="ti-angle-right">Sau</i>
+            </a>
         </div>
+<!--            <form action="/customer" id="pageNumber">-->
+<!--                <input style="width: 50px" class="form-control" type="number" name="page"-->
+<!--                       onchange="document.getElementById('pageNumber').submit();">-->
+<!--            </form>-->
+<!--        </div>-->
 
 
         <script>

@@ -7,8 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface IManagerWatchBranch extends JpaRepository<ManageWatchBranch , Integer> {
-//    @Transactional
-//    @Query(value = "delete from ManageWatchBranch where branch = id")
-//    void removeIdBranch(@Param("idBranch") int idBranch);
-    void deleteByBranch_IdBranch(int idBranch);
+    @Transactional
+    @Query(value = "delete from manage_product_branch where id_branch = ?" , nativeQuery = true)
+    void deleteManageWatchBranches(@Param("idBranch") int idBranch);
 }

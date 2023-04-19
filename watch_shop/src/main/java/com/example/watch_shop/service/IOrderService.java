@@ -7,4 +7,5 @@ import org.springframework.data.domain.PageRequest;
 public interface IOrderService {
     void save(OrderWatch orderWatch);
     Page<OrderWatch> findAll(PageRequest pageRequest);
+    void delete(Integer id);
 }

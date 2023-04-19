@@ -1,48 +1,56 @@
-package com.example.watch_shop.model;
+package com.example.watch_shop.dto;
 
-import javax.persistence.*;
-import java.util.Set;
+import com.example.watch_shop.model.Manufacturer;
+import com.example.watch_shop.model.TypeWatch;
 
-@Entity
-@Table(name = "watch")
-public class Watch {
-    @Id
-    @Column(name = "id_watch")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
+public class WatchDTO {
     private Integer idWatch;
-    @Column(name = "name_watch")
+
+    @NotEmpty(message = "Tên không được để trống ")
     private String name;
-    @Column(name = "price")
+
+    @NotNull(message = "Giá không được để trống ")
+    @Min(value = 0,message = "Giá phải lớn hơn 0")
     private Integer price;
-    @Column(name = "image")
+
     private String image;
-    @Column(name = "strap_material")
+
     private String strapMaterial;
-    @Column(name = "diameter")
+
     private String diameter;
-    @Column(name = "face_color")
+
     private String color;
-    @Column(name = "origin")
+
     private String origin;
-    @Column(name = "detail")
+
     private String detail;
-    @Column(name = "quantity")
-    private Integer quantity ;
+
+    @NotNull(message = "Số lượng không được để trống")
+    @Min(value = 0,message = "Số lượng ít nhất là không ")
+    private Integer quantity;
+
     @ManyToOne
     @JoinColumn(name = "id_type_watch")
     private TypeWatch typeWatch;
+
     @ManyToOne
     @JoinColumn(name = "id_manufacturer")
     private Manufacturer manufacturer;
 
-    @ManyToMany
-    @JoinTable(name = "manage_product_branch" , joinColumns = @JoinColumn(name = "id_watch") , inverseJoinColumns = @JoinColumn(name = "id_branch"))
-    private Set<Branch> branchSet;
-
-    public Watch() {
+    public WatchDTO() {
     }
 
-    public Watch(Integer idWatch, String name, Integer price, String image, String strapMaterial, String diameter, String color, String origin, String detail, Integer quantity, TypeWatch typeWatch, Manufacturer manufacturer) {
+    public WatchDTO(Integer idWatch, String name, Integer price, String image, String strapMaterial, String diameter, String color, String origin, String detail, Integer quantity, TypeWatch typeWatch, Manufacturer manufacturer) {
         this.idWatch = idWatch;
         this.name = name;
         this.price = price;
@@ -151,5 +159,18 @@ public class Watch {
 
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WatchDTO watchDTO = (WatchDTO) o;
+        return Objects.equals(idWatch, watchDTO.idWatch) && Objects.equals(name, watchDTO.name) && Objects.equals(price, watchDTO.price) && Objects.equals(image, watchDTO.image) && Objects.equals(strapMaterial, watchDTO.strapMaterial) && Objects.equals(diameter, watchDTO.diameter) && Objects.equals(color, watchDTO.color) && Objects.equals(origin, watchDTO.origin) && Objects.equals(detail, watchDTO.detail) && Objects.equals(quantity, watchDTO.quantity) && Objects.equals(typeWatch, watchDTO.typeWatch) && Objects.equals(manufacturer, watchDTO.manufacturer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idWatch, name, price, image, strapMaterial, diameter, color, origin, detail, quantity, typeWatch, manufacturer);
     }
 }
