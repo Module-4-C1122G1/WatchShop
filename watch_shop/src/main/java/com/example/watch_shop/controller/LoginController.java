@@ -40,7 +40,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("customerDto") CustomerDTO customerCreateDTO, BindingResult bindingResult, Model model) {
+    public String register(@Valid @ModelAttribute("customerDto") CustomerDTO customerCreateDTO, BindingResult bindingResult, Model model, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("customerType", customerTypeService.findAllCustomerType());
             return "register";
@@ -63,8 +63,8 @@ public class LoginController {
             AppUser appUser = customer.getAppUser();
             AppRole appRole = new AppRole(2, "ROLE_USER");
             userRoleService.saveUserRole(new UserRole(appUser, appRole));
-
-            return "redirect:/customer";
+            redirect.addFlashAttribute("msg", "Đăng ký thành công");
+            return "redirect:/login";
         }
     }
 

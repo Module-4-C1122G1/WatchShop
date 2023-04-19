@@ -19,4 +19,10 @@ public interface IEmployeeRepository extends JpaRepository<Employee ,Integer> {
 
 
     Page<Employee> findByBranch(Integer idBranch, PageRequest pageRequest);
+
+    
+    @Transactional
+    void deleteEmployeeByBranchIdBranch(int deleteId);
+
 }
+

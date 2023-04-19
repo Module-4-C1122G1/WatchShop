@@ -22,7 +22,6 @@ public class OrderDetail {
     @JoinColumn(name = "id_watch")
     Watch watch;
 
-
     public OrderDetail() {
     }
 
