@@ -13,6 +13,8 @@ public class Cart {
     private Integer quantity;
     @Column(name = "check_order")
     private Integer check;
+    @Column(name = "check_delete")
+    private Integer check_delete;
     @ManyToOne
     @MapsId("idCustomer")
     @JoinColumn(name = "id_customer")
@@ -25,17 +27,26 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(CartID cartID, Integer price, Integer quantity, Integer check, Customer customer, Watch watch) {
+    public Cart(CartID cartID, Integer price, Integer quantity, Integer check,Integer check_delete, Customer customer, Watch watch) {
         this.cartID = cartID;
         this.price = price;
         this.quantity = quantity;
         this.check = check;
+        this.check_delete=check_delete;
         this.customer = customer;
         this.watch = watch;
     }
 
     public CartID getCartID() {
         return cartID;
+    }
+
+    public Integer getCheck_delete() {
+        return check_delete;
+    }
+
+    public void setCheck_delete(Integer check_delete) {
+        this.check_delete = check_delete;
     }
 
     public void setCartID(CartID cartID) {

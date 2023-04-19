@@ -234,14 +234,14 @@
             padding: 0;
         }
         /*<b:tag name='style'>!* <![CDATA[ *!*/
-        .buttons_added {
-            opacity:1;
-            display:inline-block;
-            display:-ms-inline-flexbox;
-            display:inline-flex;
-            white-space:nowrap;
-            vertical-align:top;
-        }
+                           .buttons_added {
+                               opacity:1;
+                               display:inline-block;
+                               display:-ms-inline-flexbox;
+                               display:inline-flex;
+                               white-space:nowrap;
+                               vertical-align:top;
+                           }
         .is-form {
             overflow:hidden;
             position:relative;
@@ -280,7 +280,7 @@
             margin:0;
         }
         /*!* ]]> *!</b:tag>*/
-        /*    css mua ngay*/
+    /*    css mua ngay*/
         .button {  display: inline-block;  border-radius: 7px;  background-color: #2822a6;  border: none;  color: #FFFFFF;  text-align: center;  font-size: 15px;  padding: 10px;  width: 120px;height: 40px; transition: all 0.5s;  cursor: pointer;}
         .button span {  cursor: pointer;  display: inline-block;  position: relative;  transition: 0.5s;}
         .button span:after {  content: '\00bb';  position: absolute;  opacity: 0;  top: 0;  right: -10px;  transition: 0.5s;}
@@ -345,10 +345,7 @@
                             <div class="dropdown-divider"></div>
                             <a href="#">Logout</a>
                         </div>
-                        <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
-                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                        </a>
-                        <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">
+                        <a th:href="@{/carts}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
                         <a href="">
@@ -473,10 +470,12 @@
                     <br>
                     <div class="d-flex justify-content-between align-items-center"><h5 style="font-family: Bahnschrift" th:text="${watch.name}"></h5>    <span
                             class="heart"><i class='bx bx-heart'></i></span></div>
-                    <!--                    <h6><span th:text="${watch.price}"></span> VND</h6>-->
+<!--                    <h6><span th:text="${watch.price}"></span> VND</h6>-->
 
-                    <h6><span th:text="${#numbers.formatCurrency(watch.price)}"></span></h6>
+                    <h6><span th:text="${#numbers.formatCurrency(watch.price)}"></span>VND</h6>
 
+                    <hr style="color: #abb2b7">
+                        <div class="mt-2 pr-3 content"><p th:utext="${watch.detail}"></p></div>
                     <hr style="color: #abb2b7">
                     <div class="mt-2 pr-3 content"><p th:utext="${watch.detail}"></p></div>
 
@@ -486,6 +485,34 @@
                         <span>441 reviews</span></div>
 
                     <div class="buttons d-flex flex-row mt-5 gap-3">
+                        <button th:if="${watch.quantity >0 && #request.userPrincipal != null}" class="button" style="vertical-align:middle" type="submit"><span>Mua ngay </span></button>
+                       </button>
+
+                        <form action="/carts/add" method="get">
+                            <input type="hidden" name="nameAccount" th:value="${#request.userPrincipal.name}">
+                            <input type="hidden" name="idWatch" th:value="${watch.idWatch}">
+                            <input type="hidden" name="price" th:value="${watch.price}">
+                        <div th:if="${watch.quantity >0}" class="buttons_added">
+                            <input class="minus is-form" type="button" value="-">
+                            <input aria-label="quantity" class="input-qty" max="10" min="1" name="qtt" type="number" value="1">
+                            <input class="plus is-form" onclick="increaseValue()" type="button" value="+">
+                        </div>
+                            <p th:if="${watch.quantity==0}" style="color: red">Hết Hàng</p>
+                            <button th:if="${watch.quantity >0}" style="color: red; height: 35px; border: red">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                <!--                            <p href="#" style="font-size: 10px;text-align: center">Thêm vào giỏ</p>-->
+                            </button>
+<!--                            <a th:if="${#request.userPrincipal == null}" onclick="location.href='/login'" style="color: red; height: 35px; border: red">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">-->
+<!--                                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>-->
+<!--                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>-->
+<!--                                </svg>-->
+<!--                                &lt;!&ndash;                            <p href="#" style="font-size: 10px;text-align: center">Thêm vào giỏ</p>&ndash;&gt;-->
+<!--                            </a>-->
+                        </form>
                         <button th:if="${watch.quantity >0 && #request.userPrincipal != null}" class="button" style="vertical-align:middle" type="submit"><span>Mua ngay </span></button>
                         </button>
 
@@ -538,6 +565,13 @@
                             }
                             //]]></script>
                         </div>
+                        <button class="btn add-to-cart" style="width: 8%;height:10%;color: red;border: 2px red solid">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                            <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+<!--                            <p href="#" style="font-size: 10px;text-align: center">Thêm vào giỏ</p>-->
+                        </button>
                     </div>
                     <div class="search-option"><i class='bx bx-search-alt-2 first-search'></i>
                         <div class="inputs"><input type="text" name=""></div>
@@ -546,6 +580,7 @@
             </div>
         </div>
     </div>
+    </form>
 
 </div>
 <footer class="footer_section">
@@ -653,6 +688,7 @@
 <!-- Google Map -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
 <!-- End Google Map -->
+
 </body>
 
 </html>
