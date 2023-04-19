@@ -1,6 +1,7 @@
 package com.example.watch_shop.service.employeeService;
 
 import com.example.watch_shop.dto.EmployeeDTO;
+import com.example.watch_shop.model.Customer;
 import com.example.watch_shop.model.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,5 +20,5 @@ public interface IEmployeeService {
     void update(Employee employee);
     List<Employee> list();
 
-
+    Page<Employee> findByBranch(Integer idBranch, PageRequest pageRequest);
 }

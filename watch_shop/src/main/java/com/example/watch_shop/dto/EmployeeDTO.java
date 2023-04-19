@@ -34,12 +34,10 @@ public class EmployeeDTO {
 
     @NotBlank(message = "Số điện thoại không được để trống")
     @Pattern(regexp = "\\d{9,10}", message = "Số điện thoại phải từ 9 đến 10 số")
-    @UniqueElements
     private String phone;
 
     @NotBlank(message = "Email không được để trống")
     @Email(message = "Nhập đúng định dạng example@gmail")
-    @UniqueElements
     private String email;
     
     private String img;

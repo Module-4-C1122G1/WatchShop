@@ -37,7 +37,7 @@ public class CartController {
     public String delete(@RequestParam Integer idWatch, @RequestParam Integer idCus) {
         CartID id = new CartID(idCus, idWatch);
         iCartService.deleteById(id);
-        return "redirect:/carts";
+        return "redirect:/watch/index";
     }
 
     @GetMapping("buys")

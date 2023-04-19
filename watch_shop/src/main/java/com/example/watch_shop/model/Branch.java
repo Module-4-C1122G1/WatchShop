@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,14 +27,16 @@ public class Branch {
     @Column(name = "is_delete" , nullable = false)
     private boolean isDelete;
     @OneToMany(cascade = CascadeType.ALL)
-    Set<Employee> employees;
+    Set<Employee> employeeSet;
+    @ManyToMany(mappedBy = "branchSet")
+    private Set<Watch> watchSet;
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public Set<Employee> getEmployeeSet() {
+        return employeeSet;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setEmployeeSet(Set<Employee> employeeSet) {
+        this.employeeSet = employeeSet;
     }
 
     public Branch() {
@@ -78,11 +81,25 @@ public class Branch {
         this.address = address;
     }
 
+    public Set<Watch> getWatchSet() {
+        return watchSet;
+    }
+
+    public void setWatchSet(Set<Watch> watchSet) {
+        this.watchSet = watchSet;
+    }
+
     public double getArea() {
         return area;
     }
 
     public void setArea(double area) {
         this.area = area;
+    }
+    public void removeWatch(Set<Watch> watches) {
+        this.watchSet.removeAll(watches);
+    }
+    public void removeEmployee(Set<Employee> employees){
+        this.employeeSet.remove(employees);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.watch_shop.service.employeeService.impl;
 
 import com.example.watch_shop.dto.EmployeeDTO;
+import com.example.watch_shop.model.Customer;
 import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.repository.IEmployeeRepository;
 import com.example.watch_shop.service.employeeService.IEmployeeService;
@@ -49,5 +50,10 @@ public class EmployService implements IEmployeeService {
     @Override
     public List<Employee> list() {
         return (List<Employee>) iEmployeeRepository.findAll();
+    }
+
+    @Override
+    public Page<Employee> findByBranch(Integer idBranch, PageRequest pageRequest) {
+        return iEmployeeRepository.findByBranch(idBranch,pageRequest);
     }
 }

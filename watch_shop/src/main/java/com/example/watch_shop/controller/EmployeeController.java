@@ -43,13 +43,22 @@ public class EmployeeController {
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),sort);
         Page<Employee> employeePage=employeeService.findByAll(name, (PageRequest) sortedPage);
         model.addAttribute("employee",employeePage);
+        model.addAttribute("name",name);
         List<Integer> integerList =new ArrayList<>();
         for (int i = 1; i <employeePage.getTotalPages() ; i++) {
             integerList.add(i);
         }
         model.addAttribute("integerList",integerList);
-//        model.addAttribute("employee", employeeService.findByAll(name, PageRequest.of(page, 3, sort)));
+        model.addAttribute("branchList",iBranchEService.list());
         return "admin/employee/list";
+    }
+
+    @GetMapping("/branch/{id}")
+    public String seachByEmployee(@PathVariable Integer id,Model model,@RequestParam(defaultValue = "0") int page){
+        model.addAttribute("employee",employeeService.findByBranch(id,PageRequest.of(page,5)));
+        model.addAttribute("branchList",iBranchEService.list());
+//        model.addAttribute("totalElement",employeeService.findByBranch(id,PageRequest.of(page,3)).getTotalPages());
+        return "/admin/employee/list";
     }
 
     @GetMapping("/create")
@@ -70,17 +79,12 @@ public class EmployeeController {
             model.addAttribute("branch", iBranchEService.list());
             return "admin/employee/create";
         }else {
-            redirectAttributes.addFlashAttribute("msg","thêm mới thành công");
+            redirectAttributes.addFlashAttribute("msg","thành công");
             employeeService.save(employeeDTO);
             return "redirect:/employee";
         }
     }
 
-
-//    @GetMapping("create1")
-//    public String pr(){
-//        return "admin/employee/update2";
-//    }
 
     @GetMapping("/update/{id}")
     public String update(@PathVariable Integer id,Model model){
@@ -97,12 +101,5 @@ public class EmployeeController {
         employeeService.delete(deleteId);
         return "redirect:/employee";
     }
-//    @GetMapping("")
-//    public String list(Model model){
-//        model.addAttribute("position",iPositionService.list());
-//        model.addAttribute("diloma",iDilomaService.list());
-//        model.addAttribute("branch",iBranchEService.list());
-//        model.addAttribute("employee",employeeService.list());
-//        return "admin/employee/list";
-//    }
+
 }
