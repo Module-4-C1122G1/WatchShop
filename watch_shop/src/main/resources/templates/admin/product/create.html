@@ -327,7 +327,7 @@
       </a>
       <h2 class="title pt-3 pb-3" style="text-align: center">Thêm mới đồng hồ</h2>
       <form action="/adminWatch/create" method="post" th:object="${watch}" style="width: 50%;margin: 0 auto" novalidate="novalidate">
-        <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Tên đồng hồ:</small>
+        <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Tên đồng hồ: <span style="color: red">*</span></small>
         <div class="row rone">
           <div class="form-group col-md-12 py-3" style="position: relative;">
             <input type="text" class="form-control" th:field="*{name}" name="name" id="name"
@@ -335,7 +335,7 @@
             <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Sai tên</p>
           </div>
         </div>
-        <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Giá (VND): </small>
+        <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Giá (VND): <span style="color: red">*</span> </small>
         <div class="row rone">
           <div class="form-group col-md-12 py-3" style="position: relative;">
             <input type="number" class="form-control" th:field="*{price}" name="price" id="price"
@@ -396,7 +396,7 @@
                       style="font-size: 13px;font-weight: bold;padding-left: 40px;"></textarea>
           </div>
         </div>
-        <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Số lượng: </small>
+        <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Số lượng: <span style="color: red">*</span> </small>
         <div class="row rone">
           <div class="form-group col-md-12 py-3" style="position: relative;">
             <input type="number" class="form-control" th:field="*{quantity}" name="quantity" id="quantity"

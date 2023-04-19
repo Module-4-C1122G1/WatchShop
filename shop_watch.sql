@@ -21,11 +21,18 @@ create table manufacturer(
 id_manufacturer int primary key auto_increment,
 name_manufacturer varchar(45) not null
 );
+create table domain(
+id_domain int auto_increment primary key,
+name varchar(50)
+);
 create table branch(
 id_branch int primary key auto_increment,
 name_branch varchar(45) not null,
 address_branch varchar(255) not null,
-area_branch double not null
+area_branch double not null,
+is_delete bit,
+id_domain int,
+foreign key(id_domain) references domain(id_domain)
 );
 create table employee(
 id_employee int primary key auto_increment,
@@ -40,13 +47,14 @@ img text,
 id_diploma int,
 id_position int,
 id_branch int,
+is_delete bit,
 foreign key(id_position) references positions(id_position),
 foreign key(id_diploma) references diploma(id_diploma),
 foreign key(id_branch) references branch(id_branch)
 );
 create table watch(
 id_watch int primary key auto_increment,
-name_watch varchar(45) not null,
+name_watch varchar(255) not null,
 price int not null,
 id_type_watch int,
 id_manufacturer int,
@@ -129,6 +137,39 @@ foreign key(id_order) references order_watch(id_order),
 foreign key(id_watch) references watch(id_watch),
 primary key(id_order,id_watch)
 );
+
+
+insert into type_customer(name_type_cus)
+value('Đồng'),
+('Bạc'),
+('Vàng'),
+('Bạch kim'),
+('Kim cương');
+
+insert into app_role
+value(1, 'ROLE_ADMIN'),
+(2, 'ROLE_USER');
+
+
+insert into app_user(user_name, encryted_password, enabled)
+value('admin123456','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('tin.tran123','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('vanvu5678','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('nhannguyen267','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('dat.hoang273','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('AnhPhuc628','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('thao.hoang233','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('dang.hai145','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('ngovu123','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('huudat728','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('van.thanh289','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('Lien.si123','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('nhuHoang123','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('tranTung784','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('thanh.liem849','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('van.hoang567','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1),
+('phung.vo147','$2a$12$mHnfm/gnPDXKIpUCnCLNtuQ0cTYRQgahxL/Lr7r5PwrvFE2kzMowy', 1);
+
 insert into user_role(user_id, role_id)
 value(1,1),
 (2,2),
@@ -140,44 +181,35 @@ value(1,1),
 (8,2),
 (9,2),
 (10,2),
-(11,2);
-insert into type_customer(name_type_cus)
-value('Member'),
-('Silver'),
-('Gold'),
-('Paltinium'),
-('Diamond');
-insert into app_role
-value(1, 'ROLE_ADMIN'),
-(2, 'ROLE_USER');
-insert into app_user(user_name, encryted_password, enabled)
-value('admin123456','admin123456', 1),
-('tin.tran123','abcd34782', 1),
-('vanvu5678','abcd34782', 1),
-('nhannguyen267','abcd3478232', 1),
-('dat.hoang273','abcd3478242', 1),
-('AnhPhuc628','abcd34782342', 0),
-('thao.hoang233','abc243d34782', 1),
-('dang.hai145','abcd2434782', 1),
-('ngovu123','abc24d34782', 1),
-('huudat728','ab25cd34782', 1),
-('thanh.tran457','abgcd34782', 1);
+(11,2),
+(12,2),
+(13,2),
+(14,2),
+(15,2),
+(16,2),
+(17,2);
+
 insert into customer(name_customer, date_of_birth, address, email_customer, phone_number, id_type_cus, user_id)
 value('Đoàn Thành Tiến','1993-12-03','123 Phan Châu Trinh, Đà Nẳng','tienDoan123@gmail.com','0911899574',1,1),
-('Trần Thị Tín','2000-12-25','45 Đống Đa, Quảng Nam','tinTran345@gmail.com','0918869572',2,2),
+('Trần Thị Tín','2000-12-25','45 Đống Đa, Quảng Nam','tinTran345@gmail.com','0918869572',1,2),
 ('Ngô Văn Vũ','1991-04-24','60 Nguyễn Huệ, Quảng Nam','VuNgo1994@gmail.com','0816829570',1,3),
-('Nguyễn Phước Thành Nhân','1992-04-11','45 Trần Bá Song, Huế','NhanNguyen1994@gmail.com','0918897575',3,4),
-('Hoàng Tất Đạt','2005-06-15','78 Phan Tứ, Đà Nẳng','NguyenDat123@gmail.com','0911819572',4,5),
+('Nguyễn Phước Thành Nhân','1992-04-11','45 Trần Bá Song, Huế','NhanNguyen1994@gmail.com','0918897575',1,4),
+('Hoàng Tất Đạt','2005-06-15','78 Phan Tứ, Đà Nẳng','NguyenDat123@gmail.com','0911819572',1,5),
 ('Nguyễn Thị Ánh Phúc','2001-04-30','89 Chu Văn An, Huế','PhucPham456@gmail.com','0816599576', 5,6),
-('Hồ Thị Thu Thảo','1980-12-11','60 Nguyễn Huệ, Hà Nội','Thao241@gmail.com','0918869570',5,7),
+('Hồ Thị Thu Thảo','1980-12-11','60 Nguyễn Huệ, Hà Nội','Thao241@gmail.com','0918869570',2,7),
 ('Phan Ngọc Hải Đăng','1992-08-11','50 Châu Thị Vĩnh Tế, Đà Nẳng','DangGa34@gmail.com','0954839572',3,8),
 ('Ngô Định Vũ','2005-01-11','10 Trần Hưng Đạo, Huế','dinhvu24@gmail.com','0973859571',2,9),
-('Hoàng Hữu Đạt','2005-01-11','50 Nguyễn Chí Thanh, Huế, Quảng Nam','datNguyen4@gmail.com','0990829578',5,10),
-('Trần Văn Thanh','2000-09-15','234 Ngô Quyền, Hồ Chí Minh','thanh2000@gmail.com','0987894572',3,11);
-insert into branch (name_branch , address_branch , area_branch) values ('Chi nhánh Hà Nội' , '310 Xã Đàn, Phường Phương Liên, Quận Đống Đa, Hà Nội' , 50.0) ,
-('Chi nhánh Đà Nẵng' , '71 Nguyễn Lương Bằng, Hòa Khánh, Liên Chiểu, Đà Nẵng' , 50.0) ,
-('Chi nhánh Hồ Chí minh' , '64 Võ Thị Sáu, phường Tân Định, quận 1, TP. HCM' , 50.0) ,
-('Chi nhánh Hải Phòng' , '342 P.Tô Hiệu , Hà Nam , Hải Phòng' , 50.0);
+('Hoàng Hữu Đạt','2005-01-11','50 Nguyễn Chí Thanh, Huế, Quảng Nam','datNguyen4@gmail.com','0990829578',4,10),
+('Trần Văn Thanh','2001-08-15','234 Ngô Quyền, Hồ Chí Minh','thanh2000@gmail.com','0987898172',1,11),
+('Ngô Sỉ Liên','1995-09-15','234 Trần Hưng Đạo, Hồ Chí Minh','lien.si2001@gmail.com','0984894572',1,12),
+('Trần Như Hoàng','1990-10-15','123 Ngô Quyền, Hà Nội','hoang.nhu1993@gmail.com','0987898972',1,13),
+('Hoàng Thanh Tùng','2003-10-15','234 Đống Đa, Quảng Nam','thung.thanh3392@gmail.com','0987004572',1,14),
+('Thanh Liêm','2004-09-10','20 Phan Thúc Duyện, Đà Nẳng','lien.thanh123@gmail.com','0987890072',1,15),
+('Võ Văn Hoàng','1990-09-10','20 Châu Thị Vĩnh Tế, Đà Nẳng','Hoang.vo123@gmail.com','0987889272',1,16),
+('Võ Trọng Phụng','2001-02-15','234 Lê Lợi, Hồ Chí Minh','phung.vo378@gmail.com','0986194572',1,17);
+
+
+
 insert into type_watch(name_type_watch) values
 ('Đồng hồ cơ – Automatic'),
 ('Đồng hồ Quartz '),
@@ -201,7 +233,9 @@ insert into manufacturer(name_manufacturer) values
 ('SAMSUNG'),       
 ('XIAOMI'),        
 ('HUAWEI'),
-('CERTINA');      
+('CERTINA');  
+
+    
 insert into watch(name_watch,price,id_type_watch,id_manufacturer,image,strap_material,diameter,face_color,origin,detail,quantity) values
 ('ĐỒNG HỒ NAM LONGINES MASTER COLLECTION',103500000,1,1,'https://donghoduyanh.com/images/products/2021/07/01/large/l27935577_1625107594.jpg.webp','Thép không gỉ 316L/ Vàng 18K','40mm','Đen','Thụy Sỹ','Tính năng khác:Lịch ngày. Caliber L888, 25.200vph, trữ cót 64h. Mặt số đính 13 viên kim cương tổng 0.059 carat.<br>Độ chịu nước:30m<br>Bảo hành chính hãng:5 năm quốc tế',10),
 ('ĐỒNG HỒ NAM HAMILTON KHAKI FIELD TITANIUM',25300000,1,2,'https://donghoduyanh.com/images/products/2023/03/16/large/h70545560_1678959432-copy.png.webp','Vàng 18K','42mm','Xanh lá','Thụy Sỹ','Với kích thước nhỏ hơn, vỏ thiết kế gọn hơn cùng nhiều kiểu dáng và kết cấu có tính thừa kế và đối tượng không chỉ dừng lại ở môi trường quân nhân mà đây có thể là một bước ngoặt lấn sang đối tượng cụ thể khác trong tương lai, các mẫu đồng hồ Hamilton Khaki Field Titanium mới mang đến những cá tính mới, sự hấp dẫn về phong cách và khả năng vận hành đáng tin cậy của một thương hiệu tên tuổi lớn lấy quân sự làm nền tảng xây dựng thương hiệu đồng hồ.<br>Bảo hành chính hãng:2 năm quốc tế',20),
@@ -216,6 +250,8 @@ insert into watch(name_watch,price,id_type_watch,id_manufacturer,image,strap_mat
 ('ĐỒNG HỒ NAM CERTINA DS-8 MOON PHASE',14710000,6,15,'https://donghoduyanh.com/images/products/2021/01/04/large/dong-ho-certina-c0334573605100_1609729818.jpg.webp','Dây da','41mm','Đen','Thụy Sỹ','Tính năng khác:Lịch ngày. Moonphase. Caliber F05.441. Super-LumiNova. Sapphire chống lóa.<br>Độ chịu nước:100m<br>Bảo hành chính hãng:2 năm quốc tế',30),
 ('Apple Watch SE 2022 40mm',7490000,7,11,'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/1/_/1_258.jpg','Cao Su','40mm','Retina LTPO OLED (1.000 nits)',null,'Tính năng: Có định vị GPS, cài ứng dụng, phát nhạc trên đồng hồ, chế độ luyện tập, hiển thị thông báo điện thoại, tùy chỉnh mặt đồng hồ, nghe gọi trên đồng hồ, nhận cuộc gọi , điều khiển chơi nhạc, kết nối tai nghe',10),
 ('Đồng hồ thông minh Xiaomi Watch S1 Active',4490000,7,13,'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/b/l/blue2.jpg','Silicone','1.43 inch','Amoled','Trung Quốc','17 chế độ thể thao, 19 chế độ chuyên nghiệp.<br>Thực hiện cuộc gọi qua bluetooth<br>Trợ lý ảo Alexa',30);
+
+
 insert into diploma(name_diploma)
 values
 ('Giám đốc'),
@@ -223,6 +259,8 @@ values
 ('Quản lý'),
 ('Nhân viên bán hàng'),
 ('Thực tập');
+
+
 insert into positions(name_position)
 values
 ('Tiến sĩ'),
@@ -230,33 +268,7 @@ values
 ('Cao đẳng'),
 ('Trung cấp'),
 ('Không có');
-insert into employee(name_employee,date_of_birth,gender,salary,address,phone_number,email_employee,img,id_diploma,id_position ,id_branch )
-values
-('Nguyễn Văn An','1970-11-07','Nam','5000','295 Nguyễn Tất Thành, Đà Nẵng','0901234121','annguyen@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,1),
-('Lê Văn Bình','1997-04-09','Nam','2000','22 Yên Bái, Đà Nẵng','0934212314','binhlv@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,2),
-('Hồ Thị Yến','1995-12-12','Nữ','3000','K234/11 Điện Biên Phủ, Gia Lai','0412352315','thiyen@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,3),
-('Võ Công Toản','1980-04-04','Nam','1000','77 Hoàng Diệu, Quảng Trị','0374443232','toan0404@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,3),
-('Nguyễn Bỉnh Phát','1999-12-09','Nam','500','43 Yên Bái, Đà Nẵng','0902341231','phatphat@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,2),
-('Khúc Nguyễn An Nghi','2000-11-08','Nam','5000','294 Nguyễn Tất Thành, Đà Nẵng','0978653213','annghi20@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,1),
-('Nguyễn Hữu Hà','1993-01-01','Nam','3000','4 Nguyễn Chí Thanh, Huế','0941234553','nhh0101@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,2),
-('Nguyễn Hà Đông','1989-09-03','Nam','2000','111 Hùng Vương, Hà Nội','0642123111','donghanguyen@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,3),
-('Tòng Hoang','1982-09-03','Nam','1000','213 Hàm Nghi, Đà Nẵng','0245144444','hoangtong@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,3),
-('Nguyễn Công Đạo','1994-01-08','Nam','500','6 Hoà Khánh, Đồng Nai','0988767111','nguyencongdao12@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,2),
-('Nguyễn Thị Hào','1970-11-07','Nữ','5000','23 Nguyễn Hoàng, Đà Nẵng','0945423362','thihao07@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,1),
-('Phạm Xuân Diệu','1992-08-08','Nam','3000','K77/22 Thái Phiên, Quảng Trị','0954333333','xuandieu92@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,2),
-('Trương Đình Nghệ','1989-12-11','Nam','2000','K323/12 Ông Ích Khiêm, Vinh','0373213122','nghenhan2702@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,3),
-('Dương Văn Quan','1981-07-08','Nam','1000','K453/12 Lê Lợi, Đà Nẵng','0490039241','duongquan@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,3),
-('Hoàng Trần Nhi Nhi','1995-12-09','Nữ','500','224 Lý Thái Tổ, Gia Lai','0312345678','nhinhi123@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,2),
-('Tôn Nữ Mộc Châu','2005-12-06','Nữ','5000','37 Yên Thế, Đà Nẵng','0988888844','tonnuchau@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,1),
-('Nguyễn Mỹ Kim','1984-04-08','Nữ','3000','K123/45 Lê Lợi, Hồ Chí Minh','0912345698','kimcuong84@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,2),
-('Nguyễn Thị Hào','1999-04-08','Nữ','2000','55 Nguyễn Văn Linh, Kon Tum','0763212345','haohao99@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,3),
-('Trần Đại Danh','1994-07-01','Nam','1000','24 Lý Thường Kiệt, Quảng Ngãi','0643343433','danhhai99@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,2),
-('Nguyễn Tâm Đắc','1989-07-01','Nam','500','22 Ngô Quyền, Đà Nẵng','0987654321','dactam@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,3),
-('Trần Thị Dung','1989-12-11','Nữ','5000','88 Hồ Nghinh, Đà Nẵng','0907326463','dungtran@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1),
-('Nguyễn Phan Bảo Hoàng','1998-11-11','Nam','3000','22 Phan Thanh, Đà Nẵng','0998311563','hoangbaophan@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1),
-('Nguyễn Thị Bích Ngọc','1996-10-11','Nữ','2000','121 Tố Hữu, Đà Nẵng','0903111563','bichngoc@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1),
-('Tạ Đình Vũ Đàm','1997-07-11','Nam','1000','111 Phan Tứ, Đà Nẵng','0905323563','damvuta@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1),
-('Nguyễn Thị Hương Trà','1999-02-11','Nữ','500','453 Bạch Đằng, Đà Nẵng','0909124863','huongtra@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1);
+
 
 
 insert into watch(name_watch,price,id_type_watch,id_manufacturer,image,strap_material,diameter,face_color,origin,detail,quantity) values
@@ -295,3 +307,40 @@ insert into watch(name_watch,price,id_type_watch,id_manufacturer,image,strap_mat
 ('Samsung Galaxy Watch 5',5490000,7,12,'https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/a/sansung_1__2.png','Silicone','40 mm','Xám Graphite, Bạc, Hồng vàng',null,'Hỗ trợ sức khỏe.<br>Hỗ trợ hơn 90 chế độ tập luyện thể thao.<br>Hỗ trợ đo Sp02, đo nhịp tim, huyết áp.<br>Cải thiện cảm biến theo dõi lộ trình tập luyện, theo dõi giấc ngủ',20),
 ('Apple Watch SE 2022 40mm',7490000,7,11,'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/1/_/1_258.jpg','Cao Su','40mm','Retina LTPO OLED (1.000 nits)',null,'Tính năng: Có định vị GPS, cài ứng dụng, phát nhạc trên đồng hồ, chế độ luyện tập, hiển thị thông báo điện thoại, tùy chỉnh mặt đồng hồ, nghe gọi trên đồng hồ, nhận cuộc gọi , điều khiển chơi nhạc, kết nối tai nghe',20),
 ('Đồng hồ thông minh Xiaomi Watch S1 Active',4490000,7,13,'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/b/l/blue2.jpg','Silicone','1.43 inch','Amoled','Trung Quốc','17 chế độ thể thao, 19 chế độ chuyên nghiệp.<br>Thực hiện cuộc gọi qua bluetooth<br>Trợ lý ảo Alexa',20);
+
+insert into domain(name) values ('Miền Bắc') , ('Miền Trung') , ('Miền Nam');
+insert into branch (name_branch , address_branch , area_branch , id_domain , is_delete) values ('Chi nhánh Hà Nội' , '310 Xã Đàn, Phường Phương Liên, Quận Đống Đa, Hà Nội' , 50.0 , 1 , 0) ,
+('Chi nhánh Đà Nẵng' , '71 Nguyễn Lương Bằng, Hòa Khánh, Liên Chiểu, Đà Nẵng' , 50.0 , 2 , 0) ,
+('Chi nhánh Hồ Chí minh' , '64 Võ Thị Sáu, phường Tân Định, quận 1, TP. HCM' , 50.0 , 3 , 0) ,
+('Chi nhánh Hải Phòng' , '342 P.Tô Hiệu , Hà Nam , Hải Phòng' , 50.0 , 1 , 0);
+
+
+
+insert into employee(name_employee,date_of_birth,gender,salary,address,phone_number,email_employee,img,id_diploma,id_position ,id_branch , is_delete )
+values
+('Nguyễn Văn An','1970-11-07','Nam','5000','295 Nguyễn Tất Thành, Đà Nẵng','0901234121','annguyen@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,1 , 0),
+('Lê Văn Bình','1997-04-09','Nam','2000','22 Yên Bái, Đà Nẵng','0934212314','binhlv@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,2 ,0),
+('Hồ Thị Yến','1995-12-12','Nữ','3000','K234/11 Điện Biên Phủ, Gia Lai','0412352315','thiyen@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,3 , 0),
+('Võ Công Toản','1980-04-04','Nam','1000','77 Hoàng Diệu, Quảng Trị','0374443232','toan0404@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,3 , 0),
+('Nguyễn Bỉnh Phát','1999-12-09','Nam','500','43 Yên Bái, Đà Nẵng','0902341231','phatphat@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,2 , 0),
+('Khúc Nguyễn An Nghi','2000-11-08','Nam','5000','294 Nguyễn Tất Thành, Đà Nẵng','0978653213','annghi20@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,1,0),
+('Nguyễn Hữu Hà','1993-01-01','Nam','3000','4 Nguyễn Chí Thanh, Huế','0941234553','nhh0101@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,2,0),
+('Nguyễn Hà Đông','1989-09-03','Nam','2000','111 Hùng Vương, Hà Nội','0642123111','donghanguyen@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,3,0),
+('Tòng Hoang','1982-09-03','Nam','1000','213 Hàm Nghi, Đà Nẵng','0245144444','hoangtong@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,3,0),
+('Nguyễn Công Đạo','1994-01-08','Nam','500','6 Hoà Khánh, Đồng Nai','0988767111','nguyencongdao12@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',2,2,2,0),
+('Nguyễn Thị Hào','1970-11-07','Nữ','5000','23 Nguyễn Hoàng, Đà Nẵng','0945423362','thihao07@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,1,0),
+('Phạm Xuân Diệu','1992-08-08','Nam','3000','K77/22 Thái Phiên, Quảng Trị','0954333333','xuandieu92@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,2,0),
+('Trương Đình Nghệ','1989-12-11','Nam','2000','K323/12 Ông Ích Khiêm, Vinh','0373213122','nghenhan2702@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,3,0),
+('Dương Văn Quan','1981-07-08','Nam','1000','K453/12 Lê Lợi, Đà Nẵng','0490039241','duongquan@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,3,0),
+('Hoàng Trần Nhi Nhi','1995-12-09','Nữ','500','224 Lý Thái Tổ, Gia Lai','0312345678','nhinhi123@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',3,3,2,0),
+('Tôn Nữ Mộc Châu','2005-12-06','Nữ','5000','37 Yên Thế, Đà Nẵng','0988888844','tonnuchau@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,1,0),
+('Nguyễn Mỹ Kim','1984-04-08','Nữ','3000','K123/45 Lê Lợi, Hồ Chí Minh','0912345698','kimcuong84@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,2,0),
+('Nguyễn Thị Hào','1999-04-08','Nữ','2000','55 Nguyễn Văn Linh, Kon Tum','0763212345','haohao99@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,3,0),
+('Trần Đại Danh','1994-07-01','Nam','1000','24 Lý Thường Kiệt, Quảng Ngãi','0643343433','danhhai99@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,2,0),
+('Nguyễn Tâm Đắc','1989-07-01','Nam','500','22 Ngô Quyền, Đà Nẵng','0987654321','dactam@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',4,4,3,0),
+('Trần Thị Dung','1989-12-11','Nữ','5000','88 Hồ Nghinh, Đà Nẵng','0907326463','dungtran@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1,0),
+('Nguyễn Phan Bảo Hoàng','1998-11-11','Nam','3000','22 Phan Thanh, Đà Nẵng','0998311563','hoangbaophan@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1,0),
+('Nguyễn Thị Bích Ngọc','1996-10-11','Nữ','2000','121 Tố Hữu, Đà Nẵng','0903111563','bichngoc@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1,0),
+('Tạ Đình Vũ Đàm','1997-07-11','Nam','1000','111 Phan Tứ, Đà Nẵng','0905323563','damvuta@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1,0),
+('Nguyễn Thị Hương Trà','1999-02-11','Nữ','500','453 Bạch Đằng, Đà Nẵng','0909124863','huongtra@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1,0);
+select sum(price) from cart where id_customer =1 and check_order=1;

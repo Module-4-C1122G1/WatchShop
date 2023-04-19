@@ -330,7 +330,7 @@
                 <div class="form-group col-md-12 py-3" style="position: relative;">
                     <input type="hidden" class="form-control" th:field="*{idWatch}" name="idWatch">
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Tên đồng hồ:</small>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Tên đồng hồ: <span style="color: red">*</span></small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{name}" name="name" id="name"
@@ -338,7 +338,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Sai tên</p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Giá (VND): </small>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Giá (VND): <span style="color: red">*</span> </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="number" class="form-control" th:field="*{price}" name="price" id="price"
@@ -398,7 +398,7 @@
                         <textarea class="form-control" name="detail" id="detail" th:text="${watch.detail.replace('<br>','&#10')}"></textarea>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Số lượng: </small>
+                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Số lượng: <span style="color: red">*</span> </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="number" class="form-control" th:field="*{quantity}" name="quantity" id="quantity"
