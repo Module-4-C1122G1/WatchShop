@@ -28,7 +28,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
            aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
+        <a class="navbar-brand m-0" th:href="@{/watch/index}"
            target="_blank">
             <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
@@ -202,11 +202,11 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Thông tin tài khoản</span>
+                    <span class="nav-link-text ms-1" th:utext="${#request.userPrincipal.name}"></span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/sign-in.html">
+                <a class="nav-link  " th:href="@{/logout}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -392,25 +392,24 @@
             })
         }
     </script>
+    <!--    join-->
+    <div class="container-fluid py-4">
+        <select id="select_employee" style="width: 150px" onchange="onChangeCustomerType()"
+                class="form-select form-select-lg" aria-label=".form-select-lg example">
+            <option class="text-primary" selected>Chi nhánh</option>
+            <option th:each="branch : ${branchList}" th:value="${branch.idBranch}" th:text="${branch.name}"
+                    style="width: 100px">
+                <a th:href="@{/employee/branch/{id}(id=${branch.getIdBranch()})}"
+                   th:text="${branch.name}"></a>
+            </option>
+        </select>
+    </div>
+
     <!-- End Navbar -->
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12" style="background-color: #e9e8fc">
                 <div class="card mb-4" style="background-color: #2c2972">
-
-                    <div class="d-flex gap-2 align-items-center">
-                        <select id="select_employee" style="width: 150px" onchange="onChangeCustomerType()"
-                                class="form-select form-select-lg" aria-label=".form-select-lg example">
-                            <option class="text-primary" selected>Chi nhánh</option>
-                            <option th:each="branch : ${branchList}" th:value="${branch.idBranch}" th:text="${branch.name}" style="width: 100px">
-                                <a th:href="@{/employee/branch/{id}(id=${branch.getIdBranch()})}"
-                                   th:text="${branch.name}"></a>
-                            </option>
-                        </select>
-                    </div>
-<!--join -->
-
-
 
                     <div class="card-header pb-0">
                         <h3 style="display: inline;color: white">Danh sách nhân viên</h3>
@@ -500,6 +499,8 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <p class="text-center" style="color: red" th:if="${list == 0}">Không tìm thấy chi nhánh nào
+                                có tên là <span style="color: red" th:text="${name}"></span></p>
                         </div>
                         <!--modal xem thêm  -->
                         <div class="modal fade" id="extraLargeModal" tabindex="-1" aria-labelledby="exampleModalLabel1"

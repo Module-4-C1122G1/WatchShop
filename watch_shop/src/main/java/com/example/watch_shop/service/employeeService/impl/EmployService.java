@@ -4,6 +4,7 @@ import com.example.watch_shop.dto.EmployeeDTO;
 import com.example.watch_shop.model.Customer;
 import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.repository.IEmployeeRepository;
+import com.example.watch_shop.repository.IEmployeeeRepository;
 import com.example.watch_shop.service.employeeService.IEmployeeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.List;
 public class EmployService implements IEmployeeService {
     @Autowired
     private IEmployeeRepository iEmployeeRepository;
+    @Autowired
+    private IEmployeeeRepository iEmployeeeRepository;
 
     @Override
     public Page<Employee> findByAll(String name,PageRequest pageRequest) {
@@ -54,6 +57,6 @@ public class EmployService implements IEmployeeService {
 
     @Override
     public Page<Employee> findByBranch(Integer idBranch, PageRequest pageRequest) {
-        return iEmployeeRepository.findByBranch(idBranch,pageRequest);
+        return iEmployeeeRepository.findByBranch(idBranch,pageRequest);
     }
 }

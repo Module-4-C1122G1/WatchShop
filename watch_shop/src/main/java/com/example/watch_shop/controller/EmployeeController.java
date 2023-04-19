@@ -37,26 +37,27 @@ public class EmployeeController {
     private IPositionService iPositionService;
 
     @GetMapping("")
-    public String list(Model model, @PageableDefault(size = 5)Pageable pageable,
-                       @RequestParam(defaultValue = "",required = false) String name) {
+    public String list(Model model, @PageableDefault(size = 5) Pageable pageable,
+                       @RequestParam(defaultValue = "", required = false) String name) {
         Sort sort = Sort.by("name").descending();
-        Pageable sortedPage = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),sort);
-        Page<Employee> employeePage=employeeService.findByAll(name, (PageRequest) sortedPage);
-        model.addAttribute("employee",employeePage);
-        model.addAttribute("name",name);
-        List<Integer> integerList =new ArrayList<>();
-        for (int i = 1; i <employeePage.getTotalPages() ; i++) {
+        Pageable sortedPage = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        Page<Employee> employeePage = employeeService.findByAll(name, (PageRequest) sortedPage);
+        model.addAttribute("employee", employeePage);
+        model.addAttribute("name", name);
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i < employeePage.getTotalPages(); i++) {
             integerList.add(i);
         }
-        model.addAttribute("integerList",integerList);
-        model.addAttribute("branchList",iBranchEService.list());
+        model.addAttribute("integerList", integerList);
+        model.addAttribute("branchList", iBranchEService.list());
+        model.addAttribute("list" , employeePage.getTotalElements());
         return "admin/employee/list";
     }
 
     @GetMapping("/branch/{id}")
-    public String seachByEmployee(@PathVariable Integer id,Model model,@RequestParam(defaultValue = "0") int page){
-        model.addAttribute("employee",employeeService.findByBranch(id,PageRequest.of(page,5)));
-        model.addAttribute("branchList",iBranchEService.list());
+    public String seachByEmployee(@PathVariable Integer id, Model model, @RequestParam(defaultValue = "0") Integer page) {
+        model.addAttribute("employee", employeeService.findByBranch(id, PageRequest.of(page, 5)));
+        model.addAttribute("branchList", iBranchEService.list());
 //        model.addAttribute("totalElement",employeeService.findByBranch(id,PageRequest.of(page,3)).getTotalPages());
         return "/admin/employee/list";
     }
@@ -72,14 +73,14 @@ public class EmployeeController {
 
     @PostMapping("/create")
     public String add(@Valid @ModelAttribute EmployeeDTO employeeDTO, BindingResult bindingResult,
-                      RedirectAttributes redirectAttributes,Model model){
-        if (bindingResult.hasErrors()){
+                      RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("position", iPositionService.list());
             model.addAttribute("diploma", iDiplomaService.list());
             model.addAttribute("branch", iBranchEService.list());
             return "admin/employee/create";
-        }else {
-            redirectAttributes.addFlashAttribute("msg","thành công");
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "thành công");
             employeeService.save(employeeDTO);
             return "redirect:/employee";
         }
@@ -87,8 +88,8 @@ public class EmployeeController {
 
 
     @GetMapping("/update/{id}")
-    public String update(@PathVariable Integer id,Model model){
-        model.addAttribute("employeeDTO",employeeService.findById(id));
+    public String update(@PathVariable Integer id, Model model) {
+        model.addAttribute("employeeDTO", employeeService.findById(id));
         model.addAttribute("position", iPositionService.list());
         model.addAttribute("diploma", iDiplomaService.list());
         model.addAttribute("branch", iBranchEService.list());
@@ -97,7 +98,7 @@ public class EmployeeController {
 
 
     @GetMapping("/delete")
-    public String delete(@RequestParam(required = false) Integer deleteId){
+    public String delete(@RequestParam(required = false) Integer deleteId) {
         employeeService.delete(deleteId);
         return "redirect:/employee";
     }
