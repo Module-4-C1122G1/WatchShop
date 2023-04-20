@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
     <title>
-        Trang admin
+        Danh sách nhân viên
     </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <link th:href="@{/admin/assets/css/nucleo-icons.css}" rel="stylesheet"/>
@@ -222,7 +222,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-body"><i class="fas fa-search"
                                                                         aria-hidden="true"></i></span>
-                            <input type="text" placeholder="Tìm kiếm theo tên Nhân viên.." class="form-control"
+                            <input type="text" placeholder="Tìm kiếm theo tên nhân viên.." class="form-control"
                                    name="name" th:value="${name}"/>
                         </div>
                     </form>
@@ -469,7 +469,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <p class="text-center" style="color: red" th:if="${list == 0}">Không tìm thấy chi nhánh nào
+                            <p class="text-center" style="color: red" th:if="${list == 0}">Không tìm thấy nhân viên nào
                                 có tên là <span style="color: red" th:text="${name}"></span></p>
                         </div>
                         <!--modal xem thêm  -->
@@ -479,7 +479,7 @@
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel1">Xem thêm</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel1">Xem chi tiết</h5>
                                         <button type="button" class="btn-close text-danger" data-bs-dismiss="modal"
                                                 aria-label="Close">
                                             <i class="fa-solid fa-xmark text-danger"></i>
@@ -489,44 +489,44 @@
                                         <input type="hidden" id="idDetail" name="idDetail">
                                         <table>
                                             <tr class="detail-watch">
-                                                <th><p>Chi nhánh:</p></th>
+                                                <td><p>Chi nhánh:</p></td>
                                                 <td><p id="branch"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th><p>Chức vụ:</p></th>
+                                                <td><p>Chức vụ:</p></td>
                                                 <td><p id="diploma"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th><p>Bằng cấp:</p></th>
+                                                <td><p>Bằng cấp:</p></td>
                                                 <td><p id="position"></p></td>
                                             </tr>
-                                            <tr class="detail-watch">
-                                                <th>Tên nhân viên:</th>
-                                                <td><p id="name"></p></td>
+                                            <tr class="detail-watch magin">
+                                                <td>Tên nhân viên:</td>
+                                                <td><p id="name" style="margin-top: 15px"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Số điện thoại:</th>
-                                                <td><p id="phone"></p></td>
+                                                <td>Số điện thoại:</td>
+                                                <td><p id="phone" style="margin-top: 15px"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Ngày sinh:</th>
-                                                <td><p id="dateOfBirth"></p></td>
+                                                <td>Ngày sinh:</td>
+                                                <td><p id="dateOfBirth" style="margin-top: 15px"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Giới tính:</th>
-                                                <td><p id="gender"></p></td>
+                                                <td>Giới tính:</td>
+                                                <td><p id="gender" style="margin-top: 15px"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Lương:</th>
-                                                <td><p id="salary">vnd
+                                                <td>Lương:</td>
+                                                <td><p id="salary" style="margin-top: 15px">vnd
                                                 </p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Địa chỉ:</th>
-                                                <td><p id="address"></p></td>
+                                                <td>Địa chỉ:</td>
+                                                <td><p id="address" style="margin-top: 15px"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Ảnh:</th>
+                                                <td>Ảnh:</td>
                                                 <td><p id="image" style="width: 50px"></p></td>
                                             </tr>
                                         </table>
