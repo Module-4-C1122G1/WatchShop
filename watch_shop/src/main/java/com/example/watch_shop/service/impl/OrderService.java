@@ -6,6 +6,8 @@ import com.example.watch_shop.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,8 +19,8 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Page<OrderWatch> findAll(PageRequest pageRequest) {
-        return iOrderRepository.findAll(pageRequest);
+    public Page<OrderWatch> findAll(Pageable pageable) {
+        return iOrderRepository.findAll(pageable);
     }
     public void delete(Integer id){
         iOrderRepository.deleteById(id);
