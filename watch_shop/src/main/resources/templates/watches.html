@@ -155,13 +155,13 @@
         <p style="text-align: center" th:text="${msg}"></p>
         <div class="row">
             <div style="background: lightgrey" class="col-md-6 " th:each="watch : ${list}">
-                <div class="box" style="min-height: 310px">
+                <div class="box" style="min-height: 310px; margin-bottom: 20px;margin-top: 10px">
                     <a th:href="@{/watch/detail/__${watch.idWatch}__}">
                         <div class="img-box">
                             <img th:src="${watch.image}">
                         </div>
                         <div class="detail-box">
-                            <h6 th:text="${watch.name}">
+                            <h6 style="width: 65%" th:text="${watch.name}">
 
                             </h6>
                             <h6>
