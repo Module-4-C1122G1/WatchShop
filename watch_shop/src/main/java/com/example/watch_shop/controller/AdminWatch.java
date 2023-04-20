@@ -39,7 +39,9 @@ public class AdminWatch {
     private IManufactureService iManufactureService;
 
 //    @GetMapping("")
-//    public String showList(@RequestParam(required = false, defaultValue = "") String name, @PageableDefault(sort = {"idWatch"}, direction = Sort.Direction.DESC, size = 5) Pageable pageable, Model model) {
+//    public String showList(@RequestParam(required = false, defaultValue = "")
+//                               String name, @PageableDefault(sort = {"idWatch"}
+//            , direction = Sort.Direction.DESC, size = 5) Pageable pageable, Model model) {
 //        model.addAttribute("name", name);
 //        model.addAttribute("watchList", iWatchService.findAllWatch(name, pageable));
 //        List<Integer> integerList = new ArrayList<>();
@@ -56,13 +58,14 @@ public class AdminWatch {
                        @RequestParam(defaultValue = "") String name) {
         Sort sort= Sort.by("idWatch").descending();
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),sort);
-        Page<Watch> watchPage=iWatchService.findAllWatch(name,(PageRequest) sortedPage);
+        Page<Watch> watchPage=iWatchService.findAllWatch(name,sortedPage);
         model.addAttribute("watchList",watchPage);
         model.addAttribute("list" , watchPage.getTotalElements());
         List<Integer> integerList =new ArrayList<>();
         for (int i = 1; i <watchPage.getTotalPages() ; i++) {
             integerList.add(i);
         }
+        integerList.add(integerList.size()+1);
         model.addAttribute("name",name);
         model.addAttribute("integerList",integerList);
         return "/admin/product/list";

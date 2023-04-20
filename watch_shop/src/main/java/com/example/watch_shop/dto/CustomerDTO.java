@@ -26,9 +26,9 @@ public class CustomerDTO {
 
 
     private CustomerType customerType;
-//    @NotBlank(message = "Account không được để trống")
+    //    @NotBlank(message = "Account không được để trống")
 //    @Size(min = 6, message = "Account phải trên 6 ký tự")
-@Valid
+    @Valid
     private AppUser appUser;
 
     public CustomerDTO() {
