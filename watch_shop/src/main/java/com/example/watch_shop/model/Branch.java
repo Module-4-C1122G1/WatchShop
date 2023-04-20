@@ -30,7 +30,9 @@ public class Branch {
     Set<Employee> employeeSet;
     @ManyToMany(mappedBy = "branchSet")
     private Set<Watch> watchSet;
-
+    @ManyToOne
+    @JoinColumn(name = "id_domain")
+    private Domain domain;
     public Set<Employee> getEmployeeSet() {
         return employeeSet;
     }
@@ -40,6 +42,14 @@ public class Branch {
     }
 
     public Branch() {
+    }
+
+    public Domain getDomain() {
+        return domain;
+    }
+
+    public void setDomain(Domain domain) {
+        this.domain = domain;
     }
 
     public Branch(Integer idBranch, String name, String address, double area) {

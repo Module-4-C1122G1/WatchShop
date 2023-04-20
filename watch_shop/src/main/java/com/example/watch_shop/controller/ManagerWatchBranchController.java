@@ -4,6 +4,7 @@ import com.example.watch_shop.dto.BranchDTO;
 import com.example.watch_shop.model.Branch;
 import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.model.Watch;
+import com.example.watch_shop.service.employeeService.IDomainService;
 import com.example.watch_shop.service.manager_watch_branch.IBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,8 +26,10 @@ import java.util.List;
 public class ManagerWatchBranchController {
     @Autowired
     private IBranchService branchService;
+    @Autowired
+    private IDomainService domainService;
     @GetMapping("")
-    public String showStore(@PageableDefault(size = 1) Pageable pageable, @RequestParam(defaultValue = "") String name, Model model) {
+    public String showStore(@PageableDefault(size = 2) Pageable pageable, @RequestParam(defaultValue = "") String name, Model model) {
         Sort sort = Sort.by("name").ascending();
         model.addAttribute("name", name);
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
@@ -36,12 +39,15 @@ public class ManagerWatchBranchController {
         for (int i = 1; i <branchPage.getTotalPages() ; i++) {
             integerList.add(i);
         }
+        model.addAttribute("list" , branchPage.getTotalElements());
         model.addAttribute("integerList",integerList);
         return "/admin/branch/list";
     }
 
     @GetMapping("/employee/{id}")
     public String showEmployee(@PathVariable("id") int id, Model model) {
+        Branch branch = branchService.findById(id);
+        model.addAttribute("nameEmployee" , branch.getName());
         List<Employee> employeePage = branchService.findAllEmployee(id);
         model.addAttribute("employeePage", employeePage);
         return "/admin/branch/list-employee";
@@ -49,6 +55,8 @@ public class ManagerWatchBranchController {
 
     @GetMapping("/watch/{idBranch}")
     public String showWatch(@PathVariable("idBranch") int idBranch, Model model) {
+        Branch branch = branchService.findById(idBranch);
+        model.addAttribute("nameWatch" , branch.getName());
         List<Watch> watchList = branchService.findAllWatch(idBranch);
         model.addAttribute("idBranch" , idBranch);
         model.addAttribute("watchList", watchList);
@@ -56,36 +64,44 @@ public class ManagerWatchBranchController {
     }
 
     @GetMapping("/delete")
-    public String deleteBranch(@RequestParam int deleteId) {
+    public String deleteBranch(@RequestParam int deleteId , Model model) {
         branchService.delete(deleteId);
+        Branch branch = branchService.findById(deleteId);
+        model.addAttribute("msg" , "Xoá " + branch.getName() + " thành công");
         return "redirect:/branch";
     }
     @GetMapping("/create")
     public String showCreateBranch(Model model) {
+        model.addAttribute("domains" , domainService.findAll());
         model.addAttribute("branchDTO", new BranchDTO());
         return "/admin/branch/create";
     }
 
     @PostMapping("/create")
-    public String createBranch(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult) {
+    public String createBranch(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult , Model model) {
         if (bindingResult.hasErrors()){
+            model.addAttribute("domains" , domainService.findAll());
             return "/admin/branch/create";
         }
+        model.addAttribute("msg" , "Thêm mới thành công");
         branchService.create(branchDTO);
         return "redirect:/branch";
     }
 
     @GetMapping("/update")
     public String showUpdateSoccerPlayer(@RequestParam int id, Model model) {
+        model.addAttribute("domains" , domainService.findAll());
         model.addAttribute("branchDTO", branchService.findById(id));
         return "/admin/branch/update";
     }
 
     @PostMapping("/update")
-    public String updateSoccerPlayer(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult) {
+    public String updateSoccerPlayer(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult , Model model) {
         if (bindingResult.hasErrors()){
+            model.addAttribute("domains" , domainService.findAll());
             return "/admin/branch/update";
         }
+        model.addAttribute("msg" , "Chỉnh sửa thành công");
         branchService.update(branchDTO, branchDTO.getIdBranch());
         return "redirect:/branch";
     }
