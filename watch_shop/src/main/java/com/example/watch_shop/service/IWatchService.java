@@ -31,4 +31,7 @@ public interface IWatchService {
 
     void updateQuantity(Integer qtt, Integer id);
 
+    String findByNameContainingOrderBy();
+
+
 }

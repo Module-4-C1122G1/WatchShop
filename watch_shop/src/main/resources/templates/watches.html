@@ -92,23 +92,33 @@
                             <a class="nav-link" th:href="@{/watch/watches}"> Sản Phẩm <span
                                     class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <li th:if="${#request.userPrincipal == null}" class="nav-item">
                             <a class="nav-link" th:href="@{/login}"> Đăng nhập </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:each="authority : ${#authentication.getAuthorities()}"  th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}"  class="nav-link" th:href="@{/customer}">Admin</a>
                         </li>
                     </ul>
                     <div class="user_option-box">
                         <div class="input-group">
-                            <form action="/watch/search" method="post">
-                                <input name="name" type="text" class="form-control" placeholder="Tìm kiếm theo tên">
+                            <form action="/watch/search" method="get">
+                                <input th:value="${name}" name="name" type="text" class="form-control"
+                                       placeholder="Tìm kiếm theo tên">
                             </form>
                         </div>
-                        <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+
+
+                        <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle"
+                           data-bs-toggle="dropdown"><i
                                 class="fa fa-user"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" style=" width: 24%">
+                        <div sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-end" style=" width: 24%">
+                            <div style="text-align: center" th:text="${#request.userPrincipal.name}"></div>
                             <div class="dropdown-divider"></div>
                             <a th:href="@{/logout}">Logout</a>
                         </div>
-                        <a  th:if="${#request.userPrincipal == null}" th:href="@{/login}"><i
+
+
+                        <a th:if="${#request.userPrincipal == null}" th:href="@{/login}"><i
                                 class="fa fa-user"></i></a>
                         <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
@@ -116,6 +126,8 @@
                         <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
+
+
                     </div>
                 </div>
             </nav>
@@ -136,13 +148,14 @@
 <section class="shop_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
-            <h2>
-                Latest Watches
+            <h2 style="text-align: center">
+                Đồng Hồ
             </h2>
         </div>
+        <p style="text-align: center" th:text="${msg}"></p>
         <div class="row">
-            <div class="col-md-6 " th:each="watch : ${list}">
-                <div class="box">
+            <div style="background: lightgrey" class="col-md-6 " th:each="watch : ${list}">
+                <div class="box" style="min-height: 310px">
                     <a th:href="@{/watch/detail/__${watch.idWatch}__}">
                         <div class="img-box">
                             <img th:src="${watch.image}">
@@ -152,21 +165,57 @@
 
                             </h6>
                             <h6>
-                                Price:
+                                Giá:
                                 <span th:text="${#numbers.formatCurrency(watch.price)}">
 
-                  </span>VNĐ
+                  </span>
                             </h6>
                         </div>
                         <div class="new">
                 <span>
-                  Featured
+                  Chính hãng
                 </span>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
+        <div style="margin-top: 20px" class="text-center container" th:if="${check==0}">
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+               th:href="@{/watch/watches(page = ${list.number - 1})}">
+                <i class="ti-angle-left">Trước</i>
+            </a>
+
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+               th:href="@{/watch/watches(page = ${list.number + 1})}">
+                <i class="ti-angle-right">Sau</i>
+            </a>
+        </div>
+
+        <div style="margin-top: 20px" class="text-center container" th:if="${check==1}">
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+               th:href="@{/watch/type(page = ${list.number - 1},id=${id})}">
+                <i class="ti-angle-left">Trước</i>
+            </a>
+
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+               th:href="@{/watch/type(page = ${list.number + 1},id=${id})}">
+                <i class="ti-angle-right">Sau</i>
+            </a>
+        </div>
+
+        <div style="margin-top: 20px" class="text-center container" th:if="${check==2}">
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+               th:href="@{/watch/search(page = ${list.number - 1},name=${name})}">
+                <i class="ti-angle-left">Trước</i>
+            </a>
+
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+               th:href="@{/watch/search(page = ${list.number + 1},name=${name})}">
+                <i class="ti-angle-right">Sau</i>
+            </a>
+        </div>
+
         <div class="btn-box">
             <a href="">
                 View All
@@ -174,21 +223,7 @@
         </div>
     </div>
 </section>
-<span th:if="${check==0}">
-    <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/watches(page=${list.number -1})}">Trước</a></span>
-    <span><a th:if="${list.hasNext()}" th:href="@{/watch/watches(page=${list.number +1})}">Sau</a></span>
-</span>
 
-<span th:if="${check==1}">
-    <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/type(page=${list.number -1},id=${id})}">Trước</a></span>
-    <span><a th:if="${list.hasNext()}" th:href="@{/watch/type(page=${list.number +1},id=${id})}">Sau</a></span>
-</span>
-
-<span th:if="${check==2}">
-    <span><a th:if="${list.hasPrevious()}"
-             th:href="@{/watch/search(page=${list.number -1},name=${id})}">Trước</a></span>
-    <span><a th:if="${list.hasNext()}" th:href="@{/watch/search(page=${list.number +1},name=${id})}">Sau</a></span>
-</span>
 
 <!-- end shop section -->
 
@@ -198,12 +233,17 @@
         <div class="row">
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_detail">
-                    <h4>
-                        About
-                    </h4>
+                    <div class="heading_container">
+                        <h2>
+                            Về chúng tôi
+                        </h2>
+                    </div>
                     <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over
-                        200 Latin words, combined with
+                        Được mệnh danh là thương hiệu đồng hồ “Ngon - Bổ - Rẻ”,
+                        đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
+                        Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
+                        bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
+                        hồ ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                     <div class="footer_social">
                         <a href="">
@@ -224,7 +264,7 @@
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_contact">
                     <h4>
-                        Reach at..
+                        Liên hệ
                     </h4>
                     <div class="contact_link_box">
                         <a href="">
@@ -236,13 +276,13 @@
                         <a href="">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                  Call +01 1234567890
+                  Call 0961053275
                 </span>
                         </a>
                         <a href="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                  demo@gmail.com
+                  minhn091099@gmail.com
                 </span>
                         </a>
                     </div>
@@ -271,8 +311,7 @@
         </div>
         <div class="footer-info">
             <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
+                &copy; <span id="displayYear"></span>ShopWatch by team3</a>
             </p>
         </div>
     </div>

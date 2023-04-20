@@ -76,22 +76,35 @@
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
                         </li>
+                        <li class="nav-item">
+                            <a th:each="authority : ${#authentication.getAuthorities()}" th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}" class="nav-link" th:href="@{/login}">Admin</a>
+                        </li>
+
+
                     </ul>
                     <div class="user_option-box">
+
+
                         <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="fa fa-user"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end">
+                        <div sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-end">
+                            <div style="text-align: center" th:text="${#request.userPrincipal.name}"></div>
                             <div class="dropdown-divider"></div>
                             <a th:href="@{/logout}">Logout</a>
                         </div>
                         <a  th:if="${#request.userPrincipal == null}" th:href="@{/login}"><i
                                 class="fa fa-user"></i></a>
+
+
+
                         <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
                         <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
+
+
 
                     </div>
                 </div>
@@ -189,8 +202,8 @@
             </h2>
         </div>
         <div class="row">
-            <div class="col-md-4 " th:each="watch:${list}">
-                <div class="box">
+            <div class="col-md-4 " th:each="watch:${list}" style="background: lightgrey">
+                <div class="box" style="min-height: 310px">
                     <a th:href="@{/watch/detail/__${watch.idWatch}__}">
                         <div class="img-box">
                             <img th:src="${watch.image}" alt="">
@@ -200,7 +213,7 @@
                             </h6>
                             <h6>
                                 Giá:
-                                <span th:text="${watch.price}"></span>VNĐ
+                                <span th:text="${#numbers.formatCurrency(watch.price)}"></span>
                             </h6>
                         </div>
                         <div class="new">
@@ -214,15 +227,11 @@
         </div>
     </div>
     <div class="btn-box">
-        <a href="">
+        <a th:href="@{/watch/watches}">
             View All
         </a>
     </div>
 </section>
-<!--<span>-->
-<!--    <span><a th:if="${list.hasPrevious()}" th:href="@{/watch/index(page=${list.number -1})}">Trước</a></span>-->
-<!--    <span><a th:if="${list.hasNext()}" th:href="@{/watch/index(page=${list.number +1})}">Sau</a></span>-->
-<!--</span>-->
 <!-- end shop section -->
 
 <!-- about section -->
@@ -239,21 +248,16 @@
                 <div class="detail-box">
                     <div class="heading_container">
                         <h2>
-                            About Us
+                            Về chúng tôi
                         </h2>
                     </div>
                     <p>
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                        alteration
-                        in some form, by injected humour, or randomised words which don't look even slightly believable.
-                        If you
-                        are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing
-                        hidden in
-                        the middle of text. All
+                        Được mệnh danh là thương hiệu đồng hồ “Ngon - Bổ - Rẻ”,
+                        đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
+                        Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
+                        bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
+                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
-                    <a href="">
-                        Read More
-                    </a>
                 </div>
             </div>
         </div>
@@ -501,12 +505,17 @@
         <div class="row">
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_detail">
-                    <h4>
-                        About
-                    </h4>
+                    <div class="heading_container">
+                        <h2>
+                            Về chúng tôi
+                        </h2>
+                    </div>
                     <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over
-                        200 Latin words, combined with
+                        Được mệnh danh là thương hiệu đồng hồ “Ngon - Bổ - Rẻ”,
+                        đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
+                        Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
+                        bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
+                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                     <div class="footer_social">
                         <a href="">
@@ -527,7 +536,7 @@
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_contact">
                     <h4>
-                        Reach at..
+                        Liên hệ
                     </h4>
                     <div class="contact_link_box">
                         <a href="">
@@ -539,13 +548,13 @@
                         <a href="">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                  Call +01 1234567890
+                  Call 0961053275
                 </span>
                         </a>
                         <a href="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                  demo@gmail.com
+                  minhn091099@gmail.com
                 </span>
                         </a>
                     </div>
@@ -574,8 +583,7 @@
         </div>
         <div class="footer-info">
             <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
+                &copy; <span id="displayYear"></span>ShopWatch by team3</a>
             </p>
         </div>
     </div>

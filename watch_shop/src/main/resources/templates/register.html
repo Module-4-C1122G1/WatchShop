@@ -172,7 +172,8 @@
                         <h2 style="margin: 0 auto">
                             Đăng ký
                         </h2>
-                        <p style="color: red; margin: auto; padding: 10px" th:text="${message}"></p>
+                        <p style="color: red; margin: auto; padding: 10px" id="error-text"> </p>
+                        <p style="color: red ; margin: auto; padding: 10px" th:text="${message}"></p>
                     </div>
                     <form action="/register" method="post" th:object="${customerDto}">
                         <div>
@@ -206,9 +207,12 @@
                             <p style="color: red" th:if="${#fields.hasErrors('appUser.userName')}" th:errors="*{appUser.userName}"></p>
                         </div>
                         <div>
-                            <input th:field="*{appUser.encrytedPassword}" type="password" placeholder="Mật khẩu *"/>
+                            <input id ="password" th:field="*{appUser.encrytedPassword}" type="password" placeholder="Mật khẩu *"/>
                             <p style="color: red" th:if="${#fields.hasErrors('appUser.encrytedPassword')}" th:errors="*{appUser.encrytedPassword}"></p>
 
+                        </div>
+                        <div>
+                            <input  id ="confirmPassword" type="password" th:placeholder="${'Nhập lại mật khẩu *'}"/>
                         </div>
 <!--                        <div>-->
 <!--                            <input th:field="*{appUser.enabled}" th:text="${enabled}" type="number" hidden="hidden">-->
@@ -217,13 +221,26 @@
                         <!--              <input th:field="*{account.pass}" type="password" placeholder="Confirm password " />-->
                         <!--            </div>-->
                         <div class="d-flex ">
-                            <button style="margin: 0 auto">
+                            <button id="button" style="margin: 0 auto">
                                 Đăng ký
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
+            <script>
+                document.querySelector("#button").onclick = function () {
+                    const password = document.querySelector("#password").value;
+                    const confirmPassword = document.querySelector("#confirmPassword").value;
+                    if (password != confirmPassword) {
+                        // alert("Mật khẩu xác thực không khớp")
+                        document.getElementById("error-text").innerText ="Mật khẩu xác thực không khớp, vui lòng nhập lại"
+                        return false
+                    }
+                }
+            </script>
+
+
             <div class="col-md-6">
                 <div class="img-box">
                     <img th:src="@{/images/contact-img.jpg}" alt="">
@@ -237,12 +254,17 @@
         <div class="row">
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_detail">
-                    <h4>
-                        About
-                    </h4>
+                    <div class="heading_container">
+                        <h2>
+                            Về chúng tôi
+                        </h2>
+                    </div>
                     <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over
-                        200 Latin words, combined with
+                        Được mệnh danh là thương hiệu đồng hồ “Ngon - Bổ - Rẻ”,
+                        đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
+                        Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
+                        bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
+                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                     <div class="footer_social">
                         <a href="">
@@ -263,7 +285,7 @@
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_contact">
                     <h4>
-                        Reach at..
+                        Liên hệ
                     </h4>
                     <div class="contact_link_box">
                         <a href="">
@@ -275,13 +297,13 @@
                         <a href="">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                  Call +01 1234567890
+                  Call 0961053275
                 </span>
                         </a>
                         <a href="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                  demo@gmail.com
+                  minhn091099@gmail.com
                 </span>
                         </a>
                     </div>
@@ -310,8 +332,7 @@
         </div>
         <div class="footer-info">
             <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
+                &copy; <span id="displayYear"></span>ShopWatch by team3</a>
             </p>
         </div>
     </div>

@@ -38,8 +38,8 @@ public class WatchService implements IWatchService {
     }
 
     @Override
-    public Page<Watch> findAllWatch(String name, Pageable pageable) {
-        return iWatchRepository.findByNameContainingAndIsDelete(name, pageable, false);
+    public Page<Watch> findAllWatch(String name,Pageable pageable) {
+        return iWatchRepository.findByNameContainingAndIsDelete(name,pageable,false);
     }
 
     @Override
@@ -86,4 +86,8 @@ public class WatchService implements IWatchService {
         iWatchRepository.save(watch);
     }
 
+
+    public String findByNameContainingOrderBy() {
+        return iWatchRepository.findByIdWatch();
+    }
 }
