@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "branch")
-public class Branch {
+public class   Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_branch")
