@@ -23,18 +23,22 @@ public interface IWatchRepository extends PagingAndSortingRepository<Watch,Integ
 
     List<Watch>findAll();
     Page<Watch>findByNameContainingAndIsDelete(String name, Pageable pageable,boolean isDelete);
+    @Query(value = "select * from watch where is_delete=0",nativeQuery = true)
+    Page<Watch>findAllWhereIsDelete(Pageable pageable);
 
     Watch findByIdWatch(int idWatch);
 
-    Page<Watch> findWatchByTypeWatchId(Integer id, PageRequest pageRequest);
+    Page<Watch> findWatchByTypeWatchId(Integer id, Pageable pageable);
 
-    Page<Watch> findWatchByNameContaining(String name, PageRequest pageRequest);
+    Page<Watch> findWatchByNameContaining(String name, Pageable pageable);
 
     @Transactional
     @Query(value = "select * from watch join manage_product_branch on manage_product_branch.id_watch = watch.id_watch where manage_product_branch.id_branch = ?", nativeQuery = true)
-    List<Watch> findWatchByBranchIdBranch(@Param("idBranch") int idBranch);
+    Page<Watch> findWatchByBranchIdBranch(@Param("id") int id , Pageable pageable);
 
     @Query(value = "select watch.name_watch,sum(order_detail.quantity) from order_detail join watch on order_detail.id_watch=watch.id_watch group by order_detail.id_watch order by sum(order_detail.quantity) desc limit 0,1 ",nativeQuery = true)
     String findByIdWatch();
+
+
 
 }

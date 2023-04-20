@@ -363,10 +363,10 @@
                                     <td th:text="${branch.address}"></td>
                                     <td th:text="${branch.domain.name}"></td>
                                     <td><a class="btn btn-primary btn-sm"
-                                           th:href="@{/branch/employee/__${branch.idBranch}__}">Nhân viên</a>
+                                           th:href="@{/branch/employee/(id=${branch.idBranch})}">Nhân viên</a>
                                     </td>
                                     <td><a class="btn btn-primary btn-sm"
-                                           th:href="@{/branch/watch/__${branch.idBranch}__}">Sản phẩm</a>
+                                           th:href="@{/branch/watch/(id=${branch.idBranch})}">Sản phẩm</a>
                                     </td>
                                     <td>
                                         <!--button update-->
@@ -412,22 +412,22 @@
         </div>
     </div>
     </div>
-    <!--Phân trangg-->
+    <!--Phân trang-->
     <div class="text-center container">
         <a class="page-item a btn btn-dark page-item" th:if="${branchPage.hasPrevious()}"
-           th:href="@{/branch(page = ${branchPage.number - 1})}">
+           th:href="@{/branch(page = ${branchPage.number - 1},name=${name})}">
             <i class="ti-angle-left">Trước</i>
         </a>
 
         <a class="page-item active1 number btn btn-dark page-item a"
            th:classappend="${pageNumber == branchPage.number + 1} ? 'active' : ''"
            th:each="pageNumber : ${integerList}"
-           th:href="@{/branch(page = ${pageNumber - 1})}"
+           th:href="@{/branch(page = ${pageNumber - 1},name=${name})}"
            th:text="${pageNumber}">
         </a>
 
         <a class="page-item btn a btn-dark page-item" th:if="${branchPage.hasNext()}"
-           th:href="@{/branch(page = ${branchPage.number + 1})}">
+           th:href="@{/branch(page = ${branchPage.number + 1},name=${name})}">
             <i class="ti-angle-right">Sau</i>
         </a>
     </div>

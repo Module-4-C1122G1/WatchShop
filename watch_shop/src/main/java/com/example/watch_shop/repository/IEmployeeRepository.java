@@ -13,15 +13,13 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface IEmployeeRepository extends JpaRepository<Employee ,Integer> {
-    List<Employee> findByBranchIdBranch(int idBranch);
+    @Transactional
+    @Query(value = "select * from employee where employee.id_branch = ?" , nativeQuery = true)
+    Page<Employee> findByBranchIdBranch(@Param("id") int id , Pageable pageable);
 
     Page<Employee> findEmployeeByNameContainingAndIsDelete(String name, PageRequest pageRequest, boolean b);
 
-
+    List<Employee> findByBranchIdBranch(int id);
     Page<Employee> findByBranch(Integer idBranch, PageRequest pageRequest);
-
-   
-    void deleteEmployeeByBranchIdBranch(int deleteId);
-
 }
 

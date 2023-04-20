@@ -61,6 +61,15 @@
             color: white;
         }
     </style>
+    <style>
+        .a {
+            margin: 5px;
+        }
+        .active1 {
+            color: black;
+            background: white;
+        }
+    </style>
 </head>
 
 <body class="sub_page" style="background: fixed">
@@ -96,7 +105,7 @@
                             <a class="nav-link" th:href="@{/login}"> Đăng nhập </a>
                         </li>
                         <li class="nav-item">
-                            <a th:each="authority : ${#authentication.getAuthorities()}"  th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}"  class="nav-link" th:href="@{/customer}">Admin</a>
+                            <a th:each="authority : ${#authentication.getAuthorities()}"  th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}"  class="nav-link" th:href="@{/order}">Admin</a>
                         </li>
                     </ul>
                     <div class="user_option-box">
@@ -181,44 +190,58 @@
             </div>
         </div>
         <div style="margin-top: 20px" class="text-center container" th:if="${check==0}">
-            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+            <a class="page-item a btn btn-dark page-item" th:if="${list.hasPrevious()}"
                th:href="@{/watch/watches(page = ${list.number - 1})}">
                 <i class="ti-angle-left">Trước</i>
             </a>
 
-            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+            <a class="page-item active1 number btn btn-dark page-item a"
+               th:classappend="${pageNumber == list.number + 1} ? 'active' : ''"
+               th:each="pageNumber : ${integerList}"
+               th:href="@{/watch/watches(page = ${pageNumber - 1})}"
+               th:text="${pageNumber}">
+            </a>
+
+            <a class="page-item btn a btn-dark page-item" th:if="${list.hasNext()}"
                th:href="@{/watch/watches(page = ${list.number + 1})}">
                 <i class="ti-angle-right">Sau</i>
             </a>
         </div>
 
         <div style="margin-top: 20px" class="text-center container" th:if="${check==1}">
-            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+            <a class="page-item a btn btn-dark page-item" th:if="${list.hasPrevious()}"
                th:href="@{/watch/type(page = ${list.number - 1},id=${id})}">
                 <i class="ti-angle-left">Trước</i>
             </a>
 
-            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+            <a class="page-item active1 number btn btn-dark page-item a"
+               th:classappend="${pageNumber == list.number + 1} ? 'active' : ''"
+               th:each="pageNumber : ${integerList}"
+               th:href="@{/watch/type(page = ${pageNumber - 1},id=${id})}"
+               th:text="${pageNumber}">
+            </a>
+
+            <a class="page-item btn a btn-dark page-item" th:if="${list.hasNext()}"
                th:href="@{/watch/type(page = ${list.number + 1},id=${id})}">
                 <i class="ti-angle-right">Sau</i>
             </a>
         </div>
-
         <div style="margin-top: 20px" class="text-center container" th:if="${check==2}">
-            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+            <a class="page-item a btn btn-dark page-item" th:if="${list.hasPrevious()}"
                th:href="@{/watch/search(page = ${list.number - 1},name=${name})}">
                 <i class="ti-angle-left">Trước</i>
             </a>
 
-            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+            <a class="page-item active1 number btn btn-dark page-item a"
+               th:classappend="${pageNumber == list.number + 1} ? 'active' : ''"
+               th:each="pageNumber : ${integerList}"
+               th:href="@{/watch/search(page = ${pageNumber - 1},name=${name})}"
+               th:text="${pageNumber}">
+            </a>
+
+            <a class="page-item btn a btn-dark page-item" th:if="${list.hasNext()}"
                th:href="@{/watch/search(page = ${list.number + 1},name=${name})}">
                 <i class="ti-angle-right">Sau</i>
-            </a>
-        </div>
-
-        <div class="btn-box">
-            <a href="">
-                View All
             </a>
         </div>
     </div>
