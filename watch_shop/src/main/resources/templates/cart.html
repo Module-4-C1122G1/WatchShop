@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <p>Total Price <span th:text="${total}"></span> VNĐ</p>
+                <p>Tổng Giá Tiền <span id="result" th:text="${total}"></span> VNĐ</p>
                 <div class="card">
                     <div class="card-body">
                         <a th:href="@{/carts/buys(name=${#request.userPrincipal.name})}"
@@ -85,10 +85,6 @@
 </section>
 
 
-<!-- Button trigger modal -->
-<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
-<!--    Launch demo modal-->
-<!--</button>-->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -99,7 +95,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Xác nhận xoá <span id="nameWatch"></span></p>
+                <p>Xác nhận xoá <span id="nameWatch"> ra khỏi giỏ hàng</span></p>
             </div>
             <div class="modal-footer">
                 <form action="carts/delete">

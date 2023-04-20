@@ -534,10 +534,10 @@
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
                         <span>441 reviews</span></div>
 
-                    <div class="buttons d-flex flex-row mt-5 gap-3">
+                    <div sec:authorize="isAuthenticated()" class="buttons d-flex flex-row mt-5 gap-3">
 
                         <form action="/carts/add" method="get">
-                            <input type="hidden" name="nameAccount" th:value="${#request.userPrincipal.name}">
+                            <input sec:authorize="isAuthenticated()" type="hidden" name="nameAccount" th:value="${#request.userPrincipal.name}">
                             <input type="hidden" name="idWatch" th:value="${watch.idWatch}">
                             <input type="hidden" name="price" th:value="${watch.price}">
                             <div th:if="${watch.quantity >0}" class="buttons_added">
