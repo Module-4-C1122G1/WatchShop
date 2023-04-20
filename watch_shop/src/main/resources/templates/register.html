@@ -30,7 +30,7 @@
             <nav class="navbar navbar-expand-lg custom_nav-container ">
                 <a class="navbar-brand" href="index.html">
             <span>
-              Watch shop
+              ShopWhat
             </span>
                 </a>
 
@@ -42,31 +42,28 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/watch/index}">Home </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/watch/index}"> Watches </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/about}"> About </a>
-                        </li>
                         <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/contact}">Contact Us <span class="sr-only">(current)</span>
-                            </a>
+                            <a class="nav-link" th:href="@{/watch/index}">Trang chủ<span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/watch/watches}">Sản phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
                         </li>
                     </ul>
-                    <div class="user_option-box">
-                        <a href="">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </a>
-                    </div>
+<!--                    <div class="user_option-box">-->
+<!--                        <a href="">-->
+<!--                            <i class="fa fa-user" aria-hidden="true"></i>-->
+<!--                        </a>-->
+<!--                        <a href="">-->
+<!--                            <i class="fa fa-cart-plus" aria-hidden="true"></i>-->
+<!--                        </a>-->
+<!--                        <a href="">-->
+<!--                            <i class="fa fa-search" aria-hidden="true"></i>-->
+<!--                        </a>-->
+<!--                    </div>-->
                 </div>
             </nav>
         </div>
@@ -179,23 +176,23 @@
                     </div>
                     <form action="/register" method="post" th:object="${customerDto}">
                         <div>
-                            <input th:field="*{name}" type="text" placeholder="Họ và tên"/>
+                            <input th:field="*{name}" type="text" placeholder="Họ và tên *"/>
                             <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                         </div>
                         <div>
-                            <input th:field="*{dayOfBirth}" type="date" placeholder="Ngày sinh"/>
+                            <input th:field="*{dayOfBirth}" type="date" placeholder="Ngày sinh *"/>
                             <p style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}"></p>
                         </div>
                         <div>
-                            <input th:field="*{address}" type="text" placeholder="Địa chỉ"/>
+                            <input th:field="*{address}" type="text" placeholder="Địa chỉ *"/>
                             <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
                         </div>
                         <div>
-                            <input th:field="*{email}" type="email" placeholder="Email"/>
+                            <input th:field="*{email}" type="email" placeholder="Email *"/>
                             <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                         </div>
                         <div>
-                            <input th:field="*{phone}" type="number" placeholder="Số điện thoại"/>
+                            <input th:field="*{phone}" type="number" placeholder="Số điện thoại *"/>
                             <p style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                         </div>
                         <div>
@@ -205,11 +202,11 @@
                             </select>
                         </div>
                         <div>
-                            <input th:field="*{appUser.userName}" type="text" placeholder="Tài khoản"/>
+                            <input th:field="*{appUser.userName}" type="text" placeholder="Tài khoản *"/>
                             <p style="color: red" th:if="${#fields.hasErrors('appUser.userName')}" th:errors="*{appUser.userName}"></p>
                         </div>
                         <div>
-                            <input th:field="*{appUser.encrytedPassword}" type="password" placeholder="Mật khẩu"/>
+                            <input th:field="*{appUser.encrytedPassword}" type="password" placeholder="Mật khẩu *"/>
                             <p style="color: red" th:if="${#fields.hasErrors('appUser.encrytedPassword')}" th:errors="*{appUser.encrytedPassword}"></p>
 
                         </div>

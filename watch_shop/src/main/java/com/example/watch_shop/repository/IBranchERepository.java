@@ -1,4 +1,4 @@
-package com.example.watch_shop.repository.employeeRepository;
+package com.example.watch_shop.repository;
 
 import com.example.watch_shop.model.Branch;
 import org.springframework.data.repository.PagingAndSortingRepository;

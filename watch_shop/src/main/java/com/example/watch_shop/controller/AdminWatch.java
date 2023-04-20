@@ -1,7 +1,9 @@
 package com.example.watch_shop.controller;
 
 import com.example.watch_shop.dto.WatchDTO;
+import com.example.watch_shop.model.OrderDetail;
 import com.example.watch_shop.model.Watch;
+import com.example.watch_shop.repository.PostCommentSummary;
 import com.example.watch_shop.service.IManufactureService;
 import com.example.watch_shop.service.ITypeWatchService;
 import com.example.watch_shop.service.IWatchService;
@@ -131,5 +133,11 @@ public class AdminWatch {
             redirectAttributes.addFlashAttribute("msg", "Xóa không thành công");
         }
         return "redirect:/adminWatch";
+    }
+    @GetMapping("/quantity")
+    public String quantitySell(Model model){
+       List<PostCommentSummary> orderDetailList = iWatchService.getQuantitySell();
+       model.addAttribute("orderDetailList" , orderDetailList);
+       return "/admin/product/quantity-sell";
     }
 }

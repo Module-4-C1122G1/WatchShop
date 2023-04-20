@@ -2,7 +2,9 @@ package com.example.watch_shop.service.impl;
 
 import com.example.watch_shop.model.Branch;
 import com.example.watch_shop.model.Watch;
+import com.example.watch_shop.repository.IOrderDetailRepository;
 import com.example.watch_shop.repository.IWatchRepository;
+import com.example.watch_shop.repository.PostCommentSummary;
 import com.example.watch_shop.service.IWatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class WatchService implements IWatchService {
     @Autowired
     private IWatchRepository iWatchRepository;
+    @Autowired
+    private IOrderDetailRepository orderDetailRepository;
 
     @Override
     public Page<Watch> findAll(PageRequest pageRequest) {
@@ -26,6 +30,11 @@ public class WatchService implements IWatchService {
     @Override
     public List<Watch> findAll() {
         return iWatchRepository.findAll();
+    }
+
+    @Override
+    public List<PostCommentSummary> getQuantitySell() {
+        return orderDetailRepository.getQuantityByOderDetail();
     }
 
     @Override

@@ -30,6 +30,11 @@ public class BranchService implements IBranchService {
     private IManagerWatchBranch managerWatchBranch;
 
     @Override
+    public List<Branch> findAll() {
+        return watchBranchRepository.findAll();
+    }
+
+    @Override
     public Page<Branch> findAll(String name, Pageable pageable) {
         return watchBranchRepository.findBranchByNameContainingAndIsDelete(name, pageable, false);
     }
