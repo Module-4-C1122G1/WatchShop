@@ -55,7 +55,7 @@ public class WatchController {
         return "register";
     }
 
-    @PostMapping("search")
+    @GetMapping("search")
     public String searchByName(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page, @RequestParam(name = "name", required = false) String name) {
         Page<Watch> watchPage = iWatchService.findByName(name, PageRequest.of(page, 6));
         if (watchPage.isEmpty()) {

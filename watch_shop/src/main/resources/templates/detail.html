@@ -380,11 +380,15 @@
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
                         </li>
+                        <li class="nav-item">
+                            <a th:each="authority : ${#authentication.getAuthorities()}" th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}" class="nav-link" th:href="@{/login}">Admin</a>
+                        </li>
                     </ul>
                     <div class="user_option-box">
                         <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="fa fa-user"></i></a>
                         <div class="dropdown-menu dropdown-menu-end">
+                            <div style="text-align: center" th:text="${#request.userPrincipal.name}"></div>
                             <div class="dropdown-divider"></div>
                             <a th:href="@{/logout}">Logout</a>
                         </div>
@@ -588,12 +592,6 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-</div>
-</form>
-=======
->>>>>>> 0c8c0869e659207349532f4cb6152815226029a6
-
 </div>
 <footer class="footer_section">
     <div class="container">
