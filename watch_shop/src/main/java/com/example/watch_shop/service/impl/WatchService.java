@@ -1,5 +1,6 @@
 package com.example.watch_shop.service.impl;
 
+import com.example.watch_shop.model.Branch;
 import com.example.watch_shop.model.Watch;
 import com.example.watch_shop.repository.IOrderDetailRepository;
 import com.example.watch_shop.repository.IWatchRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WatchService implements IWatchService {
@@ -36,8 +38,8 @@ public class WatchService implements IWatchService {
     }
 
     @Override
-    public Page<Watch> findAllWatch(String name, Pageable pageable) {
-        return iWatchRepository.findByNameContaining(name, pageable);
+    public Page<Watch> findAllWatch(String name,Pageable pageable) {
+        return iWatchRepository.findByNameContainingAndIsDelete(name,pageable,false);
     }
 
     @Override
@@ -50,10 +52,19 @@ public class WatchService implements IWatchService {
         iWatchRepository.save(watch);
     }
 
+    //    @Override
+//    public void delete(int idWatch) {
+//        iWatchRepository.delete(findById(idWatch));
+//    }
     @Override
     public void delete(int idWatch) {
-        iWatchRepository.delete(findById(idWatch));
+        Optional<Watch> watch = iWatchRepository.findById(idWatch);
+        if (watch.isPresent()) {
+            watch.get().setDelete(true);
+            iWatchRepository.save(watch.get());
+        }
     }
+
 
     public Page<Watch> findByType(Integer id, PageRequest pageRequest) {
         return iWatchRepository.findWatchByTypeWatchId(id, pageRequest);
@@ -66,11 +77,11 @@ public class WatchService implements IWatchService {
 
     @Override
     public Page<Watch> findByName(String name, PageRequest pageRequest) {
-        return iWatchRepository.findWatchByNameContaining(name,pageRequest);
+        return iWatchRepository.findWatchByNameContaining(name, pageRequest);
     }
 
-    public void updateQuantity(Integer qtt,Integer id){
-        Watch watch=findById(id);
+    public void updateQuantity(Integer qtt, Integer id) {
+        Watch watch = findById(id);
         watch.setQuantity(qtt);
         iWatchRepository.save(watch);
     }

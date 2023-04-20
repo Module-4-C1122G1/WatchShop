@@ -479,12 +479,24 @@
 
                     <hr style="color: #abb2b7">
                         <div class="mt-2 pr-3 content"><p th:utext="${watch.detail}"></p></div>
+                    <hr style="color: #abb2b7">
+                    <div class="mt-2 pr-3 content"><p th:utext="${watch.detail}"></p></div>
 
                     <div class="ratings d-flex flex-row align-items-center">
                         <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
                         <span>441 reviews</span></div>
-
+<!--                    <div class="mt-5"><span class="fw-bold">Color</span>-->
+<!--                        <div class="colors">-->
+<!--                            <ul id="marker">-->
+<!--                                <li id="marker-1"></li>-->
+<!--                                <li id="marker-2"></li>-->
+<!--                                <li id="marker-3"></li>-->
+<!--                                <li id="marker-4"></li>-->
+<!--                                <li id="marker-5"></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="buttons d-flex flex-row mt-5 gap-3">
                         <button th:if="${watch.quantity >0 && #request.userPrincipal != null}" class="button" style="vertical-align:middle" type="submit"><span>Mua ngay </span></button>
                        </button>

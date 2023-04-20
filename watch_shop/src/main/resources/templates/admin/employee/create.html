@@ -18,8 +18,8 @@
 
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+<body class="g-sidenav-show " style="background-color: #dedde3">
+<aside style="background-color: #c0bfc4" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
        id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -31,7 +31,7 @@
         </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse  w-auto h-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link  " href="../dashboard.html">
@@ -76,7 +76,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Sản phẫm</span>
+                    <span class="nav-link-text ms-1">Sản phẩm </span>
                 </a>
             </li>
             <li class="nav-item">
@@ -224,7 +224,7 @@
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Tìm kiếm theo tên sản phẫm">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm ">
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
@@ -339,8 +339,17 @@
         </div>
     </nav>
     <!-- End Navbar -->
-    <div class="row my-2 mx-2" style="width: 95%;background: bisque;height: auto;">
+    <div class="row my-2 mx-2" style="width: 95%;background: #d4d4e3;height: auto;">
         <div class="col-md-12">
+            <a href="/employee" style="display: block;margin-left: 1em;margin-top: 1em">
+                <button type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"
+                         viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
+                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
+                    </svg>
+                </button>
+            </a>
             <h2 class="title pt-5 pb-3" style="text-align: center">Thêm mới nhân viên</h2>
             <form style="width: 50%;margin: 0 auto" action="/employee/create" th:object="${employeeDTO}"
                   novalidate="novalidate" method="post">
@@ -402,10 +411,14 @@
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Ảnh:</small>
                 <div class="row rone">
-                    <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <input type="text" class="form-control" th:field="*{img}"
-                               style="font-size: 13px;font-weight: bold;padding-left: 40px;">
-                    </div>
+<!--                    thêm ảnh từ máy-->
+                        <div class="form-group">
+                            <label class="form-label required">
+                            </label>
+                            <input type="file" multiple class="form-control required"
+                                   id="uploaded-file" name="uploaded-file" th:field="*{img}"/>
+                        </div>
+
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Bằng cấp:</small>
                 <div class="row rone">
@@ -435,9 +448,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button type="submit"
-                            style="margin: 0 auto; width: 165px;background: #cb0c9f; border-radius: 10px;color: white;border: #cb0c9f">
-                        <span>CREATE ACCOUNT</span></button>
+                    <div class="col-3"></div>
+                    <div class="col-3"><button type="submit" class="btn btn-secondary" style="display: block;margin:0 auto;width: 120%;background: #2c2972; border-radius: 10px" onclick="myFunction()">Thêm mới</button></div>
+                    <div class="col-3"><button type="reset" class="btn btn-secondary" style="background-color: red;display: block;width: 100%;border-radius: 10px">Hủy bỏ</button></div>
+                    <div class="col-3"></div>
                 </div>
             </form>
         </div>

@@ -34,8 +34,17 @@ public class Employee {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_branch")
     private Branch branch;
-
+    @Column(name = "is_delete")
+    private boolean isDelete;
     public Employee() {
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 
     public Employee(Integer id, String name, String dateOfBirth, String gender, Double salary, String address, String phone, String email, String img, Diploma diploma, Position position, Branch branch) {
