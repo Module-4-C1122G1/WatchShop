@@ -1,10 +1,9 @@
 package com.example.watch_shop.controller;
 
 import com.example.watch_shop.model.Customer;
-import com.example.watch_shop.service.ICartService;
-import com.example.watch_shop.service.ICustomerService;
-import com.example.watch_shop.service.IOrderDetailService;
-import com.example.watch_shop.service.IOrderService;
+import com.example.watch_shop.service.*;
+import com.example.watch_shop.service.employeeService.IBranchEService;
+import com.example.watch_shop.service.manager_watch_branch.IBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -27,6 +26,8 @@ public class OrderWatchController {
     private ICustomerService iCustomerService;
     @Autowired
     private IOrderDetailService iOrderDetailService;
+    @Autowired
+    private IWatchService iWatchService;
 
     @GetMapping("")
     public String findAll(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
@@ -38,6 +39,9 @@ public class OrderWatchController {
         }
         model.addAttribute("customer", list);
         model.addAttribute("price", iCartService.selectTotalPriceMax());
+        String[] a=iWatchService.findByNameContainingOrderBy().split(",");
+        model.addAttribute("nameWatch",a[0]);
+        model.addAttribute("qttWatch",a[1]);
         model.addAttribute("totalPrice", iOrderService.totalPrice());
         return "admin/cart/list";
     }

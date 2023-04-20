@@ -520,7 +520,6 @@
                                                                                        th:text="${watch.name}"></h5>
                         <span
                                 class="heart"><i class='bx bx-heart'></i></span></div>
-                    <!--                    <h6><span th:text="${watch.price}"></span> VND</h6>-->
 
                     <h6><span th:text="${#numbers.formatCurrency(watch.price)}"></span>VND</h6>
 
@@ -533,6 +532,7 @@
                         <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
                                 class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i></div>
                         <span>441 reviews</span></div>
+
 
                     <div sec:authorize="isAuthenticated()" class="buttons d-flex flex-row mt-5 gap-3">
 
@@ -580,7 +580,6 @@
 
                             //]]></script>
                         </div>
-                        </form>
                     </div>
                 </div>
                 <div class="search-option"><i class='bx bx-search-alt-2 first-search'></i>
@@ -589,8 +588,11 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
 </form>
+=======
+>>>>>>> 0c8c0869e659207349532f4cb6152815226029a6
 
 </div>
 <footer class="footer_section">

@@ -396,12 +396,11 @@
                 <div class="col-8">
                     <div class="numbers">
                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Sản phẩm được mua nhiều nhất</p>
-                        <h5 class="font-weight-bolder">
-                            $53,000
+                        <h5 class="font-weight-bolder" th:text="${nameWatch}">
                         </h5>
                         <p class="mb-0">
-                            <span class="text-success text-sm font-weight-bolder">+55%</span>
-                            since yesterday
+                            Số lượng:
+                            <span class="text-success text-sm font-weight-bolder" th:text="${qttWatch}"></span>
                         </p>
                     </div>
                 </div>
@@ -449,8 +448,7 @@
                                     <td th:text="${order.price}"></td>
                                     <td>
                                         <a  th:href="@{/order/detail(id=${order.getIdOrder()})}">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
+                                            <i class="fa fa-table" style="color: black"></i>                                        </a>
                                     </td>
                                 </tr>
                                 </tbody>
