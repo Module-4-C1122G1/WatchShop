@@ -17,13 +17,18 @@ import java.util.List;
 
 public interface IWatchRepository extends PagingAndSortingRepository<Watch,Integer> {
 
-    List<Watch>findAll();
-    Page<Watch>findByNameContaining(String name, Pageable pageable);
-    Watch findByIdWatch(int idWatch);
-    Page<Watch> findWatchByTypeWatchId(Integer id,PageRequest pageRequest);
+    List<Watch> findAll();
 
-    Page<Watch> findWatchByNameContaining(String name,PageRequest pageRequest);
+    Page<Watch> findByNameContaining(String name, Pageable pageable);
+
+    Watch findByIdWatch(int idWatch);
+
+    Page<Watch> findWatchByTypeWatchId(Integer id, PageRequest pageRequest);
+
+    Page<Watch> findWatchByNameContaining(String name, PageRequest pageRequest);
+
     @Transactional
-    @Query(value = "select * from watch join manage_product_branch on manage_product_branch.id_watch = watch.id_watch where manage_product_branch.id_branch = ?" , nativeQuery = true)
+    @Query(value = "select * from watch join manage_product_branch on manage_product_branch.id_watch = watch.id_watch where manage_product_branch.id_branch = ?", nativeQuery = true)
     List<Watch> findWatchByBranchIdBranch(@Param("idBranch") int idBranch);
+
 }

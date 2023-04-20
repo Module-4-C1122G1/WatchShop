@@ -48,17 +48,18 @@ public class EmployeeController {
         for (int i = 1; i < employeePage.getTotalPages(); i++) {
             integerList.add(i);
         }
+        integerList.add(integerList.size() + 1);
         model.addAttribute("integerList", integerList);
         model.addAttribute("branchList", iBranchEService.list());
-        model.addAttribute("list" , employeePage.getTotalElements());
+        model.addAttribute("list", employeePage.getTotalElements());
         return "admin/employee/list";
     }
 
     @GetMapping("/branch/{id}")
     public String seachByEmployee(@PathVariable Integer id, Model model, @RequestParam(defaultValue = "0") Integer page) {
-        model.addAttribute("employee", employeeService.findByBranch(id, PageRequest.of(page, 5)));
+        model.addAttribute("employee", employeeService.findByBranch(id, PageRequest.of(page, 10)));
         model.addAttribute("branchList", iBranchEService.list());
-//        model.addAttribute("totalElement",employeeService.findByBranch(id,PageRequest.of(page,3)).getTotalPages());
+        model.addAttribute("totalElement", employeeService.findByBranch(id, PageRequest.of(page, 3)).getTotalPages());
         return "/admin/employee/list";
     }
 
@@ -98,8 +99,9 @@ public class EmployeeController {
 
 
     @GetMapping("/delete")
-    public String delete(@RequestParam(required = false) Integer deleteId) {
+    public String delete(@RequestParam(required = false) Integer deleteId, RedirectAttributes redirectAttributes) {
         employeeService.delete(deleteId);
+        redirectAttributes.addFlashAttribute("msg", "thành công");
         return "redirect:/employee";
     }
 

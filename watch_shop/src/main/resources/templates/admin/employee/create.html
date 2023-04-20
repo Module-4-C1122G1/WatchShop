@@ -19,7 +19,8 @@
 </head>
 
 <body class="g-sidenav-show " style="background-color: #dedde3">
-<aside style="background-color: #c0bfc4" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+<aside style="background-color: #c0bfc4"
+       class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
        id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -343,7 +344,8 @@
         <div class="col-md-12">
             <a href="/employee" style="display: block;margin-left: 1em;margin-top: 1em">
                 <button type="button" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                         class="bi bi-house-fill"
                          viewBox="0 0 16 16">
                         <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
                         <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
@@ -351,7 +353,8 @@
                 </button>
             </a>
             <h2 class="title pt-5 pb-3" style="text-align: center">Thêm mới nhân viên</h2>
-            <form style="width: 50%;margin: 0 auto" action="/employee/create" th:object="${employeeDTO}"
+            <form style="width: 50%;margin: 0 auto" action="/employee/create" name="my-form" id="my-form"
+                  th:object="${employeeDTO}"
                   novalidate="novalidate" method="post">
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Tên nhân viên:</small>
                 <div class="row rone">
@@ -411,15 +414,28 @@
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Ảnh:</small>
                 <div class="row rone">
-<!--                    thêm ảnh từ máy-->
-                        <div class="form-group">
-                            <label class="form-label required">
-                            </label>
-                            <input type="file" multiple class="form-control required"
-                                   id="uploaded-file" name="uploaded-file" th:field="*{img}"/>
-                        </div>
+                    <!--                    thêm ảnh từ máy-->
+                    <!--                        <div class="form-group">-->
+                    <!--                            <label class="form-label required">-->
+                    <!--                            </label>-->
+                    <!--                            <input type="file" multiple class="form-control required"-->
+                    <!--                                   id="uploaded-file" name="uploaded-file" th:field="*{img}"/>-->
+                    <!--                        </div>-->
+                    <div class="col-12"><p class="m-2">Thêm ảnh</p>
+                        <!--                   img-->
 
+                        <div class="box">
+                            <input class="form-control" type="hidden" id="image-url" name="image-url"
+                                   th:field="*{img}">
+                        </div>
+                        <input type="file" id="file-input" name="file-input">
+                    </div>
+                    <p th:if="${#fields.hasErrors('img')}" th:errors="*{img}"
+                       style="color: red"></p>
                 </div>
+
+
+
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Bằng cấp:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
@@ -449,10 +465,20 @@
                 </div>
                 <div class="row">
                     <div class="col-3"></div>
-                    <div class="col-3"><button type="submit" class="btn btn-secondary" style="display: block;margin:0 auto;width: 120%;background: #2c2972; border-radius: 10px" onclick="myFunction()">Thêm mới</button></div>
-                    <div class="col-3"><button type="reset" class="btn btn-secondary" style="background-color: red;display: block;width: 100%;border-radius: 10px">Hủy bỏ</button></div>
+                    <div class="col-3">
+                        <button type="" name="upload-btn" id="upload-btn" class="btn btn-secondary"
+                                style="display: block;margin:0 auto;width: 120%;background: #2c2972; border-radius: 10px"
+                                >Thêm mới
+                        </button>
+                    </div>
+                    <div class="col-3">
+                        <button type="reset" class="btn btn-secondary"
+                                style="background-color: red;display: block;width: 100%;border-radius: 10px">Hủy bỏ
+                        </button>
+                    </div>
                     <div class="col-3"></div>
                 </div>
+
             </form>
         </div>
     </div>
@@ -553,6 +579,56 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 </script>
+<script>
+
+    const button = document.getElementById("upload-btn");
+    const fileInput = document.getElementById("file-input");
+    const imageUrlInput = document.getElementById("image-url");
+    let clicked = false; // Cờ để chặn hành vi auto
+
+    button.addEventListener("click", function (event) {
+        event.preventDefault(); // Ngăn chặn form đăng ký bị tự động submit
+
+        if (!clicked) {
+            clicked = true;
+            const apiUrl = "https://api.imgbb.com/1/upload";
+            const apiKey = "43e37c08bd9fd35d4dd7043f05e23a85";
+            const imgFile = fileInput.files[0];
+            const imgUrl = imageUrlInput.value.trim();
+
+            if (!imgUrl && !imgFile) {
+                // Nếu url và file đều không có, hiển thị thông báo lỗi
+                alert("Yêu cầu người dùng nhập ảnh");
+                clicked = false;
+            } else if (!imgUrl && imgFile) {
+                // Nếu chỉ có file mà không có url, tiến hành upload file lên API
+                const formData = new FormData();
+                formData.append("image", imgFile);
+                formData.append("key", apiKey);
+
+                setTimeout(function () { // Thêm setTimeout để chờ 1s trước khi chạy API
+                    fetch(apiUrl, {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            const imgUrl = data.data.url;
+                            imageUrlInput.value = imgUrl; // Gán URL của ảnh đã tải lên vào giá trị của thẻ input
+                            clicked = false;
+                            document.getElementById("my-form").submit(); // Submit form sau khi tải ảnh lên thành công
+                        });
+                }, 1000);
+            } else {
+                // Nếu đã có url thì submit form như bình thường
+                document.getElementById("my-form").submit();
+            }
+        }
+    });
+    </script>
+    <script src="https://api.imgbb.com/js/imageupload.js"></script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
