@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("order")
+@RequestMapping("/order")
 public class OrderWatchController {
     @Autowired
     private IOrderService iOrderService;
