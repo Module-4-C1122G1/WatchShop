@@ -22,12 +22,10 @@
 <aside style="background-color: #c0bfc4" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
        id="sidenav-main">
     <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-           aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
-           target="_blank">
-            <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" th:href="@{/watch/index} " target="_blank" >
+            <img th:src="@{/images/watch.jpg}" class="navbar-brand-img h-300 w-300" alt="main_logo">
+            <span class="ms-1 font-weight-bold" style="color: #312f83">Trang chủ</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -127,9 +125,6 @@
                     <span class="nav-link-text ms-1">Nhân viên</span>
                 </a>
             </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý tài khoản</h6>
-            </li>
             <li class="nav-item">
                 <a class="nav-link  " th:href="@{/order}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -154,6 +149,9 @@
                     </div>
                     <span class="nav-link-text ms-1">Hoá đơn</span>
                 </a>
+            </li>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý tài khoản</h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link  " style="background-color: #c3c5c9">
@@ -227,7 +225,7 @@
                     <a style="font-size: 16px;" href="/adminWatch">Sản phẩm</a>
 
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Sản phẩm</h6>
+<!--                <h6 class="font-weight-bolder mb-0">Cập nhật thông tin sản phẩm</h6>-->
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -353,21 +351,21 @@
     <div class="row my-2 mx-2" style="width: 95%;background: #d4d4e3;height: auto;">
         <div class="col-md-12" style="
     margin-top: 80px !important">
-<!--            <a href="/adminWatch" style="display: block;margin-left: 1em;margin-top: 1em">-->
-<!--                <button type="button" class="btn btn-secondary">-->
-<!--                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"-->
-<!--                         viewBox="0 0 16 16">-->
-<!--                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>-->
-<!--                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>-->
-<!--                    </svg>-->
-<!--                </button>-->
-<!--            </a>-->
+            <!--            <a href="/adminWatch" style="display: block;margin-left: 1em;margin-top: 1em">-->
+            <!--                <button type="button" class="btn btn-secondary">-->
+            <!--                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"-->
+            <!--                         viewBox="0 0 16 16">-->
+            <!--                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>-->
+            <!--                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>-->
+            <!--                    </svg>-->
+            <!--                </button>-->
+            <!--            </a>-->
             <h2 class="title pt-3 pb-3" style="text-align: center"> Cập nhật thông tin đồng hồ</h2>
             <form action="/adminWatch/update" method="post" th:object="${watch}" style="width: 50%;margin: 0 auto">
                 <div class="form-group col-md-12 py-3" style="position: relative;">
                     <input type="hidden" class="form-control" th:field="*{idWatch}" name="idWatch">
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Tên đồng hồ: <span style="color: red">*</span></small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Tên đồng hồ: <span style="color: red">*</span></small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{name}" name="name" id="name"
@@ -375,7 +373,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Sai tên</p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Giá (VND): <span style="color: red">*</span> </small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;"> Giá (VND): <span style="color: red">*</span> </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="number" class="form-control" th:field="*{price}" name="price" id="price"
@@ -383,7 +381,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Sai giá</p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Thương hiệu: </small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Thương hiệu: </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" id="manufactureid" style="position: relative;">
                         <select class="form-select" th:field="*{manufacturer}">
@@ -392,7 +390,7 @@
                         </select>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;">Loại đồng hồ:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Loại đồng hồ:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" id="typeWatchID" style="position: relative;">
                         <select class="form-select" th:field="*{typeWatch}" style="font-size: 13px">
@@ -401,41 +399,41 @@
                         </select>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Ảnh: </small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;"> Ảnh: </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{image}" name="image" id="image"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Chất liệu dây: </small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;"> Chất liệu dây: </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{strapMaterial}" name="strapMaterial" id="strapMaterial"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Đường kính: </small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;"> Đường kính: </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{diameter}" name="diameter" id="diameter"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Màu mặt:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;"> Màu mặt:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{color}" name="color" id="color"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Thông tin chi tiết: </small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;"> Thông tin chi tiết: </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <textarea class="form-control" name="detail" id="detail" th:text="${watch.detail.replace('<br>','&#10')}"></textarea>
+                        <textarea style="height: 150%;" class="form-control" name="detail" id="detail" th:text="${watch.detail.replace('<br>','&#10')}"></textarea>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 13px;font-weight: bold;"> Số lượng: <span style="color: red">*</span> </small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;"> Số lượng: <span style="color: red">*</span> </small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="number" class="form-control" th:field="*{quantity}" name="quantity" id="quantity"

@@ -20,7 +20,7 @@ public class WatchDTO {
     private String name;
 
     @NotNull(message = "Giá không được để trống ")
-    @Min(value = 0,message = "Giá phải lớn hơn 0")
+    @Min(value = 1,message = "Giá phải lớn hơn 0")
     private Integer price;
 
     private String image;
