@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
@@ -24,11 +24,7 @@
             <div class="col-10">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
-                    <div>
-                        <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i
-                                class="fas fa-angle-down mt-1"></i></a></p>
-                    </div>
+                    <h3 class="fw-normal mb-0 text-black">Giỏ Hàng</h3>
                 </div>
 
                 <div class="card rounded-3 mb-4" th:each="listCart:${list}">
@@ -76,23 +72,20 @@
                         </div>
                     </div>
                 </div>
-                <p>Total Price <span th:text="${total}"></span> VNĐ</p>
+                <p>Tổng Giá Tiền <span id="result" th:text="${total}"></span> VNĐ</p>
                 <div class="card">
                     <div class="card-body">
                         <a th:href="@{/carts/buys(name=${#request.userPrincipal.name})}"
-                           class="btn btn-warning btn-block btn-lg">Proceed to Pay</a>
+                           class="btn btn-warning btn-block btn-lg">Thanh toán</a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </section>
 
 
-<!-- Button trigger modal -->
-<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
-<!--    Launch demo modal-->
-<!--</button>-->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,7 +96,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Xác nhận xoá <span id="nameWatch"></span></p>
+                <p>Xác nhận xoá <span id="nameWatch"> ra khỏi giỏ hàng</span></p>
             </div>
             <div class="modal-footer">
                 <form action="carts/delete">
@@ -123,12 +116,17 @@
         <div class="row">
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_detail">
-                    <h4>
-                        About
-                    </h4>
+                    <div class="heading_container">
+                        <h2>
+                            Về chúng tôi
+                        </h2>
+                    </div>
                     <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over
-                        200 Latin words, combined with
+                        Được mệnh danh là thương hiệu đồng hồ “Ngon - Bổ - Rẻ”,
+                        đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
+                        Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
+                        bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
+                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                     <div class="footer_social">
                         <a href="">
@@ -149,7 +147,7 @@
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_contact">
                     <h4>
-                        Reach at..
+                        Liên hệ
                     </h4>
                     <div class="contact_link_box">
                         <a href="">
@@ -161,13 +159,13 @@
                         <a href="">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                  Call +01 1234567890
+                  Call 0961053275
                 </span>
                         </a>
                         <a href="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                  demo@gmail.com
+                  minhn091099@gmail.com
                 </span>
                         </a>
                     </div>
@@ -196,8 +194,7 @@
         </div>
         <div class="footer-info">
             <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
+                &copy; <span id="displayYear"></span>ShopWatch by team3</a>
             </p>
         </div>
     </div>
