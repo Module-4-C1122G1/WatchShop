@@ -1,5 +1,8 @@
 package com.example.watch_shop.controller;
 
+import com.example.watch_shop.model.Customer;
+import com.example.watch_shop.service.ICartService;
+import com.example.watch_shop.service.ICustomerService;
 import com.example.watch_shop.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
