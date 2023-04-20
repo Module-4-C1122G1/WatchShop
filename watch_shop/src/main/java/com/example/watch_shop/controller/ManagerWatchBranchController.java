@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -64,10 +65,10 @@ public class ManagerWatchBranchController {
     }
 
     @GetMapping("/delete")
-    public String deleteBranch(@RequestParam int deleteId , Model model) {
+    public String deleteBranch(@RequestParam int deleteId , Model model , RedirectAttributes redirectAttributes) {
         branchService.delete(deleteId);
         Branch branch = branchService.findById(deleteId);
-        model.addAttribute("msg" , "Xoá " + branch.getName() + " thành công");
+        redirectAttributes.addFlashAttribute("msg" , "Xoá " + branch.getName() + " thành công");
         return "redirect:/branch";
     }
     @GetMapping("/create")
@@ -78,12 +79,12 @@ public class ManagerWatchBranchController {
     }
 
     @PostMapping("/create")
-    public String createBranch(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult , Model model) {
+    public String createBranch(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult , Model model , RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()){
             model.addAttribute("domains" , domainService.findAll());
             return "/admin/branch/create";
         }
-        model.addAttribute("msg" , "Thêm mới thành công");
+        redirectAttributes.addFlashAttribute("msg" , "Thêm mới thành công");
         branchService.create(branchDTO);
         return "redirect:/branch";
     }
@@ -96,12 +97,12 @@ public class ManagerWatchBranchController {
     }
 
     @PostMapping("/update")
-    public String updateSoccerPlayer(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult , Model model) {
+    public String updateSoccerPlayer(@Valid @ModelAttribute BranchDTO branchDTO , BindingResult bindingResult , Model model , RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()){
             model.addAttribute("domains" , domainService.findAll());
             return "/admin/branch/update";
         }
-        model.addAttribute("msg" , "Chỉnh sửa thành công");
+        redirectAttributes.addFlashAttribute("msg" , "Chỉnh sửa thành công");
         branchService.update(branchDTO, branchDTO.getIdBranch());
         return "redirect:/branch";
     }

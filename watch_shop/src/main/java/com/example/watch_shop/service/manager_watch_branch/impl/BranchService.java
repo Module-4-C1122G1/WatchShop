@@ -26,9 +26,6 @@ public class BranchService implements IBranchService {
     private IEmployeeRepository employeeRepository;
     @Autowired
     private IWatchRepository watchRepository;
-    @Autowired
-    private IManagerWatchBranch managerWatchBranch;
-
     @Override
     public List<Branch> findAll() {
         return watchBranchRepository.findAll();
@@ -71,10 +68,13 @@ public class BranchService implements IBranchService {
     @Override
     public void delete(int id) {
         Optional<Branch> branch = watchBranchRepository.findById(id);
+//        List<Employee> list = employeeRepository.findByBranchIdBranch(id);
+//        for (int i = 0; i < list.size(); i++) {
+//        }
         if (branch.isPresent()) {
             branch.get().removeWatch(branch.get().getWatchSet());
             branch.get().removeEmployee(branch.get().getEmployeeSet());
-//            employeeRepository.deleteEmployeeByBranchIdBranch(branch.get().getIdBranch());
+
             branch.get().setDelete(true);
             watchBranchRepository.save(branch.get());
         }
