@@ -6,6 +6,7 @@ import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.model.Watch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,4 +20,5 @@ public interface IBranchService {
     void create (BranchDTO branchDTO);
     void update(BranchDTO branchDTO , int id);
     void delete(int isDelete);
+    String findByNameContainingOrderBy();
 }

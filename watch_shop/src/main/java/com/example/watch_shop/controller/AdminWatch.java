@@ -54,7 +54,7 @@ public class AdminWatch {
                        @RequestParam(defaultValue = "") String name) {
         Sort sort= Sort.by("idWatch").descending();
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(),pageable.getPageSize(),sort);
-        Page<Watch> watchPage=iWatchService.findAllWatch(name, (PageRequest) sortedPage);
+        Page<Watch> watchPage=iWatchService.findAllWatch(name,(PageRequest) sortedPage);
         model.addAttribute("watchList",watchPage);
         model.addAttribute("list" , watchPage.getTotalElements());
         List<Integer> integerList =new ArrayList<>();
@@ -116,9 +116,20 @@ public class AdminWatch {
         }
     }
 
-    @GetMapping("/delete")
-    public String performDelete(@RequestParam(required = false) Integer deleteId) {
-        iWatchService.delete(deleteId);
+//    @GetMapping("/delete")
+//    public String performDelete(@RequestParam(required = false) Integer deleteId) {
+//        iWatchService.delete(deleteId);
+//        return "redirect:/adminWatch";
+//    }
+
+    @GetMapping("delete")
+    public String performDelete(@RequestParam(required = false) Integer deleteId, RedirectAttributes redirectAttributes) {
+        if (iWatchService.findById(deleteId) != null) {
+            redirectAttributes.addFlashAttribute("msg", "Xóa thành công ");
+            iWatchService.delete(deleteId);
+        } else {
+            redirectAttributes.addFlashAttribute("msg", "Xóa không thành công");
+        }
         return "redirect:/adminWatch";
     }
 }

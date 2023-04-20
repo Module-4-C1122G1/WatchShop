@@ -74,4 +74,9 @@ public class BranchService implements IBranchService {
             watchBranchRepository.save(branch.get());
         }
     }
+
+    @Override
+    public String findByNameContainingOrderBy() {
+        return watchRepository.findByIdWatch();
+    }
 }
