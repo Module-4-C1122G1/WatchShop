@@ -19,6 +19,7 @@
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <style>
         .placeicon {
             font-family: fontawesome;
@@ -30,7 +31,7 @@
         }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+
     <link rel="stylesheet" href="../static/css/style.scss">
 </head>
 
@@ -178,14 +179,14 @@
 </div>
 
 <!-- contact section -->
-<div style="margin-left: 250px; margin-top: 30px;  margin-bottom: 5px; height: 100px" th:if="${msg} != null" id="message_toast"
-     class="toast align-items-center show text-white bg-primary">
-    <div class="d-flex">
-        <div class="toast-body">
-            <h2 class="text-bg-primary text-center" th:text="${msg}"></h2>
-        </div>
-    </div>
-</div>
+<!--<div style="margin-left: 250px; margin-top: 30px;  margin-bottom: 5px; height: 100px" th:if="${msg} != null" id="message_toast"-->
+<!--     class="toast align-items-center show text-white bg-primary">-->
+<!--    <div class="d-flex">-->
+<!--        <div class="toast-body">-->
+<!--            <h2 class="text-bg-primary text-center" th:text="${msg}"></h2>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <section class="contact_section layout_padding">
     <div class="container">
         <div class="row">
@@ -195,6 +196,8 @@
                         <h2 style="margin: 0 auto; bottom: 30px">
                             Đăng nhập
                         </h2>
+                        <h2 hidden="hidden" id="msg" th:if="${msg} != null" th:text="${msg}"></h2>
+<!--                        <p th:text="${msg}" id="msg" style="display: none;align-content: center"></p>-->
                         <div th:if="${#request.getParameter('error') == 'true'}"
                              style="color:red; margin:auto;">
                             <p class="text-center">Đăng nhập thất bại !!!!</p>
@@ -257,12 +260,17 @@
         <div class="row">
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_detail">
-                    <h4>
-                        About
-                    </h4>
+                    <div class="heading_container">
+                        <h2>
+                            Về chúng tôi
+                        </h2>
+                    </div>
                     <p>
-                        Necessary, making this the first true generator on the Internet. It uses a dictionary of over
-                        200 Latin words, combined with
+                        Được mệnh danh là thương hiệu đồng hồ “Ngon - Bổ - Rẻ”,
+                        đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
+                        Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
+                        bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
+                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                     <div class="footer_social">
                         <a href="">
@@ -283,7 +291,7 @@
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_contact">
                     <h4>
-                        Reach at..
+                        Liên hệ
                     </h4>
                     <div class="contact_link_box">
                         <a href="">
@@ -295,13 +303,13 @@
                         <a href="">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                  Call +084 911899572
+                  Call 0961053275
                 </span>
                         </a>
                         <a href="">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             <span>
-                  Nhom2CodeGym@gmail.com
+                  minhn091099@gmail.com
                 </span>
                         </a>
                     </div>
@@ -330,8 +338,7 @@
         </div>
         <div class="footer-info">
             <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
+                &copy; <span id="displayYear"></span>ShopWatch by team3</a>
             </p>
         </div>
     </div>
@@ -351,16 +358,42 @@
 <!-- End Google Map -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<!--<script>-->
+<!--    window.addEventListener("load", (event) => {-->
+<!--        console.log("page is fully loaded");-->
+<!--        let myToastEl = document.getElementById('message_toast')-->
+<!--        myToastEl.classList.add('show');-->
+<!--        setTimeout(() => {-->
+<!--            myToastEl.classList.remove('show');-->
+<!--        }, 3000)-->
+<!--    });-->
+<!--</script>-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
 <script>
-    window.addEventListener("load", (event) => {
-        console.log("page is fully loaded");
-        let myToastEl = document.getElementById('message_toast')
-        myToastEl.classList.add('show');
-        setTimeout(() => {
-            myToastEl.classList.remove('show');
-        }, 3000)
-    });
+    let msg = document.getElementById("msg").innerText;
+    debugger
+    if (msg) {
+        Swal.fire({
+            title: '<div style="direction:rtl;font-size:12px;font-family:serif;font-weight:bold;">$msg</div>'.replace('$msg', msg),
+            fontSize: 1.6,
+            position: 'fixed',
+            icon: 'success',
+            // title: msg,
+            showConfirmButton: false,
+            timer: 1500,
+            style: 'w-10,h-10',
+            width: 50,
+            height: 50
+        })
+    }
 </script>
+
 </body>
 
 </html>

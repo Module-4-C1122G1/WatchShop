@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("order")
+@RequestMapping("/order")
 public class OrderWatchController {
     @Autowired
     private IOrderService iOrderService;
@@ -39,9 +39,12 @@ public class OrderWatchController {
         }
         model.addAttribute("customer", list);
         model.addAttribute("price", iCartService.selectTotalPriceMax());
-        String[] a=iWatchService.findByNameContainingOrderBy().split(",");
-        model.addAttribute("nameWatch",a[0]);
-        model.addAttribute("qttWatch",a[1]);
+        String[] a;
+        if (iWatchService.findByNameContainingOrderBy()!=null){
+            a=iWatchService.findByNameContainingOrderBy().split(",");
+            model.addAttribute("nameWatch",a[0]);
+            model.addAttribute("qttWatch",a[1]);
+        }
         model.addAttribute("totalPrice", iOrderService.totalPrice());
         return "admin/cart/list";
     }

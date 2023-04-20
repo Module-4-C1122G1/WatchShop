@@ -2,7 +2,9 @@ package com.example.watch_shop.controller;
 
 import com.example.watch_shop.dto.CartDTO;
 import com.example.watch_shop.model.Cart;
+import com.example.watch_shop.model.OrderDetail;
 import com.example.watch_shop.model.Watch;
+import com.example.watch_shop.repository.PostCommentSummary;
 import com.example.watch_shop.service.IManufactureService;
 import com.example.watch_shop.service.ITypeWatchService;
 import com.example.watch_shop.service.IWatchService;
@@ -12,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("watch")
@@ -55,7 +59,7 @@ public class WatchController {
         return "register";
     }
 
-    @PostMapping("search")
+    @GetMapping("search")
     public String searchByName(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page, @RequestParam(name = "name", required = false) String name) {
         Page<Watch> watchPage = iWatchService.findByName(name, PageRequest.of(page, 6));
         if (watchPage.isEmpty()) {
@@ -76,5 +80,4 @@ public class WatchController {
         model.addAttribute("list", iWatchService.findAll(PageRequest.of(page, 12)));
         return "index";
     }
-
 }
