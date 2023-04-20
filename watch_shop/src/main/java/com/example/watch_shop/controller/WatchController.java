@@ -80,11 +80,4 @@ public class WatchController {
         model.addAttribute("list", iWatchService.findAll(PageRequest.of(page, 12)));
         return "index";
     }
-    @GetMapping("/quantity-sell")
-    public String quantitySell(Model model){
-        List<PostCommentSummary> orderDetailList = iWatchService.getQuantitySell();
-        model.addAttribute("orderDetailList" , orderDetailList);
-        return "/admin/product/quantity-sell";
-    }
-
 }
