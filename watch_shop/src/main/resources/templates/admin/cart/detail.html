@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -134,26 +143,26 @@
                     <span class="nav-link-text ms-1">Nhân viên</span>
                 </a>
             </li>
-                        <li class="nav-item">
-                            <a class="nav-link  " th:href="@{/order}">
-                                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <title>credit-card</title>
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                                <g transform="translate(1716.000000, 291.000000)">
-                                                    <g transform="translate(453.000000, 454.000000)">
-                                                        <path class="color-background opacity-6" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
-                                                        <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                                    </g>
-                                                </g>
-                                            </g>
+            <li class="nav-item">
+                <a class="nav-link  " th:href="@{/order}">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(453.000000, 454.000000)">
+                                            <path class="color-background opacity-6" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
+                                            <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
                                         </g>
-                                    </svg>
-                                </div>
-                                <span class="nav-link-text ms-1">Hoá đơn</span>
-                            </a>
-                        </li>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Hoá đơn</span>
+                </a>
+            </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý tài khoản</h6>
             </li>
@@ -223,16 +232,6 @@
                 <h4 class="font-weight-bolder mb-0">Hoá đơn</h4>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <form action="/adminWatch">
-                        <div class="input-group">
-                            <span class="input-group-text text-body"><i class="fas fa-search"
-                                                                        aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Nhập tên sản phẩm..."
-                                   name="name" th:value="${name}">
-                        </div>
-                    </form>
-                </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -344,75 +343,6 @@
             </div>
         </div>
     </nav>
-    <div class="card" style="display: inline-block; width: 20%;margin: 20px auto;margin-left: 20px">
-        <div class="card-body p-3" style="min-height: 160px">
-            <div class="row">
-                <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Tổng doanh thu</p>
-                        <p class="text-success text-sm font-weight-bolder" th:text="${#numbers.formatCurrency(totalPrice)}">
-
-                        </p>
-<!--                        <p class="mb-0">-->
-<!--                            <span class="text-success text-sm font-weight-bolder">+55%</span>-->
-<!--                            since yesterday-->
-<!--                        </p>-->
-                    </div>
-                </div>
-                <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="card" style="display: inline-block; width: 20%;margin: 20px auto">
-        <div class="card-body p-3" style="min-height: 160px">
-            <div class="row">
-                <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Khách hàng mua nhiều nhất</p>
-                        <h5 class="font-weight-bolder" th:each="cus : ${customer}" th:text="${cus.name}">
-                        </h5>
-                        <p class="mb-0">
-                            <span class="text-success text-sm font-weight-bolder" th:text="${#numbers.formatCurrency(price)}"></span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="card" style="display: inline-block; width: 20%;margin: 20px auto">
-        <div class="card-body p-3" style="min-height: 160px">
-            <div class="row">
-                <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Sản phẩm được mua nhiều nhất</p>
-                        <h5 class="font-weight-bolder" th:text="${nameWatch}">
-                        </h5>
-                        <p class="mb-0">
-                            Số lượng:
-                            <span class="text-success text-sm font-weight-bolder" th:text="${qttWatch}"></span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
 
 
     <div class="container-fluid py-4">
@@ -429,31 +359,49 @@
                                 <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2"
-                                        style="font-family: 'Times New Roman'">Số thứ tự
+                                        style="font-family: 'Times New Roman'">Sản Phẩm
                                     </th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2"
-                                        style="font-family: 'Times New Roman'">Tên khách hàng
+                                        style="font-family: 'Times New Roman'">Số Lượng
                                     </th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2"
-                                        style="font-family: 'Times New Roman'">Gía (VND)
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2"
-                                        style="font-family: 'Times New Roman'">Tác vụ
+                                        style="font-family: 'Times New Roman'">Giá
                                     </th>
                                 </tr>
                                 </thead>
-                                <tr th:each="order:${listOrder}">
-                                    <td th:text="${order.idOrder}"></td>
-                                    <td th:text="${order.customer.getName()}"></td>
-                                    <td th:text="${order.price}"></td>
-                                    <td>
-                                        <a  th:href="@{/order/detail(id=${order.getIdOrder()})}">
-                                            <i class="fa fa-table" style="color: black"></i>                                        </a>
-                                    </td>
+                                <tr th:each="od:${list}">
+                                    <td th:text="${od.watch.name}"></td>
+                                    <td th:text="${od.quantity}"></td>
+                                    <td th:text="${od.price}"></td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Xóa hoá đơn </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/order/delete">
+                            <div class="modal-body">
+                                <label for="deleteId"></label>
+                                <input type="hidden" id="deleteId" name="orderId">
+                                Bạn có muốn xóa hoá đơn<span id="deleteIds"
+                                                             style="color: brown; font-weight: bold"></span>
+                                ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                                <button type="submit" class="btn btn-primary">Đồng ý</button>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
@@ -462,8 +410,8 @@
     </div>
     <!--Phân trang-->
     <div class="text-center container">
-        <a class="page-item btn btn-dark page-item" th:if="${listOrder.hasPrevious()}"
-           th:href="@{/order(page = ${listOrder.number - 1})}">
+        <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+           th:href="@{/order/detail(page = ${list.number - 1})}">
             <i class="ti-angle-left">Trước</i>
         </a>
 
@@ -474,8 +422,8 @@
         <!--           th:text="${pageNumber}">-->
         <!--        </a>-->
 
-        <a class="page-item btn btn-dark page-item" th:if="${listOrder.hasNext()}"
-           th:href="@{/order(page = ${listOrder.number + 1})}">
+        <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+           th:href="@{/order/detail(page = ${list.number + 1})}">
             <i class="ti-angle-right">Sau</i>
         </a>
     </div>
@@ -490,7 +438,7 @@
                         </script>
                         ,
                         WatchShop <i class="fa fa-heart"></i> bởi
-                        <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Team3</a>
+                        <a class="font-weight-bold" target="_blank">Team3</a>
                     </div>
                 </div>
             </div>

@@ -85,4 +85,8 @@ public class WatchService implements IWatchService {
         watch.setQuantity(qtt);
         iWatchRepository.save(watch);
     }
+
+    public String findByNameContainingOrderBy() {
+        return iWatchRepository.findByIdWatch();
+    }
 }
