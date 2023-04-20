@@ -40,6 +40,7 @@ public class ManagerWatchBranchController {
         for (int i = 1; i <branchPage.getTotalPages() ; i++) {
             integerList.add(i);
         }
+        integerList.add(integerList.size() + 1);
         model.addAttribute("list" , branchPage.getTotalElements());
         model.addAttribute("integerList",integerList);
         return "/admin/branch/list";
