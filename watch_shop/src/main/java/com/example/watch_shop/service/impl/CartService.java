@@ -46,6 +46,7 @@ public class CartService implements ICartService {
 
     public void addCart(String nameAcc, Integer idWatch, Integer price, Integer qtt) {
         Customer customer = iCustomerService.findByNameAccount(nameAcc);
+
         Watch watch = iWatchService.findByIdWatch(idWatch);
         int totalPrice;
         totalPrice = qtt * price;

@@ -30,6 +30,8 @@ public interface IWatchService {
     Page<Watch> findByName(String name, PageRequest pageRequest);
 
     void updateQuantity(Integer qtt, Integer id);
+
     String findByNameContainingOrderBy();
+
 
 }

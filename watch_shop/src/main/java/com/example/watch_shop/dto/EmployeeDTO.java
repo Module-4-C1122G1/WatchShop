@@ -24,6 +24,7 @@ public class EmployeeDTO {
     private String dateOfBirth;
 
     @NotBlank(message = "giới tính không được để trống")
+    @Pattern(regexp = "^(nam|nữ|khác|Nam|Nữ|Khác)$", message = "Giới tính nam hoặc nữ hoặc khác")
     private String gender;
 
     @NotNull(message = "lương không được để trống")

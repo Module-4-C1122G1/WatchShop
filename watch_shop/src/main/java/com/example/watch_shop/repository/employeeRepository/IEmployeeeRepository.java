@@ -1,4 +1,4 @@
-package com.example.watch_shop.repository;
+package com.example.watch_shop.repository.employeeRepository;
 
 import com.example.watch_shop.model.Employee;
 import org.springframework.data.domain.Page;

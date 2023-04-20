@@ -18,6 +18,7 @@ public interface IEmployeeService {
 
     void update(Employee employee);
     List<Employee> list();
-
     Page<Employee> findByBranch(Integer idBranch, PageRequest pageRequest);
+
+
 }
