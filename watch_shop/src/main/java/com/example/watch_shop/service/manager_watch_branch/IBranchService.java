@@ -15,8 +15,8 @@ import java.util.List;
 public interface IBranchService {
     List<Branch> findAll();
     Page<Branch> findAll(String name , Pageable pageable);
-    List<Employee> findAllEmployee(int id);
-    List<Watch> findAllWatch(int idBranch);
+    Page<Employee> findAllEmployee(int id , Pageable pageable);
+    Page<Watch> findAllWatch(int id , Pageable pageable);
     Branch findById(int id);
     void create (BranchDTO branchDTO);
     void update(BranchDTO branchDTO , int id);
