@@ -30,5 +30,8 @@ public interface IWatchRepository extends PagingAndSortingRepository<Watch,Integ
     @Transactional
     @Query(value = "select * from watch join manage_product_branch on manage_product_branch.id_watch = watch.id_watch where manage_product_branch.id_branch = ?", nativeQuery = true)
     List<Watch> findWatchByBranchIdBranch(@Param("idBranch") int idBranch);
+    Page<Watch>findByNameContainingAndIsDelete(String name, Pageable pageable,boolean isDelete);
+
+
 
 }
