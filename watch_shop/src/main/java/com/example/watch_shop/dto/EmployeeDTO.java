@@ -8,10 +8,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 public class EmployeeDTO {
 
@@ -26,7 +23,7 @@ public class EmployeeDTO {
     @NotBlank(message = "giới tính không được để trống")
     @Pattern(regexp = "^(nam|nữ|khác|Nam|Nữ|Khác)$", message = "Giới tính nam hoặc nữ hoặc khác")
     private String gender;
-
+    @Min(value = 1)
     @NotNull(message = "lương không được để trống")
     private Double salary;
 
@@ -40,7 +37,7 @@ public class EmployeeDTO {
     @NotBlank(message = "Email không được để trống")
     @Email(message = "Nhập đúng định dạng example@gmail")
     private String email;
-    
+
     private String img;
     private Diploma diploma;
 
