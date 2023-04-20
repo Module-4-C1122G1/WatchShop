@@ -1,11 +1,15 @@
 package com.example.watch_shop.controller;
 
 import com.example.watch_shop.model.Customer;
+import com.example.watch_shop.model.OrderWatch;
 import com.example.watch_shop.service.*;
 import com.example.watch_shop.service.employeeService.IBranchEService;
 import com.example.watch_shop.service.manager_watch_branch.IBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +34,9 @@ public class OrderWatchController {
     private IWatchService iWatchService;
 
     @GetMapping("")
-    public String findAll(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
-        model.addAttribute("listOrder", iOrderService.findAll(PageRequest.of(page, 4)));
+    public String findAll(Model model, @PageableDefault(size = 6) Pageable page) {
+        Page<OrderWatch> orderWatchPage = iOrderService.findAll(page);
+        model.addAttribute("listOrder", orderWatchPage);
         List<Customer> list = new ArrayList<>();
         for (Integer id : iCartService.selectIdCustomer()) {
             Customer customer = iCustomerService.findByIdCustomer(id);
@@ -39,9 +44,18 @@ public class OrderWatchController {
         }
         model.addAttribute("customer", list);
         model.addAttribute("price", iCartService.selectTotalPriceMax());
-        String[] a=iWatchService.findByNameContainingOrderBy().split(",");
-        model.addAttribute("nameWatch",a[0]);
-        model.addAttribute("qttWatch",a[1]);
+        String[] a;
+        if (iWatchService.findByNameContainingOrderBy()!=null){
+            a=iWatchService.findByNameContainingOrderBy().split(",");
+            model.addAttribute("nameWatch",a[0]);
+            model.addAttribute("qttWatch",a[1]);
+        }
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i < orderWatchPage.getTotalPages(); i++) {
+            integerList.add(i);
+        }
+        integerList.add(integerList.size() + 1);
+        model.addAttribute("integerList" , integerList);
         model.addAttribute("totalPrice", iOrderService.totalPrice());
         return "admin/cart/list";
     }

@@ -66,8 +66,8 @@ public class WatchService implements IWatchService {
     }
 
 
-    public Page<Watch> findByType(Integer id, PageRequest pageRequest) {
-        return iWatchRepository.findWatchByTypeWatchId(id, pageRequest);
+    public Page<Watch> findByType(Integer id, Pageable pageable) {
+        return iWatchRepository.findWatchByTypeWatchId(id, pageable);
     }
 
 
@@ -76,8 +76,8 @@ public class WatchService implements IWatchService {
     }
 
     @Override
-    public Page<Watch> findByName(String name, PageRequest pageRequest) {
-        return iWatchRepository.findWatchByNameContaining(name, pageRequest);
+    public Page<Watch> findByName(String name, Pageable pageable) {
+        return iWatchRepository.findWatchByNameContaining(name, pageable);
     }
 
     public void updateQuantity(Integer qtt, Integer id) {
@@ -89,5 +89,10 @@ public class WatchService implements IWatchService {
 
     public String findByNameContainingOrderBy() {
         return iWatchRepository.findByIdWatch();
+    }
+
+    @Override
+    public Page<Watch> findAllWhereIsDelete(Pageable pageable) {
+        return iWatchRepository.findAllWhereIsDelete(pageable);
     }
 }

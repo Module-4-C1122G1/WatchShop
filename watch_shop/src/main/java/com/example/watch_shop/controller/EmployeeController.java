@@ -79,6 +79,7 @@ public class EmployeeController {
             model.addAttribute("position", iPositionService.list());
             model.addAttribute("diploma", iDiplomaService.list());
             model.addAttribute("branch", iBranchEService.list());
+            redirectAttributes.addFlashAttribute("mss","thất bại");
             return "admin/employee/create";
         } else {
             redirectAttributes.addFlashAttribute("msg", "thành công");

@@ -342,11 +342,13 @@
                     </svg>
                 </button>
             </a>
+
             <h2 class="title pt-5 pb-3" style="text-align: center">Thêm mới nhân viên</h2>
             <form style="width: 50%;margin: 0 auto" action="/employee/create" name="my-form" id="my-form"
                   th:object="${employeeDTO}"
                   novalidate="novalidate" method="post">
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Tên nhân viên:</small>
+                <span style="color: red" th:if="${#fields.hasErrors('name')}">*</span>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{name}"
@@ -355,14 +357,16 @@
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Ngày sinh:</small>
+                <span style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}">*</span>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <input type="text" class="form-control" th:field="*{dateOfBirth}"
+                        <input type="date" class="form-control" th:field="*{dateOfBirth}"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
                         <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Giới tính:</small>
+                <span style="color: red" th:if="${#fields.hasErrors('gender')}">*</span>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{gender}"
@@ -371,14 +375,16 @@
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Lương:</small>
+                <span style="color: red" th:if="${#fields.hasErrors('salary')}">*</span>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <input type="text" class="form-control" th:field="*{salary}"
+                        <input type="number" class="form-control" th:field="*{salary}"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
                         <p style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></p>
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Địa chỉ:</small>
+                <span style="color: red" th:if="${#fields.hasErrors('address')}">*</span>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{address}"
@@ -387,14 +393,16 @@
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Số điện thoại:</small>
+                <span style="color: red" th:if="${#fields.hasErrors('phone')}">*</span>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <input type="text" class="form-control" th:field="*{phone}"
+                        <input type="number" class="form-control" th:field="*{phone}"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
                         <p style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                     </div>
                 </div>
                 <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Email:</small>
+                <span style="color: red" th:if="${#fields.hasErrors('email')}">*</span>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{email}"
@@ -468,7 +476,6 @@
                     </div>
                     <div class="col-3"></div>
                 </div>
-
             </form>
         </div>
     </div>
