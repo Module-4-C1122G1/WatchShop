@@ -30,7 +30,7 @@ public class ManagerWatchBranchController {
     @Autowired
     private IDomainService domainService;
     @GetMapping("")
-    public String showStore(@PageableDefault(size = 2) Pageable pageable, @RequestParam(defaultValue = "") String name, Model model) {
+    public String showStore(@PageableDefault(size = 4) Pageable pageable, @RequestParam(defaultValue = "") String name, Model model) {
         Sort sort = Sort.by("name").ascending();
         model.addAttribute("name", name);
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);

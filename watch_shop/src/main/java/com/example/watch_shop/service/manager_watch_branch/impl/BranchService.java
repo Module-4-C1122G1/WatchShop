@@ -6,7 +6,6 @@ import com.example.watch_shop.model.Employee;
 import com.example.watch_shop.model.Watch;
 import com.example.watch_shop.repository.IBranchRepository;
 import com.example.watch_shop.repository.IEmployeeRepository;
-import com.example.watch_shop.repository.IManagerWatchBranch;
 import com.example.watch_shop.repository.IWatchRepository;
 import com.example.watch_shop.service.manager_watch_branch.IBranchService;
 import org.springframework.beans.BeanUtils;
@@ -68,13 +67,14 @@ public class BranchService implements IBranchService {
     @Override
     public void delete(int id) {
         Optional<Branch> branch = watchBranchRepository.findById(id);
-//        List<Employee> list = employeeRepository.findByBranchIdBranch(id);
-//        for (int i = 0; i < list.size(); i++) {
-//        }
+        List<Employee> list = employeeRepository.findByBranchIdBranch(id);
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setDelete(true);
+            employeeRepository.save(list.get(i));
+        }
         if (branch.isPresent()) {
             branch.get().removeWatch(branch.get().getWatchSet());
             branch.get().removeEmployee(branch.get().getEmployeeSet());
-
             branch.get().setDelete(true);
             watchBranchRepository.save(branch.get());
         }
