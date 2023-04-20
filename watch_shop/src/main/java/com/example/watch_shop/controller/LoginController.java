@@ -40,7 +40,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("customerDto") CustomerDTO customerCreateDTO, BindingResult bindingResult, Model model, RedirectAttributes redirect) {
+    public String register(@Valid @ModelAttribute("customerDto") CustomerDTO customerCreateDTO,  BindingResult bindingResult, Model model, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("customerType", customerTypeService.findAllCustomerType());
             return "register";
@@ -125,19 +125,21 @@ public class LoginController {
 
             model.addAttribute("userInfo", userInfo);
 
-            String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
+            String message = "Xin chào " + principal.getName() //
+                    + "<br> Bạn không có quyền truy cập vào trang này!";
             model.addAttribute("message", message);
 
         }
         return "403Page";
     }
+
     @GetMapping("/about")
-    public String about(){
+    public String about() {
         return "about";
     }
+
     @GetMapping("/contact")
-    public String contact(){
+    public String contact() {
         return "contact";
     }
 
