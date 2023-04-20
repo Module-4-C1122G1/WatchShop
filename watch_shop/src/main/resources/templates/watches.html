@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Site Metas -->
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+
+    <title>Timups</title>
+
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- font awesome style -->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <!-- responsive style -->
+    <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
+    <style>
+        .filter-all-category .box-group-filter {
+            background: #fff;
+            padding: 10px 15px 20px;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            box-sizing: inherit;
+            line-height: 1.42857143;
+            font-size: 1.4rem;
+        }
+
+        .list-cat-child-category > a {
+            -webkit-border-radius: 14px;
+            margin-bottom: 10px;
+            border: 0.5px solid #eee;
+            height: 33px;
+            line-height: 33px;
+            background: #fff;
+            display: inline-block;
+            padding: 0px 15px;
+            color: #333;
+            margin-right: 15px;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .list-cat-child-category > a:hover {
+            background: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="sub_page" style="background: fixed">
+
+<div class="hero_area">
+
+    <!-- header section strats -->
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="index.html">
+            <span>
+              ShopWatch
+            </span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class=""> </span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/watch/index}">Trang Chủ </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/watch/watches}"> Sản Phẩm <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li th:if="${#request.userPrincipal == null}" class="nav-item">
+                            <a class="nav-link" th:href="@{/login}"> Đăng nhập </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:each="authority : ${#authentication.getAuthorities()}"  th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}"  class="nav-link" th:href="@{/customer}">Admin</a>
+                        </li>
+                    </ul>
+                    <div class="user_option-box">
+                        <div class="input-group">
+                            <form action="/watch/search" method="get">
+                                <input th:value="${name}" name="name" type="text" class="form-control"
+                                       placeholder="Tìm kiếm theo tên">
+                            </form>
+                        </div>
+
+
+                        <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle"
+                           data-bs-toggle="dropdown"><i
+                                class="fa fa-user"></i></a>
+                        <div sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-end" style=" width: 24%">
+                            <div style="text-align: center" th:text="${#request.userPrincipal.name}"></div>
+                            <div class="dropdown-divider"></div>
+                            <a th:href="@{/logout}">Logout</a>
+                        </div>
+
+
+                        <a th:if="${#request.userPrincipal == null}" th:href="@{/login}"><i
+                                class="fa fa-user"></i></a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        </a>
+                        <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">
+                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        </a>
+
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header section -->
+</div>
+
+<!-- shop section -->
+<div class="box-group-filter" style="margin-top: 40px; margin-left: 20px " th:each="type:${listManu}">
+    <div id="filter_by">
+      <span class="list-cat-child-category">
+ 	            <a th:href="@{/watch/type(id=${type.id})}" th:text="${type.name}" title="Apple Watch"
+                   style="float: left"><i></i></a>
+    </span>
+    </div>
+</div>
+<section class="shop_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2 style="text-align: center">
+                Đồng Hồ
+            </h2>
+        </div>
+        <p style="text-align: center" th:text="${msg}"></p>
+        <div class="row">
+            <div style="background: lightgrey" class="col-md-6 " th:each="watch : ${list}">
+                <div class="box" style="min-height: 310px">
+                    <a th:href="@{/watch/detail/__${watch.idWatch}__}">
+                        <div class="img-box">
+                            <img th:src="${watch.image}">
+                        </div>
+                        <div class="detail-box">
+                            <h6 th:text="${watch.name}">
+
+                            </h6>
+                            <h6>
+                                Giá:
+                                <span th:text="${#numbers.formatCurrency(watch.price)}">
+
+                  </span>
+                            </h6>
+                        </div>
+                        <div class="new">
+                <span>
+                  Chính hãng
+                </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 20px" class="text-center container" th:if="${check==0}">
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+               th:href="@{/watch/watches(page = ${list.number - 1})}">
+                <i class="ti-angle-left">Trước</i>
+            </a>
+
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+               th:href="@{/watch/watches(page = ${list.number + 1})}">
+                <i class="ti-angle-right">Sau</i>
+            </a>
+        </div>
+
+        <div style="margin-top: 20px" class="text-center container" th:if="${check==1}">
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+               th:href="@{/watch/type(page = ${list.number - 1},id=${id})}">
+                <i class="ti-angle-left">Trước</i>
+            </a>
+
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+               th:href="@{/watch/type(page = ${list.number + 1},id=${id})}">
+                <i class="ti-angle-right">Sau</i>
+            </a>
+        </div>
+
+        <div style="margin-top: 20px" class="text-center container" th:if="${check==2}">
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasPrevious()}"
+               th:href="@{/watch/search(page = ${list.number - 1},name=${name})}">
+                <i class="ti-angle-left">Trước</i>
+            </a>
+
+            <a class="page-item btn btn-dark page-item" th:if="${list.hasNext()}"
+               th:href="@{/watch/search(page = ${list.number + 1},name=${name})}">
+                <i class="ti-angle-right">Sau</i>
+            </a>
+        </div>
+
+        <div class="btn-box">
+            <a href="">
+                View All
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- end shop section -->
+
+<!-- footer section -->
+<footer class="footer_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3 footer-col">
+                <div class="footer_detail">
+                    <div class="heading_container">
+                        <h2>
+                            Về chúng tôi
+                        </h2>
+                    </div>
+                    <p>
+                        Được mệnh danh là thương hiệu đồng hồ “Ngon - Bổ - Rẻ”,
+                        đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
+                        Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
+                        bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
+                        hồ ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
+                    </p>
+                    <div class="footer_social">
+                        <a href="">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 footer-col">
+                <div class="footer_contact">
+                    <h4>
+                        Liên hệ
+                    </h4>
+                    <div class="contact_link_box">
+                        <a href="">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <span>
+                  Location
+                </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span>
+                  Call 0961053275
+                </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span>
+                  minhn091099@gmail.com
+                </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 footer-col">
+                <div class="footer_contact">
+                    <h4>
+                        Subscribe
+                    </h4>
+                    <form action="#">
+                        <input type="text" placeholder="Enter email"/>
+                        <button type="submit">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 footer-col">
+                <div class="map_container">
+                    <div class="map">
+                        <div id="googleMap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-info">
+            <p>
+                &copy; <span id="displayYear"></span>ShopWatch by team3</a>
+            </p>
+        </div>
+    </div>
+</footer>
+<!-- footer section -->
+
+<!-- jQery -->
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<!-- popper js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<!-- bootstrap js -->
+<script th:src="@{/js/bootstrap.js}"></script>
+<!-- owl slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+</script>
+<!-- custom js -->
+<script th:src="@{/js/custom.js}"></script>
+<!-- Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+<!-- End Google Map -->
+
+</body>
+
+</html>
