@@ -51,6 +51,7 @@ public class CustomerController {
         for (int i = 1; i < customerPage.getTotalPages(); i++) {
             integerList.add(i);
         }
+        integerList.add(integerList.size()+1);
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
         model.addAttribute("integerList", integerList);
         return "/admin/customer/list";
@@ -106,9 +107,10 @@ public class CustomerController {
 
     @GetMapping("/type/{id}")
     public String searchByCustomerType(@PathVariable Integer id, Model model, @RequestParam(defaultValue = "0") int page) {
-        model.addAttribute("customerList", customerService.findByCustomerType(id, PageRequest.of(page, 4)));
+        model.addAttribute("customerList", customerService.findByCustomerType(id, PageRequest.of(page, 20)));
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
-        model.addAttribute("totalElement", customerService.findByCustomerType(id, PageRequest.of(page, 4)).getTotalPages());
+        model.addAttribute("totalElement", customerService.findByCustomerType(id, PageRequest.of(page, 20)).getTotalPages());
+        model.addAttribute("typeOfCustomer", customerTypeService.findCustomerTypeById(id).getName());
         return "/admin/customer/list";
     }
 
@@ -117,7 +119,7 @@ public class CustomerController {
         model.addAttribute("customerList", customerService.findByNameCustomer(name, PageRequest.of(page, 4)));
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
         model.addAttribute("totalElement", customerService.findByNameCustomer(name, PageRequest.of(page, 4)).getTotalElements());
-
+        model.addAttribute("name", name);
         return "/admin/customer/list";
     }
 
