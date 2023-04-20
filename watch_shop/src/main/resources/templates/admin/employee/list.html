@@ -20,6 +20,15 @@
 
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <style>
+        .a {
+            margin: 5px;
+        }
+        .active1 {
+            color: black;
+            background: white;
+        }
+    </style>
 </head>
 <body class="g-sidenav-show" style="background-color: #dedde3">
 <aside style="background-color: #c0bfc4" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xll my-3 fixed-start ms-3 " id="sidenav-main">
@@ -600,28 +609,25 @@
             <!--                            page-->
 
             <div class="text-center container">
-                <a class="page-item btn btn-dark page-item" th:if="${employee.hasPrevious()}"
+                <a class="page-item btn a btn-dark page-item" th:if="${employee.hasPrevious()}"
                    th:href="@{/employee(page = ${employee.number - 1})}">
                     <i class="ti-angle-left">Trước</i>
                 </a>
 
-                <a class="page-item number btn btn-dark page-item" style="margin-right: 5px"
+                <a class="page-item number btn a active1 btn-dark page-item"
                    th:classappend="${pageNumber == employee.number + 1} ? 'active' : ''"
                    th:each="pageNumber : ${integerList}"
                    th:href="@{/employee(page = ${pageNumber - 1})}"
                    th:text="${pageNumber}">
                 </a>
 
-                <a class="page-item btn btn-dark page-item" th:if="${employee.hasNext()}"
+                <a class="page-item btn btn-dark page-item a" th:if="${employee.hasNext()}"
                    th:href="@{/employee(page = ${employee.number + 1})}">
                     <i class="ti-angle-right">Sau</i>
                 </a>
             </div>
 
         </div>
-    </div>
-    </div>
-    </div>
     </div>
     <footer class="footer pt-3  ">
         <div class="container-fluid">
