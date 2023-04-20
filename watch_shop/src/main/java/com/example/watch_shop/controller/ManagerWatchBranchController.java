@@ -46,21 +46,35 @@ public class ManagerWatchBranchController {
         return "/admin/branch/list";
     }
 
-    @GetMapping("/employee/{id}")
-    public String showEmployee(@PathVariable("id") int id, Model model) {
+    @GetMapping("/employee")
+    public String showEmployee(@RequestParam(name = "id" , required = false) Integer id, @PageableDefault(size = 5) Pageable pageable, Model model) {
         Branch branch = branchService.findById(id);
+        model.addAttribute("id" , branch.getIdBranch());
         model.addAttribute("nameEmployee" , branch.getName());
-        List<Employee> employeePage = branchService.findAllEmployee(id);
+        Page<Employee> employeePage = branchService.findAllEmployee(id , pageable);
         model.addAttribute("employeePage", employeePage);
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i < employeePage.getTotalPages(); i++) {
+            integerList.add(i);
+        }
+        integerList.add(integerList.size() + 1);
+        model.addAttribute("integerList" , integerList);
         return "/admin/branch/list-employee";
     }
 
-    @GetMapping("/watch/{idBranch}")
-    public String showWatch(@PathVariable("idBranch") int idBranch, Model model) {
-        Branch branch = branchService.findById(idBranch);
+    @GetMapping("/watch")
+    public String showWatch(@RequestParam(name = "id" , required = false) Integer id,@PageableDefault(size = 5) Pageable pageable , Model model) {
+        Branch branch = branchService.findById(id);
         model.addAttribute("nameWatch" , branch.getName());
-        List<Watch> watchList = branchService.findAllWatch(idBranch);
-        model.addAttribute("idBranch" , idBranch);
+        model.addAttribute("id" , branch.getIdBranch());
+        Page<Watch> watchList = branchService.findAllWatch(id , pageable);
+        model.addAttribute("idBranch" , id);
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i < watchList.getTotalPages(); i++) {
+            integerList.add(i);
+        }
+        integerList.add(integerList.size() + 1);
+        model.addAttribute("integerList" , integerList);
         model.addAttribute("watchList", watchList);
         return "/admin/branch/list-watch";
     }

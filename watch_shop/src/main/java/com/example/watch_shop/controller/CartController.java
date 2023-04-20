@@ -33,6 +33,12 @@ public class CartController {
         model.addAttribute("total", iCartService.totalPrice(customer.getIdCustomer()));
         return "cart";
     }
+    @GetMapping("pay")
+    public String pay(Model model,@RequestParam("nameAcc")String name){
+        Customer customer=iCustomerService.findByNameAccount(name);
+        model.addAttribute("total",iCartService.totalPrice(customer.getIdCustomer()));
+        return "pay";
+    }
     @GetMapping("add")
     private String addCart(@RequestParam("nameAccount")String nameAcc,
                        @RequestParam("qtt")Integer qtt,

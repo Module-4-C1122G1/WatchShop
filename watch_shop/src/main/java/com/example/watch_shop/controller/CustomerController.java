@@ -54,6 +54,7 @@ public class CustomerController {
         integerList.add(integerList.size()+1);
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
         model.addAttribute("integerList", integerList);
+        model.addAttribute("typeOfCustomer", customerTypeService.findCustomerTypeById(1).getName());
         return "/admin/customer/list";
     }
 
@@ -120,6 +121,8 @@ public class CustomerController {
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
         model.addAttribute("totalElement", customerService.findByNameCustomer(name, PageRequest.of(page, 4)).getTotalElements());
         model.addAttribute("name", name);
+        model.addAttribute("typeOfCustomer", customerTypeService.findCustomerTypeById(1).getName());
+
         return "/admin/customer/list";
     }
 

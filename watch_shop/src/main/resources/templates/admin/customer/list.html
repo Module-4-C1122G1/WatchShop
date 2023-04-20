@@ -39,9 +39,9 @@
 <aside style="background-color: #c0bfc4" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xll my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-            <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
+        <a class="navbar-brand m-0" th:href="@{/watch/index}" target="_blank">
+            <img th:src="@{/images/watch_shop.png}" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold">Trang chủ</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -386,8 +386,7 @@
                             <h4 style="color: #dde0e3">Loại khách hàng:</h4>
                             <select id="select_customer" style="width: 150px" onchange="onChangeCustomerType()"
                                     class="form-select form-select-lg" aria-label=".form-select-lg example">
-                                <option hidden="hidden" th:text="${typeOfCustomer}" class="text-primary" selected>Loại khách hàng</option>
-                                <option th:each="type : ${customerTypeList}" th:value="${type.getId()}" >
+                                <option  th:each="type : ${customerTypeList}" th:selected="${type.getId() == 1 || typeOfCustomer.equals(type.getName()) }" th:value="${type.getId()}" >
                                     <a th:href="@{/customer/type/{id}(id=${type.getId()})}"
                                        th:text="${type.name}"></a>
                                 </option>
@@ -430,7 +429,7 @@
                                         style="font-family: 'Times New Roman'">Tài khoản
                                     </th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2"
-                                        style="font-family: 'Times New Roman'">Thông tin chi tiết
+                                        style="font-family: 'Times New Roman'">Thông tin
                                     </th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2"
                                         style="font-family: 'Times New Roman'">Cập nhật

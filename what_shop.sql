@@ -301,6 +301,7 @@ insert into branch (name_branch , address_branch , area_branch , id_domain , is_
 ('Chi nhánh Hồ Chí minh' , '64 Võ Thị Sáu, phường Tân Định, quận 1, TP. HCM' , 50.0 , 3 , 0) ,
 ('Chi nhánh Hải Phòng' , '342 P.Tô Hiệu , Hà Nam , Hải Phòng' , 50.0 , 1 , 0);
 
+
 insert into employee(name_employee,date_of_birth,gender,salary,address,phone_number,email_employee,img,id_diploma,id_position ,id_branch , is_delete )
 values
 ('Nguyễn Văn An','1970-11-07','Nam','5000','295 Nguyễn Tất Thành, Đà Nẵng','0901234121','annguyen@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,1 , 0),
