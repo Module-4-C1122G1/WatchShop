@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
     <title>
-        Trang admin
+        Danh sách khách hàng
     </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <link th:href="@{/admin/assets/css/nucleo-icons.css}" rel="stylesheet"/>
@@ -455,7 +455,7 @@
                                                 th:attr="onclick=|information2('${customer.getName()}','${customer.getDayOfBirth()}','${customer.getAddress()}','${customer.getEmail()}','${customer.getPhone()}','${customer.getCustomerType().getName()}','${customer.getAppUser().getUserName()}',)|"
                                                 class="btn btn-primary btn-rounded btn-icon" style="margin-bottom: 0px"
                                                 data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                            <i class="fa fa-book-dead"></i>
+                                            <i class="fa fa-table" style="color: black"></i>
                                         </button>
                                         <div class="modal fade" id="exampleModal1" tabindex="-1"
                                              aria-labelledby="exampleModalLabel"
@@ -482,7 +482,7 @@
                                                         <span id="email" class="text-success fs-4"></span></br>
                                                         <span class="text-dark fs-4">Số điện thoại: </span>
                                                         <span id="phone" class="text-success fs-4"></span></br>
-                                                        <span class="text-dark fs-4">Loại khách hàng </span>
+                                                        <span class="text-dark fs-4">Loại khách hàng: </span>
                                                         <span id="customerType" class="text-success fs-4"></span></br>
                                                         <span class="text-dark fs-4">Tài khoản: </span>
                                                         <span id="userName" class="text-success fs-4"></span></br>

@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
     <title>
-        Trang cập nhật
+        Cập nhật sản phẩm
     </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
     <link th:href="@{/admin/assets/css/nucleo-icons.css}" rel="stylesheet"/>
@@ -34,7 +34,7 @@
     <div class="collapse navbar-collapse  w-auto h-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link  " href="../dashboard.html">
+                <a class="nav-link active " th:href="@{/adminWatch}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -53,11 +53,11 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Thống kê</span>
+                    <span class="nav-link-text ms-1">Sản phẩm</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  active" href="../pages/tables.html">
+                <a class="nav-link  " th:href="@{/customer}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -76,11 +76,11 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Sản phẩm</span>
+                    <span class="nav-link-text ms-1">Khách hàng</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/billing.html">
+                <a class="nav-link  " th:href="@{/branch}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -99,11 +99,11 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Khách hàng</span>
+                    <span class="nav-link-text ms-1">Chi nhánh</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/virtual-reality.html">
+                <a class="nav-link  " th:href="@{/employee}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -124,14 +124,14 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Chi nhánh</span>
+                    <span class="nav-link-text ms-1">Nhân viên</span>
                 </a>
             </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Quản lý tài khoản</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/profile.html">
+                <a class="nav-link  " th:href="@{/order}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -152,11 +152,36 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Thông tin tài khoản</span>
+                    <span class="nav-link-text ms-1">Hoá đơn</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="../pages/sign-in.html">
+                <a class="nav-link  " style="background-color: #c3c5c9">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>customer-support</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(1.000000, 0.000000)">
+                                            <path class="color-background opacity-6"
+                                                  d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
+                                            <path class="color-background"
+                                                  d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                                            <path class="color-background"
+                                                  d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1" th:utext="${#request.userPrincipal?.name}"></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  " th:href="@{/logout}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -184,23 +209,34 @@
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+    <nav style="
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    right: 0em;
+    left: 16.1rem;
+    background: #b9b8bd;
+    width: 74.6%;" class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none " id="navbarBlur"
          navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;" style="font-size: 16px;">Admin</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sản phẩm</li>
+                    <li class="breadcrumb-item text-lg text-dark active" aria-current="page" ></li>
+                    <a style="font-size: 16px;" href="/adminWatch">Sản phẩm</a>
+
                 </ol>
                 <h6 class="font-weight-bolder mb-0">Sản phẩm</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm">
-                    </div>
+                    <form action="/adminWatch">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="Nhập tên đồng hồ cần tìm..." name="name" th:value="${name}">
+                        </div>
+                    </form>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
@@ -315,16 +351,17 @@
     </nav>
     <!-- End Navbar -->
     <div class="row my-2 mx-2" style="width: 95%;background: #d4d4e3;height: auto;">
-        <div class="col-md-12">
-            <a href="/adminWatch" style="display: block;margin-left: 1em;margin-top: 1em">
-                <button type="button" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"
-                         viewBox="0 0 16 16">
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
-                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
-                    </svg>
-                </button>
-            </a>
+        <div class="col-md-12" style="
+    margin-top: 80px !important">
+<!--            <a href="/adminWatch" style="display: block;margin-left: 1em;margin-top: 1em">-->
+<!--                <button type="button" class="btn btn-secondary">-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"-->
+<!--                         viewBox="0 0 16 16">-->
+<!--                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>-->
+<!--                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>-->
+<!--                    </svg>-->
+<!--                </button>-->
+<!--            </a>-->
             <h2 class="title pt-3 pb-3" style="text-align: center"> Cập nhật thông tin đồng hồ</h2>
             <form action="/adminWatch/update" method="post" th:object="${watch}" style="width: 50%;margin: 0 auto">
                 <div class="form-group col-md-12 py-3" style="position: relative;">

@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
     <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
     <title>
-        Trang admin
+        Danh sách chi nhánh
     </title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link th:href="@{/admin/assets/css/nucleo-icons.css}" rel="stylesheet" />
@@ -412,7 +412,7 @@
         </div>
     </div>
     </div>
-    <!--Phân trangg-->
+    <!--Phân trang-->
     <div class="text-center container">
         <a class="page-item a btn btn-dark page-item" th:if="${branchPage.hasPrevious()}"
            th:href="@{/branch(page = ${branchPage.number - 1})}">

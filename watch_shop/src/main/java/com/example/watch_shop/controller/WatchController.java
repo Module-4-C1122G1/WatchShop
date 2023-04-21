@@ -11,10 +11,14 @@ import com.example.watch_shop.service.IWatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,9 +40,15 @@ public class WatchController {
     }
 
     @GetMapping("type")
-    public String type(Model model, @RequestParam(name = "id", required = false) Integer id, @RequestParam(name = "page", defaultValue = "0") Integer page) {
-        Page<Watch> page1 = iWatchService.findByType(id, PageRequest.of(page, 6));
-        model.addAttribute("list", page1);
+    public String type(Model model, @RequestParam(name = "id", required = false) Integer id, @PageableDefault(size = 4) Pageable pageable) {
+        Page<Watch> watchPage = iWatchService.findByType(id, pageable);
+        model.addAttribute("list", watchPage);
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i < watchPage.getTotalPages(); i++) {
+            integerList.add(i);
+        }
+        integerList.add(integerList.size() + 1);
+        model.addAttribute("integerList", integerList);
         model.addAttribute("listManu", iManufactureService.findAll());
         model.addAttribute("id", id);
         model.addAttribute("check", 1);
@@ -47,8 +57,15 @@ public class WatchController {
 
 
     @GetMapping("watches")
-    public String watches(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page) {
-        model.addAttribute("list", iWatchService.findAll(PageRequest.of(page, 8)));
+    public String watches(Model model, @PageableDefault(size = 6) Pageable pageable) {
+        Page<Watch> watchPage = iWatchService.findAllWhereIsDelete(pageable);
+        model.addAttribute("list", watchPage);
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i < watchPage.getTotalPages(); i++) {
+            integerList.add(i);
+        }
+        integerList.add(integerList.size() + 1);
+        model.addAttribute("integerList", integerList);
         model.addAttribute("listManu", iManufactureService.findAll());
         model.addAttribute("check", 0);
         return "watches";
@@ -60,15 +77,20 @@ public class WatchController {
     }
 
     @GetMapping("search")
-    public String searchByName(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page, @RequestParam(name = "name", required = false) String name) {
-        Page<Watch> watchPage = iWatchService.findByName(name, PageRequest.of(page, 6));
+    public String searchByName(Model model, @PageableDefault(size = 2) Pageable pageable, @RequestParam(name = "name", required = false) String name) {
+        Page<Watch> watchPage = iWatchService.findByName(name, pageable);
         if (watchPage.isEmpty()) {
-            String msg="Không tìm thấy sản phẩm";
+            String msg = "Không tìm thấy sản phẩm";
             model.addAttribute("msg", msg);
             System.out.println(msg);
-        } else {
-            model.addAttribute("list", watchPage);
         }
+        model.addAttribute("list", watchPage);
+        List<Integer> integerList = new ArrayList<>();
+        for (int i = 1; i < watchPage.getTotalPages(); i++) {
+            integerList.add(i);
+        }
+        integerList.add(integerList.size() + 1);
+        model.addAttribute("integerList", integerList);
         model.addAttribute("listManu", iManufactureService.findAll());
         model.addAttribute("check", 2);
         model.addAttribute("name", name);
