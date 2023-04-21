@@ -16,10 +16,10 @@ public interface ICustomerRepository extends PagingAndSortingRepository<Customer
     Page<Customer> findByNameCustomer(@Param("name_customer") String name, PageRequest pageRequest);
 
     @Query(value = "select * from customer where id_type_cus = :id_type_cus", nativeQuery = true)
-    Page<Customer> findByCustomerType(@Param("id_type_cus") Integer id, PageRequest pageRequest);
+    Page<Customer> findByCustomerType(@Param("id_type_cus") Integer id, Pageable pageable);
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
     boolean existsByAppUser_UserName(String userName);
     Customer findCustomerByAppUser_UserName(String account);
-    Page<Customer>findByNameContaining(String name, Pageable pageable);
+    Page<Customer>findByNameContaining(String name , Pageable pageable);
 }
