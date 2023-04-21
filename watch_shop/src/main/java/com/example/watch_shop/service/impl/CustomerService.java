@@ -22,7 +22,7 @@ public class CustomerService implements ICustomerService {
 //    }
 
     @Override
-    public Page<Customer> findAllCustomer(String name, Pageable pageable) {
+    public Page<Customer> findAllCustomer(String name , Pageable pageable) {
         return customerRepository.findByNameContaining(name,pageable);
     }
 
@@ -49,8 +49,8 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Page<Customer> findByCustomerType(Integer idCustomerType, PageRequest pageRequest) {
-        return customerRepository.findByCustomerType(idCustomerType, pageRequest);
+    public Page<Customer> findByCustomerType(Integer idCustomerType, Pageable pageable) {
+        return customerRepository.findByCustomerType(idCustomerType, pageable);
     }
 
     @Override

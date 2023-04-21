@@ -42,8 +42,9 @@ public class CustomerController {
 //    }
     @GetMapping("")
     public String list(Model model, @PageableDefault(size = 4) Pageable pageable,
-                       @RequestParam(defaultValue = "") String name) {
+                       @RequestParam(defaultValue = "" , required = false) String name) {
         Sort sort = Sort.by("idCustomer").descending();
+        model.addAttribute("name", name);
         Pageable sortedPage = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         Page<Customer> customerPage = customerService.findAllCustomer(name, sortedPage);
         model.addAttribute("customerList", customerPage);
@@ -52,6 +53,7 @@ public class CustomerController {
             integerList.add(i);
         }
         integerList.add(integerList.size()+1);
+        model.addAttribute("check" , 0);
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
         model.addAttribute("integerList", integerList);
         model.addAttribute("typeOfCustomer", customerTypeService.findCustomerTypeById(1).getName());
@@ -106,24 +108,13 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
-    @GetMapping("/type/{id}")
+        @GetMapping("/type/{id}")
     public String searchByCustomerType(@PathVariable Integer id, Model model, @RequestParam(defaultValue = "0") int page) {
-        model.addAttribute("customerList", customerService.findByCustomerType(id, PageRequest.of(page, 20)));
+        model.addAttribute("customerList", customerService.findByCustomerType(id, PageRequest.of(page, 4)));
         model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
-        model.addAttribute("totalElement", customerService.findByCustomerType(id, PageRequest.of(page, 20)).getTotalPages());
+        model.addAttribute("totalElement", customerService.findByCustomerType(id, PageRequest.of(page, 4)).getTotalPages());
         model.addAttribute("typeOfCustomer", customerTypeService.findCustomerTypeById(id).getName());
         return "/admin/customer/list";
     }
-
-    @GetMapping("/search")
-    public String searchByCustomerName(@RequestParam String name, Model model, @RequestParam(defaultValue = "0") int page) {
-        model.addAttribute("customerList", customerService.findByNameCustomer(name, PageRequest.of(page, 4)));
-        model.addAttribute("customerTypeList", customerTypeService.findAllCustomerType());
-        model.addAttribute("totalElement", customerService.findByNameCustomer(name, PageRequest.of(page, 4)).getTotalElements());
-        model.addAttribute("name", name);
-        model.addAttribute("typeOfCustomer", customerTypeService.findCustomerTypeById(1).getName());
-
-        return "/admin/customer/list";
     }
 
-}
