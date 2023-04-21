@@ -10,7 +10,7 @@
     <meta name="author" content=""/>
     <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
 
-    <title>Timups</title>
+    <title>Đăng kí</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css"
@@ -172,7 +172,7 @@
                         <h2 style="margin: 0 auto">
                             Đăng ký
                         </h2>
-                        <p style="color: red; margin: auto; padding: 10px" id="error-text"> </p>
+
                         <p style="color: red ; margin: auto; padding: 10px" th:text="${message}"></p>
                     </div>
                     <form action="/register" method="post" th:object="${customerDto}">
@@ -214,6 +214,7 @@
                         <div>
                             <input  id ="confirmPassword" type="password" th:placeholder="${'Nhập lại mật khẩu *'}"/>
                         </div>
+                        <p style="color: red" id="error-text"> </p>
 <!--                        <div>-->
 <!--                            <input th:field="*{appUser.enabled}" th:text="${enabled}" type="number" hidden="hidden">-->
 <!--                        </div>-->

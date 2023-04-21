@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .inlineimage{max-width:470px;margin-right: 8px;margin-left: 10px}.images{display: inline-block;max-width: 98%;height: auto;width: 22%;margin: 1%;left:20px;text-align: center}
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header text-center">
+        <h1>Thẻ Tín Dụng</h1>
+    </div>
+    <!-- Credit Card Payment Form - START -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <h3 class="text-center">Chi Tiết</h3>
+                            <div class="inlineimage"> <img style="float: left"  class="img-responsive images" src="https://portal.vietcombank.com.vn/content/personal/KhoAnh/Hinh%20Anh%20the/Vietcombank_Regional%20Debit_Illustrations_Development_v6_Artboard%201_FRONT%20copy%202.png?RenditionID=3">
+                                <img style="float: left" class="img-responsive images" src="data:image/jpeg;base64,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">
+                                <img style="float: left" class="img-responsive images" src="https://www.vietinbank.vn/sites/mediafile/VTB157860">
+                                <img style="float: left" class="img-responsive images" src="https://www.vietinbank.vn/sites/mediafile/VTB148448"> </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group"> <label>SỐ TÀI KHOẢN</label>
+                                        <div class="input-group"> <input type="tel" class="form-control" placeholder="Số tài khoản" /> <span class="input-group-addon"><span class="fa fa-credit-card"></span></span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-7 col-md-7">
+                                    <div class="form-group"> <label><span class="hidden-xs">NGÀY</span><span class="visible-xs-inline">EXP</span> TẠO</label> <input type="tel" class="form-control" placeholder="MM / YY" /> </div>
+                                </div>
+                                <div class="col-xs-5 col-md-5 pull-right">
+                                    <div class="form-group"> <label>CGV</label> <input type="tel" class="form-control" placeholder="CVC" /> </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group"> <label>TÊN NGƯỜI DÙNG</label> <input type="text" class="form-control" placeholder="Tên người dùng" /> </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-xs-12"> <button  class="btn btn-success btn-lg btn-block"><a style="color: white" th:href="@{/carts/buys/(name=${#request.userPrincipal.name})}">Thanh toán <span th:text="${#numbers.formatCurrency(total)}"></span></a></button> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

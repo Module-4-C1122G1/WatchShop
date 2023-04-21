@@ -5,7 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>
+        Giỏ hàng
+    </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="shortcut icon" th:href="@{/images/favicon.png}" type="image/x-icon">
@@ -16,6 +18,8 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/css/responsive.css}" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+    </style>
 </head>
 <body>
 <section class="h-100" style="background-color: #eee;">
@@ -37,12 +41,13 @@
                             </div>
                             <div class="col-md-3 col-lg-3 col-xl-3">
                                 <p class="lead fw-normal mb-2" th:text="${listCart.watch.name}"></p>
-                                <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey
+                                <p><span class="text-muted">Kích thước: </span>M <span class="text-muted">Color: </span><span
+                                        th:text="${listCart.watch.color}"></span>
                                 </p>
                             </div>
                             <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                                 <button class="btn btn-link px-2"
-                                        th:attr="onclick=|download('${listCart.watch.idWatch}','${listCart.price}','${listCart.customer.idCustomer}')|">
+                                        th:attr="onclick=|download('${listCart.watch.idWatch}','${listCart.watch.price}','${listCart.customer.idCustomer}')|">
                                     <i class="fa fa-minus"></i>
                                 </button>
 
@@ -52,7 +57,7 @@
                                        class="form-control form-control-sm"/>
 
                                 <button class="btn btn-link px-2"
-                                        th:attr="onclick=|upload('${listCart.watch.idWatch}','${listCart.price}','${listCart.customer.idCustomer}')|">
+                                        th:attr="onclick=|upload('${listCart.watch.idWatch}','${listCart.watch.price}','${listCart.customer.idCustomer}')|">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
@@ -65,17 +70,15 @@
                                         class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     <i class="fa fa-trash fa-lg"></i>
                                 </button>
-
-<!--                                <a th:href="@{/carts/delete/(name=${nameAcc},idWatch=${listCart.cartID.getIdWatch()},idCus=${listCart.cartID.getIdCustomer()})}"-->
-<!--                                   class="text-danger"><i class="fa fa-trash fa-lg"></i></a>-->
                             </div>
                         </div>
                     </div>
                 </div>
-                <p>Tổng Giá Tiền <span id="result" th:text="${total}"></span> VNĐ</p>
+                <p>Tổng Giá Tiền <span id="result" th:text="${#numbers.formatCurrency(total)}"></span></p>
+                <input type="hidden" th:value="${total}" id="results">
                 <div class="card">
                     <div class="card-body">
-                        <a th:href="@{/carts/buys(name=${#request.userPrincipal.name})}"
+                        <a th:href="@{/carts/pay(nameAcc=${#request.userPrincipal.name})}"
                            class="btn btn-warning btn-block btn-lg">Thanh toán</a>
                     </div>
                 </div>
@@ -84,7 +87,6 @@
         </div>
     </div>
 </section>
-
 
 
 <!-- Modal -->
@@ -102,8 +104,9 @@
                 <form action="carts/delete">
                     <input type="hidden" name="idCus" id="idCus">
                     <input type="hidden" name="idWatch" id="idWatch">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Xoá</button>
+                    <input type="hidden" id="nameAcc" name="nameAcc">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Xoá</button>
                 </form>
             </div>
         </div>
@@ -126,7 +129,7 @@
                         đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
                         Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
                         bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
-                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
+                        hồ ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                     <div class="footer_social">
                         <a href="">
@@ -200,10 +203,11 @@
     </div>
 </footer>
 <script>
-    function deleteCart(nameAcc,idWatch,idCus,nameWatch){
-        document.getElementById("nameWatch").innerHTML=nameWatch;
-        document.getElementById("idCus").value=idCus;
-        document.getElementById("idWatch").value=idWatch;
+    function deleteCart(nameAcc, idWatch, idCus, nameWatch) {
+        document.getElementById("nameWatch").innerHTML = nameWatch;
+        document.getElementById("idCus").value = idCus;
+        document.getElementById("idWatch").value = idWatch;
+        document.getElementById("nameAcc").value=nameAcc;
     }
 </script>
 <script>
@@ -211,8 +215,11 @@
 
     function upload(idWatch, price, idCus) {
         let qtt = +document.getElementById(idWatch + 'b' + idCus).value + 1;
-        document.getElementById(idWatch + 'a' + idCus).innerText = qtt * price
-        document.getElementById(idWatch + 'b' + idCus).value = qtt
+        document.getElementById(idWatch + 'a' + idCus).innerText = qtt * price;
+        document.getElementById(idWatch + 'b' + idCus).value = qtt;
+        let totalPrice = +document.getElementById("results").value;
+        document.getElementById("results").value = totalPrice * 1 + price * 1;
+        document.getElementById("result").innerText = totalPrice * 1 + price * 1;
 
         let watch = {
             idWatch: idWatch,
@@ -236,8 +243,16 @@
 
     function download(idWatch, price, idCus) {
         let qtt = +document.getElementById(idWatch + 'b' + idCus).value - 1;
-        document.getElementById(idWatch + 'a' + idCus).innerText = qtt * price
-        document.getElementById(idWatch + 'b' + idCus).value = qtt
+        let totalPrice = +document.getElementById("results").value;
+        if (qtt < 1) {
+            qtt = 1;
+            document.getElementById(idWatch + 'b' + idCus).value = 1;
+        } else {
+            document.getElementById(idWatch + 'b' + idCus).value = qtt
+            document.getElementById("results").value = totalPrice * 1 - price * 1;
+            document.getElementById("result").innerText = totalPrice * 1 - price * 1;
+        }
+        document.getElementById(idWatch + 'a' + idCus).innerText = qtt * price;
         let watch = {
             idWatch: idWatch,
             idCus: idCus,

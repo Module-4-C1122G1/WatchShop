@@ -11,7 +11,7 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Timups</title>
+    <title>Trang chủ</title>
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css"
@@ -54,7 +54,7 @@
             <nav class="navbar navbar-expand-lg custom_nav-container ">
                 <a class="navbar-brand" href="index.html">
             <span>
-              ShopWhat
+              ShopWatch
             </span>
                 </a>
 
@@ -70,14 +70,16 @@
                             <a class="nav-link" th:href="@{/watch/index}">Trang chủ<span
                                     class="sr-only">(current)</span></a>
                         </li>
-                        <li  class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" th:href="@{/watch/watches}">Sản phẩm</a>
                         </li>
                         <li th:if="${#request.userPrincipal == null}" class="nav-item">
                             <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
                         </li>
                         <li class="nav-item">
-                            <a th:each="authority : ${#authentication.getAuthorities()}" th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}" class="nav-link" th:href="@{/customer}">Admin</a>
+                            <a th:each="authority : ${#authentication.getAuthorities()}"
+                               th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}" class="nav-link"
+                               th:href="@{/order}">Admin</a>
                         </li>
 
 
@@ -85,16 +87,16 @@
                     <div class="user_option-box">
 
 
-                        <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                        <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle"
+                           data-bs-toggle="dropdown"><i
                                 class="fa fa-user"></i></a>
                         <div sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-end">
                             <div style="text-align: center" th:text="${#request.userPrincipal.name}"></div>
                             <div class="dropdown-divider"></div>
                             <a th:href="@{/logout}">Logout</a>
                         </div>
-                        <a  th:if="${#request.userPrincipal == null}" th:href="@{/login}"><i
+                        <a th:if="${#request.userPrincipal == null}" th:href="@{/login}"><i
                                 class="fa fa-user"></i></a>
-
 
 
                         <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
@@ -103,7 +105,6 @@
                         <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
-
 
 
                     </div>
@@ -228,7 +229,7 @@
     </div>
     <div class="btn-box">
         <a th:href="@{/watch/watches}">
-            View All
+            Xem tất cả
         </a>
     </div>
 </section>
@@ -256,7 +257,7 @@
                         đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
                         Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
                         bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
-                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
+                        hồ ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                 </div>
             </div>
@@ -272,10 +273,10 @@
     <div class="container">
         <div class="heading_container">
             <h2>
-                Features Of Our Watches
+                Các tính năng của đồng hồ của chúng tôi
             </h2>
             <p>
-                Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Nhà phát triển đồng hồ khắp thế giới sẻ tạo nên trong một bản nhạc, và nỗi đau của một lượng lớn.
             </p>
         </div>
         <div class="row">
@@ -286,14 +287,14 @@
                     </div>
                     <div class="detail-box">
                         <h5>
-                            Fitness Tracking
+                            Theo dõi đồng hồ
                         </h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            Mọi chức năng có thể thay đổi theo thời gian
                         </p>
                         <a href="">
                 <span>
-                  Read More
+                  Đọc thêm
                 </span>
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -307,14 +308,14 @@
                     </div>
                     <div class="detail-box">
                         <h5>
-                            Alerts & Notifications
+                            Thông báo
                         </h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            Bạn có thể xem những đồng hồ mới nhất
                         </p>
                         <a href="">
                 <span>
-                  Read More
+                  Đọc thêm
                 </span>
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -328,14 +329,14 @@
                     </div>
                     <div class="detail-box">
                         <h5>
-                            Messages
+                            Tin nhắn
                         </h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            Chuyên viên tư vân hổ trợ 7/24 hổ trợ mọi lúc mọi nơi
                         </p>
                         <a href="">
                 <span>
-                  Read More
+                  Đọc thêm
                 </span>
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -349,14 +350,14 @@
                     </div>
                     <div class="detail-box">
                         <h5>
-                            Bluetooth
+                            Kết nối
                         </h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            Thông tin trên mọi miền tổ quốc.Giao hàng tận nơi.
                         </p>
                         <a href="">
                 <span>
-                  Read More
+                  Đọc thêm
                 </span>
                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                         </a>
@@ -366,7 +367,7 @@
         </div>
         <div class="btn-box">
             <a href="">
-                View More
+                Xem thêm
             </a>
         </div>
     </div>
@@ -383,25 +384,25 @@
                 <div class="form_container">
                     <div class="heading_container">
                         <h2>
-                            Contact Us
+                            Liên hệ với chúng tôi
                         </h2>
                     </div>
                     <form action="">
                         <div>
-                            <input type="text" placeholder="Full Name "/>
+                            <input type="text" placeholder="Họ và tên "/>
                         </div>
                         <div>
                             <input type="email" placeholder="Email"/>
                         </div>
                         <div>
-                            <input type="text" placeholder="Phone number"/>
+                            <input type="text" placeholder="Số điện thoại"/>
                         </div>
                         <div>
-                            <input type="text" class="message-box" placeholder="Message"/>
+                            <input type="text" class="message-box" placeholder="Tin nhắn"/>
                         </div>
                         <div class="d-flex ">
                             <button>
-                                SEND
+                                Gởi đi
                             </button>
                         </div>
                     </form>
@@ -423,7 +424,7 @@
     <div class="container">
         <div class="heading_container heading_center">
             <h2>
-                Testimonial
+                Đánh giá
             </h2>
         </div>
         <div class="carousel-wrap ">
@@ -440,22 +441,17 @@
                                         Mark Thomas
                                     </h5>
                                     <h6>
-                                        Customer
+                                        Khách hàng
                                     </h6>
                                 </div>
                                 <i class="fa fa-quote-left" aria-hidden="true"></i>
                             </div>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut
-                                labore
-                                et
-                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                velit esse
-                                cillum
-                                dolore eu fugia
+                                Shop Watch luôn là cái tên xa xỉ và cao cấp bậc nhất trong thị trường đồng hồ. Bất kỳ ai
+                                đam
+                                mê cũng khao khát được sở hữu sản phẩm của thương hiệu này. Vậy các dòng đồng hồ Shop
+                                Watch
+                                nổi tiếng, được săn lùng nhiều nhất là gì? Hãy cùng Team3 tìm hiểu nha!
                             </p>
                         </div>
                     </div>
@@ -472,22 +468,15 @@
                                         Alina Hans
                                     </h5>
                                     <h6>
-                                        Customer
+                                        Khách hàng
                                     </h6>
                                 </div>
                                 <i class="fa fa-quote-left" aria-hidden="true"></i>
                             </div>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut
-                                labore
-                                et
-                                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                velit esse
-                                cillum
-                                dolore eu fugia
+                                Air-King là bộ sưu tập lấy cảm hứng từ loạt phim “Air” đình đám, mang tinh thần phiêu
+                                lưu của ngành hàng không. Dòng đồng hồ bấm giờ này có độ chính xác tuyệt vời, được các
+                                phi công RAF của Anh đánh giá vô cùng cao.
                             </p>
                         </div>
                     </div>
@@ -515,7 +504,7 @@
                         đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
                         Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
                         bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
-                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
+                        hồ ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                     <div class="footer_social">
                         <a href="">
@@ -542,13 +531,13 @@
                         <a href="">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                             <span>
-                  Location
+                  Vị trí
                 </span>
                         </a>
                         <a href="">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <span>
-                  Call 0961053275
+                  Điện thoại liên hệ 0961053275
                 </span>
                         </a>
                         <a href="">
@@ -563,12 +552,12 @@
             <div class="col-md-6 col-lg-3 footer-col">
                 <div class="footer_contact">
                     <h4>
-                        Subscribe
+                        Đặt mua
                     </h4>
                     <form action="#">
-                        <input type="text" placeholder="Enter email"/>
+                        <input type="text" placeholder="Xác nhận email"/>
                         <button type="submit">
-                            Subscribe
+                            Đặt mua
                         </button>
                     </form>
                 </div>

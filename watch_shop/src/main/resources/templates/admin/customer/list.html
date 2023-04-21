@@ -39,9 +39,9 @@
 <aside style="background-color: #c0bfc4" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xll my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-            <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
+        <a class="navbar-brand m-0" th:href="@{/watch/index}" target="_blank">
+            <img th:src="@{/images/watch_shop.png}" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold">Trang chủ</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -232,12 +232,10 @@
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 <!--                <p th:utext="${#request.userPrincipal.name}"></p>-->
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                    <form action="/customer/search/" class="example d-flex align-items-center">
+                    <form action="/customer">
                         <div class="input-group">
-                            <span class="input-group-text text-body"><i class="fas fa-search"
-                                                                        aria-hidden="true"></i></span>
-                            <input th:value="${name}" name="name" type="text" class="form-control"
-                                   placeholder="Tìm kiếm theo tên khách hàng">
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="Nhập tên khách hàng cần tìm..." name="name" th:value="${name}">
                         </div>
                     </form>
                 </div>
@@ -386,8 +384,7 @@
                             <h4 style="color: #dde0e3">Loại khách hàng:</h4>
                             <select id="select_customer" style="width: 150px" onchange="onChangeCustomerType()"
                                     class="form-select form-select-lg" aria-label=".form-select-lg example">
-                                <option hidden="hidden" th:text="${typeOfCustomer}" class="text-primary" selected>Loại khách hàng</option>
-                                <option th:each="type : ${customerTypeList}" th:value="${type.getId()}" >
+                                <option  th:each="type : ${customerTypeList}" th:selected="${type.getId() == 1 || typeOfCustomer.equals(type.getName()) }" th:value="${type.getId()}" >
                                     <a th:href="@{/customer/type/{id}(id=${type.getId()})}"
                                        th:text="${type.name}"></a>
                                 </option>
@@ -430,7 +427,7 @@
                                         style="font-family: 'Times New Roman'">Tài khoản
                                     </th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2"
-                                        style="font-family: 'Times New Roman'">Thông tin chi tiết
+                                        style="font-family: 'Times New Roman'">Thông tin
                                     </th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2"
                                         style="font-family: 'Times New Roman'">Cập nhật
@@ -556,25 +553,42 @@
             <h1 class="text-center text-danger"> Không tìm thấy</h1>
         </div>
 
-        <div class="text-center container">
+        <div style="margin-top: 20px" class="text-center container" th:if="${check==0}">
             <a class="a page-item btn btn-dark page-item" th:if="${customerList.hasPrevious()}"
-               th:href="@{/customer(page=${customerList.number - 1})}">
+               th:href="@{/customer(page=${customerList.number - 1},name=${name})}">
                 <i class="ti-angle-left">Trước</i>
             </a>
 
             <a class="a active1 page-item number btn btn-dark page-item"
                th:classappend="${pageNumber == customerList.number + 1} ? 'active' : ''"
                th:each="pageNumber : ${integerList}"
-               th:href="@{/customer(page = ${pageNumber - 1})}"
+               th:href="@{/customer(page = ${pageNumber - 1},name=${name})}"
                th:text="${pageNumber}">
             </a>
 
             <a class="a page-item btn btn-dark page-item" th:if="${customerList.hasNext()}"
-               th:href="@{/customer(page = ${customerList.number + 1})}">
+               th:href="@{/customer(page = ${customerList.number + 1},name=${name})}">
                 <i class="ti-angle-right">Sau</i>
             </a>
         </div>
+        <div style="margin-top: 20px" class="text-center container" th:if="${check==1}">
+            <a class="a page-item btn btn-dark page-item" th:if="${customerList.hasPrevious()}"
+               th:href="@{/customer/type(page=${customerList.number - 1})}">
+                <i class="ti-angle-left">Trước</i>
+            </a>
 
+            <a class="a active1 page-item number btn btn-dark page-item"
+               th:classappend="${pageNumber == customerList.number + 1} ? 'active' : ''"
+               th:each="pageNumber : ${integerList}"
+               th:href="@{/customer/type(page = ${pageNumber - 1})}"
+               th:text="${pageNumber}">
+            </a>
+
+            <a class="a page-item btn btn-dark page-item" th:if="${customerList.hasNext()}"
+               th:href="@{/customer/type(page = ${customerList.number + 1})}">
+                <i class="ti-angle-right">Sau</i>
+            </a>
+        </div>
         <script>
             function information(id, name) {
                 document.getElementById("idDelete").value = id;
