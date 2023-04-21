@@ -307,7 +307,9 @@
             transition: all 0.5s;
             cursor: pointer;
         }
-
+        a{
+            text-decoration: none;
+        }
         .button span {
             cursor: pointer;
             display: inline-block;
@@ -377,7 +379,7 @@
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/watch/watches}">Sản phẩm</a>
                         </li>
-                        <li class="nav-item">
+                        <li th:if="${#request.userPrincipal == null}" class="nav-item">
                             <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
                         </li>
                         <li class="nav-item">
@@ -527,8 +529,8 @@
 
                     <h6><span th:text="${#numbers.formatCurrency(watch.price)}"></span>VND</h6>
 
-                    <hr style="color: #abb2b7">
-                    <div class="mt-2 pr-3 content"><p th:utext="${watch.detail}"></p></div>
+<!--                    <hr style="color: #abb2b7">-->
+<!--                    <div class="mt-2 pr-3 content"><p th:utext="${watch.detail}"></p></div>-->
                     <hr style="color: #abb2b7">
                     <div class="mt-2 pr-3 content"><p th:utext="${watch.detail}"></p></div>
 

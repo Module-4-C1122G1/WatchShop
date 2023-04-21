@@ -236,6 +236,25 @@ insert into manufacturer(name_manufacturer) values
 ('HUAWEI'),
 ('CERTINA');
 
+insert into diploma(name_diploma)
+values
+('Giám đốc'),
+('Thư kí'),
+('Quản lý'),
+('Nhân viên bán hàng'),
+('Thực tập');
+
+
+insert into positions(name_position)
+values
+('Tiến sĩ'),
+('Đại học'),
+('Cao đẳng'),
+('Trung cấp'),
+('Không có');
+
+
+
 insert into watch(name_watch,price,id_type_watch,id_manufacturer,image,strap_material,diameter,face_color,origin,detail,quantity,is_delete) values
 ('ĐỒNG HỒ NAM LONGINES MASTER COLLECTION',103500000,1,1,'https://donghoduyanh.com/images/products/2021/07/01/large/l27935577_1625107594.jpg.webp','Thép không gỉ 316L/ Vàng 18K','40mm','Đen','Thụy Sỹ','Tính năng khác:Lịch ngày. Caliber L888, 25.200vph, trữ cót 64h. Mặt số đính 13 viên kim cương tổng 0.059 carat.<br>Độ chịu nước:30m<br>Bảo hành chính hãng:5 năm quốc tế',20,0),
 ('ĐỒNG HỒ NAM HAMILTON KHAKI FIELD TITANIUM',25300000,1,2,'https://donghoduyanh.com/images/products/2023/03/16/large/h70545560_1678959432-copy.png.webp','Vàng 18K','42mm','Xanh lá','Thụy Sỹ','Với kích thước nhỏ hơn, vỏ thiết kế gọn hơn cùng nhiều kiểu dáng và kết cấu có tính thừa kế và đối tượng không chỉ dừng lại ở môi trường quân nhân mà đây có thể là một bước ngoặt lấn sang đối tượng cụ thể khác trong tương lai, các mẫu đồng hồ Hamilton Khaki Field Titanium mới mang đến những cá tính mới, sự hấp dẫn về phong cách và khả năng vận hành đáng tin cậy của một thương hiệu tên tuổi lớn lấy quân sự làm nền tảng xây dựng thương hiệu đồng hồ.<br>Bảo hành chính hãng:2 năm quốc tế',20,0),
@@ -269,44 +288,31 @@ insert into watch(name_watch,price,id_type_watch,id_manufacturer,image,strap_mat
 ('TISSOT PR 100 GENT COSC',18550000,6,3,'https://donghoduyanh.com/images/products/2020/03/17/large/tissot_pr_100_gent_cosc_t1014512203100.jpg.webp','Thép không gỉ 316L mạ vàng công nghệ PVD','39mm','Trắng','Thuỵ Sỹ','Độ chịu nước:100m<br>Tính năng khác:Lịch ngày. QUARTZ CHRONOMETER COSC. Sai số 10giây/ năm<br>Bảo hành chính hãng:3 năm quốc tế',20,0),
 ('Đồng hồ thông minh Huawei Watch Fit 2',3290000,7,14,'https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/h/u/huawei-band.jpg','Silicone','1.74 inch','Màn hình Amoled','Trung Quốc','Tính năng: Có định vị GPS, Màn hình luôn hiển thị, Tùy chỉnh mặt đồng hồ, Nghe gọi trên đồng hồ, Nhận cuộc gọi',20,0),
 ('Đồng hồ thông minh Huawei Watch GT Cyber viền nhựa',5990000,7,14,'https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/h/u/huawei_12_.png','Cao Su','1.32 inches','Kính cường lực','Trung Quốc','Tính năng:Có định vị GPS, Cài ứng dụng, Phát nhạc trên đồng hồ, Chế độ luyện tập, Hiển thị thông báo điện thoại, Tùy chỉnh mặt đồng hồ, Nghe gọi trên đồng hồ, Điều khiển chơi nhạc, Kết nối tai nghe',20,0),
-('Samsung Galaxy Watch 5',5490000,7,12,'https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/a/sansung_1__2.png','Silicone','40 mm','Xám Graphite, Bạc, Hồng vàng',null,'Hỗ trợ sức khỏe<br>Hỗ trợ hơn 90 chế độ tập luyện thể thao.<br>Hỗ trợ đo Sp02, đo nhịp tim, huyết áp.<br>Cải thiện cảm biến theo dõi lộ trình tập luyện, theo dõi giấc ngủ',20,0),
+('Samsung Galaxy Watch 5',5490000,7,12,'https://cdn2.cellphones.com.vn/x358,webp,q100/media/catalog/product/s/a/sansung_1__2.png','Silicone','40 mm','Xám Graphite, Bạc, Hồng vàng','Trung Quốc','Đồng hồ Galaxy Watch5 không có nhiều thay đổi về mặt thiết kế so với thế hệ trước, vẫn là mặt đồng hồ tròn được vát phẳng hài hòa kết hợp khung viền hợp kim nhôm cứng cáp, tạo cảm giác năng động cùng sự hiện đại khi đeo trên tay. Samsung cũng đã thay thế chất liệu kính cường lực bằng kính Sapphire cho thế hệ Watch5 giúp tăng độ cứng cáp cho màn hình, hạn chế nứt vỡ, trầy xước trong quá trình sử dụng',20,0),
 ('Apple Watch SE 2022 40mm',7490000,7,11,'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/1/_/1_258.jpg','Cao Su','40mm','Retina LTPO OLED (1.000 nits)',null,'Tính năng: Có định vị GPS, cài ứng dụng, phát nhạc trên đồng hồ, chế độ luyện tập, hiển thị thông báo điện thoại, tùy chỉnh mặt đồng hồ, nghe gọi trên đồng hồ, nhận cuộc gọi , điều khiển chơi nhạc, kết nối tai nghe',20,0),
 ('Đồng hồ thông minh Xiaomi Watch S1 Active',4490000,7,13,'https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/b/l/blue2.jpg','Silicone','1.43 inch','Amoled','Trung Quốc','17 chế độ thể thao, 19 chế độ chuyên nghiệp.<br>Thực hiện cuộc gọi qua bluetooth<br>Trợ lý ảo Alexa',20,0);
-
-
-
-insert into diploma(name_diploma)
-values
-('Giám đốc'),
-('Thư kí'),
-('Quản lý'),
-('Nhân viên bán hàng'),
-('Thực tập');
-
-
-insert into positions(name_position)
-values
-('Tiến sĩ'),
-('Đại học'),
-('Cao đẳng'),
-('Trung cấp'),
-('Không có');
-
-
-
 
 insert into domain(name) values ('Miền Bắc') , ('Miền Trung') , ('Miền Nam');
 insert into branch (name_branch , address_branch , area_branch , id_domain , is_delete) values ('Chi nhánh Hà Nội' , '310 Xã Đàn, Phường Phương Liên, Quận Đống Đa, Hà Nội' , 50.0 , 1 , 0) ,
 ('Chi nhánh Đà Nẵng' , '71 Nguyễn Lương Bằng, Hòa Khánh, Liên Chiểu, Đà Nẵng' , 50.0 , 2 , 0) ,
 ('Chi nhánh Hồ Chí minh' , '64 Võ Thị Sáu, phường Tân Định, quận 1, TP. HCM' , 50.0 , 3 , 0) ,
-('Chi nhánh Hải Phòng' , '342 P.Tô Hiệu , Hà Nam , Hải Phòng' , 50.0 , 1 , 0);
-
-insert into branch (name_branch , address_branch , area_branch) values ('Chi nhánh Hà Nội' , '310 Xã Đàn, Phường Phương Liên, Quận Đống Đa, Hà Nội' , 50.0) ,
-('Chi nhánh Đà Nẵng' , '71 Nguyễn Lương Bằng, Hòa Khánh, Liên Chiểu, Đà Nẵng' , 50.0) ,
-('Chi nhánh Hồ Chí minh' , '64 Võ Thị Sáu, phường Tân Định, quận 1, TP. HCM' , 50.0) ,
-('Chi nhánh Hải Phòng' , '342 P.Tô Hiệu , Hà Nam , Hải Phòng' , 50.0);
-
-
+('Chi nhánh Hải Phòng' , '342 P.Tô Hiệu , Hà Nam , Hải Phòng' , 50.0 , 1 , 0),
+('Chi nhánh Quảng Trị' , '342 P.Tô Hiệu , Quảng Trị' , 50.0 , 1 , 0),
+('Chi nhánh Tây Nguyên' , '342 P.Tô Hiệu , Tây Nguyên' , 50.0 , 1 , 0),
+('Chi nhánh Dak Lak' , '342 P.Tô Hiệu , Dak Lak' , 50.0 , 1 , 0),
+('Chi nhánh Bắc Kạn' , '342 P.Tô Hiệu , Bắc Kạn' , 50.0 , 1 , 0),
+('Chi nhánh Cà Mau' , '342 P.Tô Hiệu , Cà Mau' , 50.0 , 1 , 0),
+('Chi nhánh Lạng Sơn' , '342 P.Tô Hiệu , Hà Nam , Lạng Sơn' , 50.0 , 1 , 0),
+('Chi nhánh Cao Bằng' , '342 P.Tô Hiệu , Hà Nam , Cao Bằng' , 50.0 , 1 , 0),
+('Chi nhánh Sơn La' , '342 P.Tô Hiệu , Sơn La' , 50.0 , 1 , 0),
+('Chi nhánh Ninh Bình' , '342 P.Tô Hiệu , Ninh Bình' , 50.0 , 1 , 0),
+('Chi nhánh Nghệ An' , '342 P.Tô Hiệu , Nghệ An' , 50.0 , 1 , 0),
+('Chi nhánh Long An' , '342 P.Tô Hiệu , Long An' , 50.0 , 1 , 0),
+('Chi nhánh Bình Định' , '342 P.Tô Hiệu , Bình Định' , 50.0 , 1 , 0),
+('Chi nhánh Quảng Nam' , '32 Nguyễn Huệ , Quảng Nam' , 50.0 , 2 , 0),
+('Chi nhánh Bình Dương' , '64 Quang Trung , Bình Dương' , 50.0 , 3 , 0),
+('Chi nhánh Huế' , '21 Hương Thuỷ , Hà Nam , Huế' , 50.0 , 2 , 0),
+('Chi nhánh Đà Lạt' , '321 P.Tô Hoài , Hà Nam , Đà Lạt' , 50.0 , 1 , 0);
 insert into employee(name_employee,date_of_birth,gender,salary,address,phone_number,email_employee,img,id_diploma,id_position ,id_branch , is_delete )
 values
 ('Nguyễn Văn An','1970-11-07','Nam','5000','295 Nguyễn Tất Thành, Đà Nẵng','0901234121','annguyen@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',1,1,1 , 0),
@@ -334,4 +340,15 @@ values
 ('Nguyễn Thị Bích Ngọc','1996-10-11','Nữ','2000','121 Tố Hữu, Đà Nẵng','0903111563','bichngoc@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1,0),
 ('Tạ Đình Vũ Đàm','1997-07-11','Nam','1000','111 Phan Tứ, Đà Nẵng','0905323563','damvuta@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1,0),
 ('Nguyễn Thị Hương Trà','1999-02-11','Nữ','500','453 Bạch Đằng, Đà Nẵng','0909124863','huongtra@gmail.com','https://giaydabongtot.com/wp-content/uploads/2020/10/Hinh-nen-ronaldo-cr7-may-tinh-laptop-3-scaled.jpg',5,5,1,0);
+select sum(price) from cart where id_customer =1 and check_order=1;
+
+
+
+insert into manage_product_branch values (1,2),(1,1),(1,3),(1,4),(1,5),(2,6),(2,7),(2,8),(2,9),(3,1),(3,4),(3,6),(3,7),(4,1),(4,4),(4,5),(4,6);
+
+
+
+
+
+
 

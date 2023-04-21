@@ -23,6 +23,15 @@
         table thead tr th {
             border-color: black !important;
         }
+
+         .a {
+             margin: 5px;
+         }
+        .active1 {
+            color: black;
+            background: white;
+        }
+
     </style>
 </head>
 <body class="g-sidenav-show " style="background-color: #dedde3">
@@ -30,7 +39,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" th:href="@{/watch/index} " target="_blank" >
-            <img th:src="@{/images/watch_shop.png}" class="navbar-brand-img h-300 w-300" alt="main_logo">
+            <img th:src="@{/images/watch.jpg}" class="navbar-brand-img h-300 w-300" alt="main_logo">
             <span class="ms-1 font-weight-bold" style="color: #312f83">Trang chủ</span>
         </a>
     </div>
@@ -192,20 +201,19 @@
     <!-- Navbar -->
     <nav style="
     position: fixed;
-    z-index: 10000;
+    z-index: 0;
     top: 0;
     right: 0;
     left: 16.35rem;
     width: 77%;
-    background: #b9b8bd;
-" class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none" id="navbarBlur" navbar-scroll="true">
+    background: #b9b8bd;" class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none" id="navbarBlur" navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sản phẩm</li>
+                    <li class="breadcrumb-item text-lg"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
+                    <li class="breadcrumb-item text-lg text-dark active" aria-current="page">Sản phẩm</li>
                 </ol>
-                <h4 class="font-weight-bolder mb-0">Sản phẩm</h4>
+<!--                <h4 class="font-weight-bolder mb-0">Sản phẩm</h4>-->
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -319,7 +327,7 @@
         </div>
     </nav>
     <div class="container-fluid py-4" style="
-    margin-top: 80px !important;">
+    margin-top: 60px !important;">
         <p th:text = "${msg}" id="msg" style="display: none"></p>
         <div class="row">
             <div class="col-12" style="background-color: #e9e8fc">
@@ -338,16 +346,16 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Số thứ tự</th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Tên đồng hồ</th>
-                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Gía (VND)</th>
+                                    <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Gía</th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Số lượng</th>
                                     <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7 ps-2" style="font-family: 'Times New Roman'">Tác vụ</th>
                                 </tr>
                                 </thead>
                                 <tr th:each="adminWatch:${watchList}">
-                                    <td th:text="${adminWatch.idWatch}"></td>
+                                    <td style="text-align: center" th:text="${adminWatch.idWatch}"></td>
                                     <td th:text="${adminWatch.name}"></td>
-                                    <td th:text="${adminWatch.price}"></td>
-                                    <td th:text="${adminWatch.quantity}"></td>
+                                    <td th:text="${#numbers.formatCurrency(adminWatch.price)}"></td>
+                                    <td style="text-align: center" th:text="${adminWatch.quantity}"></td>
                                     <td>
                                     <!-- button xem thêm-->
                                         <button type="button"
@@ -373,12 +381,12 @@
                             <p class="text-center" style="color: red" th:if="${list == 0}">Không tìm thấy đồng hồ nào có tên là <span style="color: red" th:text="${name}"></span></p>
                         <!--modal xem thêm  -->
                         <div class="modal fade" id="extraLargeModal" tabindex="-1" aria-labelledby="exampleModalLabel1"
-                             style="width: 100%;"
+                             style="width: 100%;!important;"
                              aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel1">Xem thêm</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel1">Thông tin chi tiết</h5>
                                         <button  type="button" class="btn-close text-danger" data-bs-dismiss="modal"
                                                 aria-label="Close">
                                             <i class="fa-solid fa-xmark text-danger"></i>
@@ -388,36 +396,36 @@
                                         <input type="hidden" id="idDetail" name="idDetail">
                                         <table>
                                             <tr class="detail-watch">
-                                                <th><p>Loại đồng hồ:</p> </th>
+                                                <td><p>Loại đồng hồ:</p> </td>
                                                 <td><p id="typeWatch"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th><p>Thương hiệu:</p> </th>
+                                                <td><p>Thương hiệu:</p> </td>
                                                 <td><p id="manufacturer"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th><p>Chất liệu dây:</p> </th>
+                                                <td><p>Chất liệu dây:</p> </td>
                                                 <td><p id="strapMaterial"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Đường kính: </th>
+                                                <td>Đường kính: </td>
                                                 <td><p id="diameter"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Màu mặt: </th>
+                                                <td>Màu mặt: </td>
                                                 <td><p id="color"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Xuất xứ: </th>
+                                                <td>Xuất xứ: </td>
                                                 <td><p id="origin"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th> Thông tin chi tiết: </th>
+                                                <td> Thông tin chi tiết: </td>
                                                 <td><p id="detail"></p></td>
                                             </tr>
                                             <tr class="detail-watch">
-                                                <th>Ảnh</th>
-                                                <td><p id="image" style="margin: 1px 0px"></p></td>
+                                                <td>Ảnh</td>
+                                                <td><p id="image" style="margin: 25px 0px;width: 50%;height: 10%;"></p></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -464,22 +472,41 @@
     </div>
     <!--Phân trang-->
     <div class="text-center container">
-        <a class="page-item btn btn-dark page-item" th:if="${watchList.hasPrevious()}"
+        <a class="page-item a btn btn-dark page-item" th:if="${watchList.hasPrevious()}"
            th:href="@{/adminWatch(page = ${watchList.number - 1},name=${name})}">
             <i class="ti-angle-left">Trước</i>
         </a>
 
-        <a class="page-item number btn btn-dark page-item" style="margin-right: 5px"
+        <a class="page-item active1 number btn btn-dark page-item a"
            th:classappend="${pageNumber == watchList.number + 1} ? 'active' : ''"
            th:each="pageNumber : ${integerList}"
-           th:href="@{/adminWatch(page = ${pageNumber - 1},name=${name})}"
+           th:href="@{/adminWatch(page = ${pageNumber - 1})}"
            th:text="${pageNumber}">
         </a>
 
-        <a class="page-item btn btn-dark page-item" th:if="${watchList.hasNext()}"
-           th:href="@{/adminWatch(page = ${watchList.number + 1},name=${name})}">
+        <a class="page-item btn a btn-dark page-item" th:if="${watchList.hasNext()}"
+           th:href="@{/branch(page = ${watchList.number + 1},name=${name})}">
             <i class="ti-angle-right">Sau</i>
         </a>
+    </div>
+<!--    <div class="text-center container">-->
+<!--        <a class="page-item btn btn-dark page-item" th:if="${watchList.hasPrevious()}"-->
+<!--           th:href="@{/adminWatch(page = ${watchList.number - 1},name=${name})}">-->
+<!--            <i class="ti-angle-left">Trước</i>-->
+<!--        </a>-->
+
+<!--        <a class="page-item number btn btn-dark page-item" style="margin-right: 5px; color: black;-->
+<!--            background: white;"-->
+<!--           th:classappend="${pageNumber == watchList.number + 1} ? 'active' : ''"-->
+<!--           th:each="pageNumber : ${integerList}"-->
+<!--           th:href="@{/adminWatch(page = ${pageNumber - 1},name=${name})}"-->
+<!--           th:text="${pageNumber}">-->
+<!--        </a>-->
+
+<!--        <a class="page-item btn btn-dark page-item" th:if="${watchList.hasNext()}"-->
+<!--           th:href="@{/adminWatch(page = ${watchList.number + 1},name=${name})}">-->
+<!--            <i class="ti-angle-right">Sau</i>-->
+<!--        </a>-->
     </div>
         <footer class="footer pt-3  ">
             <div class="container-fluid">
