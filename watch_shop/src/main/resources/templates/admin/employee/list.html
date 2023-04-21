@@ -34,9 +34,9 @@
 <aside style="background-color: #c0bfc4" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xll my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-            <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
+        <a class="navbar-brand m-0" th:href="@{/watch/index} " target="_blank" >
+            <img th:src="@{/images/watch.jpg}" class="navbar-brand-img h-300 w-300" alt="main_logo">
+            <span class="ms-1 font-weight-bold" style="color: #312f83">Trang chủ</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -213,7 +213,14 @@
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+    <nav style="
+    position: static;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    left: 16.35rem;
+    width: 96.4%;
+    background: #b9b8bd;"class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none" id="navbarBlur"
          navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
@@ -222,7 +229,7 @@
                     </li>
                     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Nhân viên</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Nhân viên</h6>
+<!--                <h6 class="font-weight-bolder mb-0">Nhân viên</h6>-->
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 
@@ -356,23 +363,22 @@
 
     <script>
         let msg = document.getElementById("msg").innerText;
-        if (msg) {
+        if(msg) {
             Swal.fire({
-                title: '<div style="direction:rtl;font-size:12px;font-family:serif;font-weight:bold;">$msg</div>'.replace('$msg', msg),
+                title: '<div style="direction:rtl;font-size:14px;font-family:Iran,Calibri;font-weight:bold;">$msg</div>'.replace('$msg',msg),
                 fontSize: 1.6,
-                position: 'fixed',
+                position: 'top-end',
                 icon: 'success',
                 // title: msg,
                 showConfirmButton: false,
                 timer: 1500,
-                style: 'w-10,h-10',
-                width: 50,
-                height: 50
+                width: 250,
+                height: 10
             })
         }
     </script>
     <!--    join-->
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4" >
         <select id="select_employee" style="width: 150px" onchange="onChangeCustomerType()"
                 class="form-select form-select-lg" aria-label=".form-select-lg example">
             <option class="text-primary" selected>Chi nhánh</option>
@@ -385,7 +391,7 @@
     </div>
 
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4" style="margin-top: -1%;" >
         <div class="row">
             <div class="col-12" style="background-color: #e9e8fc">
                 <div class="card mb-4" style="background-color: #2c2972">

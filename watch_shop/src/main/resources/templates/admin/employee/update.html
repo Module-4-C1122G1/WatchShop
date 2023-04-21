@@ -22,9 +22,9 @@
 <aside style="background-color: #c0bfc4" class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xll my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-            <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
+        <a class="navbar-brand m-0" th:href="@{/watch/index} " target="_blank" >
+            <img th:src="@{/images/watch.jpg}" class="navbar-brand-img h-300 w-300" alt="main_logo">
+            <span class="ms-1 font-weight-bold" style="color: #312f83">Trang chủ</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -200,33 +200,47 @@
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+    <nav style="
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    right: 0em;
+    left: 16.1rem;
+    background: #b9b8bd;
+    width: 74.6%;" class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none" id="navbarBlur"
          navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;"
+                                                           style="font-size: 16px;">Admin</a>
                     </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sản phẫm</li>
+                    <li class="breadcrumb-item text-lg text-dark active" aria-current="page"></li>
+                    <a style="font-size: 16px;" href="/employee">Nhân viên</a>
+
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Sản phẫm</h6>
+<!--                <h6 class="font-weight-bolder mb-0">Sản phẫm</h6>-->
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <form action="/employee">
                     <div class="input-group">
-                        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" placeholder="Tìm kiếm theo tên sản phẫm">
+                            <span class="input-group-text text-body"><i class="fas fa-search"
+                                                                        aria-hidden="true"></i></span>
+                        <input type="text" placeholder="Tìm kiếm theo tên nhân viên.." class="form-control"
+                               name="name" th:value="${name}"/>
                     </div>
+                </form>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="fa fa-user"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" style="height: 500px; width: 24%">
-                            <a href="#" style="font-size: 20px">Reports</a>
-                            <a href="#">Settings</a>
+                        <div class="dropdown-menu dropdown-menu-end" style="height: 200px; width: 24%">
+                            <a href="#" style="font-size: 20px">Báo cáo</a>
+                            <a href="#">Cài đặt</a>
                             <div class="dropdown-divider"></div>
-                            <a href="#">Logout</a>
+                            <a href="#">Đăng xuất</a>
                         </div>
                     </li>
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -331,21 +345,22 @@
     </nav>
     <!-- End Navbar -->
     <div class="row my-2 mx-2" style="width: 95%;background: #d4d4e3;height: auto;">
-        <div class="col-md-12">
-            <a href="/employee" style="display: block;margin-left: 1em;margin-top: 1em">
-                <button type="button" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"
-                         viewBox="0 0 16 16">
-                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>
-                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>
-                    </svg>
-                </button>
-            </a>
+        <div class="col-md-12" style="
+    margin-top: 80px !important;">
+<!--            <a href="/employee" style="display: block;margin-left: 1em;margin-top: 1em">-->
+<!--                <button type="button" class="btn btn-secondary">-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house-fill"-->
+<!--                         viewBox="0 0 16 16">-->
+<!--                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"></path>-->
+<!--                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"></path>-->
+<!--                    </svg>-->
+<!--                </button>-->
+<!--            </a>-->
             <h2 class="title pt-5 pb-3" style="text-align: center">Cập nhật thông tin nhân viên</h2>
             <form style="width: 50%;margin: 0 auto" action="/employee/create" th:object="${employeeDTO}"
                   novalidate="novalidate" method="post">
                 <input type="hidden" class="form-control" th:field="*{id}"/>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Tên nhân viên:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Tên nhân viên:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{name}"
@@ -353,7 +368,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Ngày sinh:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Ngày sinh:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{dateOfBirth}"
@@ -361,7 +376,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Giới tính:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Giới tính:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{gender}"
@@ -369,7 +384,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Lương:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Lương:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{salary}"
@@ -377,7 +392,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Địa chỉ:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Địa chỉ:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{address}"
@@ -385,7 +400,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Số điện thoại:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Số điện thoại:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{phone}"
@@ -393,7 +408,7 @@
                         <p style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Email:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Email:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{email}"
@@ -401,35 +416,35 @@
                         <p style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Ảnh:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Ảnh:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
                         <input type="text" class="form-control" th:field="*{img}"
                                style="font-size: 13px;font-weight: bold;padding-left: 40px;">
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Bằng cấp:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Bằng cấp:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <select th:field="*{position}" style="text-align: center">
+                        <select class="form-select" th:field="*{position}" style="text-align: center">
                             <option th:each="position1:${position}" class="dropup-content"
                                     th:text="${position1.name}" th:value="${position1.id}"></option>
                         </select>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Chức vụ:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Chức vụ:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <select th:field="*{diploma}" style="text-align: center">
+                        <select class="form-select" th:field="*{diploma}" style="text-align: center">
                             <option th:each="diploma:${diploma}" class="dropup-content"
                                     th:text="${diploma.name}" th:value="${diploma.id}"></option>
                         </select>
                     </div>
                 </div>
-                <small class="identity text-muted" style="font-size: 10px;font-weight: bold;">Chi nhánh:</small>
+                <small class="identity text-muted" style="font-size: 15px;font-weight: bold;">Chi nhánh:</small>
                 <div class="row rone">
                     <div class="form-group col-md-12 py-3" style="position: relative;">
-                        <select th:field="*{branch}" style="text-align: center">
+                        <select class="form-select" th:field="*{branch}" style="text-align: center">
                             <option th:each="branch:${branch}" class="dropup-content"
                                     th:text="${branch.address}" th:value="${branch.idBranch}"></option>
                         </select>

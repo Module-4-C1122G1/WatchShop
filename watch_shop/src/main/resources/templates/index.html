@@ -49,13 +49,26 @@
         </a>
     </div>
     <!-- header section strats -->
-    <header class="header_section">
+    <header class="header_section" style=" margin-left: -4%;
+    width: 101%;
+    position: fixed;
+    z-index: 19;
+    background-color: white;
+    padding: 7px 0;">
         <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg custom_nav-container ">
-                <a class="navbar-brand" href="index.html">
-            <span>
-              ShopWatch
-            </span>
+            <nav class="navbar navbar-expand-md custom_nav-container ">
+                <a class="navbar-brand" th:href="@{/watch/index} " style="
+    width: 100px;
+    height: 38px;
+    position: relative;
+">
+                    <img style="
+                    margin-left: 24%;
+    width: 127%;
+    height: 167%;
+    position: absolute;
+    top: -20px;
+" th:src="@{/images/watch-trangchu.jpg}" class="navbar-brand-img h-2 w-5" alt="main_logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -65,19 +78,21 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/watch/index}">Trang chủ<span
+                    <ul class="navbar-nav ">
+                        <li class="nav-item active" >
+                            <a class="nav-link" th:href="@{/watch/index}" >Trang chủ<span
                                     class="sr-only">(current)</span></a>
                         </li>
-                        <li  class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" th:href="@{/watch/watches}">Sản phẩm</a>
                         </li>
                         <li th:if="${#request.userPrincipal == null}" class="nav-item">
                             <a class="nav-link" th:href="@{/login}">Đăng nhập</a>
                         </li>
                         <li class="nav-item">
-                            <a th:each="authority : ${#authentication.getAuthorities()}" th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}" class="nav-link" th:href="@{/order}">Admin</a>
+                            <a th:each="authority : ${#authentication.getAuthorities()}"
+                               th:if="${authority.getAuthority().startsWith('ROLE_ADMIN')}" class="nav-link"
+                               th:href="@{/order}">Admin</a>
                         </li>
 
 
@@ -85,16 +100,16 @@
                     <div class="user_option-box">
 
 
-                        <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                        <a sec:authorize="isAuthenticated()" href="#" class="nav-link dropdown-toggle"
+                           data-bs-toggle="dropdown"><i
                                 class="fa fa-user"></i></a>
                         <div sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-end">
                             <div style="text-align: center" th:text="${#request.userPrincipal.name}"></div>
                             <div class="dropdown-divider"></div>
-                            <a th:href="@{/logout}">Logout</a>
+                            <a th:href="@{/logout}"> Đăng xuất  </a>
                         </div>
-                        <a  th:if="${#request.userPrincipal == null}" th:href="@{/login}"><i
+                        <a th:if="${#request.userPrincipal == null}" th:href="@{/login}"><i
                                 class="fa fa-user"></i></a>
-
 
 
                         <a sec:authorize="isAuthenticated()" th:href="@{/carts(name=${#request.userPrincipal.name})}">
@@ -103,7 +118,6 @@
                         <a th:if="${#request.userPrincipal == null}" th:href="@{/login}">
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                         </a>
-
 
 
                     </div>
@@ -256,7 +270,7 @@
                         đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
                         Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
                         bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
-                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
+                        hồ ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                 </div>
             </div>
@@ -515,7 +529,7 @@
                         đồng hồ ShopWatch được rất nhiều tín đồ tại Việt Nam yêu thích và săn đón.
                         Nếu muốn một sở hữu một chiếc đồng hồ chất lượng, thiết kế đẹp, sang trọng,
                         bộ máy bền bỉ với các thông số đảm bảo máy chạy ổn định, chất liệu cao cấp thì Đồng
-                        hồ  ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
+                        hồ ShopWatch(team3) chính là lựa chọn sáng giá nhất trong tầm giá.
                     </p>
                     <div class="footer_social">
                         <a href="">

@@ -37,12 +37,10 @@
        class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xll my-3 fixed-start ms-3 "
        id="sidenav-main">
     <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-           aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
-           target="_blank">
-            <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" th:href="@{/watch/index} " target="_blank" >
+            <img th:src="@{/images/watch.jpg}" class="navbar-brand-img h-300 w-300" alt="main_logo">
+            <span class="ms-1 font-weight-bold" style="color: #312f83">Trang chủ</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -220,7 +218,14 @@
         </ul>
     </div>
 </aside>
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+<main style="
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    left: 16.35rem;
+    width: 77%;
+    background: #b9b8bd;" class="main-content position-relative max-height-vh-100 h-100 ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
          navbar-scroll="true">
@@ -403,7 +408,7 @@
                 <div class="col-8">
                     <div class="numbers">
                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Sản phẩm được mua nhiều nhất</p>
-                        <h5 class="font-weight-bolder" th:text="${nameWatch}">
+                        <h5 class="font-weight-bolder" th:text="${nameWatch}" style="font-size: 20px;font-family: 'Times New Roman'">
                         </h5>
                         <p class="mb-0">
                             Số lượng:
@@ -422,7 +427,8 @@
     </div>
 
 
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4" style="
+    margin-top: 60px !important;">
         <p th:text="${msg}" id="msg" style="display: none"></p>
         <div class="row">
             <div class="col-12" style="background-color: #e9e8fc">
