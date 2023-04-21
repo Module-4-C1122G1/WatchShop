@@ -372,7 +372,7 @@
                                 <tr th:each="od:${list}">
                                     <td th:text="${od.watch.name}"></td>
                                     <td th:text="${od.quantity}"></td>
-                                    <td th:text="${od.price}"></td>
+                                    <td th:text="${#numbers.formatCurrency(od.price)}"></td>
                                 </tr>
                                 </tbody>
                             </table>
