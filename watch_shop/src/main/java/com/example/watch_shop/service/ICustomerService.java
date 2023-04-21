@@ -19,7 +19,7 @@ public interface ICustomerService {
 
     Page<Customer> findByNameCustomer(String nameCustomer, PageRequest pageRequest);
 
-    Page<Customer> findByCustomerType(Integer idCustomerType, PageRequest pageRequest);
+    Page<Customer> findByCustomerType(Integer idCustomerType, Pageable pageable);
 
     boolean existsByEmail(String email);
 
