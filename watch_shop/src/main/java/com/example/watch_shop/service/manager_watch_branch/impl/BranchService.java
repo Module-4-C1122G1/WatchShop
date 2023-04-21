@@ -36,13 +36,13 @@ public class BranchService implements IBranchService {
     }
 
     @Override
-    public List<Employee> findAllEmployee(int id) {
-        return employeeRepository.findByBranchIdBranch(id);
+    public Page<Employee> findAllEmployee(int id , Pageable pageable) {
+        return employeeRepository.findByBranchIdBranch(id , pageable);
     }
 
     @Override
-    public List<Watch> findAllWatch(int idBranch) {
-        return watchRepository.findWatchByBranchIdBranch(idBranch);
+    public Page<Watch> findAllWatch(int id , Pageable pageable) {
+        return watchRepository.findWatchByBranchIdBranch(id , pageable);
     }
 
     @Override

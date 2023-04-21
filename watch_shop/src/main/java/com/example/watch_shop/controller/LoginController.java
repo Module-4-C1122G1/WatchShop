@@ -40,7 +40,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @ModelAttribute("customerDto") CustomerDTO customerCreateDTO,  BindingResult bindingResult, Model model, RedirectAttributes redirect) {
+    public String register(@Valid @ModelAttribute("customerDto") CustomerDTO customerCreateDTO, BindingResult bindingResult, Model model, RedirectAttributes redirect) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("customerType", customerTypeService.findAllCustomerType());
             return "register";

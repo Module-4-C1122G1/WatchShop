@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 @Controller
@@ -33,6 +35,12 @@ public class CartController {
         model.addAttribute("total", iCartService.totalPrice(customer.getIdCustomer()));
         return "cart";
     }
+    @GetMapping("pay")
+    public String pay(Model model,@RequestParam("nameAcc")String name){
+        Customer customer=iCustomerService.findByNameAccount(name);
+        model.addAttribute("total",iCartService.totalPrice(customer.getIdCustomer()));
+        return "pay";
+    }
     @GetMapping("add")
     private String addCart(@RequestParam("nameAccount")String nameAcc,
                        @RequestParam("qtt")Integer qtt,
@@ -43,10 +51,11 @@ public class CartController {
     }
 
     @GetMapping("/delete")
-    public String deleteCart(@RequestParam Integer idWatch, @RequestParam Integer idCus) {
+    public RedirectView deleteCart(@RequestParam String nameAcc,@RequestParam Integer idWatch, @RequestParam Integer idCus, RedirectAttributes redirectAttributes) {
         CartID id = new CartID(idCus, idWatch);
         iCartService.deleteById(id);
-        return "redirect:/watch/index";
+        redirectAttributes.addAttribute("name",nameAcc);
+        return new RedirectView("/carts");
     }
 
     @GetMapping("buys")

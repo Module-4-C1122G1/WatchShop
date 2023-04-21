@@ -85,6 +85,8 @@ public class AdminWatch {
                                 Model model
     ) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("typeWatchList", iTypeWatchService.findAll());
+            model.addAttribute("manufactureList", iManufactureService.findAll());
             model.addAttribute("watchDTO", watchDTO);
             return "/admin/product/create";
         } else {
@@ -110,6 +112,8 @@ public class AdminWatch {
                                 RedirectAttributes redirectAttributes,
                                 Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("typeWatchList", iTypeWatchService.findAll());
+            model.addAttribute("manufactureList", iManufactureService.findAll());
             model.addAttribute("watchDTO", watchDTO);
             return "admin/product/update";
         } else {
