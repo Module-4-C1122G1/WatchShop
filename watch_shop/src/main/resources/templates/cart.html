@@ -102,6 +102,7 @@
                 <form action="carts/delete">
                     <input type="hidden" name="idCus" id="idCus">
                     <input type="hidden" name="idWatch" id="idWatch">
+                    <input type="hidden" id="nameAcc" name="nameAcc">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Xoá</button>
                 </form>
@@ -204,6 +205,7 @@
         document.getElementById("nameWatch").innerHTML = nameWatch;
         document.getElementById("idCus").value = idCus;
         document.getElementById("idWatch").value = idWatch;
+        document.getElementById("nameAcc").value=nameAcc;
     }
 </script>
 <script>
